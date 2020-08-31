@@ -8,7 +8,7 @@ import 'package:mall/utils/fluro_convert_utils.dart';
 class NavigatorUtils {
   static goMallMainPage(BuildContext context) {
     Application.router.navigateTo(context, Routers.home,
-        transition: TransitionType.inFromRight, replace: true);
+        transition: TransitionType.native, replace: true);
   }
 
   static goCategoryGoodsListPage(
@@ -19,95 +19,96 @@ class NavigatorUtils {
         context,
         Routers.categoryGoodsList +
             "?categoryName=$categoryNameText&categoryId=$categoryId",
-        transition: TransitionType.inFromRight);
+        transition: TransitionType.native);
   }
 
   static goRegister(BuildContext context) {
     Application.router.navigateTo(context, Routers.register,
-        transition: TransitionType.inFromRight);
+        transition: TransitionType.native);
   }
 
   static goLogin(BuildContext context) {
-    Application.router.navigateTo(context, Routers.login,
-        transition: TransitionType.inFromRight);
+    Application.router
+        .navigateTo(context, Routers.login, transition: TransitionType.native);
   }
 
   static goGoodsDetails(BuildContext context, int goodsId) {
     Application.router.navigateTo(
         context, Routers.goodsDetail + "?goodsId=$goodsId",
-        transition: TransitionType.inFromRight);
+        transition: TransitionType.native);
   }
 
   static popRegister(BuildContext context) {
     Application.router.pop(context);
   }
 
-  static goFillInOrder(BuildContext context,int cartId) {
-    Application.router.navigateTo(context, Routers.fillInOrder+"?cartId=$cartId",
-        transition: TransitionType.inFromRight);
+  static goFillInOrder(BuildContext context, int cartId) {
+    Application.router.navigateTo(
+        context, Routers.fillInOrder + "?cartId=$cartId",
+        transition: TransitionType.native);
   }
 
   static Future goAddress(BuildContext context) async {
     return await Application.router.navigateTo(context, Routers.address,
-        transition: TransitionType.inFromRight);
+        transition: TransitionType.native);
   }
 
   static Future goAddressEdit(BuildContext context, int addressId) {
     return Application.router.navigateTo(
         context, Routers.addressEdit + "?addressId=$addressId",
-        transition: TransitionType.inFromRight);
+        transition: TransitionType.native);
   }
 
   static goFeedback(BuildContext context) {
     Application.router.navigateTo(context, Routers.feedback,
-        transition: TransitionType.inFromRight);
+        transition: TransitionType.native);
   }
 
   static goCoupon(BuildContext context) {
     Application.router.navigateTo(context, Routers.mineCoupon,
-        transition: TransitionType.inFromRight);
+        transition: TransitionType.native);
   }
 
   static goFootprint(BuildContext context) {
     Application.router.navigateTo(context, Routers.mineFootprint,
-        transition: TransitionType.inFromRight);
+        transition: TransitionType.native);
   }
 
   static goCollect(BuildContext context) {
     Application.router.navigateTo(context, Routers.mineCollect,
-        transition: TransitionType.inFromRight);
+        transition: TransitionType.native);
   }
 
   static goAboutUs(BuildContext context) {
     Application.router.navigateTo(context, Routers.aboutUs,
-        transition: TransitionType.inFromRight);
+        transition: TransitionType.native);
   }
 
   static submitOrderSuccessPop(BuildContext context) {
     Application.router.navigateTo(context, Routers.home,
-        clearStack: true, transition: TransitionType.inFromRight);
+        clearStack: true, transition: TransitionType.native);
   }
 
   static goOrder(BuildContext context) {
     Application.router.navigateTo(context, Routers.mineOrder,
-        transition: TransitionType.inFromRight);
+        transition: TransitionType.native);
   }
 
   static Future goOrderDetail(BuildContext context, int orderId, String token) {
     return Application.router.navigateTo(
         context, Routers.mineOrderDetail + "?orderId=$orderId&token=$token",
-        transition: TransitionType.inFromRight);
+        transition: TransitionType.native);
   }
 
   static goSearchGoods(BuildContext context) {
     Application.router.navigateTo(context, Routers.searchGoods,
-        transition: TransitionType.inFromRight);
+        transition: TransitionType.native);
   }
 
   static goProjectSelectionDetail(BuildContext context, int id, bool replace) {
     Application.router.navigateTo(
         context, Routers.projectSelectionDetail + "?id=$id",
-        replace: replace, transition: TransitionType.inFromRight);
+        replace: replace, transition: TransitionType.native);
   }
 
   static goWebView(BuildContext context, String title, String url) {
@@ -118,13 +119,16 @@ class NavigatorUtils {
     //        transition: TransitionType.inFromRight);
     Application.router.navigateTo(
         context, Routers.webView + "?title=$titleName&&url=$urlEncode",
-        transition: TransitionType.inFromRight);
+        transition: TransitionType.native);
   }
 
   static goBrandDetail(BuildContext context, String titleName, int id) {
     var title = FluroConvertUtil.fluroCnParamsEncode(titleName);
     Application.router.navigateTo(
         context, Routers.brandDetail + "?titleName=$title&id=$id",
-        transition: TransitionType.inFromRight);
+        transition: TransitionType.native);
+
+    // Navigator.pushNamed(
+    //     context, Routers.brandDetail + "?titleName=$title&id=$id");
   }
 }
