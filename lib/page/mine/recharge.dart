@@ -8,61 +8,66 @@ class RechargePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('充值'),
-          centerTitle: true,
-        ),
-        body: Column(
-          children: [
-            Container(
-              height: 670,
-              // margin: EdgeInsets.fromLTRB(0, 0, 0, 40),
-              child: ListView(
-                children: [
-                  //
-                  Amnout(),
-                  //
-                  Pay(),
-                  //
-                ],
-              ),
+      appBar: AppBar(
+        title: Text('充值'),
+        centerTitle: true,
+      ),
+      body: Column(
+        children: [
+          Container(
+            height: 570,
+            // height: 670,
+
+            child: ListView(
+              children: [
+                //充值模块
+                Amnout(),
+                //支付模块
+                Pay(),
+              ],
             ),
-            Container(
-              height: 40,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Text('合计'),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(10, 8, 10, 0),
-                    height: 35,
-                    width: 40,
-                    child: Text(
-                      "¥50",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 20, color: Colors.red),
-                    ),
+          ),
+          Container(
+            margin: EdgeInsets.all(5),
+            height: 40,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text(
+                  '合计',
+                  style: TextStyle(fontSize: 16),
+                ),
+                Container(
+                  margin: EdgeInsets.fromLTRB(10, 8, 10, 0),
+                  height: 35,
+                  width: 40,
+                  child: Text(
+                    "¥50",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 20, color: Colors.red),
                   ),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(0, 0, 10, 0),
-                    height: 32,
-                    width: 80,
-                    child: RaisedButton(
-                        child: Text(
-                          "支付",
-                          style: TextStyle(color: Colors.white, fontSize: 14),
-                        ),
-                        color: Colors.red,
-                        onPressed: () {}),
-                  ),
-                  SizedBox(
-                    width: 20,
-                  )
-                ],
-              ),
-            )
-          ],
-        ));
+                ),
+                Container(
+                  margin: EdgeInsets.fromLTRB(0, 0, 10, 0),
+                  height: 32,
+                  width: 80,
+                  child: RaisedButton(
+                      child: Text(
+                        "支付",
+                        style: TextStyle(color: Colors.white, fontSize: 15),
+                      ),
+                      color: Colors.red,
+                      onPressed: () {}),
+                ),
+                SizedBox(
+                  width: 20,
+                )
+              ],
+            ),
+          )
+        ],
+      ),
+    );
   }
 }
 
@@ -99,9 +104,7 @@ class _AmnoutState extends State<Amnout> {
           ),
           TextField(
             decoration: InputDecoration(
-              border: OutlineInputBorder(),
-            ),
-            controller: TextEditingController(text: "请输入充值金额"),
+                border: OutlineInputBorder(), hintText: '请输入充值金额'),
           ),
           SizedBox(
             height: 15,
@@ -109,7 +112,7 @@ class _AmnoutState extends State<Amnout> {
           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             Container(
               height: 50,
-              width: 120,
+              width: 100,
               //margin: EdgeInsets.only(right: 32),
               child: RaisedButton(
                   shape: RoundedRectangleBorder(
@@ -124,7 +127,7 @@ class _AmnoutState extends State<Amnout> {
             ),
             Container(
               height: 50,
-              width: 120,
+              width: 100,
               //margin: EdgeInsets.only(right: 32),
               child: RaisedButton(
                   shape: RoundedRectangleBorder(
@@ -139,7 +142,7 @@ class _AmnoutState extends State<Amnout> {
             ),
             Container(
               height: 50,
-              width: 120,
+              width: 100,
               child: RaisedButton(
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8)),
@@ -160,8 +163,7 @@ class _AmnoutState extends State<Amnout> {
             children: [
               Container(
                 height: 50,
-                width: 120,
-                margin: EdgeInsets.only(right: 32),
+                width: 100,
                 child: RaisedButton(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8)),
@@ -175,8 +177,7 @@ class _AmnoutState extends State<Amnout> {
               ),
               Container(
                 height: 50,
-                width: 120,
-                margin: EdgeInsets.only(right: 32),
+                width: 100,
                 child: RaisedButton(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8)),
@@ -190,7 +191,7 @@ class _AmnoutState extends State<Amnout> {
               ),
               Container(
                 height: 50,
-                width: 120,
+                width: 100,
                 child: RaisedButton(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8)),
@@ -242,9 +243,7 @@ class _PayState extends State<Pay> {
           ),
           TextField(
             decoration: InputDecoration(
-              border: OutlineInputBorder(),
-            ),
-            controller: TextEditingController(text: "请输入充值数量"),
+                border: OutlineInputBorder(), hintText: '请输入充值数量'),
           ),
           SizedBox(
             height: 20,
@@ -264,9 +263,10 @@ class _PayState extends State<Pay> {
             height: 10,
           ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                width: 380,
+                width: 200,
                 child: Column(
                   children: [
                     Container(
