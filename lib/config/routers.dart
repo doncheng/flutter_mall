@@ -33,7 +33,8 @@ class Routers {
     router.define(root, handler: splashHandler);
     router.define(home, handler: homeHandler);
     router.define(categoryGoodsList, handler: categoryGoodsListHandler);
-    router.define(login, handler: loginHandler);
+    router.define(login,
+        handler: loginHandler, transitionType: TransitionType.inFromBottom);
     router.define(register, handler: registerHandler);
     router.define(goodsDetail, handler: goodsDetailsHandler);
     router.define(fillInOrder, handler: fillInOrderHandler);
