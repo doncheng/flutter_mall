@@ -10,7 +10,7 @@ import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugins.GeneratedPluginRegistrant;
 
 public class MainActivity extends FlutterActivity {
-  String   C_NAME="example.mall/call_native111";//路径同步
+  String   C_NAME="example.mall/call_native";//路径同步
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

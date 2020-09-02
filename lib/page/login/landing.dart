@@ -1,20 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'dart:ui' as ui;
-
-// void main() => runApp(_widgetForRoute(ui.window.defaultRouteName));
-// Widget _widgetForRoute(String route) {
-//   switch (route) {
-//     case 'landingPage':
-//       return new landingPage();
-//     // case 'home':
-//     //   return new HomePage();
-//     default:
-//       return Center(
-//         child: Text('Unknown route: $route', textDirection: TextDirection.ltr),
-//       );
-//   }
-// }
 
 class landingPage extends StatefulWidget {
   landingPage({Key key}) : super(key: key);
@@ -26,19 +11,6 @@ class landingPage extends StatefulWidget {
 class _landingPageState extends State<landingPage> {
   double textfontsize = 12.0;
   double iconsize = 30;
-
-  // static const methodChannel = const MethodChannel('com.pages.your/native_get');
-  // _iOSPushToVC() async {
-  //   await methodChannel.invokeMethod('iOSFlutter', '参数');
-  // }
-
-  // _iOSPushToVC1() async {
-  //   Map<String, dynamic> map = {
-  //     "code": "200",
-  //     "data": [1, 2, 3]
-  //   };
-  //   await methodChannel.invokeMethod('iOSFlutter1', map);
-  // }
   static const String CHINAL_NAME = "example.mall/call_native"; //同步路径
   static const platform = const MethodChannel(CHINAL_NAME);
   String _result = "";
@@ -95,7 +67,6 @@ class _landingPageState extends State<landingPage> {
               },
             ),
           ),
-          Text("result is:      " + _result),
           SizedBox(height: 82),
           Padding(
             padding: EdgeInsets.only(left: 31, right: 31),
@@ -137,6 +108,7 @@ class _landingPageState extends State<landingPage> {
                         onTap: () async {
                           String result =
                               await platform.invokeMethod("Alipaylanding");
+                          print(result);
                         },
                       )),
                   SizedBox(height: 10),
@@ -165,6 +137,7 @@ class _landingPageState extends State<landingPage> {
                           onTap: () async {
                             String result =
                                 await platform.invokeMethod("WeChatlanding");
+                            print(result);
                           })),
                   SizedBox(height: 10),
                   Container(
@@ -192,6 +165,7 @@ class _landingPageState extends State<landingPage> {
                       onTap: () async {
                         String result =
                             await platform.invokeMethod("Applelanding");
+                        print(result);
                       },
                     ),
                   ),
@@ -216,11 +190,12 @@ class _landingPageState extends State<landingPage> {
                       width: 44,
                       child: InkWell(
                         child: Image.network(
-                          'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1200407102,3124617923&fm=26&gp=0.jpg',
+                          'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1599050553370&di=b5c3ba4c2f35e3504675df2ff7865622&imgtype=0&src=http%3A%2F%2Fbpic.588ku.com%2Felement_origin_min_pic%2F01%2F49%2F66%2F2257447a7b5d1df.jpg',
                         ),
                         onTap: () async {
                           String result = await platform
                               .invokeMethod("NoValidationlanding");
+                          print(result);
                         },
                       )),
                   SizedBox(height: 10),
