@@ -15,7 +15,8 @@ class RechargePage extends StatelessWidget {
         body: Column(
           children: [
             Container(
-              height: 650,
+              height: 670,
+              // margin: EdgeInsets.fromLTRB(0, 0, 0, 40),
               child: ListView(
                 children: [
                   //
@@ -33,11 +34,17 @@ class RechargePage extends StatelessWidget {
                 children: [
                   Text('合计'),
                   Container(
-                    height: 30,
-                    width: 30,
-                    child: Text(""),
+                    margin: EdgeInsets.fromLTRB(10, 8, 10, 0),
+                    height: 35,
+                    width: 40,
+                    child: Text(
+                      "¥50",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 20, color: Colors.red),
+                    ),
                   ),
                   Container(
+                    margin: EdgeInsets.fromLTRB(0, 0, 10, 0),
                     height: 32,
                     width: 80,
                     child: RaisedButton(
@@ -99,11 +106,11 @@ class _AmnoutState extends State<Amnout> {
           SizedBox(
             height: 15,
           ),
-          Row(children: [
+          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             Container(
               height: 50,
               width: 120,
-              margin: EdgeInsets.only(right: 32),
+              //margin: EdgeInsets.only(right: 32),
               child: RaisedButton(
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8)),
@@ -118,7 +125,7 @@ class _AmnoutState extends State<Amnout> {
             Container(
               height: 50,
               width: 120,
-              margin: EdgeInsets.only(right: 32),
+              //margin: EdgeInsets.only(right: 32),
               child: RaisedButton(
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8)),
@@ -149,6 +156,7 @@ class _AmnoutState extends State<Amnout> {
             height: 10,
           ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
                 height: 50,
@@ -289,8 +297,9 @@ class _PayState extends State<Pay> {
                           Container(
                             height: 40,
                             width: 40,
+                            padding: EdgeInsets.all(2),
                             child: Image.network(
-                                "https://kf.qq.com/img/wechat.png"),
+                                "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1816752600,129898364&fm=26&gp=0.jpg"),
                           ),
                           SizedBox(
                             width: 15,
@@ -312,7 +321,7 @@ class _PayState extends State<Pay> {
                             height: 40,
                             width: 40,
                             child: Image.network(
-                                "https://kf.qq.com/img/wechat.png"),
+                                "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=781566647,131809619&fm=15&gp=0.jpg"),
                           ),
                           SizedBox(
                             width: 15,
@@ -372,9 +381,9 @@ class _PayState extends State<Pay> {
             ],
           ),
           Container(
-            color: Color(0xffF5F5F5),
+            color: Color(0xffeeeeee),
             child: TextField(
-              maxLines: 8,
+              maxLines: 10,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
               ),
