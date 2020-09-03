@@ -19,11 +19,11 @@
              // result 是给flutter的回调， 该回调只能使用一次
              NSLog(@"method=%@ \narguments = %@", call.method, call.arguments);
              
-             if ([call.method isEqualToString:@"call_native_method"]) {
+             if ([call.method isEqualToString:@"WeChatlanding"]) {
                  result(@"ma4444455");
                  
              }
-             if ([call.method isEqualToString:@"call_native"]) {
+             if ([call.method isEqualToString:@"call_native_method"]) {
                  result(@"888888455");
                  
              }

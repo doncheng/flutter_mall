@@ -1,6 +1,6 @@
 #import <Flutter/Flutter.h>
 #import <UIKit/UIKit.h>
-
-@interface AppDelegate : FlutterAppDelegate
+#import "WXApi.h"
+@interface AppDelegate : FlutterAppDelegate<UIApplicationDelegate, WXApiDelegate>
 
 @end

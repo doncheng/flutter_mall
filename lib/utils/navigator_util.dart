@@ -32,6 +32,11 @@ class NavigatorUtils {
         .navigateTo(context, Routers.login, transition: TransitionType.native);
   }
 
+  static goSettings(BuildContext context) {
+    Application.router.navigateTo(context, Routers.settingsPage,
+        transition: TransitionType.native);
+  }
+
   static goGoodsDetails(BuildContext context, int goodsId) {
     Application.router.navigateTo(
         context, Routers.goodsDetail + "?goodsId=$goodsId",

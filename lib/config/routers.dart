@@ -23,6 +23,7 @@ class Routers {
   static String projectSelectionDetail = "/projectSelectionDetail";
   static String webView = "/webView";
   static String brandDetail = "/brandDetail";
+  static String settingsPage = "/settingsPage";
 
   static void configureRoutes(Router router) {
     router.notFoundHandler = Handler(handlerFunc:
@@ -52,5 +53,6 @@ class Routers {
         handler: projectSelectionDetailHandler);
     router.define(webView, handler: webViewHandler);
     router.define(brandDetail, handler: brandDetailHandler);
+    router.define(settingsPage, handler: settingsPageHandler);
   }
 }

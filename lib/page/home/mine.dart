@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mall/constant/string.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mall/entity/home_entity.dart';
 import 'package:mall/utils/shared_preferences_util.dart';
 import 'package:mall/widgets/icon_text_arrow.dart';
 import 'package:mall/widgets/mall_icon.dart';
@@ -15,283 +16,411 @@ class MineView extends StatefulWidget {
 }
 
 class _MineViewState extends State<MineView> {
-  bool isLogin = false;
-  var imageHeadUrl;
-  var nickName;
-  UserService _userService = UserService();
-
-  @override
-  void initState() {
-    super.initState();
-    _getUserInfo();
-  }
-
-  _refreshEvent() {
-    loginEventBus.on<LoginEvent>().listen((LoginEvent loginEvent) {
-      if (loginEvent.isLogin) {
-        setState(() {
-          isLogin = true;
-          imageHeadUrl = loginEvent.url;
-          nickName = loginEvent.nickName;
-        });
-      } else {
-        setState(() {
-          isLogin = false;
-        });
-      }
+  List recommendedtools = [
+    {
+      'toolsname1': '客服中心',
+      'toolsname2': '我的订阅',
+      'toolsname3': '我的拼团',
+      'toolsname4': '借钱',
+    },
+    {
+      'toolsname1': '平台规则',
+      'toolsname2': '邀请得现金',
+      'toolsname3': '活动报名',
+      'toolsname4': '租着玩',
+    },
+    {
+      'toolsname1': '领取中心',
+      'toolsname2': '活动扫码',
+      'toolsname3': '天天抽奖',
+      'toolsname4': '签到送礼',
+    }
+  ];
+  List<Widget> _recommendedtoolsget() {
+    var tempList = recommendedtools.map((value) {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: <Widget>[
+          Container(
+              height: 60,
+              width: 70,
+              child: Center(
+                child: Column(
+                  children: <Widget>[
+                    Icon(Icons.home),
+                    Text(
+                      value['toolsname1'],
+                      style: TextStyle(fontSize: 12),
+                    ),
+                  ],
+                ),
+              )),
+          Container(
+              height: 60,
+              width: 70,
+              child: Center(
+                child: Column(
+                  children: <Widget>[
+                    Icon(Icons.home),
+                    Text(
+                      value['toolsname2'],
+                      style: TextStyle(fontSize: 12),
+                    ),
+                  ],
+                ),
+              )),
+          Container(
+              height: 60,
+              width: 70,
+              child: Center(
+                child: Column(
+                  children: <Widget>[
+                    Icon(Icons.home),
+                    Text(
+                      value['toolsname3'],
+                      style: TextStyle(fontSize: 12),
+                    ),
+                  ],
+                ),
+              )),
+          Container(
+              height: 60,
+              width: 70,
+              child: Center(
+                child: Column(
+                  children: <Widget>[
+                    Icon(Icons.home),
+                    Text(
+                      value['toolsname4'],
+                      style: TextStyle(fontSize: 12),
+                    ),
+                  ],
+                ),
+              )),
+        ],
+      );
     });
-  }
-
-  _getUserInfo() {
-    SharedPreferencesUtils.getToken().then((token) {
-      if (token != null) {
-        setState(() {
-          isLogin = true;
-        });
-        SharedPreferencesUtils.getImageHead().then((imageHeadAddress) {
-          setState(() {
-            imageHeadUrl = imageHeadAddress;
-          });
-        });
-        SharedPreferencesUtils.getUserName().then((name) {
-          setState(() {
-            nickName = name;
-          });
-        });
-      }
-    });
+    return tempList.toList();
   }
 
   @override
   Widget build(BuildContext context) {
-    _refreshEvent();
     return Scaffold(
       appBar: AppBar(
-        title: Text(Strings.MINE),
-        centerTitle: true,
-      ),
-      body: Column(
+          // tritle: Text(Strings.MINE),
+          centerTitle: true,
+          backgroundColor: Color(0xffFE5155),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.settings),
+              onPressed: () => _toSettings(),
+            ),
+          ]),
+      body: ListView(
         children: <Widget>[
           Container(
-            height: ScreenUtil.getInstance().setHeight(160.0),
-            width: double.infinity,
-            color: Colors.deepOrangeAccent,
-            alignment: Alignment.center,
-            child: isLogin
-                ? Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        width: ScreenUtil.getInstance().setWidth(100),
-                        height: ScreenUtil.getInstance().setHeight(100),
-                        margin: EdgeInsets.only(
-                            left: ScreenUtil.getInstance().setWidth(30.0)),
-                        child: CircleAvatar(
-                          radius: ScreenUtil.getInstance().setWidth(50),
-                          foregroundColor: Colors.deepOrangeAccent,
-                          backgroundImage: NetworkImage(
-                            imageHeadUrl,
+            height: 223,
+            color: Color(0xffFE5155),
+            child: Column(
+              children: <Widget>[
+                ListTile(
+                  leading: Icon(
+                    Icons.account_circle,
+                    size: 54,
+                  ),
+                  title: Text('李天霸'),
+                  subtitle: Text('关注 0｜粉丝 0'),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    Column(
+                      children: <Widget>[
+                        Text(
+                          '11',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        Text(
+                          '购物车',
+                          style: TextStyle(color: Colors.white),
+                        )
+                      ],
+                    ),
+                    Column(
+                      children: <Widget>[
+                        Text(
+                          '3',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        Text(
+                          '足迹',
+                          style: TextStyle(color: Colors.white),
+                        )
+                      ],
+                    ),
+                    Column(
+                      children: <Widget>[
+                        Text(
+                          '7',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        Text(
+                          '红包',
+                          style: TextStyle(color: Colors.white),
+                        )
+                      ],
+                    ),
+                    Column(
+                      children: <Widget>[
+                        Text(
+                          '0',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        Text(
+                          '账单',
+                          style: TextStyle(color: Colors.white),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+                Container(
+                  width: double.infinity,
+                  height: 34,
+                  margin: EdgeInsets.only(left: 14, right: 14, top: 7),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    color: Colors.white12,
+                  ),
+                  child: FlatButton(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text(
+                          '偷偷告诉你，实名认证后宝贝更易卖出哦~',
+                          style: TextStyle(
+                            color: Colors.white70,
+                            fontSize: 12,
                           ),
                         ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(
-                            left: ScreenUtil.getInstance().setWidth(10.0)),
-                      ),
-                      Text(
-                        nickName,
-                        style: TextStyle(
-                            fontSize: ScreenUtil.getInstance().setSp(26.0),
-                            color: Colors.white),
-                      ),
-                      Expanded(
-                        child: InkWell(
-                            onTap: () => _loginOutDialog(),
-                            child: Offstage(
-                              offstage: !isLogin,
-                              child: Container(
-                                padding: EdgeInsets.only(right: ScreenUtil.getInstance().setWidth(30)),
-                                alignment: Alignment.centerRight,
-                                child: Text(
-                                  Strings.LOGIN_OUT,
-                                  style: TextStyle(
-                                      fontSize:
-                                          ScreenUtil.getInstance().setSp(26),
-                                      color: Colors.white),
-                                ),
-                              ),
-                            )),
-                      ),
-                    ],
-                  )
-                : InkWell(
-                    onTap: () => _toLogin(),
-                    child: Text(
-                      Strings.CLICK_LOGIN,
-                      style: TextStyle(
+                        SizedBox(
+                          width: 55,
+                        ),
+                        Icon(
+                          Icons.navigate_next,
                           color: Colors.white,
-                          fontSize: ScreenUtil.getInstance().setSp(30.0)),
+                        ),
+                      ],
                     ),
+                    onPressed: () {},
                   ),
+                ),
+              ],
+            ),
           ),
-          Padding(
-            padding:
-                EdgeInsets.only(top: ScreenUtil.getInstance().setHeight(20.0)),
-          ),
-          IconTextArrowView(
-              MallIcon.ORDER, Strings.ORDER, Colors.deepPurpleAccent, order),
-          Divider(
-            height: ScreenUtil.getInstance().setHeight(1.0),
-            color: Color(0xffd3d3d3),
-          ),
-          IconTextArrowView(
-              MallIcon.COUPON, Strings.COUPON, Colors.green, mineCoupon),
-          Divider(
-            height: ScreenUtil.getInstance().setHeight(1.0),
-            color: Color(0xffd3d3d3),
-          ),
-          IconTextArrowView(
-              MallIcon.COLLECTION, Strings.COLLECTION, Colors.red, collect),
-          Divider(
-            height: ScreenUtil.getInstance().setHeight(1.0),
-            color: Color(0xffd3d3d3),
-          ),
-          IconTextArrowView(
-              MallIcon.ADDRESS, Strings.ADDRESS, Colors.amber, address),
-          Divider(
-            height: ScreenUtil.getInstance().setHeight(1.0),
-            color: Color(0xffd3d3d3),
-          ),
-          IconTextArrowView(
-              MallIcon.FOOTPRINT, Strings.FOOTPRINT, Colors.pink, footprint),
-          Divider(
-            height: ScreenUtil.getInstance().setHeight(1.0),
-            color: Color(0xffd3d3d3),
-          ),
-          IconTextArrowView(MallIcon.FEED_BACK, Strings.FEED_BACK,
-              Colors.blueAccent, feedbackCallback),
-          Divider(
-            height: ScreenUtil.getInstance().setHeight(1.0),
-            color: Color(0xffd3d3d3),
-          ),
-          IconTextArrowView(
-              MallIcon.ABOUT_US, Strings.ABOUT_US, Colors.teal, aboutUs),
-          Divider(
-            height: ScreenUtil.getInstance().setHeight(1.0),
-            color: Color(0xffd3d3d3),
-          ),
+          Container(
+              height: 150,
+              width: double.infinity,
+              // padding: EdgeInsets.all(13),
+              padding: EdgeInsets.only(left: 13, right: 13, top: 10),
+              child: Card(
+                child: Column(
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.only(left: 14, top: 13),
+                      child: Row(
+                        children: <Widget>[
+                          Text(
+                            '我的交易',
+                            style: TextStyle(fontWeight: FontWeight.w600),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 11,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: <Widget>[
+                        Column(
+                          children: <Widget>[
+                            Text(
+                              '5',
+                              style:
+                                  TextStyle(color: Colors.black, fontSize: 30),
+                            ),
+                            Text(
+                              '我发布的',
+                              style: TextStyle(
+                                  color: Colors.black54, fontSize: 13),
+                            )
+                          ],
+                        ),
+                        Column(
+                          children: <Widget>[
+                            Text(
+                              '5',
+                              style:
+                                  TextStyle(color: Colors.black, fontSize: 30),
+                            ),
+                            Text(
+                              '我卖出的',
+                              style: TextStyle(
+                                  color: Colors.black54, fontSize: 13),
+                            )
+                          ],
+                        ),
+                        Column(
+                          children: <Widget>[
+                            Text(
+                              '5',
+                              style:
+                                  TextStyle(color: Colors.black, fontSize: 30),
+                            ),
+                            Text(
+                              '我买到的',
+                              style: TextStyle(
+                                  color: Colors.black54, fontSize: 13),
+                            )
+                          ],
+                        ),
+                        Column(
+                          children: <Widget>[
+                            Text(
+                              '5',
+                              style:
+                                  TextStyle(color: Colors.black, fontSize: 30),
+                            ),
+                            Text(
+                              '我收藏的',
+                              style: TextStyle(
+                                  color: Colors.black54, fontSize: 13),
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              )),
+          Container(
+              height: 150,
+              width: double.infinity,
+              padding: EdgeInsets.all(12),
+              child: Card(
+                child: Column(
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.only(left: 14, top: 13),
+                      child: Row(
+                        children: <Widget>[
+                          Text(
+                            '天天赚钱',
+                            style: TextStyle(fontWeight: FontWeight.w600),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 11,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        Container(
+                          height: 58,
+                          width: 171,
+                          child: ListTile(
+                            leading: Image.network(
+                              'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3901429284,1378079784&fm=26&gp=0.jpg',
+                              width: 45,
+                              height: 45,
+                            ),
+                            title: Text(
+                              '签到领现金',
+                              style: TextStyle(fontSize: 12),
+                            ),
+                            subtitle: Text(
+                              '提现至微信零钱',
+                              style: TextStyle(fontSize: 12),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          height: 58,
+                          width: 171,
+                          child: ListTile(
+                            leading: Image.network(
+                              'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3901429284,1378079784&fm=26&gp=0.jpg',
+                              width: 45,
+                              height: 45,
+                            ),
+                            title: Text(
+                              '签到领现金',
+                              style: TextStyle(fontSize: 12),
+                            ),
+                            subtitle: Text(
+                              '提现至微信零钱',
+                              style: TextStyle(fontSize: 12),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              )),
+          Container(
+              height: 285,
+              width: double.infinity,
+              padding: EdgeInsets.all(12),
+              child: Card(
+                child: Column(
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.only(left: 14, top: 5),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(
+                            '推荐工具',
+                            style: TextStyle(fontWeight: FontWeight.w600),
+                          ),
+                          FlatButton(
+                              onPressed: () {},
+                              child: Row(
+                                children: <Widget>[
+                                  Text(
+                                    '更多',
+                                    style: TextStyle(
+                                        fontSize: 14, color: Color(0xff999898)),
+                                  ),
+                                  Icon(
+                                    Icons.navigate_next,
+                                    color: Color(0xff999898),
+                                  )
+                                ],
+                              )),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 12,
+                    ),
+                    Column(children: this._recommendedtoolsget())
+                  ],
+                ),
+              )),
         ],
       ),
     );
   }
 
-  _loginOutDialog() {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text(
-              Strings.TIPS,
-              style: TextStyle(
-                  fontSize: ScreenUtil.getInstance().setSp(30),
-                  color: Colors.black54),
-            ),
-            content: Text(
-              Strings.LOGIN_OUT_TIPS,
-              style: TextStyle(
-                  fontSize: ScreenUtil.getInstance().setSp(30),
-                  color: Colors.black54),
-            ),
-            actions: <Widget>[
-              FlatButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text(
-                  Strings.CANCEL,
-                  style: TextStyle(color: Colors.black54),
-                ),
-              ),
-              FlatButton(
-                onPressed: () => _loginOut(),
-                child: Text(
-                  Strings.CONFIRM,
-                  style: TextStyle(color: Colors.deepOrangeAccent),
-                ),
-              )
-            ],
-          );
-        });
-  }
-
-  _loginOut() {
-    _userService.loginOut((success) {
-      loginEventBus.fire(LoginEvent(false));
-    }, (error) {
-      loginEventBus.fire(LoginEvent(false));
-      ToastUtil.showToast(error);
-    });
-    Navigator.pop(context);
-  }
-
-  void feedbackCallback() {
-    if (isLogin) {
-      NavigatorUtils.goFeedback(context);
-    } else {
-      _toLogin();
-    }
-  }
-
-  void mineCoupon() {
-    if (isLogin) {
-      NavigatorUtils.goCoupon(context);
-    } else {
-      _toLogin();
-    }
-  }
-
-  void footprint() {
-    if (isLogin) {
-      NavigatorUtils.goFootprint(context);
-    } else {
-      _toLogin();
-    }
-  }
-
-  void collect() {
-    if (isLogin) {
-      NavigatorUtils.goCollect(context);
-    } else {
-      _toLogin();
-    }
-  }
-
-  void address() {
-    if (isLogin) {
-      NavigatorUtils.goAddress(context);
-    } else {
-      _toLogin();
-    }
-  }
-
-  void aboutUs() {
-    if (isLogin) {
-      NavigatorUtils.goAboutUs(context);
-    } else {
-      _toLogin();
-    }
-  }
-
-  void order() {
-    if (isLogin) {
-      NavigatorUtils.goOrder(context);
-    } else {
-      _toLogin();
-    }
-  }
-
-  _toLogin() {
-    NavigatorUtils.goLogin(context);
+  _toSettings() {
+    NavigatorUtils.goSettings(context);
   }
 }
