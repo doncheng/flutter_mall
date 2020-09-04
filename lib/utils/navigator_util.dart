@@ -11,6 +11,29 @@ class NavigatorUtils {
         transition: TransitionType.native, replace: true);
   }
 
+//**********************************路由配置************************************//
+//跳转方法调用
+  static goBalance(BuildContext context) {
+    Application.router.navigateTo(context, Routers.goBalanceRechargePage,
+        transition: TransitionType.native);
+  }
+
+  static goCapitalPage(BuildContext context) {
+    Application.router.navigateTo(context, Routers.goCapitalPage,
+        transition: TransitionType.native);
+  }
+
+  static goFreezePage(BuildContext context) {
+    Application.router.navigateTo(context, Routers.goFreezePage,
+        transition: TransitionType.native);
+  }
+
+  static goBalanceRechargePage(BuildContext context) {
+    Application.router.navigateTo(context, Routers.goBalanceRechargePage,
+        transition: TransitionType.native);
+  }
+
+//
   static goCategoryGoodsListPage(
       BuildContext context, String categoryName, int categoryId) {
     var categoryNameText = StringUtils.encode(categoryName);
@@ -112,13 +135,6 @@ class NavigatorUtils {
 
   static goSearchGoods(BuildContext context) {
     Application.router.navigateTo(context, Routers.searchGoods,
-        transition: TransitionType.native);
-  }
-
-//**********************************路由配置************************************//
-//跳转方法调用
-  static goBalance(BuildContext context) {
-    Application.router.navigateTo(context, Routers.goBalanceRechargePage,
         transition: TransitionType.native);
   }
 

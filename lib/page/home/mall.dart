@@ -29,7 +29,7 @@ class _MallMainViewState extends State<MallMainView> {
     _list
       ..add(WithdrawalPage())
       // ..add(CategoryView())
-      ..add(RechargePage())
+      ..add(FreezePage())
       ..add(CartView())
       ..add(MineView());
   }

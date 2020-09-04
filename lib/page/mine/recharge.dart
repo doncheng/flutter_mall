@@ -18,7 +18,7 @@ class RechargePage extends StatelessWidget {
       body: Column(
         children: [
           Container(
-            height: screenHeight - 190,
+            height: screenHeight - 130,
             // height: 670,
 
             child: ListView(

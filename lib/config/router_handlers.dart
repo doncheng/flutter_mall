@@ -1,8 +1,12 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:mall/page/bill/balance_recharge.dart';
+import 'package:mall/page/bill/capital_subsidiary.dart';
+import 'package:mall/page/bill/freeze_funds.dart';
+import 'package:mall/page/bill/my_assets.dart';
 import 'package:mall/page/home/mall.dart';
 import 'package:mall/page/login/landing.dart';
+import 'package:mall/page/mine/recharge.dart';
 import 'package:mall/page/splash/splash.dart';
 import 'package:mall/page/goods/category_goods_list.dart';
 import 'package:mall/page/login/register.dart';
@@ -65,9 +69,24 @@ var goBalanceRechargePageHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> parameters) {
   //return回要跳转的页面
 
-  return BalanceRechargePage();
+  return AssetsPage();
 });
 
+var goCapitalPageHandler = Handler(
+    handlerFunc: (BuildContext context, Map<String, List<String>> parameters) {
+  return CapitalPage();
+});
+
+var goFreezePageHandler = Handler(
+    handlerFunc: (BuildContext context, Map<String, List<String>> parameters) {
+  return FreezePage();
+});
+
+var goBalanceRechargePage = Handler(
+    handlerFunc: (BuildContext context, Map<String, List<String>> parameters) {
+  return BalanceRechargePage();
+});
+//
 var loginHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> parameters) {
   return landingPage();

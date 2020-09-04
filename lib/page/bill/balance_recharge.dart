@@ -7,6 +7,7 @@ class BalanceRechargePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         title: Text(
           '余额充值',
           style: TextStyle(fontSize: 18),
