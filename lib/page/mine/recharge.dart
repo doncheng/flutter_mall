@@ -7,6 +7,9 @@ class RechargePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final width = size.width;
+    final screenHeight = size.height;
     return Scaffold(
       appBar: AppBar(
         title: Text('充值'),
@@ -15,7 +18,7 @@ class RechargePage extends StatelessWidget {
       body: Column(
         children: [
           Container(
-            height: 570,
+            height: screenHeight - 190,
             // height: 670,
 
             child: ListView(

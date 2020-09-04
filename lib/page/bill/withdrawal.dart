@@ -1,39 +1,45 @@
 import 'package:flutter/material.dart';
+import 'dart:ui';
 
-class BalanceRechargePage extends StatelessWidget {
-  const BalanceRechargePage({Key key}) : super(key: key);
+class WithdrawalPage extends StatelessWidget {
+  const WithdrawalPage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          '余额充值',
+          '提现',
           style: TextStyle(fontSize: 18),
         ),
         centerTitle: true,
       ),
       // backgroundColor: Color(0xfff0f0f0),
-      body: BalanceRechargeBody(),
+      body: WithdrawalBody(),
     );
   }
 }
 
-class BalanceRechargeBody extends StatefulWidget {
-  BalanceRechargeBody({Key key}) : super(key: key);
+class WithdrawalBody extends StatefulWidget {
+  WithdrawalBody({Key key}) : super(key: key);
 
   @override
-  _BalanceRechargeBodyState createState() => _BalanceRechargeBodyState();
+  _WithdrawalBodyState createState() => _WithdrawalBodyState();
 }
 
-class _BalanceRechargeBodyState extends State<BalanceRechargeBody> {
-  String reacharge = '1000';
+class _WithdrawalBodyState extends State<WithdrawalBody> {
+  final size = window.physicalSize;
+
+  @override
+  String withdrawal = '1000';
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final width = size.width;
     final height = size.height;
-
+    print(size);
+    print(width);
+    print(height);
     return ListView(
       children: [
         Container(
@@ -48,7 +54,7 @@ class _BalanceRechargeBodyState extends State<BalanceRechargeBody> {
                     children: [
                       Center(
                         child: Text(
-                          '充值金额',
+                          '提现金额',
                           style: TextStyle(
                               fontSize: 14, fontWeight: FontWeight.bold),
                         ),
@@ -81,14 +87,45 @@ class _BalanceRechargeBodyState extends State<BalanceRechargeBody> {
                               fontWeight: FontWeight.bold, fontSize: 20),
                         ),
                       )),
+                  // Text(withdrawal,
+                  //     style:
+                  //         TextStyle(fontWeight: FontWeight.bold, fontSize: 18))
                 ],
               )
             ],
           ),
         ),
         PayMethod(),
-        Chick()
+        Chick(),
       ],
+    );
+  }
+}
+
+class Chick extends StatefulWidget {
+  Chick({Key key}) : super(key: key);
+
+  @override
+  _ChickState createState() => _ChickState();
+}
+
+class _ChickState extends State<Chick> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 50,
+      margin: EdgeInsets.fromLTRB(10, 50, 10, 70),
+      child: RaisedButton(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        color: Colors.red,
+        child: Text(
+          '提现',
+          style: TextStyle(fontSize: 18, color: Colors.white),
+        ),
+        onPressed: () {
+          setState(() {});
+        },
+      ),
     );
   }
 }
@@ -115,12 +152,12 @@ class _PayMethodState extends State<PayMethod> {
         Column(
       children: [
         Container(
-            margin: EdgeInsets.all(20),
+            margin: EdgeInsets.only(left: 20, top: 20),
             child: Row(
               children: [
                 Center(
                   child: Text(
-                    '充值方式',
+                    '提现方式',
                     style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                   ),
                 )
@@ -129,53 +166,13 @@ class _PayMethodState extends State<PayMethod> {
         Divider(
           color: Color(0xffdddddd),
         ),
-        Container(
-          margin: EdgeInsets.only(left: 15, bottom: 10, top: 5),
-          child: Row(
-            children: [
-              Container(
-                height: 26,
-                width: 26,
-                child: Image.network("https://kf.qq.com/img/wechat.png"),
-              ),
-              SizedBox(
-                width: 15,
-              ),
-              Text(
-                "微信支付",
-                style: TextStyle(fontSize: 15),
-              )
-            ],
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.only(left: 15, top: 5),
-          child: Row(
-            children: [
-              Container(
-                height: 26,
-                width: 26,
-                padding: EdgeInsets.all(2),
-                child: Image.network(
-                    "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1816752600,129898364&fm=26&gp=0.jpg"),
-              ),
-              SizedBox(
-                width: 15,
-              ),
-              Text(
-                "支付宝支付",
-                style: TextStyle(fontSize: 15),
-              )
-            ],
-          ),
-        ),
         ExpansionTile(
           leading: Image.network(
             'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3673269788,472516603&fm=26&gp=0.jpg',
             height: 26,
             width: 26,
           ),
-          title: Text('银行卡', style: TextStyle(fontSize: 15)),
+          title: Text('选择银行卡', style: TextStyle(fontSize: 15)),
           // backgroundColor: Colors.lightBlue,
           initiallyExpanded: false, //默认是否展开
           children: <Widget>[
@@ -196,34 +193,6 @@ class _PayMethodState extends State<PayMethod> {
     )
         // )
         ;
-  }
-}
-
-class Chick extends StatefulWidget {
-  Chick({Key key}) : super(key: key);
-
-  @override
-  _ChickState createState() => _ChickState();
-}
-
-class _ChickState extends State<Chick> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 50,
-      margin: EdgeInsets.fromLTRB(10, 50, 10, 70),
-      child: RaisedButton(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        color: Colors.red,
-        child: Text(
-          '充值',
-          style: TextStyle(fontSize: 18, color: Colors.white),
-        ),
-        onPressed: () {
-          setState(() {});
-        },
-      ),
-    );
   }
 }
 
