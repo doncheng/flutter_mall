@@ -37,6 +37,11 @@ class NavigatorUtils {
         transition: TransitionType.native);
   }
 
+  static goPlacetheorder(BuildContext context) {
+    Application.router.navigateTo(context, Routers.goPlacetheorder,
+        transition: TransitionType.native);
+  }
+
   static goGoodsDetails(BuildContext context, int goodsId) {
     Application.router.navigateTo(
         context, Routers.goodsDetail + "?goodsId=$goodsId",

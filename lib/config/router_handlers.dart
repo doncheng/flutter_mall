@@ -24,12 +24,17 @@ import 'package:mall/widgets/webview.dart';
 import 'package:mall/utils/fluro_convert_utils.dart';
 import 'package:mall/page/home/brand_detail.dart';
 import 'package:mall/page/home/settings.dart';
+import 'package:mall/page/home/placetheorder.dart';
 
 var settingsPageHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> parameters) {
   return SettingsPage();
 });
 
+var goPlacetheorderHandler = Handler(
+    handlerFunc: (BuildContext context, Map<String, List<String>> parameters) {
+  return PlacetheorderPage();
+});
 var homeHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> parameters) {
   return MallMainView();
