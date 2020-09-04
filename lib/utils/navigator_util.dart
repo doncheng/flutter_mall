@@ -115,6 +115,13 @@ class NavigatorUtils {
         transition: TransitionType.native);
   }
 
+//**********************************路由配置************************************//
+//跳转方法调用
+  static goBalance(BuildContext context) {
+    Application.router.navigateTo(context, Routers.goBalanceRechargePage,
+        transition: TransitionType.native);
+  }
+
   static goProjectSelectionDetail(BuildContext context, int id, bool replace) {
     Application.router.navigateTo(
         context, Routers.projectSelectionDetail + "?id=$id",

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:ui';
 
+import 'package:mall/utils/navigator_util.dart';
+
 class WithdrawalPage extends StatelessWidget {
   const WithdrawalPage({Key key}) : super(key: key);
 
@@ -37,9 +39,7 @@ class _WithdrawalBodyState extends State<WithdrawalBody> {
     final size = MediaQuery.of(context).size;
     final width = size.width;
     final height = size.height;
-    print(size);
-    print(width);
-    print(height);
+
     return ListView(
       children: [
         Container(
@@ -123,10 +123,16 @@ class _ChickState extends State<Chick> {
           style: TextStyle(fontSize: 18, color: Colors.white),
         ),
         onPressed: () {
-          setState(() {});
+          setState(() {
+            _toBalance();
+          });
         },
       ),
     );
+  }
+
+  _toBalance() {
+    NavigatorUtils.goBalance(context);
   }
 }
 

@@ -1,5 +1,6 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
+import 'package:mall/page/bill/balance_recharge.dart';
 import 'package:mall/page/home/mall.dart';
 import 'package:mall/page/login/landing.dart';
 import 'package:mall/page/splash/splash.dart';
@@ -58,6 +59,13 @@ var categoryGoodsListHandler = Handler(
 var registerHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> parameters) {
   return RegisterView();
+});
+//***************************路由配置添加**************************************//
+var goBalanceRechargePageHandler = Handler(
+    handlerFunc: (BuildContext context, Map<String, List<String>> parameters) {
+  //return回要跳转的页面
+
+  return BalanceRechargePage();
 });
 
 var loginHandler = Handler(

@@ -25,6 +25,8 @@ class Routers {
   static String brandDetail = "/brandDetail";
   static String settingsPage = "/settingsPage";
   static String goPlacetheorder = "/goPlacetheorder";
+  //路由配置添加
+  static String goBalanceRechargePage = "/gorBalanceRechargePage";
 
   static void configureRoutes(Router router) {
     router.notFoundHandler = Handler(handlerFunc:
@@ -37,6 +39,9 @@ class Routers {
     router.define(categoryGoodsList, handler: categoryGoodsListHandler);
     router.define(login,
         handler: loginHandler, transitionType: TransitionType.inFromBottom);
+//路由配置添加
+    router.define(goBalanceRechargePage, handler: goBalanceRechargePageHandler);
+
     router.define(register, handler: registerHandler);
     router.define(goodsDetail, handler: goodsDetailsHandler);
     router.define(fillInOrder, handler: fillInOrderHandler);
