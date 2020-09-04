@@ -26,9 +26,14 @@ class Routers {
   static String settingsPage = "/settingsPage";
   static String goPlacetheorder = "/goPlacetheorder";
   //路由配置添加
-  static String goBalanceRechargePage = "/gorBalanceRechargePage";
+  static String goAssetsPage = "/goAssetsPage";
   static String goCapitalPage = "/gorCapitalPage";
   static String goFreezePage = "/goFreezePage";
+  static String goBalanceRechargePage = "/goBalanceRechargePage";
+
+  static String goWithdrawalPage = "/goWithdrawalPage";
+  static String goWalletCardPage = "/goWalletCardPage";
+  //
   static void configureRoutes(Router router) {
     router.notFoundHandler = Handler(handlerFunc:
         (BuildContext context, Map<String, List<String>> parameters) {
@@ -44,6 +49,10 @@ class Routers {
     router.define(goBalanceRechargePage, handler: goBalanceRechargePageHandler);
     router.define(goCapitalPage, handler: goCapitalPageHandler);
     router.define(goFreezePage, handler: goFreezePageHandler);
+    router.define(goAssetsPage, handler: goAssetsPageHandler);
+    router.define(goWithdrawalPage, handler: goWithdrawalPageHandler);
+    router.define(goWalletCardPage, handler: goWalletCardPageHandler);
+
     //
     router.define(register, handler: registerHandler);
     router.define(goodsDetail, handler: goodsDetailsHandler);

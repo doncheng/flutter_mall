@@ -13,8 +13,8 @@ class NavigatorUtils {
 
 //**********************************路由配置************************************//
 //跳转方法调用
-  static goBalance(BuildContext context) {
-    Application.router.navigateTo(context, Routers.goBalanceRechargePage,
+  static goAssetsPage(BuildContext context) {
+    Application.router.navigateTo(context, Routers.goAssetsPage,
         transition: TransitionType.native);
   }
 
@@ -30,6 +30,16 @@ class NavigatorUtils {
 
   static goBalanceRechargePage(BuildContext context) {
     Application.router.navigateTo(context, Routers.goBalanceRechargePage,
+        transition: TransitionType.native);
+  }
+
+  static goWithdrawalPage(BuildContext context) {
+    Application.router.navigateTo(context, Routers.goWithdrawalPage,
+        transition: TransitionType.native);
+  }
+
+  static goWalletCardPage(BuildContext context) {
+    Application.router.navigateTo(context, Routers.goWalletCardPage,
         transition: TransitionType.native);
   }
 

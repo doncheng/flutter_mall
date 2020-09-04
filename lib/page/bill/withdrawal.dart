@@ -124,15 +124,15 @@ class _ChickState extends State<Chick> {
         ),
         onPressed: () {
           setState(() {
-            _toBalance();
+            _toAssets();
           });
         },
       ),
     );
   }
 
-  _toBalance() {
-    NavigatorUtils.goBalance(context);
+  _toAssets() {
+    NavigatorUtils.goAssetsPage(context);
   }
 }
 

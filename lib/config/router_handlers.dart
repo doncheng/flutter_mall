@@ -4,6 +4,8 @@ import 'package:mall/page/bill/balance_recharge.dart';
 import 'package:mall/page/bill/capital_subsidiary.dart';
 import 'package:mall/page/bill/freeze_funds.dart';
 import 'package:mall/page/bill/my_assets.dart';
+import 'package:mall/page/bill/wallet_card.dart';
+import 'package:mall/page/bill/withdrawal.dart';
 import 'package:mall/page/home/mall.dart';
 import 'package:mall/page/login/landing.dart';
 import 'package:mall/page/mine/recharge.dart';
@@ -65,7 +67,7 @@ var registerHandler = Handler(
   return RegisterView();
 });
 //***************************路由配置添加**************************************//
-var goBalanceRechargePageHandler = Handler(
+var goAssetsPageHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> parameters) {
   //return回要跳转的页面
 
@@ -82,10 +84,20 @@ var goFreezePageHandler = Handler(
   return FreezePage();
 });
 
-var goBalanceRechargePage = Handler(
+var goBalanceRechargePageHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> parameters) {
   return BalanceRechargePage();
 });
+
+var goWithdrawalPageHandler = Handler(
+    handlerFunc: (BuildContext context, Map<String, List<String>> parameters) {
+  return WithdrawalPage();
+});
+var goWalletCardPageHandler = Handler(
+    handlerFunc: (BuildContext context, Map<String, List<String>> parameters) {
+  return WalletCardPage();
+});
+
 //
 var loginHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> parameters) {

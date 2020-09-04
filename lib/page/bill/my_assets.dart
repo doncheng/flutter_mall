@@ -81,6 +81,14 @@ class _AssetsBodyState extends State<AssetsBody> {
     NavigatorUtils.goBalanceRechargePage(context);
   }
 
+  _toWithdrawalPage() {
+    NavigatorUtils.goWithdrawalPage(context);
+  }
+
+  _toWalletCardPage() {
+    NavigatorUtils.goWalletCardPage(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -221,7 +229,11 @@ class _AssetsBodyState extends State<AssetsBody> {
               ),
             )),
         InkWell(
-            onTap: () {},
+            onTap: () {
+              setState(() {
+                _toWithdrawalPage();
+              });
+            },
             child: Container(
               margin: EdgeInsets.only(top: 2),
               height: 64,
@@ -256,7 +268,11 @@ class _AssetsBodyState extends State<AssetsBody> {
               ),
             )),
         InkWell(
-            onTap: () {},
+            onTap: () {
+              setState(() {
+                _toWalletCardPage();
+              });
+            },
             child: Container(
               margin: EdgeInsets.only(top: 2),
               height: 64,
