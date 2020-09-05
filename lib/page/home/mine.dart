@@ -107,6 +107,7 @@ class _MineViewState extends State<MineView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+          elevation: 0, // 隐藏阴影
           // tritle: Text(Strings.MINE),
           centerTitle: true,
           backgroundColor: Color(0xffFE5155),
@@ -128,13 +129,16 @@ class _MineViewState extends State<MineView> {
                   color: Color(0xffFE5155),
                   child: Column(
                     children: <Widget>[
-                      ListTile(
-                        leading: Icon(
-                          Icons.account_circle,
-                          size: 54,
+                      InkWell(
+                        onTap: () {},
+                        child: ListTile(
+                          leading: Icon(
+                            Icons.account_circle,
+                            size: 54,
+                          ),
+                          title: Text('李天霸'),
+                          subtitle: Text('关注 0｜粉丝 0'),
                         ),
-                        title: Text('李天霸'),
-                        subtitle: Text('关注 0｜粉丝 0'),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,

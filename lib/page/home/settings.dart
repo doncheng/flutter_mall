@@ -1,13 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mall/constant/string.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:mall/utils/shared_preferences_util.dart';
-import 'package:mall/widgets/icon_text_arrow.dart';
-import 'package:mall/widgets/mall_icon.dart';
 import 'package:mall/utils/navigator_util.dart';
-import 'package:mall/event/login_event.dart';
-import 'package:mall/service/user_service.dart';
-import 'package:mall/utils/toast_util.dart';
 
 class SettingsPage extends StatefulWidget {
   @override
@@ -15,281 +7,83 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  bool isLogin = false;
-  var imageHeadUrl;
-  var nickName;
-  UserService _userService = UserService();
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('我的'),
+        centerTitle: true,
+      ),
+      body: rowget(),
+    );
+  }
+}
+
+class rowget extends StatefulWidget {
+  rowget({Key key}) : super(key: key);
 
   @override
-  void initState() {
-    super.initState();
-    _getUserInfo();
-  }
+  _rowgetState createState() => _rowgetState();
+}
 
-  _refreshEvent() {
-    loginEventBus.on<LoginEvent>().listen((LoginEvent loginEvent) {
-      if (loginEvent.isLogin) {
-        setState(() {
-          isLogin = true;
-          imageHeadUrl = loginEvent.url;
-          nickName = loginEvent.nickName;
-        });
-      } else {
-        setState(() {
-          isLogin = false;
-        });
-      }
+class _rowgetState extends State<rowget> {
+  List listData = [
+    {'rowname': '我的订单', 'iconname': Icons.home},
+    {'rowname': '优惠券', 'iconname': Icons.home},
+    {'rowname': '收藏', 'iconname': Icons.home},
+    {'rowname': '地址管理', 'iconname': Icons.home},
+    {'rowname': '我的足迹', 'iconname': Icons.home},
+    {'rowname': '反馈', 'iconname': Icons.home},
+    {'rowname': '关于我们', 'iconname': Icons.home},
+  ];
+  List<Widget> _rowget() {
+//循环
+    var tempList = listData.map((value) {
+      return Column(
+        children: <Widget>[
+          Padding(
+            padding: EdgeInsets.only(left: 10, right: 10, top: 20, bottom: 5),
+            child: InkWell(
+              onTap: () {},
+              // onTap: () => _toOrder(),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Row(
+                    children: <Widget>[
+                      Icon(value['iconname']),
+                      SizedBox(width: 5),
+                      Center(
+                        child: Text(
+                          value['rowname'],
+                          style: TextStyle(color: Colors.black54),
+                        ),
+                      )
+                    ],
+                  ),
+                  Icon(
+                    Icons.navigate_next,
+                    color: Colors.grey,
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Divider(),
+        ],
+      );
     });
-  }
-
-  _getUserInfo() {
-    SharedPreferencesUtils.getToken().then((token) {
-      if (token != null) {
-        setState(() {
-          isLogin = true;
-        });
-        SharedPreferencesUtils.getImageHead().then((imageHeadAddress) {
-          setState(() {
-            imageHeadUrl = imageHeadAddress;
-          });
-        });
-        SharedPreferencesUtils.getUserName().then((name) {
-          setState(() {
-            nickName = name;
-          });
-        });
-      }
-    });
+    return tempList.toList();
   }
 
   @override
   Widget build(BuildContext context) {
-    _refreshEvent();
-    return Scaffold(
-      appBar: AppBar(
-          // tritle: Text(Strings.MINE),
-          centerTitle: true,
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(Icons.settings),
-              onPressed: () => _toSettings(),
-            ),
-          ]),
-      body: Column(
-        children: <Widget>[
-          Container(
-              height: ScreenUtil.getInstance().setHeight(160.0),
-              width: double.infinity,
-              color: Colors.deepOrangeAccent,
-              alignment: Alignment.center,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Container(
-                    width: ScreenUtil.getInstance().setWidth(100),
-                    height: ScreenUtil.getInstance().setHeight(100),
-                    margin: EdgeInsets.only(
-                        left: ScreenUtil.getInstance().setWidth(30.0)),
-                    child: CircleAvatar(
-                      radius: ScreenUtil.getInstance().setWidth(50),
-                      foregroundColor: Colors.deepOrangeAccent,
-                      backgroundImage: NetworkImage(
-                        imageHeadUrl,
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                        left: ScreenUtil.getInstance().setWidth(10.0)),
-                  ),
-                  Text(
-                    nickName,
-                    style: TextStyle(
-                        fontSize: ScreenUtil.getInstance().setSp(26.0),
-                        color: Colors.white),
-                  ),
-                  Expanded(
-                    child: InkWell(
-                        onTap: () => _loginOutDialog(),
-                        child: Offstage(
-                          offstage: !isLogin,
-                          child: Container(
-                            padding: EdgeInsets.only(
-                                right: ScreenUtil.getInstance().setWidth(30)),
-                            alignment: Alignment.centerRight,
-                            child: Text(
-                              Strings.LOGIN_OUT,
-                              style: TextStyle(
-                                  fontSize: ScreenUtil.getInstance().setSp(26),
-                                  color: Colors.white),
-                            ),
-                          ),
-                        )),
-                  ),
-                ],
-              )),
-          Padding(
-            padding:
-                EdgeInsets.only(top: ScreenUtil.getInstance().setHeight(20.0)),
-          ),
-          IconTextArrowView(
-              MallIcon.ORDER, Strings.ORDER, Colors.deepPurpleAccent, order),
-          Divider(
-            height: ScreenUtil.getInstance().setHeight(1.0),
-            color: Color(0xffd3d3d3),
-          ),
-          IconTextArrowView(
-              MallIcon.COUPON, Strings.COUPON, Colors.green, mineCoupon),
-          Divider(
-            height: ScreenUtil.getInstance().setHeight(1.0),
-            color: Color(0xffd3d3d3),
-          ),
-          IconTextArrowView(
-              MallIcon.COLLECTION, Strings.COLLECTION, Colors.red, collect),
-          Divider(
-            height: ScreenUtil.getInstance().setHeight(1.0),
-            color: Color(0xffd3d3d3),
-          ),
-          IconTextArrowView(
-              MallIcon.ADDRESS, Strings.ADDRESS, Colors.amber, address),
-          Divider(
-            height: ScreenUtil.getInstance().setHeight(1.0),
-            color: Color(0xffd3d3d3),
-          ),
-          IconTextArrowView(
-              MallIcon.FOOTPRINT, Strings.FOOTPRINT, Colors.pink, footprint),
-          Divider(
-            height: ScreenUtil.getInstance().setHeight(1.0),
-            color: Color(0xffd3d3d3),
-          ),
-          IconTextArrowView(MallIcon.FEED_BACK, Strings.FEED_BACK,
-              Colors.blueAccent, feedbackCallback),
-          Divider(
-            height: ScreenUtil.getInstance().setHeight(1.0),
-            color: Color(0xffd3d3d3),
-          ),
-          IconTextArrowView(
-              MallIcon.ABOUT_US, Strings.ABOUT_US, Colors.teal, aboutUs),
-          Divider(
-            height: ScreenUtil.getInstance().setHeight(1.0),
-            color: Color(0xffd3d3d3),
-          ),
-        ],
-      ),
+    return Column(
+      children: this._rowget(),
     );
   }
 
-  _loginOutDialog() {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text(
-              Strings.TIPS,
-              style: TextStyle(
-                  fontSize: ScreenUtil.getInstance().setSp(30),
-                  color: Colors.black54),
-            ),
-            content: Text(
-              Strings.LOGIN_OUT_TIPS,
-              style: TextStyle(
-                  fontSize: ScreenUtil.getInstance().setSp(30),
-                  color: Colors.black54),
-            ),
-            actions: <Widget>[
-              FlatButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text(
-                  Strings.CANCEL,
-                  style: TextStyle(color: Colors.black54),
-                ),
-              ),
-              FlatButton(
-                onPressed: () => _loginOut(),
-                child: Text(
-                  Strings.CONFIRM,
-                  style: TextStyle(color: Colors.deepOrangeAccent),
-                ),
-              )
-            ],
-          );
-        });
-  }
-
-  _loginOut() {
-    _userService.loginOut((success) {
-      loginEventBus.fire(LoginEvent(false));
-    }, (error) {
-      loginEventBus.fire(LoginEvent(false));
-      ToastUtil.showToast(error);
-    });
-    Navigator.pop(context);
-  }
-
-  void feedbackCallback() {
-    if (isLogin) {
-      NavigatorUtils.goFeedback(context);
-    } else {
-      _toLogin();
-    }
-  }
-
-  void mineCoupon() {
-    if (isLogin) {
-      NavigatorUtils.goCoupon(context);
-    } else {
-      _toLogin();
-    }
-  }
-
-  void footprint() {
-    if (isLogin) {
-      NavigatorUtils.goFootprint(context);
-    } else {
-      _toLogin();
-    }
-  }
-
-  void collect() {
-    if (isLogin) {
-      NavigatorUtils.goCollect(context);
-    } else {
-      _toLogin();
-    }
-  }
-
-  void address() {
-    if (isLogin) {
-      NavigatorUtils.goAddress(context);
-    } else {
-      _toLogin();
-    }
-  }
-
-  void aboutUs() {
-    if (isLogin) {
-      NavigatorUtils.goAboutUs(context);
-    } else {
-      _toLogin();
-    }
-  }
-
-  void order() {
-    if (isLogin) {
-      NavigatorUtils.goOrder(context);
-    } else {
-      _toLogin();
-    }
-  }
-
-  _toLogin() {
-    NavigatorUtils.goLogin(context);
-  }
-
-  _toSettings() {
-    NavigatorUtils.goSettings(context);
-  }
+  // _toOrder() {
+  //   NavigatorUtils.goOrder(context);
+  // }
 }

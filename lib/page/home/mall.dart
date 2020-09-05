@@ -6,6 +6,7 @@ import 'package:mall/constant/string.dart';
 import 'package:mall/page/category/category.dart';
 import 'package:mall/page/home/cart.dart';
 import 'package:mall/page/home/mine.dart';
+import 'package:mall/page/login/landing.dart';
 import 'package:mall/page/mine/jiaohu.dart';
 import 'package:mall/page/mine/recharge.dart';
 import '../bill/capital_subsidiary.dart';
@@ -30,7 +31,8 @@ class _MallMainViewState extends State<MallMainView> {
       ..add(WithdrawalPage())
       // ..add(CategoryView())
       ..add(FreezePage())
-      ..add(CartView())
+      // ..add(CartView())
+      ..add(landingPage())
       ..add(MineView());
   }
 
