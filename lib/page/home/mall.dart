@@ -32,7 +32,7 @@ class _MallMainViewState extends State<MallMainView> {
     _list
       ..add(JiaohuPAge())
       // ..add(CategoryView())
-      ..add(webviewPage())
+      ..add(CustomerPage())
       // ..add(CartView())
       ..add(landingPage())
       ..add(MineView());

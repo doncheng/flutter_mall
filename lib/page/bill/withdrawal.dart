@@ -86,7 +86,7 @@ class _WithdrawalBodyState extends State<WithdrawalBody> {
                       child: Center(
                         child: TextField(
                           decoration: InputDecoration(
-                            border: OutlineInputBorder(),
+                            border: InputBorder.none,
                           ),
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 20),
@@ -163,7 +163,7 @@ class _PayMethodState extends State<PayMethod> {
         Column(
       children: [
         Container(
-            margin: EdgeInsets.only(left: 20, top: 20),
+            margin: EdgeInsets.only(left: 20, top: 20, bottom: 10),
             child: Row(
               children: [
                 Center(
@@ -174,9 +174,9 @@ class _PayMethodState extends State<PayMethod> {
                 )
               ],
             )),
-        Divider(
-          color: Color(0xffdddddd),
-        ),
+        // Divider(
+        //   color: Color(0xffdddddd),
+        // ),
         ExpansionTile(
           leading: Image.network(
             'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3673269788,472516603&fm=26&gp=0.jpg',

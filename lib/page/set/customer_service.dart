@@ -105,11 +105,225 @@ class _CustomerBodyState extends State<CustomerBody> {
           height: 6,
         ),
         Container(
-          width: double.infinity,
-          height: sizeheight - 320,
-        ),
+            color: Colors.white,
+            width: double.infinity,
+            height: sizeheight - 320,
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(left: 20, top: 10),
+                      height: 20,
+                      width: 56,
+                      child: Text(
+                        '常见问题',
+                        style: TextStyle(
+                            fontWeight: FontWeight.w600, fontSize: 14),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(right: 20, top: 10),
+                      height: 20,
+                      width: 84,
+                      child: Text(
+                        '查看所有问题',
+                        style:
+                            TextStyle(fontSize: 14, color: Color(0xffbfbfbf)),
+                      ),
+                    )
+                  ],
+                ),
+                Divider(),
+                InkWell(
+                  onTap: () {},
+                  child: Container(
+                    margin: EdgeInsets.only(top: 10),
+                    padding: EdgeInsets.only(left: 20),
+                    height: 42,
+                    width: double.infinity,
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text('账号被找回，怎么办？',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                )),
+                            Container(
+                              margin: EdgeInsets.only(right: 20),
+                              child: Icon(Icons.arrow_right),
+                            )
+                          ],
+                        ),
+                        Divider()
+                      ],
+                    ),
+                  ),
+                ),
+                InkWell(
+                  onTap: () {},
+                  child: Container(
+                    padding: EdgeInsets.only(left: 20),
+                    height: 42,
+                    width: double.infinity,
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text('账号被找回，怎么办？',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                )),
+                            Container(
+                              margin: EdgeInsets.only(right: 20),
+                              child: Icon(Icons.arrow_right),
+                            )
+                          ],
+                        ),
+                        Divider()
+                      ],
+                    ),
+                  ),
+                ),
+                InkWell(
+                  onTap: () {},
+                  child: Container(
+                    padding: EdgeInsets.only(left: 20),
+                    height: 42,
+                    width: double.infinity,
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text('账号被找回，怎么办？',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                )),
+                            Container(
+                              margin: EdgeInsets.only(right: 20),
+                              child: Icon(Icons.arrow_right),
+                            )
+                          ],
+                        ),
+                        Divider()
+                      ],
+                    ),
+                  ),
+                ),
+                InkWell(
+                  onTap: () {},
+                  child: Container(
+                    padding: EdgeInsets.only(left: 20),
+                    height: 42,
+                    width: double.infinity,
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text('账号被找回，怎么办？',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                )),
+                            Container(
+                              margin: EdgeInsets.only(right: 20),
+                              child: Icon(Icons.arrow_right),
+                            )
+                          ],
+                        ),
+                        Divider()
+                      ],
+                    ),
+                  ),
+                ),
+                InkWell(
+                  onTap: () {},
+                  child: Container(
+                    padding: EdgeInsets.only(left: 20),
+                    height: 42,
+                    width: double.infinity,
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text('账号被找回，怎么办？',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                )),
+                            Container(
+                              margin: EdgeInsets.only(right: 20),
+                              child: Icon(Icons.arrow_right),
+                            )
+                          ],
+                        ),
+                        Divider()
+                      ],
+                    ),
+                  ),
+                ),
+                InkWell(
+                  onTap: () {},
+                  child: Container(
+                    padding: EdgeInsets.only(left: 20),
+                    height: 42,
+                    width: double.infinity,
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text('账号被找回，怎么办？',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                )),
+                            Container(
+                              margin: EdgeInsets.only(right: 20),
+                              child: Icon(Icons.arrow_right),
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Container(
+                  height: 220,
+                  color: Color(0xfff5f5f5),
+                  child: TextField(
+                    maxLines: 10,
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                    ),
+                  ),
+                )
+              ],
+            )),
         Container(
           height: 50,
+          child: Center(
+            child: Container(
+              height: 20,
+              width: 85,
+              child: Row(
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(right: 6),
+                    width: 20,
+                    height: 20,
+                    color: Colors.green,
+                    child: Image.network(''),
+                  ),
+                  Text('在线客服')
+                ],
+              ),
+            ),
+          ),
         )
       ],
     );

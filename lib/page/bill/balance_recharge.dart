@@ -80,7 +80,7 @@ class _BalanceRechargeBodyState extends State<BalanceRechargeBody> {
                       child: Center(
                         child: TextField(
                           decoration: InputDecoration(
-                            border: OutlineInputBorder(),
+                            border: InputBorder.none,
                           ),
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 20),
@@ -160,6 +160,7 @@ class _PayMethodState extends State<PayMethod> {
               Container(
                 height: 26,
                 width: 26,
+                margin: EdgeInsets.only(bottom: 5),
                 padding: EdgeInsets.all(2),
                 child: Image.network(
                     "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1816752600,129898364&fm=26&gp=0.jpg"),
