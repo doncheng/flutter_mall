@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mall/utils/navigator_util.dart';
 
 class JiaohuPAge extends StatefulWidget {
   JiaohuPAge({Key key}) : super(key: key);
@@ -16,7 +17,7 @@ class _JiaohuPAgeState extends State<JiaohuPAge> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(),
+      home: Tiao(),
     );
   }
 }
@@ -26,6 +27,34 @@ class MyHomePage extends StatefulWidget {
   @override
   _MyHomePageState createState() {
     return _MyHomePageState();
+  }
+}
+
+class Tiao extends StatefulWidget {
+  Tiao({Key key}) : super(key: key);
+
+  @override
+  _TiaoState createState() => _TiaoState();
+}
+
+class _TiaoState extends State<Tiao> {
+  _toAssets() {
+    NavigatorUtils.goAssetsPage(context);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Container(
+        height: 80,
+        width: 140,
+        child: RaisedButton(
+            child: Text('临时跳转按钮'),
+            onPressed: () {
+              _toAssets();
+            }),
+      ),
+    );
   }
 }
 

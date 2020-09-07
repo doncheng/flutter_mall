@@ -6,9 +6,11 @@ import 'package:mall/constant/string.dart';
 import 'package:mall/page/category/category.dart';
 import 'package:mall/page/home/cart.dart';
 import 'package:mall/page/home/mine.dart';
+import 'package:mall/page/home/webview.dart';
 import 'package:mall/page/login/landing.dart';
 import 'package:mall/page/mine/jiaohu.dart';
 import 'package:mall/page/mine/recharge.dart';
+import 'package:mall/page/set/customer_service.dart';
 import '../bill/capital_subsidiary.dart';
 import '../bill/freeze_funds.dart';
 import '../bill/balance_recharge.dart';
@@ -28,9 +30,9 @@ class _MallMainViewState extends State<MallMainView> {
   void initState() {
     super.initState();
     _list
-      ..add(WithdrawalPage())
+      ..add(JiaohuPAge())
       // ..add(CategoryView())
-      ..add(FreezePage())
+      ..add(webviewPage())
       // ..add(CartView())
       ..add(landingPage())
       ..add(MineView());

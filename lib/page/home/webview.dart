@@ -15,12 +15,12 @@ class _webviewPageState extends State<webviewPage> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: Text('ss'),
-          centerTitle: true,
-        ),
+        // appBar: AppBar(
+        //   title: Text('ss'),
+        //   centerTitle: true,
+        // ),
         body: WebviewScaffold(
-          url: 'http://baidu.com',
+          url: 'http://103.44.23.34:8040',
           withZoom: false,
           withLocalStorage: true,
           withJavascript: true,

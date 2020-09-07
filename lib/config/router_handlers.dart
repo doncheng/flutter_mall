@@ -7,6 +7,7 @@ import 'package:mall/page/bill/my_assets.dart';
 import 'package:mall/page/bill/wallet_card.dart';
 import 'package:mall/page/bill/withdrawal.dart';
 import 'package:mall/page/home/mall.dart';
+import 'package:mall/page/home/webview.dart';
 import 'package:mall/page/login/landing.dart';
 import 'package:mall/page/mine/recharge.dart';
 import 'package:mall/page/splash/splash.dart';
@@ -42,9 +43,13 @@ var goPlacetheorderHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> parameters) {
   return PlacetheorderPage();
 });
+// var homeHandler = Handler(
+//     handlerFunc: (BuildContext context, Map<String, List<String>> parameters) {
+//   return MallMainView();
+// });
 var homeHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> parameters) {
-  return MallMainView();
+  return webviewPage();
 });
 
 var splashHandler = Handler(
