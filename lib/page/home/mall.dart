@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mall/page/bill/wallet_card.dart';
 import 'package:mall/page/bill/withdrawal.dart';
+import 'package:mall/page/help/customer_service.dart';
+import 'package:mall/page/help/problem.dart';
 import 'package:mall/page/home/home_page.dart';
 import 'package:mall/constant/string.dart';
 import 'package:mall/page/category/category.dart';
@@ -9,8 +11,7 @@ import 'package:mall/page/home/mine.dart';
 import 'package:mall/page/home/webview.dart';
 import 'package:mall/page/login/landing.dart';
 import 'package:mall/page/mine/jiaohu.dart';
-import 'package:mall/page/mine/recharge.dart';
-import 'package:mall/page/set/customer_service.dart';
+
 import '../bill/capital_subsidiary.dart';
 import '../bill/freeze_funds.dart';
 import '../bill/balance_recharge.dart';
@@ -32,7 +33,7 @@ class _MallMainViewState extends State<MallMainView> {
     _list
       ..add(JiaohuPAge())
       // ..add(CategoryView())
-      ..add(CustomerPage())
+      ..add(ProblemPage())
       // ..add(CartView())
       ..add(landingPage())
       ..add(MineView());
