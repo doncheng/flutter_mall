@@ -3,6 +3,7 @@ import 'package:mall/page/bill/wallet_card.dart';
 import 'package:mall/page/bill/withdrawal.dart';
 import 'package:mall/page/help/customer_service.dart';
 import 'package:mall/page/help/problem.dart';
+import 'package:mall/page/help/set.dart';
 import 'package:mall/page/home/home_page.dart';
 import 'package:mall/constant/string.dart';
 import 'package:mall/page/category/category.dart';
@@ -33,7 +34,7 @@ class _MallMainViewState extends State<MallMainView> {
     _list
       ..add(JiaohuPAge())
       // ..add(CategoryView())
-      ..add(ProblemPage())
+      ..add(MySetingPage())
       // ..add(CartView())
       ..add(landingPage())
       ..add(MineView());
