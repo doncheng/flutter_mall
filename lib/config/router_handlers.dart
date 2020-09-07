@@ -43,14 +43,16 @@ var goPlacetheorderHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> parameters) {
   return PlacetheorderPage();
 });
-// var homeHandler = Handler(
-//     handlerFunc: (BuildContext context, Map<String, List<String>> parameters) {
-//   return MallMainView();
-// });
+
+//手机进入的第一个界面
 var homeHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> parameters) {
-  return webviewPage();
+  return MallMainView();
 });
+// var homeHandler = Handler(
+//     handlerFunc: (BuildContext context, Map<String, List<String>> parameters) {
+//   return webviewPage();
+// });
 
 var splashHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> parameters) {
