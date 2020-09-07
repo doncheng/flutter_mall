@@ -41,6 +41,10 @@ class _CapitalPageState extends State<CapitalPage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
+        iconTheme: IconThemeData(
+          color: Color(0xffbfbfbf), //修改颜色
+        ),
         backgroundColor: Colors.white,
         title: Text(
           '资金明细',

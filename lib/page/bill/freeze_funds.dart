@@ -13,6 +13,10 @@ class _FreezePageState extends State<FreezePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
+        elevation: 0,
+        iconTheme: IconThemeData(
+          color: Color(0xffbfbfbf), //修改颜色
+        ),
         title: Text(
           '资金冻结明细',
           style: TextStyle(color: Colors.black),

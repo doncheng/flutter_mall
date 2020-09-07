@@ -10,13 +10,18 @@ class WithdrawalPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        iconTheme: IconThemeData(
+          color: Color(0xffbfbfbf), //修改颜色
+        ),
         title: Text(
           '提现',
-          style: TextStyle(fontSize: 18),
+          style: TextStyle(fontSize: 18, color: Colors.black),
         ),
         centerTitle: true,
       ),
-      // backgroundColor: Color(0xfff0f0f0),
+      backgroundColor: Color(0xfffefefe),
       body: WithdrawalBody(),
     );
   }

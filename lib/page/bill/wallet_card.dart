@@ -7,9 +7,14 @@ class WalletCardPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        iconTheme: IconThemeData(
+          color: Color(0xffbfbfbf), //修改颜色
+        ),
         title: Text(
           '收款账户管理',
-          style: TextStyle(fontSize: 18),
+          style: TextStyle(fontSize: 18, color: Colors.black),
         ),
         centerTitle: true,
       ),
