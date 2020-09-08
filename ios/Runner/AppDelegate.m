@@ -1,5 +1,6 @@
 #include "AppDelegate.h"
 //#include "GeneratedPluginRegistrant.h"
+#import "AppleLandingViewController.h"
 
 @implementation AppDelegate
 
@@ -23,8 +24,12 @@
                  result(@"ma4444455");
                  
              }
-             if ([call.method isEqualToString:@"call_native_method"]) {
-                 result(@"888888455");
+             if ([call.method isEqualToString:@"Applelanding"]) {
+                 AppleLandingViewController *appleLandingViewController =[[AppleLandingViewController alloc]init];
+                 result(@"ss");
+//                [self.navigationController presentViewController:appleLandingViewController animated:YES];
+                     
+                 
                  
              }
 //             if ([call.method isEqualToString:@"iOSFlutter2"]) {

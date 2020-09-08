@@ -100,60 +100,7 @@ class _MineViewState extends State<MineView> {
                                   subtitle: Text('关注 0｜粉丝 0'),
                                 ),
                               ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: <Widget>[
-                                  Column(
-                                    children: <Widget>[
-                                      Text(
-                                        '11',
-                                        style: TextStyle(color: Colors.white),
-                                      ),
-                                      Text(
-                                        '购物车',
-                                        style: TextStyle(color: Colors.white),
-                                      )
-                                    ],
-                                  ),
-                                  Column(
-                                    children: <Widget>[
-                                      Text(
-                                        '3',
-                                        style: TextStyle(color: Colors.white),
-                                      ),
-                                      Text(
-                                        '足迹',
-                                        style: TextStyle(color: Colors.white),
-                                      )
-                                    ],
-                                  ),
-                                  Column(
-                                    children: <Widget>[
-                                      Text(
-                                        '7',
-                                        style: TextStyle(color: Colors.white),
-                                      ),
-                                      Text(
-                                        '红包',
-                                        style: TextStyle(color: Colors.white),
-                                      )
-                                    ],
-                                  ),
-                                  Column(
-                                    children: <Widget>[
-                                      Text(
-                                        '0',
-                                        style: TextStyle(color: Colors.white),
-                                      ),
-                                      Text(
-                                        '账单',
-                                        style: TextStyle(color: Colors.white),
-                                      )
-                                    ],
-                                  ),
-                                ],
-                              ),
+                              shoppingcartfootprint(),
                             ],
                           ),
                         ),
@@ -247,6 +194,92 @@ class _MineViewState extends State<MineView> {
   }
 }
 
+class shoppingcartfootprint extends StatefulWidget {
+  shoppingcartfootprint({Key key}) : super(key: key);
+
+  @override
+  _shoppingcartfootprintState createState() => _shoppingcartfootprintState();
+}
+
+class _shoppingcartfootprintState extends State<shoppingcartfootprint> {
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: <Widget>[
+        InkWell(
+          onTap: () {
+            print('sss');
+          },
+          child: Column(
+            children: <Widget>[
+              Text(
+                '11',
+                style: TextStyle(color: Colors.white),
+              ),
+              Text(
+                '购物车',
+                style: TextStyle(color: Colors.white),
+              )
+            ],
+          ),
+        ),
+        InkWell(
+          onTap: () {
+            print('sss');
+          },
+          child: Column(
+            children: <Widget>[
+              Text(
+                '3',
+                style: TextStyle(color: Colors.white),
+              ),
+              Text(
+                '足迹',
+                style: TextStyle(color: Colors.white),
+              )
+            ],
+          ),
+        ),
+        InkWell(
+          onTap: () {
+            print('sss');
+          },
+          child: Column(
+            children: <Widget>[
+              Text(
+                '7',
+                style: TextStyle(color: Colors.white),
+              ),
+              Text(
+                '红包',
+                style: TextStyle(color: Colors.white),
+              )
+            ],
+          ),
+        ),
+        InkWell(
+          onTap: () {
+            print('sss');
+          },
+          child: Column(
+            children: <Widget>[
+              Text(
+                '0',
+                style: TextStyle(color: Colors.white),
+              ),
+              Text(
+                '账单',
+                style: TextStyle(color: Colors.white),
+              )
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
 class mytrading extends StatefulWidget {
   mytrading({Key key}) : super(key: key);
 
@@ -283,85 +316,105 @@ class _mytradingState extends State<mytrading> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
-              Column(
-                children: <Widget>[
-                  Container(
-                    width: 19,
-                    height: 35,
-                    child: Text(
-                      '5',
-                      style: TextStyle(color: Colors.black, fontSize: 30),
+              InkWell(
+                onTap: () {
+                  print('sss');
+                },
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      width: 19,
+                      height: 35,
+                      child: Text(
+                        '5',
+                        style: TextStyle(color: Colors.black, fontSize: 30),
+                      ),
                     ),
-                  ),
-                  Container(
-                    width: 53,
-                    height: 19,
-                    child: Text(
-                      '我发布的',
-                      style: TextStyle(color: Colors.black54, fontSize: 13),
+                    Container(
+                      width: 53,
+                      height: 19,
+                      child: Text(
+                        '我发布的',
+                        style: TextStyle(color: Colors.black54, fontSize: 13),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-              Column(
-                children: <Widget>[
-                  Container(
-                    width: 19,
-                    height: 35,
-                    child: Text(
-                      '5',
-                      style: TextStyle(color: Colors.black, fontSize: 30),
+              InkWell(
+                onTap: () {
+                  print('sss');
+                },
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      width: 19,
+                      height: 35,
+                      child: Text(
+                        '5',
+                        style: TextStyle(color: Colors.black, fontSize: 30),
+                      ),
                     ),
-                  ),
-                  Container(
-                    width: 53,
-                    height: 19,
-                    child: Text(
-                      '我卖出的',
-                      style: TextStyle(color: Colors.black54, fontSize: 13),
+                    Container(
+                      width: 53,
+                      height: 19,
+                      child: Text(
+                        '我卖出的',
+                        style: TextStyle(color: Colors.black54, fontSize: 13),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-              Column(
-                children: <Widget>[
-                  Container(
-                    width: 19,
-                    height: 35,
-                    child: Text(
-                      '5',
-                      style: TextStyle(color: Colors.black, fontSize: 30),
+              InkWell(
+                onTap: () {
+                  print('sss');
+                },
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      width: 19,
+                      height: 35,
+                      child: Text(
+                        '5',
+                        style: TextStyle(color: Colors.black, fontSize: 30),
+                      ),
                     ),
-                  ),
-                  Container(
-                    width: 53,
-                    height: 19,
-                    child: Text(
-                      '我买到的',
-                      style: TextStyle(color: Colors.black54, fontSize: 13),
+                    Container(
+                      width: 53,
+                      height: 19,
+                      child: Text(
+                        '我买到的',
+                        style: TextStyle(color: Colors.black54, fontSize: 13),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-              Column(
-                children: <Widget>[
-                  Container(
-                    width: 19,
-                    height: 35,
-                    child: Text(
-                      '5',
-                      style: TextStyle(color: Colors.black, fontSize: 30),
+              InkWell(
+                onTap: () {
+                  print('sss');
+                },
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      width: 19,
+                      height: 35,
+                      child: Text(
+                        '5',
+                        style: TextStyle(color: Colors.black, fontSize: 30),
+                      ),
                     ),
-                  ),
-                  Container(
-                    width: 53,
-                    height: 19,
-                    child: Text(
-                      '我收藏的',
-                      style: TextStyle(color: Colors.black54, fontSize: 13),
+                    Container(
+                      width: 53,
+                      height: 19,
+                      child: Text(
+                        '我收藏的',
+                        style: TextStyle(color: Colors.black54, fontSize: 13),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ],
           ),
@@ -406,43 +459,53 @@ class _makemoneyState extends State<makemoney> {
             height: 7,
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Container(
-                height: 58,
-                width: 171,
-                child: ListTile(
-                  leading: Image.network(
-                    'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3901429284,1378079784&fm=26&gp=0.jpg',
-                    width: 45,
-                    height: 45,
-                  ),
-                  title: Text(
-                    '签到领现金',
-                    style: TextStyle(fontSize: 12),
-                  ),
-                  subtitle: Text(
-                    '提现至微信零钱',
-                    style: TextStyle(fontSize: 12),
+              InkWell(
+                onTap: () {
+                  print('sss');
+                },
+                child: Container(
+                  height: 58,
+                  width: 171,
+                  child: ListTile(
+                    leading: Image.network(
+                      'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3901429284,1378079784&fm=26&gp=0.jpg',
+                      width: 45,
+                      height: 45,
+                    ),
+                    title: Text(
+                      '签到领现金',
+                      style: TextStyle(fontSize: 12),
+                    ),
+                    subtitle: Text(
+                      '提现至微信零钱',
+                      style: TextStyle(fontSize: 12),
+                    ),
                   ),
                 ),
               ),
-              Container(
-                height: 58,
-                width: 171,
-                child: ListTile(
-                  leading: Image.network(
-                    'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3901429284,1378079784&fm=26&gp=0.jpg',
-                    width: 45,
-                    height: 45,
-                  ),
-                  title: Text(
-                    '签到领现金',
-                    style: TextStyle(fontSize: 12),
-                  ),
-                  subtitle: Text(
-                    '提现至微信零钱',
-                    style: TextStyle(fontSize: 12),
+              InkWell(
+                onTap: () {
+                  print('sss');
+                },
+                child: Container(
+                  height: 58,
+                  width: 171,
+                  child: ListTile(
+                    leading: Image.network(
+                      'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3901429284,1378079784&fm=26&gp=0.jpg',
+                      width: 45,
+                      height: 45,
+                    ),
+                    title: Text(
+                      '签到领现金',
+                      style: TextStyle(fontSize: 12),
+                    ),
+                    subtitle: Text(
+                      '提现至微信零钱',
+                      style: TextStyle(fontSize: 12),
+                    ),
                   ),
                 ),
               ),
@@ -487,62 +550,82 @@ class _recommendedtoolsState extends State<recommendedtools> {
       return Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-          Container(
-              height: 54,
-              width: 70,
-              child: Center(
-                child: Column(
-                  children: <Widget>[
-                    Icon(Icons.home),
-                    Text(
-                      value['toolsname1'],
-                      style: TextStyle(fontSize: 12),
-                    ),
-                  ],
-                ),
-              )),
-          Container(
-              height: 54,
-              width: 70,
-              child: Center(
-                child: Column(
-                  children: <Widget>[
-                    Icon(Icons.home),
-                    Text(
-                      value['toolsname2'],
-                      style: TextStyle(fontSize: 12),
-                    ),
-                  ],
-                ),
-              )),
-          Container(
-              height: 54,
-              width: 70,
-              child: Center(
-                child: Column(
-                  children: <Widget>[
-                    Icon(Icons.home),
-                    Text(
-                      value['toolsname3'],
-                      style: TextStyle(fontSize: 12),
-                    ),
-                  ],
-                ),
-              )),
-          Container(
-              height: 54,
-              width: 70,
-              child: Center(
-                child: Column(
-                  children: <Widget>[
-                    Icon(Icons.home),
-                    Text(
-                      value['toolsname4'],
-                      style: TextStyle(fontSize: 12),
-                    ),
-                  ],
-                ),
-              )),
+          InkWell(
+            onTap: () {
+              print('sss');
+            },
+            child: Container(
+                height: 54,
+                width: 70,
+                child: Center(
+                  child: Column(
+                    children: <Widget>[
+                      Icon(Icons.home),
+                      Text(
+                        value['toolsname1'],
+                        style: TextStyle(fontSize: 12),
+                      ),
+                    ],
+                  ),
+                )),
+          ),
+          InkWell(
+            onTap: () {
+              print('sss');
+            },
+            child: Container(
+                height: 54,
+                width: 70,
+                child: Center(
+                  child: Column(
+                    children: <Widget>[
+                      Icon(Icons.home),
+                      Text(
+                        value['toolsname2'],
+                        style: TextStyle(fontSize: 12),
+                      ),
+                    ],
+                  ),
+                )),
+          ),
+          InkWell(
+            onTap: () {
+              print('sss');
+            },
+            child: Container(
+                height: 54,
+                width: 70,
+                child: Center(
+                  child: Column(
+                    children: <Widget>[
+                      Icon(Icons.home),
+                      Text(
+                        value['toolsname3'],
+                        style: TextStyle(fontSize: 12),
+                      ),
+                    ],
+                  ),
+                )),
+          ),
+          InkWell(
+            onTap: () {
+              print('sss');
+            },
+            child: Container(
+                height: 54,
+                width: 70,
+                child: Center(
+                  child: Column(
+                    children: <Widget>[
+                      Icon(Icons.home),
+                      Text(
+                        value['toolsname4'],
+                        style: TextStyle(fontSize: 12),
+                      ),
+                    ],
+                  ),
+                )),
+          ),
         ],
       );
     });
