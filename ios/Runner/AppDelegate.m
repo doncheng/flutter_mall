@@ -27,7 +27,7 @@
              if ([call.method isEqualToString:@"Applelanding"]) {
                  AppleLandingViewController *appleLandingViewController =[[AppleLandingViewController alloc]init];
                  result(@"ss");
-//                [self.navigationController presentViewController:appleLandingViewController animated:YES];
+                 
                      
                  
                  

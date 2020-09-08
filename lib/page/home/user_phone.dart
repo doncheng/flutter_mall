@@ -8,6 +8,7 @@ class UserPhonePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Color(0xfff5f5f5),
       appBar: AppBar(
+        brightness: Brightness.light,
         backgroundColor: Colors.white,
         elevation: 0,
         iconTheme: IconThemeData(

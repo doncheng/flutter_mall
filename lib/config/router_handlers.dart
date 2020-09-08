@@ -7,6 +7,9 @@ import 'package:mall/page/bill/my_assets.dart';
 import 'package:mall/page/bill/wallet_card.dart';
 import 'package:mall/page/bill/withdrawal.dart';
 import 'package:mall/page/home/mall.dart';
+import 'package:mall/page/home/nicknamechange.dart';
+import 'package:mall/page/home/personaldata.dart';
+import 'package:mall/page/home/user_phone.dart';
 import 'package:mall/page/home/webview.dart';
 import 'package:mall/page/login/landing.dart';
 import 'package:mall/page/mine/recharge.dart';
@@ -111,6 +114,18 @@ var loginHandler = Handler(
   return landingPage();
 });
 
+var UserPhonePageHandler = Handler(
+    handlerFunc: (BuildContext context, Map<String, List<String>> parameters) {
+  return UserPhonePage();
+});
+var nicknamechangePageHandler = Handler(
+    handlerFunc: (BuildContext context, Map<String, List<String>> parameters) {
+  return nicknamechangePage();
+});
+var personaldataPageHandler = Handler(
+    handlerFunc: (BuildContext context, Map<String, List<String>> parameters) {
+  return personaldataPage();
+});
 var goodsDetailsHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<Object>> parameters) {
   var goodsId = int.parse(parameters["goodsId"].first);

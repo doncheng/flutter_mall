@@ -70,6 +70,21 @@ class NavigatorUtils {
         transition: TransitionType.native);
   }
 
+  static goUserPhonePage(BuildContext context) {
+    Application.router.navigateTo(context, Routers.UserPhonePage,
+        transition: TransitionType.native);
+  }
+
+  static gonicknamechangePage(BuildContext context) {
+    Application.router.navigateTo(context, Routers.nicknamechangePage,
+        transition: TransitionType.native);
+  }
+
+  static goPersonalData(BuildContext context) {
+    Application.router.navigateTo(context, Routers.personaldataPage,
+        transition: TransitionType.native);
+  }
+
   static goPlacetheorder(BuildContext context) {
     Application.router.navigateTo(context, Routers.goPlacetheorder,
         transition: TransitionType.native);

@@ -90,7 +90,7 @@ class _MineViewState extends State<MineView> {
                           child: Column(
                             children: <Widget>[
                               InkWell(
-                                onTap: () {},
+                                onTap: () => _toPersonalData(),
                                 child: ListTile(
                                   leading: Icon(
                                     Icons.account_circle,
@@ -191,6 +191,10 @@ class _MineViewState extends State<MineView> {
 
   _toPlacetheorder() {
     NavigatorUtils.goPlacetheorder(context);
+  }
+
+  _toPersonalData() {
+    NavigatorUtils.goPersonalData(context);
   }
 }
 
