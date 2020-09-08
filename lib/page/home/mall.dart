@@ -9,6 +9,7 @@ import 'package:mall/constant/string.dart';
 import 'package:mall/page/category/category.dart';
 import 'package:mall/page/home/cart.dart';
 import 'package:mall/page/home/mine.dart';
+import 'package:mall/page/home/user_phone.dart';
 import 'package:mall/page/home/webview.dart';
 import 'package:mall/page/login/landing.dart';
 import 'package:mall/page/mine/jiaohu.dart';
@@ -35,7 +36,7 @@ class _MallMainViewState extends State<MallMainView> {
     _list
       ..add(JiaohuPAge())
       // ..add(CategoryView())
-      ..add(RechargePage())
+      ..add(UserPhonePage())
       // ..add(CartView())
       ..add(landingPage())
       ..add(MineView());
