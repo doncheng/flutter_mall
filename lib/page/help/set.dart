@@ -14,7 +14,7 @@ class MySetingPage extends StatelessWidget {
         ),
         title: Text(
           '设置',
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: Colors.black, fontSize: 18),
         ),
         centerTitle: true,
       ),
@@ -123,7 +123,10 @@ class _SetBodyState extends State<SetBody> {
           height: 60,
           width: sizewidth - 40,
           margin: EdgeInsets.only(
-              left: 20, right: 20, top: sizeheight - 390, bottom: 20),
+            left: 20,
+            right: 20,
+            top: sizeheight - 400,
+          ),
           child: RaisedButton(
             color: Color(0xfff0f0f0),
             shape:
