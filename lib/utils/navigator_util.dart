@@ -70,6 +70,11 @@ class NavigatorUtils {
         transition: TransitionType.native);
   }
 
+  static goaddressselectionPage(BuildContext context) {
+    Application.router.navigateTo(context, Routers.addressselectionPage,
+        transition: TransitionType.native);
+  }
+
   static goUserPhonePage(BuildContext context) {
     Application.router.navigateTo(context, Routers.UserPhonePage,
         transition: TransitionType.native);

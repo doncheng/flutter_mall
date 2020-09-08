@@ -223,6 +223,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.0.3"
+  flutter_plugin_android_lifecycle:
+    dependency: transitive
+    description:
+      name: flutter_plugin_android_lifecycle
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.8"
   flutter_screenutil:
     dependency: "direct main"
     description:
@@ -297,7 +304,7 @@ packages:
       name: http
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.12.0+2"
+    version: "0.12.2"
   http_multi_server:
     dependency: transitive
     description:
@@ -319,6 +326,27 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.1.12"
+  image_crop:
+    dependency: "direct main"
+    description:
+      name: image_crop
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.3.2"
+  image_picker:
+    dependency: "direct main"
+    description:
+      name: image_picker
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.6.7+7"
+  image_picker_platform_interface:
+    dependency: transitive
+    description:
+      name: image_picker_platform_interface
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.1.0"
   io:
     dependency: transitive
     description:
@@ -438,6 +466,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.4.0"
+  plugin_platform_interface:
+    dependency: transitive
+    description:
+      name: plugin_platform_interface
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.2"
   pool:
     dependency: transitive
     description:
@@ -634,4 +669,4 @@ packages:
     version: "2.1.16"
 sdks:
   dart: ">=2.6.0 <3.0.0"
-  flutter: ">=1.12.0 <2.0.0"
+  flutter: ">=1.12.13 <2.0.0"

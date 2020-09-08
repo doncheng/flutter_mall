@@ -28,7 +28,7 @@ class Routers {
   static String personaldataPage = "/personaldataPage";
   static String nicknamechangePage = "/nicknamechangePage";
   static String UserPhonePage = "/UserPhonePage";
-  //路由配置添加
+  static String addressselectionPage = "/addressselectionPage";
   static String goAssetsPage = "/goAssetsPage";
   static String goCapitalPage = "/gorCapitalPage";
   static String goFreezePage = "/goFreezePage";
@@ -79,5 +79,6 @@ class Routers {
     router.define(personaldataPage, handler: personaldataPageHandler);
     router.define(nicknamechangePage, handler: nicknamechangePageHandler);
     router.define(UserPhonePage, handler: UserPhonePageHandler);
+    router.define(addressselectionPage, handler: addressselectionPageHandler);
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mall/utils/navigator_util.dart';
 
 class PlacetheorderPage extends StatefulWidget {
   PlacetheorderPage({Key key}) : super(key: key);
@@ -98,7 +99,7 @@ class _addressState extends State<address> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () => _toaddressselectionPage(),
       child: Container(
           width: double.infinity,
           height: 100,
@@ -114,6 +115,10 @@ class _addressState extends State<address> {
             ),
           )),
     );
+  }
+
+  _toaddressselectionPage() {
+    NavigatorUtils.goaddressselectionPage(context);
   }
 }
 
@@ -135,10 +140,12 @@ class _orderdetailsState extends State<orderdetails> {
           child: Column(
             children: <Widget>[
               ListTile(
-                leading: CircleAvatar(
+                leading: ClipOval(
                   child: Image.network(
                     'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3059487849,303561658&fm=26&gp=0.jpg',
-                    fit: BoxFit.fill,
+                    fit: BoxFit.cover,
+                    height: 36,
+                    width: 36,
                   ),
                 ),
                 title: Text('我是店名'),

@@ -6,6 +6,7 @@ import 'package:mall/page/bill/freeze_funds.dart';
 import 'package:mall/page/bill/my_assets.dart';
 import 'package:mall/page/bill/wallet_card.dart';
 import 'package:mall/page/bill/withdrawal.dart';
+import 'package:mall/page/home/addressselection.dart';
 import 'package:mall/page/home/mall.dart';
 import 'package:mall/page/home/nicknamechange.dart';
 import 'package:mall/page/home/personaldata.dart';
@@ -125,6 +126,10 @@ var nicknamechangePageHandler = Handler(
 var personaldataPageHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> parameters) {
   return personaldataPage();
+});
+var addressselectionPageHandler = Handler(
+    handlerFunc: (BuildContext context, Map<String, List<String>> parameters) {
+  return addressselectionPage();
 });
 var goodsDetailsHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<Object>> parameters) {

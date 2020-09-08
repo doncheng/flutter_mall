@@ -1,4 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:image_crop/image_crop.dart';
 import 'package:mall/utils/navigator_util.dart';
 
 class personaldataPage extends StatefulWidget {
@@ -9,6 +12,8 @@ class personaldataPage extends StatefulWidget {
 }
 
 class _personaldataPageState extends State<personaldataPage> {
+  var _imgPath;
+  String sex = '男';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +27,15 @@ class _personaldataPageState extends State<personaldataPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  _openGallery() async {
+                    var image = await ImagePicker.pickImage(
+                        source: ImageSource.gallery);
+                    setState(() {
+                      _imgPath = image;
+                    });
+                  }
+                },
                 child: Column(
                   children: <Widget>[
                     ClipOval(
@@ -77,7 +90,28 @@ class _personaldataPageState extends State<personaldataPage> {
           Padding(
               padding: EdgeInsets.only(left: 20, right: 20, top: 6, bottom: 6),
               child: InkWell(
-                onTap: () {},
+                onTap: () {
+                  var names = ['', '男', '女'];
+                  final picker = CupertinoPicker(
+                      itemExtent: 40,
+                      onSelectedItemChanged: (position) {
+                        setState(() {
+                          this.sex = names[position];
+                        });
+                        // print('The position is ${names[position]}');
+                      },
+                      children: names.map((e) {
+                        return Text(e);
+                      }).toList());
+                  showCupertinoModalPopup(
+                      context: context,
+                      builder: (cxt) {
+                        return Container(
+                          height: 200,
+                          child: picker,
+                        );
+                      });
+                },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
@@ -89,7 +123,7 @@ class _personaldataPageState extends State<personaldataPage> {
                       child: Row(
                         children: <Widget>[
                           Text(
-                            '男',
+                            this.sex,
                             style: TextStyle(fontSize: 14, color: Colors.grey),
                           ),
                           Icon(
