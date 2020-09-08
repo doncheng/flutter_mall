@@ -15,11 +15,13 @@ class RechargePage extends StatelessWidget {
         title: Text('充值'),
         centerTitle: true,
       ),
-      body: Column(
+      body: SafeArea(
+          child: Expanded(
+              child: Column(
         children: [
-          Container(
-            height: screenHeight - 130,
-            // height: 670,
+          Flexible(
+            // height: screenHeight - 130,
+            // // height: 670,
 
             child: ListView(
               children: [
@@ -69,7 +71,7 @@ class RechargePage extends StatelessWidget {
             ),
           )
         ],
-      ),
+      ))),
     );
   }
 }

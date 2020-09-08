@@ -12,6 +12,7 @@ import 'package:mall/page/home/mine.dart';
 import 'package:mall/page/home/webview.dart';
 import 'package:mall/page/login/landing.dart';
 import 'package:mall/page/mine/jiaohu.dart';
+import 'package:mall/page/mine/recharge.dart';
 
 import '../bill/capital_subsidiary.dart';
 import '../bill/freeze_funds.dart';
@@ -34,7 +35,7 @@ class _MallMainViewState extends State<MallMainView> {
     _list
       ..add(JiaohuPAge())
       // ..add(CategoryView())
-      ..add(MySetingPage())
+      ..add(RechargePage())
       // ..add(CartView())
       ..add(landingPage())
       ..add(MineView());
