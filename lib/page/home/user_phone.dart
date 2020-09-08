@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class UserPhonePage extends StatelessWidget {
   const UserPhonePage({Key key}) : super(key: key);
@@ -104,9 +105,19 @@ class _PhoneBodyState extends State<PhoneBody> {
               '立即绑定',
               style: TextStyle(fontSize: 20, color: Colors.white),
             ),
-            onPressed: () {},
+            onPressed: () {
+              // Fluttertoast.showToast(
+              //   msg: "网络连接错误",
+              //   toastLength: Toast.LENGTH_SHORT,
+              //   gravity: ToastGravity.BOTTOM,
+              //   timeInSecForIos: 1,
+              //   textColor: Colors.white,
+              //   backgroundColor: Colors.yellow
+
+              // );
+            },
           ),
-        )
+        ),
       ],
     );
   }

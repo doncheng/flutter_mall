@@ -13,7 +13,6 @@ import 'package:mall/page/home/user_phone.dart';
 import 'package:mall/page/home/webview.dart';
 import 'package:mall/page/login/landing.dart';
 import 'package:mall/page/mine/jiaohu.dart';
-import 'package:mall/page/mine/recharge.dart';
 
 import '../bill/capital_subsidiary.dart';
 import '../bill/freeze_funds.dart';

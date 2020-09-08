@@ -38,11 +38,12 @@ class _nicknamechangePageState extends State<nicknamechangePage> {
                 padding: EdgeInsets.only(left: 35),
                 onPressed: () {
                   Fluttertoast.showToast(
-                    msg: "网络连接错误",
-                    toastLength: Toast.LENGTH_SHORT,
-                    gravity: ToastGravity.BOTTOM,
-                    timeInSecForIos: 1,
-                  );
+                      msg: "网络连接错误",
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.BOTTOM,
+                      timeInSecForIos: 1,
+                      textColor: Colors.white,
+                      backgroundColor: Colors.yellow);
                 },
                 child: Text(
                   '保存',
