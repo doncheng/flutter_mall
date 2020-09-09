@@ -1,22 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:mall/page/bill/wallet_card.dart';
-import 'package:mall/page/bill/withdrawal.dart';
-import 'package:mall/page/help/customer_service.dart';
-import 'package:mall/page/help/problem.dart';
-import 'package:mall/page/help/set.dart';
-import 'package:mall/page/home/home_page.dart';
+
 import 'package:mall/constant/string.dart';
-import 'package:mall/page/category/category.dart';
-import 'package:mall/page/home/cart.dart';
+
 import 'package:mall/page/home/mine.dart';
-import 'package:mall/page/home/user_phone.dart';
-import 'package:mall/page/home/webview.dart';
+
 import 'package:mall/page/login/landing.dart';
 import 'package:mall/page/mine/jiaohu.dart';
 
-import '../bill/capital_subsidiary.dart';
-import '../bill/freeze_funds.dart';
-import '../bill/balance_recharge.dart';
+import 'evaluation.dart';
+import 'main_page.dart';
 
 class MallMainView extends StatefulWidget {
   @override
@@ -33,9 +25,9 @@ class _MallMainViewState extends State<MallMainView> {
   void initState() {
     super.initState();
     _list
-      ..add(JiaohuPAge())
+      ..add(MallHomePage())
       // ..add(CategoryView())
-      ..add(UserPhonePage())
+      ..add(EvaluationPage())
       // ..add(CartView())
       ..add(landingPage())
       ..add(MineView());
