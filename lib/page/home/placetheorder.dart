@@ -102,17 +102,57 @@ class _addressState extends State<address> {
       onTap: () => _toaddressselectionPage(),
       child: Container(
           width: double.infinity,
-          height: 100,
+          height: 106,
           margin: EdgeInsets.only(left: 10, right: 10, top: 10),
           child: Card(
             child: Padding(
-              padding: EdgeInsets.only(top: 10),
-              child: ListTile(
-                leading: Icon(Icons.location_on),
-                title: Text('我是名称 我是号码'),
-                subtitle: Text('我是地址'),
-              ),
-            ),
+                padding: EdgeInsets.only(top: 22, left: 22, right: 46),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Container(
+                      margin: EdgeInsets.only(top: 15),
+                      height: 30,
+                      width: 30,
+                      child: Icon(
+                        Icons.location_on,
+                        color: Colors.grey,
+                      ),
+                    ),
+                    SizedBox(width: 14),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Row(
+                          children: <Widget>[
+                            Text(
+                              '我是用户名',
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(width: 20),
+                            Text(
+                              '我是手机号码',
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.bold),
+                            )
+                          ],
+                        ),
+                        SizedBox(height: 10),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            Text(
+                              '我是地址',
+                              style: TextStyle(
+                                  fontSize: 13, fontWeight: FontWeight.normal),
+                            )
+                          ],
+                        )
+                      ],
+                    )
+                  ],
+                )),
           )),
     );
   }

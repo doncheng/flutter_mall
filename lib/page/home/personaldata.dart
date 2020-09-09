@@ -12,7 +12,6 @@ class personaldataPage extends StatefulWidget {
 }
 
 class _personaldataPageState extends State<personaldataPage> {
-  var _imgPath;
   String sex = '男';
   @override
   Widget build(BuildContext context) {
@@ -27,14 +26,10 @@ class _personaldataPageState extends State<personaldataPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               InkWell(
-                onTap: () {
-                  _openGallery() async {
-                    var image = await ImagePicker.pickImage(
-                        source: ImageSource.gallery);
-                    setState(() {
-                      _imgPath = image;
-                    });
-                  }
+                onTap: () async {
+                  var image =
+                      // ignore: deprecated_member_use
+                      await ImagePicker.pickImage(source: ImageSource.gallery);
                 },
                 child: Column(
                   children: <Widget>[

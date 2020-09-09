@@ -1,6 +1,7 @@
+import 'package:address_picker/address_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:mall/utils/http_util.dart';
+import 'package:address_picker/address_picker.dart';
 
 class addressselectionPage extends StatefulWidget {
   addressselectionPage({Key key}) : super(key: key);
@@ -16,6 +17,12 @@ class _addressselectionPageState extends State<addressselectionPage> {
     return Scaffold(
       backgroundColor: Color(0xfff5f5f5),
       appBar: AppBar(
+        leading: InkWell(
+          child: Icon(Icons.navigate_before),
+          onTap: () {
+            Navigator.pop(context);
+          },
+        ),
         iconTheme: IconThemeData(
           color: Color(0xffbfbfbf), //修改颜色
         ),
@@ -129,6 +136,7 @@ class inthearea extends StatefulWidget {
 }
 
 class _intheareaState extends State<inthearea> {
+  String area = '请选择地区';
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -146,14 +154,46 @@ class _intheareaState extends State<inthearea> {
               SizedBox(width: 28),
               InkWell(
                 onTap: () {
-                  print('sss');
+                  showModalBottomSheet(
+                      context: context,
+                      builder: (context) => BottomSheet(
+                          onClosing: () {},
+                          builder: (context) => Container(
+                                height: 250.0,
+                                child: AddressPicker(
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 17),
+                                  mode:
+                                      AddressPickerMode.provinceCityAndDistrict,
+                                  onSelectedAddressChanged: (address) {
+                                    // print(
+                                    //     '${address.currentProvince.province}');
+                                    // print('${address.currentCity.city}');
+                                    // print('${address.currentDistrict.area}');
+                                    setState(() {
+                                      this.area =
+                                          address.currentProvince.province +
+                                              address.currentCity.city +
+                                              address.currentDistrict.area;
+                                    });
+                                  },
+                                ),
+                              )));
                 },
                 child: Container(
                     width: 230,
                     color: Colors.white,
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
+                        Container(
+                          width: 206,
+                          child: Text(
+                            this.area,
+                            style: TextStyle(fontSize: 12, color: Colors.grey),
+                            overflow: TextOverflow.clip,
+                          ),
+                        ),
                         Icon(
                           Icons.navigate_next,
                           color: Colors.grey,
