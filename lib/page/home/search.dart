@@ -16,16 +16,20 @@ class _SearchPageState extends State<SearchPage> {
     return Scaffold(
       backgroundColor: Color(0xffffffff),
       appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.grey),
         brightness: Brightness.light,
         backgroundColor: Color(0xffffffff),
         elevation: 0,
         title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
-                decoration: BoxDecoration(color: Color(0xfff0f0f0)),
-                margin: EdgeInsets.only(left: 10, right: 15),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(40),
+                    color: Color(0xfff0f0f0)),
+                // margin: EdgeInsets.only(right: 10),
                 height: 36,
-                width: sizewidth * 2 / 3,
+                width: sizewidth * 0.65,
                 child: Center(
                   child: Row(
                     children: [
@@ -34,19 +38,23 @@ class _SearchPageState extends State<SearchPage> {
                         width: 68,
                         child: Center(
                           child: Text('宝贝',
-                              style:
-                                  TextStyle(fontSize: 14, color: Colors.black)),
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: Colors.black,
+                                fontWeight: FontWeight.normal,
+                              )),
                         ),
                       ),
                       Container(
-                        width: sizewidth * 2 / 3 - 68,
+                        alignment: Alignment.centerLeft,
+                        width: sizewidth * 0.2,
                         height: 30,
                         margin: EdgeInsets.only(top: 15),
                         child: TextField(
                           decoration: InputDecoration(
                               border: InputBorder.none, hintText: '苹果11'),
                           style:
-                              TextStyle(fontSize: 14, color: Color(0xff888888)),
+                              TextStyle(fontSize: 13, color: Color(0xff888888)),
                         ),
                       )
                     ],
@@ -57,13 +65,16 @@ class _SearchPageState extends State<SearchPage> {
                 setState(() {});
               },
               child: Container(
-                height: 36,
-                width: 50,
-                margin: EdgeInsets.only(left: 16),
+                height: 20,
+                // width: 50,
+                // margin: EdgeInsets.only(left: 16),
                 child: Center(
                   child: Text(
                     '取消',
-                    style: TextStyle(fontSize: 15, color: Color(0xffff3e45)),
+                    style: TextStyle(
+                        fontSize: 15,
+                        color: Color(0xffff3e45),
+                        fontWeight: FontWeight.normal),
                   ),
                 ),
               ),

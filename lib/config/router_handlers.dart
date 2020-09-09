@@ -10,6 +10,7 @@ import 'package:mall/page/home/addressselection.dart';
 import 'package:mall/page/home/mall.dart';
 import 'package:mall/page/home/nicknamechange.dart';
 import 'package:mall/page/home/personaldata.dart';
+import 'package:mall/page/home/search.dart';
 import 'package:mall/page/home/user_phone.dart';
 import 'package:mall/page/home/webview.dart';
 import 'package:mall/page/login/landing.dart';
@@ -130,6 +131,11 @@ var personaldataPageHandler = Handler(
 var addressselectionPageHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> parameters) {
   return addressselectionPage();
+});
+
+var SearchPageHandler = Handler(
+    handlerFunc: (BuildContext context, Map<String, List<String>> parameters) {
+  return SearchPage();
 });
 var goodsDetailsHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<Object>> parameters) {

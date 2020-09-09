@@ -33,7 +33,7 @@ class Routers {
   static String goCapitalPage = "/gorCapitalPage";
   static String goFreezePage = "/goFreezePage";
   static String goBalanceRechargePage = "/goBalanceRechargePage";
-
+  static String SearchPage = "/SearchPage";
   static String goWithdrawalPage = "/goWithdrawalPage";
   static String goWalletCardPage = "/goWalletCardPage";
   //
@@ -80,5 +80,6 @@ class Routers {
     router.define(nicknamechangePage, handler: nicknamechangePageHandler);
     router.define(UserPhonePage, handler: UserPhonePageHandler);
     router.define(addressselectionPage, handler: addressselectionPageHandler);
+    router.define(SearchPage, handler: SearchPageHandler);
   }
 }
