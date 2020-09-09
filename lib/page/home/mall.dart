@@ -55,11 +55,11 @@ class _MallMainViewState extends State<MallMainView> {
             title: Text(Strings.HOME),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.category),
+            icon: Icon(Icons.favorite),
             title: Text(Strings.CATEGORY),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart),
+            icon: Icon(Icons.message),
             title: Text(Strings.SHOP_CAR),
           ),
           BottomNavigationBarItem(

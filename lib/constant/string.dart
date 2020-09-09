@@ -7,8 +7,8 @@ class Strings {
   static const String PROJECT_SELECTIONS = "专题精选";
   static const String BRAND = "品牌制造商直供";
   static const String HOME = "首页";
-  static const String CATEGORY = "分类";
-  static const String SHOP_CAR = "购物车";
+  static const String CATEGORY = "服务";
+  static const String SHOP_CAR = "消息";
   static const String MINE = "我的";
   static const String SERVER_EXCEPTION = "请求网络数据异常";
   static const String GOODS_DETAIL = "商品详情";
