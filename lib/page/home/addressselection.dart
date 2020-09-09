@@ -184,7 +184,7 @@ class _intheareaState extends State<inthearea> {
                                 )));
                   },
                   child: Container(
-                    width: screenwith * 0.66,
+                    width: screenwith * 0.62,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[

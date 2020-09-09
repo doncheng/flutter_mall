@@ -49,12 +49,11 @@ class _SearchPageState extends State<SearchPage> {
                         alignment: Alignment.centerLeft,
                         width: sizewidth * 0.2,
                         height: 30,
-                        margin: EdgeInsets.only(top: 15),
+                        margin: EdgeInsets.only(top: 10),
                         child: TextField(
                           decoration: InputDecoration(
                               border: InputBorder.none, hintText: '苹果11'),
-                          style:
-                              TextStyle(fontSize: 13, color: Color(0xff888888)),
+                          style: TextStyle(fontSize: 13),
                         ),
                       )
                     ],
@@ -106,7 +105,7 @@ class _SearchBodyState extends State<SearchBody> {
     {"name": '荣耀play'},
     {"name": '三星s10'},
   ];
-  int radio = 0;
+
   //自定义方法
   List<Widget> _getData() {
 //循环

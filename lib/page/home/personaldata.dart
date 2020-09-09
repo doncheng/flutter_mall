@@ -16,6 +16,7 @@ class personaldataPage extends StatefulWidget {
 class _personaldataPageState extends State<personaldataPage> {
   File _image;
   final picker = ImagePicker();
+
   Future getImage() async {
     final pickedFile = await picker.getImage(source: ImageSource.camera);
 

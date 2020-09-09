@@ -2,10 +2,13 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSCameraUsageDescription</key>
-	<string>APP需要访问相机</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>APP需要从相册中选择图片</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>请允许访问</string>
+    <key>NSCameraUsageDescription</key>
+    <string>请允许访问</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>请允许访问</string>
+
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
