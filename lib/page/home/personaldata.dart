@@ -106,7 +106,12 @@ class _personaldataPageState extends State<personaldataPage> {
                     ClipOval(
                       child: _image == null
                           ? Text('No image selected.')
-                          : Image.file(_image, height: 100, width: 100),
+                          : Image.file(
+                              _image,
+                              height: 100,
+                              width: 100,
+                              fit: BoxFit.cover,
+                            ),
                     ),
                     // Image.network(
                     //     'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1789308275,2124804861&fm=26&gp=0.jpg',

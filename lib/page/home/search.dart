@@ -8,6 +8,7 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
+  String _selectedValue = '宝贝';
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -33,16 +34,21 @@ class _SearchPageState extends State<SearchPage> {
                 child: Center(
                   child: Row(
                     children: [
-                      Container(
-                        height: 30,
-                        width: 68,
-                        child: Center(
-                          child: Text('宝贝',
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: Colors.black,
-                                fontWeight: FontWeight.normal,
-                              )),
+                      InkWell(
+                        onTap: () {
+                          _showMenu(context);
+                        },
+                        child: Container(
+                          height: 30,
+                          width: 68,
+                          child: Center(
+                            child: Text('宝贝',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.normal,
+                                )),
+                          ),
                         ),
                       ),
                       Container(
@@ -61,7 +67,7 @@ class _SearchPageState extends State<SearchPage> {
                 )),
             InkWell(
               onTap: () {
-                setState(() {});
+                showSearch(context: context, delegate: SearchBarDelegate());
               },
               child: Container(
                 height: 20,
@@ -84,6 +90,66 @@ class _SearchPageState extends State<SearchPage> {
       ),
       body: SearchBody(),
     );
+  }
+
+  PopupMenuButton _popMenu() {
+    return PopupMenuButton<String>(
+      itemBuilder: (context) => _getPopupMenu(context),
+      onSelected: (String value) {
+        print('onSelected');
+        _selectValueChange(value);
+      },
+      onCanceled: () {
+        print('onCanceled');
+      },
+//      child: RaisedButton(onPressed: (){},child: Text('选择'),),
+      icon: Icon(Icons.shopping_basket),
+    );
+  }
+
+  _selectValueChange(String value) {
+    setState(() {
+      _selectedValue = value;
+    });
+  }
+
+  _showMenu(BuildContext context) {
+    final RenderBox button = context.findRenderObject();
+    final RenderBox overlay = Overlay.of(context).context.findRenderObject();
+    final RelativeRect position = RelativeRect.fromRect(
+      Rect.fromPoints(
+        button.localToGlobal(Offset(0, 0), ancestor: overlay),
+        button.localToGlobal(button.size.bottomRight(Offset.zero),
+            ancestor: overlay),
+      ),
+      Offset.zero & overlay.size,
+    );
+    var pop = _popMenu();
+    showMenu<String>(
+      context: context,
+      items: pop.itemBuilder(context),
+      position: position,
+    ).then<void>((String newValue) {
+      if (!mounted) return null;
+      if (newValue == null) {
+        if (pop.onCanceled != null) pop.onCanceled();
+        return null;
+      }
+      if (pop.onSelected != null) pop.onSelected(newValue);
+    });
+  }
+
+  _getPopupMenu(BuildContext context) {
+    return <PopupMenuEntry<String>>[
+      PopupMenuItem<String>(
+        value: '用户',
+        child: Text('用户'),
+      ),
+      PopupMenuItem<String>(
+        value: '宝贝',
+        child: Text('宝贝'),
+      ),
+    ];
   }
 }
 
@@ -154,6 +220,105 @@ class _SearchBodyState extends State<SearchBody> {
           ),
         )
       ],
+    );
+  }
+}
+
+typedef SearchItemCall = void Function(String item);
+
+class SearchBarDelegate extends SearchDelegate<String> {
+  @override
+  List<Widget> buildActions(BuildContext context) {
+    //右侧显示内容 这里放清除按钮
+    return [
+      IconButton(
+        icon: Icon(Icons.clear),
+        onPressed: () {
+          query = "";
+          showSuggestions(context);
+        },
+      ),
+    ];
+  }
+
+  @override
+  Widget buildLeading(BuildContext context) {
+    //左侧显示内容 这里放了返回按钮
+    return IconButton(
+      icon: AnimatedIcon(
+          icon: AnimatedIcons.menu_arrow, progress: transitionAnimation),
+      onPressed: () {
+        if (query.isEmpty) {
+          close(context, null);
+        } else {
+          query = "";
+          showSuggestions(context);
+        }
+      },
+    );
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    //点击了搜索显示的页面
+    return Center(
+      child: Text('123'),
+    );
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    //点击了搜索窗显示的页面
+    return SearchContentView();
+  }
+
+  @override
+  ThemeData appBarTheme(BuildContext context) {
+    return super.appBarTheme(context);
+  }
+}
+
+class SearchContentView extends StatefulWidget {
+  @override
+  _SearchContentViewState createState() => _SearchContentViewState();
+}
+
+class _SearchContentViewState extends State<SearchContentView> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[SearchBody()],
+      ),
+    );
+  }
+}
+
+class SearchItem extends StatefulWidget {
+  @required
+  final String title;
+  const SearchItem({Key key, this.title}) : super(key: key);
+  @override
+  _SearchItemState createState() => _SearchItemState();
+}
+
+class _SearchItemState extends State<SearchItem> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: InkWell(
+        child: Chip(
+          label: Text(widget.title),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        ),
+        onTap: () {
+          print(widget.title);
+        },
+      ),
+      color: Colors.white,
     );
   }
 }
