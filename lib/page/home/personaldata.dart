@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -12,9 +14,20 @@ class personaldataPage extends StatefulWidget {
 }
 
 class _personaldataPageState extends State<personaldataPage> {
+  File _image;
+  final picker = ImagePicker();
+  Future getImage() async {
+    final pickedFile = await picker.getImage(source: ImageSource.camera);
+
+    setState(() {
+      _image = File(pickedFile.path);
+    });
+  }
+
   String sex = '男';
   @override
   Widget build(BuildContext context) {
+    final screenwith = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         title: Text('个人资料编辑'),
@@ -26,11 +39,7 @@ class _personaldataPageState extends State<personaldataPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               InkWell(
-                onTap: () async {
-                  var image =
-                      // ignore: deprecated_member_use
-                      await ImagePicker.pickImage(source: ImageSource.gallery);
-                },
+                onTap: getImage,
                 child: Column(
                   children: <Widget>[
                     ClipOval(

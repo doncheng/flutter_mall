@@ -139,9 +139,12 @@ class _intheareaState extends State<inthearea> {
   String area = '请选择地区';
   @override
   Widget build(BuildContext context) {
+    final screenwith = MediaQuery.of(context).size.width;
+
     return Container(
         height: 28,
         child: Center(
+            child: Expanded(
           child: Row(
             children: <Widget>[
               Container(
@@ -153,41 +156,40 @@ class _intheareaState extends State<inthearea> {
               ),
               SizedBox(width: 28),
               InkWell(
-                onTap: () {
-                  showModalBottomSheet(
-                      context: context,
-                      builder: (context) => BottomSheet(
-                          onClosing: () {},
-                          builder: (context) => Container(
-                                height: 250.0,
-                                child: AddressPicker(
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 17),
-                                  mode:
-                                      AddressPickerMode.provinceCityAndDistrict,
-                                  onSelectedAddressChanged: (address) {
-                                    // print(
-                                    //     '${address.currentProvince.province}');
-                                    // print('${address.currentCity.city}');
-                                    // print('${address.currentDistrict.area}');
-                                    setState(() {
-                                      this.area =
-                                          address.currentProvince.province +
-                                              address.currentCity.city +
-                                              address.currentDistrict.area;
-                                    });
-                                  },
-                                ),
-                              )));
-                },
-                child: Container(
-                    width: 230,
-                    color: Colors.white,
+                  onTap: () {
+                    showModalBottomSheet(
+                        context: context,
+                        builder: (context) => BottomSheet(
+                            onClosing: () {},
+                            builder: (context) => Container(
+                                  height: 250.0,
+                                  child: AddressPicker(
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 17),
+                                    mode: AddressPickerMode
+                                        .provinceCityAndDistrict,
+                                    onSelectedAddressChanged: (address) {
+                                      // print(
+                                      //     '${address.currentProvince.province}');
+                                      // print('${address.currentCity.city}');
+                                      // print('${address.currentDistrict.area}');
+                                      setState(() {
+                                        this.area =
+                                            address.currentProvince.province +
+                                                address.currentCity.city +
+                                                address.currentDistrict.area;
+                                      });
+                                    },
+                                  ),
+                                )));
+                  },
+                  child: Container(
+                    width: screenwith * 0.66,
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Container(
-                          width: 206,
+                          // width: 206,
                           child: Text(
                             this.area,
                             style: TextStyle(fontSize: 12, color: Colors.grey),
@@ -199,10 +201,10 @@ class _intheareaState extends State<inthearea> {
                           color: Colors.grey,
                         )
                       ],
-                    )),
-              )
+                    ),
+                  )),
             ],
           ),
-        ));
+        )));
   }
 }
