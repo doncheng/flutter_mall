@@ -125,7 +125,7 @@ class _EvaluationBodyState extends State<EvaluationBody> {
                         children: [
                           Container(
                             height: 20,
-                            width: 100,
+                            width: 90,
                             child: Center(
                               child: Text('宝贝描述:' + starmun.toString() + '分'),
                             ),
@@ -146,7 +146,7 @@ class _EvaluationBodyState extends State<EvaluationBody> {
                           ),
                           Container(
                             height: 20,
-                            width: 100,
+                            width: 90,
                             margin: EdgeInsets.only(left: 20),
                             child: Center(
                               child: Text('沟通态度::' + starmun.toString() + '分'),

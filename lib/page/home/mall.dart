@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mall/constant/string.dart';
 
 import 'package:mall/page/home/mine.dart';
+import 'package:mall/page/home/search.dart';
 
 import 'package:mall/page/login/landing.dart';
 import 'package:mall/page/mine/jiaohu.dart';
@@ -27,7 +28,7 @@ class _MallMainViewState extends State<MallMainView> {
     _list
       ..add(MallHomePage())
       // ..add(CategoryView())
-      ..add(EvaluationPage())
+      ..add(SearchPage())
       // ..add(CartView())
       ..add(landingPage())
       ..add(MineView());
