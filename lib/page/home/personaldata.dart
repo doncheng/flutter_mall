@@ -5,6 +5,18 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image_crop/image_crop.dart';
 import 'package:mall/utils/navigator_util.dart';
+import 'package:permission_handler/permission_handler.dart';
+
+// requestPermiss() async {
+//   print('oooooooooo');
+//   //请求权限
+//   Map<PermissionGroup, PermissionStatus> permissions =
+//       await PermissionHandler().requestPermissions([PermissionGroup.camera]);
+//   //校验权限
+//   if (permissions[PermissionGroup.camera] != PermissionStatus.granted) {
+//     print("无相册权限");
+//   }
+// }
 
 class personaldataPage extends StatefulWidget {
   personaldataPage({Key key}) : super(key: key);
@@ -18,14 +30,61 @@ class _personaldataPageState extends State<personaldataPage> {
   final picker = ImagePicker();
 
   Future getImage() async {
-    final pickedFile = await picker.getImage(source: ImageSource.camera);
+    print('oooooooooooooo');
+    //请求权限
+    Map<PermissionGroup, PermissionStatus> permissions =
+        await PermissionHandler().requestPermissions([PermissionGroup.photos]);
+    //校验权限
+    if (permissions[PermissionGroup.photos] != PermissionStatus.granted) {
+      print("无相册权限");
+    }
+    print('pppppp');
 
+    // final pickedFile = await picker.getImage(source: ImageSource.camera);
+    // ignore: deprecated_member_use
+    final pickedFile = await ImagePicker.pickImage(source: ImageSource.gallery);
     setState(() {
       _image = File(pickedFile.path);
     });
   }
 
   String sex = '男';
+
+  //选择弹窗
+  _simpleDialog() async {
+    var result = await showDialog(
+      context: context,
+      builder: (context) {
+        return SimpleDialog(
+          title: Text('你想从'),
+          children: <Widget>[
+            SimpleDialogOption(
+              child: Text('Option A'),
+              onPressed: () {
+                Navigator.pop(context, 'A');
+              },
+            ),
+            Divider(),
+            SimpleDialogOption(
+              child: Text('Option B'),
+              onPressed: () {
+                Navigator.pop(context, 'B');
+              },
+            ),
+            Divider(),
+            SimpleDialogOption(
+              child: Text('Option C'),
+              onPressed: () {
+                Navigator.pop(context, 'C');
+              },
+            ),
+          ],
+        );
+      },
+    );
+    print(result);
+  }
+
   @override
   Widget build(BuildContext context) {
     final screenwith = MediaQuery.of(context).size.width;
@@ -41,16 +100,20 @@ class _personaldataPageState extends State<personaldataPage> {
             children: <Widget>[
               InkWell(
                 onTap: getImage,
+                // onTap: this._simpleDialog,
                 child: Column(
                   children: <Widget>[
                     ClipOval(
-                      child: Image.network(
-                        'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1789308275,2124804861&fm=26&gp=0.jpg',
-                        height: 100,
-                        width: 100,
-                        fit: BoxFit.cover,
-                      ),
+                      child: _image == null
+                          ? Text('No image selected.')
+                          : Image.file(_image, height: 100, width: 100),
                     ),
+                    // Image.network(
+                    //     'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1789308275,2124804861&fm=26&gp=0.jpg',
+                    //     height: 100,
+                    //     width: 100,
+                    //     fit: BoxFit.cover,
+                    //   ),
                     SizedBox(height: 6),
                     Text(
                       '点击更换头像',
