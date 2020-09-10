@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:mall/page/home/personaldata.dart';
 
 class nicknamechangePage extends StatefulWidget {
-  nicknamechangePage({Key key}) : super(key: key);
+  final String nicknamefrompersonaldataPage;
+  nicknamechangePage({Key key, this.nicknamefrompersonaldataPage = '同步昵称'})
+      : super(key: key);
 
   @override
-  _nicknamechangePageState createState() => _nicknamechangePageState();
+  _nicknamechangePageState createState() =>
+      _nicknamechangePageState(this.nicknamefrompersonaldataPage);
 }
 
 class _nicknamechangePageState extends State<nicknamechangePage> {
-  _toast() {
-    // bgcolor: "#9E9E9E",
-    // textcolor: '#ffffff');
+  String nicknamechangePagenickname;
+  _nicknamechangePageState(nicknamefrompersonaldataPage) {
+    this.nicknamechangePagenickname = nicknamefrompersonaldataPage;
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,15 +39,17 @@ class _nicknamechangePageState extends State<nicknamechangePage> {
           actions: <Widget>[
             FlatButton(
                 padding: EdgeInsets.only(left: 35),
-                onPressed: () {
-                  Fluttertoast.showToast(
-                      msg: "保存成功",
-                      toastLength: Toast.LENGTH_SHORT,
-                      gravity: ToastGravity.BOTTOM,
-                      timeInSecForIos: 1,
-                      textColor: Colors.white,
-                      backgroundColor: Colors.grey);
-                },
+                onPressed: () => _topersonaldataPage(),
+
+                // Fluttertoast.showToast(
+                //     msg: "保存成功",
+                //     toastLength: Toast.LENGTH_SHORT,
+                //     gravity: ToastGravity.BOTTOM,
+                //     timeInSecForIos: 1,
+                //     textColor: Colors.white,
+                //     backgroundColor: Colors.grey);
+                // Navigator.pop(context);
+
                 child: Text(
                   '保存',
                   style: TextStyle(
@@ -57,7 +62,41 @@ class _nicknamechangePageState extends State<nicknamechangePage> {
         ),
         body: Column(
           children: <Widget>[
-            changebox(),
+            Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  color: Colors.white,
+                ),
+                width: double.infinity,
+                height: 40,
+                margin: EdgeInsets.only(left: 20, right: 20, top: 20),
+                padding: EdgeInsets.only(left: 14),
+                child: Center(
+                  child: Row(
+                    children: <Widget>[
+                      Text('昵称'),
+                      SizedBox(width: 26),
+                      Container(
+                        color: Colors.white,
+                        padding: EdgeInsets.only(top: 7),
+                        width: 260,
+                        child: TextField(
+                          decoration: InputDecoration(
+                              border: InputBorder.none,
+                              hintText: this.nicknamechangePagenickname,
+                              hintStyle:
+                                  TextStyle(color: Colors.black, fontSize: 14)),
+                          onChanged: (value) {
+                            setState(() {
+                              this.nicknamechangePagenickname = value;
+                              print(this.nicknamechangePagenickname);
+                            });
+                          },
+                        ),
+                      )
+                    ],
+                  ),
+                )),
             SizedBox(height: 10),
             Container(
                 height: 20,
@@ -73,45 +112,52 @@ class _nicknamechangePageState extends State<nicknamechangePage> {
           ],
         ));
   }
-}
 
-class changebox extends StatefulWidget {
-  changebox({Key key}) : super(key: key);
-
-  @override
-  _changeboxState createState() => _changeboxState();
-}
-
-class _changeboxState extends State<changebox> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5),
-          color: Colors.white,
-        ),
-        width: double.infinity,
-        height: 40,
-        margin: EdgeInsets.only(left: 20, right: 20, top: 20),
-        padding: EdgeInsets.only(left: 14),
-        child: Center(
-          child: Row(
-            children: <Widget>[
-              Text('昵称'),
-              SizedBox(width: 26),
-              Container(
-                color: Colors.white,
-                padding: EdgeInsets.only(top: 7),
-                width: 260,
-                child: TextField(
-                  decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: '我是名称',
-                      hintStyle: TextStyle(color: Colors.black, fontSize: 14)),
-                ),
-              )
-            ],
-          ),
-        ));
+  _topersonaldataPage() {
+    // NavigatorUtils.gonicknamechangePage(context);
+    Navigator.of(context).pop(MaterialPageRoute(
+        builder: (context) =>
+            personaldataPage(nickname: this.nicknamechangePagenickname)));
   }
 }
+
+// class changebox extends StatefulWidget {
+//   changebox({Key key}) : super(key: key);
+
+//   @override
+//   _changeboxState createState() => _changeboxState();
+// }
+
+// class _changeboxState extends State<changebox> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//         decoration: BoxDecoration(
+//           borderRadius: BorderRadius.circular(5),
+//           color: Colors.white,
+//         ),
+//         width: double.infinity,
+//         height: 40,
+//         margin: EdgeInsets.only(left: 20, right: 20, top: 20),
+//         padding: EdgeInsets.only(left: 14),
+//         child: Center(
+//           child: Row(
+//             children: <Widget>[
+//               Text('昵称'),
+//               SizedBox(width: 26),
+//               Container(
+//                 color: Colors.white,
+//                 padding: EdgeInsets.only(top: 7),
+//                 width: 260,
+//                 child: TextField(
+//                   decoration: InputDecoration(
+//                       border: InputBorder.none,
+//                       hintText: '我是名称',
+//                       hintStyle: TextStyle(color: Colors.black, fontSize: 14)),
+//                 ),
+//               )
+//             ],
+//           ),
+//         ));
+//   }
+// }

@@ -14,7 +14,7 @@ class _MallHomePageState extends State<MallHomePage> {
     return Scaffold(
       // backgroundColor: Color(0xffffffff),
       appBar: AppBar(
-        brightness: Brightness.light,
+        brightness: Brightness.dark,
         backgroundColor: Color(0xff02347B),
         elevation: 0,
         title: titlerow(),

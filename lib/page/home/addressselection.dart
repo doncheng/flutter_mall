@@ -176,7 +176,9 @@ class _intheareaState extends State<inthearea> {
                                       setState(() {
                                         this.area =
                                             address.currentProvince.province +
+                                                '  ' +
                                                 address.currentCity.city +
+                                                '  ' +
                                                 address.currentDistrict.area;
                                       });
                                     },

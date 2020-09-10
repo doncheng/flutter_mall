@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image_crop/image_crop.dart';
+import 'package:mall/page/home/nicknamechange.dart';
 import 'package:mall/utils/navigator_util.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -19,13 +20,19 @@ import 'package:permission_handler/permission_handler.dart';
 // }
 
 class personaldataPage extends StatefulWidget {
-  personaldataPage({Key key}) : super(key: key);
+  final nickname;
+  personaldataPage({Key key, this.nickname = '请输入昵称'}) : super(key: key);
 
   @override
-  _personaldataPageState createState() => _personaldataPageState();
+  _personaldataPageState createState() => _personaldataPageState(this.nickname);
 }
 
 class _personaldataPageState extends State<personaldataPage> {
+  String personaldataPagenicknanme;
+  _personaldataPageState(nicknanme) {
+    this.personaldataPagenicknanme = nicknanme;
+  }
+
   File _image;
   final picker = ImagePicker();
 
@@ -146,7 +153,7 @@ class _personaldataPageState extends State<personaldataPage> {
                       child: Row(
                         children: <Widget>[
                           Text(
-                            '我是名称',
+                            this.personaldataPagenicknanme,
                             style: TextStyle(fontSize: 14, color: Colors.grey),
                           ),
                           Icon(
@@ -274,7 +281,10 @@ class _personaldataPageState extends State<personaldataPage> {
   }
 
   _tonicknamechangePage() {
-    NavigatorUtils.gonicknamechangePage(context);
+    // NavigatorUtils.gonicknamechangePage(context);
+    Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => nicknamechangePage(
+            nicknamefrompersonaldataPage: this.personaldataPagenicknanme)));
   }
 
   _toUserPhonePage() {
