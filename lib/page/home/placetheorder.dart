@@ -15,6 +15,7 @@ class _PlacetheorderPageState extends State<PlacetheorderPage> {
     final screenwidth = size.width;
     final screenheight = size.height;
     return MaterialApp(
+        debugShowCheckedModeBanner: false,
         home: Scaffold(
             appBar: AppBar(
               elevation: 0, // 隐藏阴影
@@ -171,9 +172,12 @@ class orderdetails extends StatefulWidget {
 class _orderdetailsState extends State<orderdetails> {
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final sizewidth = size.width;
+    final sizeheight = size.height;
     return Container(
         width: double.infinity,
-        height: 283,
+        height: 286,
         margin: EdgeInsets.only(left: 10, right: 10, top: 10),
         child: Card(
           child: Column(
@@ -319,7 +323,7 @@ class _methodofpaymentState extends State<methodofpayment> {
   Widget build(BuildContext context) {
     return Container(
         width: double.infinity,
-        height: 195,
+        height: 200,
         margin: EdgeInsets.only(left: 10, right: 10, top: 10),
         child: Card(
             child: Padding(

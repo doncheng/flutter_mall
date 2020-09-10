@@ -32,7 +32,7 @@ class _SearchGoodsViewState extends State<SearchGoodsView> {
     final sizewidth = size.width;
     final sizeheight = size.height;
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
-      statusBarColor: Color(0xfff0f0f0),
+      statusBarColor: Colors.transparent,
       /*状态栏 背景透明*/
       // systemNavigationBarColor: Colors.white //底部navigationBar背景颜色
     ));

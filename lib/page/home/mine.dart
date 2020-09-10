@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mall/page/bill/my_assets.dart';
 import 'package:mall/utils/navigator_util.dart';
 
 const APPBAR_SCROLL_OFFSET = 100;
@@ -249,7 +250,11 @@ class _shoppingcartfootprintState extends State<shoppingcartfootprint> {
         ),
         InkWell(
           onTap: () {
-            print('sss');
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    //导航打开新视图
+                    builder: (context) => AssetsPage()));
           },
           child: Column(
             children: <Widget>[
@@ -258,7 +263,7 @@ class _shoppingcartfootprintState extends State<shoppingcartfootprint> {
                 style: TextStyle(color: Colors.white),
               ),
               Text(
-                '账单',
+                '钱包',
                 style: TextStyle(color: Colors.white),
               )
             ],
