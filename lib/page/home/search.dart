@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 
 class SearchPage extends StatefulWidget {
-  SearchPage({Key key}) : super(key: key);
+  final String selectedValue;
+  SearchPage({Key key, this.selectedValue = '宝贝'}) : super(key: key);
 
   @override
-  _SearchPageState createState() => _SearchPageState();
+  _SearchPageState createState() =>
+      _SearchPageState(selectedValue: this.selectedValue);
 }
 
 class _SearchPageState extends State<SearchPage> {
-  String _selectedValue = '宝贝';
+  String selectedValue;
+  _SearchPageState({this.selectedValue});
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -36,18 +39,53 @@ class _SearchPageState extends State<SearchPage> {
                     children: [
                       InkWell(
                         onTap: () {
-                          _showMenu(context);
+                          // _showMenu(context);
                         },
                         child: Container(
                           height: 30,
                           width: 68,
                           child: Center(
-                            child: Text('宝贝',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.normal,
-                                )),
+                            child: PopupMenuButton(
+//              icon: Icon(Icons.home),
+                              child: Text(selectedValue,
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.normal,
+                                  )),
+                              // tooltip: "长按提示",
+                              initialValue: "goods",
+                              padding: EdgeInsets.all(0.0),
+                              itemBuilder: (BuildContext context) {
+                                return <PopupMenuItem<String>>[
+                                  PopupMenuItem<String>(
+                                    child: Text("宝贝"),
+                                    value: "goods",
+                                  ),
+                                  PopupMenuItem<String>(
+                                    child: Text("商家"),
+                                    value: "users",
+                                  ),
+                                ];
+                              },
+                              onSelected: (String action) {
+                                switch (action) {
+                                  case "goods":
+                                    setState(() {
+                                      selectedValue = '宝贝';
+                                    });
+                                    break;
+                                  case "users":
+                                    setState(() {
+                                      selectedValue = '商家';
+                                    });
+                                    break;
+                                }
+                              },
+                              onCanceled: () {
+                                print("onCanceled");
+                              },
+                            ),
                           ),
                         ),
                       ),
@@ -91,66 +129,6 @@ class _SearchPageState extends State<SearchPage> {
       body: SearchBody(),
     );
   }
-
-  PopupMenuButton _popMenu() {
-    return PopupMenuButton<String>(
-      itemBuilder: (context) => _getPopupMenu(context),
-      onSelected: (String value) {
-        print('onSelected');
-        _selectValueChange(value);
-      },
-      onCanceled: () {
-        print('onCanceled');
-      },
-//      child: RaisedButton(onPressed: (){},child: Text('选择'),),
-      icon: Icon(Icons.shopping_basket),
-    );
-  }
-
-  _selectValueChange(String value) {
-    setState(() {
-      _selectedValue = value;
-    });
-  }
-
-  _showMenu(BuildContext context) {
-    final RenderBox button = context.findRenderObject();
-    final RenderBox overlay = Overlay.of(context).context.findRenderObject();
-    final RelativeRect position = RelativeRect.fromRect(
-      Rect.fromPoints(
-        button.localToGlobal(Offset(0, 0), ancestor: overlay),
-        button.localToGlobal(button.size.bottomRight(Offset.zero),
-            ancestor: overlay),
-      ),
-      Offset.zero & overlay.size,
-    );
-    var pop = _popMenu();
-    showMenu<String>(
-      context: context,
-      items: pop.itemBuilder(context),
-      position: position,
-    ).then<void>((String newValue) {
-      if (!mounted) return null;
-      if (newValue == null) {
-        if (pop.onCanceled != null) pop.onCanceled();
-        return null;
-      }
-      if (pop.onSelected != null) pop.onSelected(newValue);
-    });
-  }
-
-  _getPopupMenu(BuildContext context) {
-    return <PopupMenuEntry<String>>[
-      PopupMenuItem<String>(
-        value: '用户',
-        child: Text('用户'),
-      ),
-      PopupMenuItem<String>(
-        value: '宝贝',
-        child: Text('宝贝'),
-      ),
-    ];
-  }
 }
 
 class SearchBody extends StatefulWidget {
@@ -176,15 +154,22 @@ class _SearchBodyState extends State<SearchBody> {
   List<Widget> _getData() {
 //循环
     var tempList = list.map((value) {
-      return Container(
-        height: 24,
-        margin: EdgeInsets.only(left: 10),
-        padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(6), color: Color(0xfff0f0f0)),
-        child: Text(
-          value["name"],
-          style: TextStyle(fontSize: 12),
+      return InkWell(
+        onTap: () {
+          setState(() {
+            print(value["name"]);
+          });
+        },
+        child: Container(
+          height: 24,
+          margin: EdgeInsets.only(left: 10),
+          padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(6), color: Color(0xfff0f0f0)),
+          child: Text(
+            value["name"],
+            style: TextStyle(fontSize: 12),
+          ),
         ),
       );
     });
