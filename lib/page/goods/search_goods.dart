@@ -28,10 +28,16 @@ class _SearchGoodsViewState extends State<SearchGoodsView> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final sizewidth = size.width;
+    final sizeheight = size.height;
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
-      statusBarColor: Color(0xffffffff), //or set color with: Color(0xFF0000FF)
+      statusBarColor: Color(0xfff0f0f0),
+      /*状态栏 背景透明*/
+      // systemNavigationBarColor: Colors.white //底部navigationBar背景颜色
     ));
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Stack(
           children: <Widget>[
@@ -110,7 +116,7 @@ class _SearchGoodsViewState extends State<SearchGoodsView> {
                           ),
                           Container(
                             height: 40,
-                            width: 200,
+                            width: sizewidth / 2,
                             child: TextField(
                               onEditingComplete: _sort,
                               controller: _editingController,
@@ -156,24 +162,24 @@ class _SearchGoodsViewState extends State<SearchGoodsView> {
               ),
             ),
             _sortView(),
-            // Container(
-            //     height: double.infinity,
-            //     margin:
-            //         EdgeInsets.only(top: ScreenUtil.instance.setHeight(210.0)),
-            //     child: _goods == null || _goods.length == 0
-            //         ? EmptyView()
-            //         : GridView.builder(
-            //             itemCount: _goods.length,
-            //             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            //                 childAspectRatio: 1.0,
-            //                 crossAxisSpacing:
-            //                     ScreenUtil.instance.setWidth(10.0),
-            //                 mainAxisSpacing:
-            //                     ScreenUtil.instance.setHeight(10.0),
-            //                 crossAxisCount: 2),
-            //             itemBuilder: (BuildContext context, int index) {
-            //               return getGoodsItemView(_goods[index]);
-            //             }))
+            Container(
+                height: double.infinity,
+                margin:
+                    EdgeInsets.only(top: ScreenUtil.instance.setHeight(210.0)),
+                child: _goods == null || _goods.length == 0
+                    ? EmptyView()
+                    : GridView.builder(
+                        itemCount: _goods.length,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            childAspectRatio: 1.0,
+                            crossAxisSpacing:
+                                ScreenUtil.instance.setWidth(10.0),
+                            mainAxisSpacing:
+                                ScreenUtil.instance.setHeight(10.0),
+                            crossAxisCount: 2),
+                        itemBuilder: (BuildContext context, int index) {
+                          return getGoodsItemView(_goods[index]);
+                        }))
           ],
         ),
       ),
@@ -219,14 +225,20 @@ class _SearchGoodsViewState extends State<SearchGoodsView> {
   }
 
   Widget _sortView() {
+    final size = MediaQuery.of(context).size;
+    final sizewidth = size.width;
+    final sizeheight = size.height;
     return Container(
-        margin: EdgeInsets.only(top: ScreenUtil.instance.setHeight(100.0)),
-        height: ScreenUtil.instance.setHeight(200.0),
+        margin: EdgeInsets.only(top: ScreenUtil.instance.setHeight(110.0)),
+        height: ScreenUtil.instance.setHeight(sizeheight / 4),
         child: Column(
           children: [
             Container(
               height: 22,
-              margin: EdgeInsets.only(left: 15, bottom: 10, top: 10),
+              margin: EdgeInsets.only(
+                left: 15,
+                bottom: 10,
+              ),
               width: double.infinity,
               child: Text(
                 '推荐搜索',
