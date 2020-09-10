@@ -10,6 +10,7 @@ import 'package:mall/page/login/landing.dart';
 import 'package:mall/page/mine/jiaohu.dart';
 
 import 'evaluation.dart';
+import 'home_page.dart';
 import 'main_page.dart';
 
 class MallMainView extends StatefulWidget {
@@ -27,7 +28,7 @@ class _MallMainViewState extends State<MallMainView> {
   void initState() {
     super.initState();
     _list
-      ..add(MallHomePage())
+      ..add(HomePage())
       // ..add(CategoryView())
       ..add(AssetsPage())
       // ..add(CartView())

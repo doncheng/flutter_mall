@@ -41,6 +41,7 @@ class _CapitalPageState extends State<CapitalPage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        brightness: Brightness.light,
         elevation: 0,
         iconTheme: IconThemeData(
           color: Color(0xffbfbfbf), //修改颜色
