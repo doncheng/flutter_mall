@@ -17,11 +17,14 @@ class _nicknamechangePageState extends State<nicknamechangePage> {
   _nicknamechangePageState(nicknamefrompersonaldataPage) {
     this.nicknamechangePagenickname = nicknamefrompersonaldataPage;
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Color(0xfff5f5f5),
         appBar: AppBar(
+          //去掉返回按钮
+          automaticallyImplyLeading: false,
           iconTheme: IconThemeData(
             color: Color(0xffbfbfbf), //修改颜色
           ),
@@ -40,16 +43,6 @@ class _nicknamechangePageState extends State<nicknamechangePage> {
             FlatButton(
                 padding: EdgeInsets.only(left: 35),
                 onPressed: () => _topersonaldataPage(),
-
-                // Fluttertoast.showToast(
-                //     msg: "保存成功",
-                //     toastLength: Toast.LENGTH_SHORT,
-                //     gravity: ToastGravity.BOTTOM,
-                //     timeInSecForIos: 1,
-                //     textColor: Colors.white,
-                //     backgroundColor: Colors.grey);
-                // Navigator.pop(context);
-
                 child: Text(
                   '保存',
                   style: TextStyle(
@@ -89,7 +82,7 @@ class _nicknamechangePageState extends State<nicknamechangePage> {
                           onChanged: (value) {
                             setState(() {
                               this.nicknamechangePagenickname = value;
-                              print(this.nicknamechangePagenickname);
+                              // print(this.nicknamechangePagenickname);
                             });
                           },
                         ),
@@ -115,9 +108,7 @@ class _nicknamechangePageState extends State<nicknamechangePage> {
 
   _topersonaldataPage() {
     // NavigatorUtils.gonicknamechangePage(context);
-    Navigator.of(context).pop(MaterialPageRoute(
-        builder: (context) =>
-            personaldataPage(nickname: this.nicknamechangePagenickname)));
+    Navigator.of(context).pop(this.nicknamechangePagenickname);
   }
 }
 

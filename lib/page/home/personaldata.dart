@@ -282,9 +282,16 @@ class _personaldataPageState extends State<personaldataPage> {
 
   _tonicknamechangePage() {
     // NavigatorUtils.gonicknamechangePage(context);
-    Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => nicknamechangePage(
-            nicknamefrompersonaldataPage: this.personaldataPagenicknanme)));
+    Navigator.of(context)
+        .push(MaterialPageRoute(
+            builder: (context) => nicknamechangePage(
+                nicknamefrompersonaldataPage: this.personaldataPagenicknanme)))
+        .then((value) {
+      setState(() {
+        this.personaldataPagenicknanme = value;
+      });
+      print(value);
+    });
   }
 
   _toUserPhonePage() {
