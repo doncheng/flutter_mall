@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:mall/constant/string.dart';
+import 'package:mall/page/bill/my_assets.dart';
 
 import 'package:mall/page/home/mine.dart';
 import 'package:mall/page/home/search.dart';
@@ -28,7 +29,7 @@ class _MallMainViewState extends State<MallMainView> {
     _list
       ..add(MallHomePage())
       // ..add(CategoryView())
-      ..add(SearchPage())
+      ..add(AssetsPage())
       // ..add(CartView())
       ..add(landingPage())
       ..add(MineView());
