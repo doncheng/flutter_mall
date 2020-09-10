@@ -36,54 +36,53 @@ class _PlacetheorderPageState extends State<PlacetheorderPage> {
             ),
             body: SafeArea(
               child: Container(
-                  height: screenheight,
-                  width: double.infinity,
-                  child: Expanded(
-                    child: Column(children: <Widget>[
-                      Flexible(
-                        child: SingleChildScrollView(
-                          child: Column(
-                            children: <Widget>[
-                              payattention(),
-                              address(),
-                              orderdetails(),
-                              methodofpayment(),
-                              totalpricelist(),
-                              SizedBox(height: 30)
-                            ],
-                          ),
-                        ),
+                height: screenheight,
+                width: double.infinity,
+                child: Column(children: <Widget>[
+                  Flexible(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: <Widget>[
+                          payattention(),
+                          address(),
+                          orderdetails(),
+                          methodofpayment(),
+                          totalpricelist(),
+                          SizedBox(height: 30)
+                        ],
                       ),
-                      Container(
-                        padding: EdgeInsets.only(
-                            left: 15, right: 15, bottom: 10, top: 7),
-                        width: double.infinity,
-                        // height: 120,
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              Text(
-                                '合计：¥ 2638.00',
-                                style: TextStyle(fontSize: 18),
-                              ),
-                              Container(
-                                height: 35,
-                                width: 100,
-                                child: RaisedButton(
-                                  onPressed: () {},
-                                  color: Colors.red,
-                                  child: Center(
-                                    child: Text(
-                                      '确认下单',
-                                      style: TextStyle(color: Colors.white),
-                                    ),
-                                  ),
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(
+                        left: 15, right: 15, bottom: 10, top: 7),
+                    width: double.infinity,
+                    // height: 120,
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(
+                            '合计：¥ 2638.00',
+                            style: TextStyle(fontSize: 18),
+                          ),
+                          Container(
+                            height: 35,
+                            width: 100,
+                            child: RaisedButton(
+                              onPressed: () {},
+                              color: Colors.red,
+                              child: Center(
+                                child: Text(
+                                  '确认下单',
+                                  style: TextStyle(color: Colors.white),
                                 ),
-                              )
-                            ]),
-                      )
-                    ]),
-                  )),
+                              ),
+                            ),
+                          )
+                        ]),
+                  )
+                ]),
+              ),
             )));
   }
 }

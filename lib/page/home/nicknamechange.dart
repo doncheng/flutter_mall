@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mall/page/home/personaldata.dart';
 
@@ -23,8 +24,6 @@ class _nicknamechangePageState extends State<nicknamechangePage> {
     return Scaffold(
         backgroundColor: Color(0xfff5f5f5),
         appBar: AppBar(
-          //去掉返回按钮
-          automaticallyImplyLeading: false,
           iconTheme: IconThemeData(
             color: Color(0xffbfbfbf), //修改颜色
           ),
@@ -111,44 +110,3 @@ class _nicknamechangePageState extends State<nicknamechangePage> {
     Navigator.of(context).pop(this.nicknamechangePagenickname);
   }
 }
-
-// class changebox extends StatefulWidget {
-//   changebox({Key key}) : super(key: key);
-
-//   @override
-//   _changeboxState createState() => _changeboxState();
-// }
-
-// class _changeboxState extends State<changebox> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//         decoration: BoxDecoration(
-//           borderRadius: BorderRadius.circular(5),
-//           color: Colors.white,
-//         ),
-//         width: double.infinity,
-//         height: 40,
-//         margin: EdgeInsets.only(left: 20, right: 20, top: 20),
-//         padding: EdgeInsets.only(left: 14),
-//         child: Center(
-//           child: Row(
-//             children: <Widget>[
-//               Text('昵称'),
-//               SizedBox(width: 26),
-//               Container(
-//                 color: Colors.white,
-//                 padding: EdgeInsets.only(top: 7),
-//                 width: 260,
-//                 child: TextField(
-//                   decoration: InputDecoration(
-//                       border: InputBorder.none,
-//                       hintText: '我是名称',
-//                       hintStyle: TextStyle(color: Colors.black, fontSize: 14)),
-//                 ),
-//               )
-//             ],
-//           ),
-//         ));
-//   }
-// }

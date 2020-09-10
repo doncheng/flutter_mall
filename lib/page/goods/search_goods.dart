@@ -28,7 +28,7 @@ class _SearchGoodsViewState extends State<SearchGoodsView> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light.copyWith(
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
       statusBarColor: Color(0xffffffff), //or set color with: Color(0xFF0000FF)
     ));
     return Scaffold(

@@ -41,13 +41,7 @@ class _addressselectionPageState extends State<addressselectionPage> {
           FlatButton(
               padding: EdgeInsets.only(left: 35),
               onPressed: () {
-                Fluttertoast.showToast(
-                    msg: "保存成功",
-                    toastLength: Toast.LENGTH_SHORT,
-                    gravity: ToastGravity.BOTTOM,
-                    timeInSecForIos: 1,
-                    textColor: Colors.white,
-                    backgroundColor: Colors.grey);
+                Navigator.pop(context);
               },
               child: Text(
                 '保存',
@@ -140,11 +134,9 @@ class _intheareaState extends State<inthearea> {
   @override
   Widget build(BuildContext context) {
     final screenwith = MediaQuery.of(context).size.width;
-
     return Container(
         height: 28,
         child: Center(
-            child: Expanded(
           child: Row(
             children: <Widget>[
               Container(
@@ -207,6 +199,6 @@ class _intheareaState extends State<inthearea> {
                   )),
             ],
           ),
-        )));
+        ));
   }
 }

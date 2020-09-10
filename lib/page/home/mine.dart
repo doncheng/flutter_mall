@@ -1,16 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:mall/constant/string.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:mall/entity/home_entity.dart';
-import 'package:mall/utils/shared_preferences_util.dart';
-import 'package:mall/widgets/icon_text_arrow.dart';
-import 'package:mall/widgets/mall_icon.dart';
 import 'package:mall/utils/navigator_util.dart';
-import 'package:mall/event/login_event.dart';
-import 'package:mall/service/user_service.dart';
-import 'package:mall/utils/toast_util.dart';
 
 const APPBAR_SCROLL_OFFSET = 100;
 
@@ -36,151 +27,145 @@ class _MineViewState extends State<MineView> {
     // prrint(appBarAlpha);
   }
 
-  double _kLeadingWidth = kToolbarHeight;
-
   String account_name = '李天霸';
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final screenheight = size.height;
     // print(screenheight);
-    final double topPadding = MediaQuery.of(context).padding.top;
-    return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: SystemUiOverlayStyle.dark,
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        body: Stack(
-          children: <Widget>[
-            MediaQuery.removePadding(
-              //移除ListView得padding
-              removeTop: true, //移除Top
-              context: context,
-              child: NotificationListener(
-                //实现对列表得监听  --  接收 onNotification 得回调，每次滚动得时候都会回调这个函数
-                onNotification: (scrollNotification) {
-                  if (scrollNotification is ScrollUpdateNotification &&
-                      scrollNotification.depth == 0) {
-                    //1、只监测ListView的滚动（深度设为0），2、监测滚动的时候（ScrollUpdateNotification）
-                    _onScroll(scrollNotification.metrics.pixels);
-                  }
-                },
-                child: ListView(children: <Widget>[
-                  Container(
-                    padding: EdgeInsets.only(top: 40),
-                    alignment: Alignment.bottomRight,
-                    height: 70.0,
-                    decoration: BoxDecoration(color: Color(0xffFE5155)),
-                    child: IconButton(
-                      icon: Icon(
-                        Icons.settings,
-                        color: Colors.white,
-                        size: 20,
-                      ),
-                      onPressed: () => _toSettings(),
+    // final double topPadding = MediaQuery.of(context).padding.top;
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      body: Stack(
+        children: <Widget>[
+          MediaQuery.removePadding(
+            //移除ListView得padding
+            removeTop: true, //移除Top
+            context: context,
+            child: NotificationListener(
+              //实现对列表得监听  --  接收 onNotification 得回调，每次滚动得时候都会回调这个函数
+              onNotification: (scrollNotification) {
+                if (scrollNotification is ScrollUpdateNotification &&
+                    scrollNotification.depth == 0) {
+                  //1、只监测ListView的滚动（深度设为0），2、监测滚动的时候（ScrollUpdateNotification）
+                  _onScroll(scrollNotification.metrics.pixels);
+                }
+              },
+              child: ListView(children: <Widget>[
+                Container(
+                  padding: EdgeInsets.only(top: 40),
+                  alignment: Alignment.bottomRight,
+                  height: 70.0,
+                  decoration: BoxDecoration(color: Color(0xffFE5155)),
+                  child: IconButton(
+                    icon: Icon(
+                      Icons.settings,
+                      color: Colors.white,
+                      size: 20,
                     ),
+                    onPressed: () => _toSettings(),
                   ),
-                  Container(
-                    width: double.infinity,
-                    height: 293,
-                    child: Stack(
-                      children: <Widget>[
-                        Container(
-                          height: 191,
-                          color: Color(0xffFE5155),
-                          child: Column(
-                            children: <Widget>[
-                              InkWell(
-                                onTap: () => _toPersonalData(),
-                                child: ListTile(
-                                  leading: Icon(
-                                    Icons.account_circle,
-                                    size: 54,
-                                  ),
-                                  title: Text(this.account_name),
-                                  subtitle: Text('关注 0｜粉丝 0'),
-                                ),
-                              ),
-                              shoppingcartfootprint(),
-                            ],
-                          ),
-                        ),
-                        Positioned(
-                          left: 14,
-                          right: 14,
-                          top: 121,
-                          child: Container(
-                            width: double.infinity,
-                            height: 34,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              color: Colors.white12,
-                            ),
-                            child: FlatButton(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  Text(
-                                    '偷偷告诉你，实名认证后宝贝更易卖出哦~',
-                                    style: TextStyle(
-                                      color: Colors.white70,
-                                      fontSize: 12,
-                                    ),
-                                  ),
-                                  Icon(
-                                    Icons.navigate_next,
-                                    color: Colors.white,
-                                  ),
-                                ],
-                              ),
-                              onPressed: () => _toPlacetheorder(),
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          left: 12,
-                          right: 13,
-                          top: 167,
-                          child: mytrading(),
-                        ),
-                      ],
-                    ),
-                  ),
-                  makemoney(),
-                  recommendedtools(),
-                  SizedBox(height: 50),
-                ]),
-              ),
-            ),
-            Opacity(
-              opacity: appBarAlpha,
-              child: Container(
-                alignment: Alignment.topCenter,
-                //按屏幕比例变化
-                height: screenheight * 0.09,
-                child: AppBar(
-                  brightness: Brightness.light,
-                  backgroundColor: Color(0xffFE5155),
-                  elevation: 0,
-                  title: Text(this.account_name),
-                  actions: <Widget>[
-                    IconButton(
-                      icon: Icon(
-                        Icons.settings,
-                        color: Colors.white,
-                        size: 20,
-                      ),
-                      onPressed: () => _toSettings(),
-                    ),
-                  ],
                 ),
+                Container(
+                  width: double.infinity,
+                  height: 293,
+                  child: Stack(
+                    children: <Widget>[
+                      Container(
+                        height: 191,
+                        color: Color(0xffFE5155),
+                        child: Column(
+                          children: <Widget>[
+                            InkWell(
+                              onTap: () => _toPersonalData(),
+                              child: ListTile(
+                                leading: Icon(
+                                  Icons.account_circle,
+                                  size: 54,
+                                ),
+                                title: Text(this.account_name),
+                                subtitle: Text('关注 0｜粉丝 0'),
+                              ),
+                            ),
+                            shoppingcartfootprint(),
+                          ],
+                        ),
+                      ),
+                      Positioned(
+                        left: 14,
+                        right: 14,
+                        top: 121,
+                        child: Container(
+                          width: double.infinity,
+                          height: 34,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            color: Colors.white12,
+                          ),
+                          child: FlatButton(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Text(
+                                  '偷偷告诉你，实名认证后宝贝更易卖出哦~',
+                                  style: TextStyle(
+                                    color: Colors.white70,
+                                    fontSize: 12,
+                                  ),
+                                ),
+                                Icon(
+                                  Icons.navigate_next,
+                                  color: Colors.white,
+                                ),
+                              ],
+                            ),
+                            onPressed: () => _toPlacetheorder(),
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        left: 12,
+                        right: 13,
+                        top: 167,
+                        child: mytrading(),
+                      ),
+                    ],
+                  ),
+                ),
+                makemoney(),
+                recommendedtools(),
+                SizedBox(height: 50),
+              ]),
+            ),
+          ),
+          Opacity(
+            opacity: appBarAlpha,
+            child: Container(
+              alignment: Alignment.topCenter,
+              //按屏幕比例变化
+              height: screenheight * 0.09,
+              child: AppBar(
+                // brightness: Brightness.dark,
+                backgroundColor: Color(0xffFE5155),
+                elevation: 0,
+                title: Text(this.account_name),
+                actions: <Widget>[
+                  IconButton(
+                    icon: Icon(
+                      Icons.settings,
+                      color: Colors.white,
+                      size: 20,
+                    ),
+                    onPressed: () => _toSettings(),
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -462,87 +447,80 @@ class _makemoneyState extends State<makemoney> {
             height: 7,
           ),
           Container(
-            // width: double.infinity,
-            // color: Colors.red,
             height: 60,
-            child: Expanded(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  InkWell(
-                    onTap: () {
-                      print('sss');
-                    },
-                    child: Container(
-                        height: 60,
-                        width: screenwith * 0.41,
-                        // color: Colors.green,
-                        child: Row(
-                          children: <Widget>[
-                            Container(
-                              width: 46,
-                              height: 48,
-                              child: Image.network(
-                                'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3901429284,1378079784&fm=26&gp=0.jpg',
-                              ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                InkWell(
+                  onTap: () {
+                    print('sss');
+                  },
+                  child: Container(
+                      height: 60,
+                      width: screenwith * 0.41,
+                      child: Row(
+                        children: <Widget>[
+                          Container(
+                            width: 46,
+                            height: 48,
+                            child: Image.network(
+                              'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3901429284,1378079784&fm=26&gp=0.jpg',
                             ),
-                            SizedBox(width: 6),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Text(
-                                  '签到领现金',
-                                  style: TextStyle(fontSize: 14),
-                                ),
-                                Text(
-                                  '提现至微信零钱',
-                                  style: TextStyle(
-                                      fontSize: 12, color: Colors.grey),
-                                )
-                              ],
-                            )
-                          ],
-                        )),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      print('sss');
-                    },
-                    child: Container(
-                        // height: 58,
-                        width: screenwith * 0.41,
-                        // color: Colors.green,
-                        child: Row(
-                          children: <Widget>[
-                            Container(
-                              width: 46,
-                              height: 48,
-                              child: Image.network(
-                                'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3901429284,1378079784&fm=26&gp=0.jpg',
+                          ),
+                          SizedBox(width: 6),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                '签到领现金',
+                                style: TextStyle(fontSize: 14),
                               ),
+                              Text(
+                                '提现至微信零钱',
+                                style:
+                                    TextStyle(fontSize: 12, color: Colors.grey),
+                              )
+                            ],
+                          )
+                        ],
+                      )),
+                ),
+                InkWell(
+                  onTap: () {
+                    print('sss');
+                  },
+                  child: Container(
+                      width: screenwith * 0.41,
+                      child: Row(
+                        children: <Widget>[
+                          Container(
+                            width: 46,
+                            height: 48,
+                            child: Image.network(
+                              'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3901429284,1378079784&fm=26&gp=0.jpg',
                             ),
-                            SizedBox(width: 6),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Text(
-                                  '签到领现金',
-                                  style: TextStyle(fontSize: 14),
-                                ),
-                                Text(
-                                  '提现至微信零钱',
-                                  style: TextStyle(
-                                      fontSize: 12, color: Colors.grey),
-                                )
-                              ],
-                            )
-                          ],
-                        )),
-                  ),
-                ],
-              ),
+                          ),
+                          SizedBox(width: 6),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                '签到领现金',
+                                style: TextStyle(fontSize: 14),
+                              ),
+                              Text(
+                                '提现至微信零钱',
+                                style:
+                                    TextStyle(fontSize: 12, color: Colors.grey),
+                              )
+                            ],
+                          )
+                        ],
+                      )),
+                ),
+              ],
             ),
           )
         ],

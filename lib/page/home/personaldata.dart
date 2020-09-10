@@ -96,8 +96,25 @@ class _personaldataPageState extends State<personaldataPage> {
   Widget build(BuildContext context) {
     final screenwith = MediaQuery.of(context).size.width;
     return Scaffold(
+      backgroundColor: Color(0xffF8F8F8),
       appBar: AppBar(
-        title: Text('个人资料编辑'),
+        leading: InkWell(
+          child: Icon(
+            Icons.navigate_before,
+            color: Colors.grey,
+          ),
+          onTap: () {
+            Navigator.pop(context);
+          },
+        ),
+        elevation: 0,
+        backgroundColor: Colors.white,
+        brightness: Brightness.light,
+        title: Text(
+          '个人资料编辑',
+          style: TextStyle(
+              color: Colors.black, fontSize: 18, fontWeight: FontWeight.normal),
+        ),
       ),
       body: Column(
         children: <Widget>[
@@ -110,16 +127,16 @@ class _personaldataPageState extends State<personaldataPage> {
                 // onTap: this._simpleDialog,
                 child: Column(
                   children: <Widget>[
-                    ClipOval(
-                      child: _image == null
-                          ? Text('No image selected.')
-                          : Image.file(
+                    _image == null
+                        ? Icon(Icons.account_circle, size: 100)
+                        : ClipOval(
+                            child: Image.file(
                               _image,
                               height: 100,
                               width: 100,
                               fit: BoxFit.cover,
                             ),
-                    ),
+                          ),
                     // Image.network(
                     //     'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1789308275,2124804861&fm=26&gp=0.jpg',
                     //     height: 100,
@@ -288,7 +305,9 @@ class _personaldataPageState extends State<personaldataPage> {
                 nicknamefrompersonaldataPage: this.personaldataPagenicknanme)))
         .then((value) {
       setState(() {
-        this.personaldataPagenicknanme = value;
+        value == null
+            ? this.personaldataPagenicknanme = this.personaldataPagenicknanme
+            : this.personaldataPagenicknanme = value;
       });
       print(value);
     });

@@ -42,7 +42,7 @@ class _rowgetState extends State<rowget> {
       return Column(
         children: <Widget>[
           Padding(
-            padding: EdgeInsets.only(left: 15, right: 15, top: 25, bottom: 5),
+            padding: EdgeInsets.only(left: 15, right: 15, top: 15),
             child: InkWell(
               onTap: () {},
               // onTap: () => _toOrder(),
