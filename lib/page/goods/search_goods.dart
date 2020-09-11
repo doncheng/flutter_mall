@@ -31,24 +31,27 @@ class _SearchGoodsViewState extends State<SearchGoodsView> {
     final size = MediaQuery.of(context).size;
     final sizewidth = size.width;
     final sizeheight = size.height;
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
-      statusBarColor: Colors.transparent,
-      /*状态栏 背景透明*/
-      // systemNavigationBarColor: Colors.white //底部navigationBar背景颜色
-    ));
+    // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
+    //   statusBarColor: Colors.transparent,
+    //   /*状态栏 背景透明*/
+    //   // systemNavigationBarColor: Colors.white //底部navigationBar背景颜色
+    // ));
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: SafeArea(
-        child: Stack(
+      appBar: AppBar(
+        elevation: 0,
+        brightness: Brightness.light,
+        automaticallyImplyLeading: false,
+        backgroundColor: Color(0xffffffff),
+        title: Stack(
           children: <Widget>[
             Container(
               height: ScreenUtil.instance.setHeight(100.0),
-              color: Color(0xffffffff),
+              // color: Color(0xffffffff),
               child: Row(
                 children: [
                   Container(
                       margin: EdgeInsets.only(
-                          left: ScreenUtil.instance.setWidth(60.0),
+                          left: ScreenUtil.instance.setWidth(30.0),
                           top: ScreenUtil.instance.setHeight(10.0),
                           bottom: ScreenUtil.instance.setHeight(10.0),
                           right: ScreenUtil.instance.setWidth(30.0)),
@@ -161,6 +164,13 @@ class _SearchGoodsViewState extends State<SearchGoodsView> {
                 ],
               ),
             ),
+          ],
+        ),
+      ),
+      backgroundColor: Colors.white,
+      body: SafeArea(
+        child: Stack(
+          children: [
             _sortView(),
             Container(
                 height: double.infinity,
