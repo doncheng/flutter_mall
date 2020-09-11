@@ -38,18 +38,19 @@ class _personaldataPageState extends State<personaldataPage> {
 
   Future getImage() async {
     print('oooooooooooooo');
-    //请求权限
-    Map<PermissionGroup, PermissionStatus> permissions =
-        await PermissionHandler().requestPermissions([PermissionGroup.photos]);
-    //校验权限
-    if (permissions[PermissionGroup.photos] != PermissionStatus.granted) {
-      print("无相册权限");
-    }
-    print('pppppp');
+    // //请求权限
+    // Map<PermissionGroup, PermissionStatus> permissions =
+    //     await PermissionHandler().requestPermissions([PermissionGroup.photos]);
+    // //校验权限
+    // if (permissions[PermissionGroup.photos] != PermissionStatus.granted) {
+    //   print("无相册权限");
+    // }
+    // print('pppppp');
 
     // final pickedFile = await picker.getImage(source: ImageSource.camera);
     // ignore: deprecated_member_use
-    final pickedFile = await ImagePicker.pickImage(source: ImageSource.gallery);
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+
     setState(() {
       _image = File(pickedFile.path);
     });
@@ -96,7 +97,6 @@ class _personaldataPageState extends State<personaldataPage> {
   Widget build(BuildContext context) {
     final screenwith = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: Color(0xffF8F8F8),
       appBar: AppBar(
         leading: InkWell(
           child: Icon(
@@ -204,7 +204,8 @@ class _personaldataPageState extends State<personaldataPage> {
                       context: context,
                       builder: (cxt) {
                         return Container(
-                          height: 200,
+                          color: Color(0xfff5f5f5),
+                          height: 170,
                           child: picker,
                         );
                       });

@@ -35,138 +35,145 @@ class _MineViewState extends State<MineView> {
     final screenheight = size.height;
     // print(screenheight);
     // final double topPadding = MediaQuery.of(context).padding.top;
-    return Scaffold(
-      backgroundColor: Colors.transparent,
-      body: Stack(
-        children: <Widget>[
-          MediaQuery.removePadding(
-            //移除ListView得padding
-            removeTop: true, //移除Top
-            context: context,
-            child: NotificationListener(
-              //实现对列表得监听  --  接收 onNotification 得回调，每次滚动得时候都会回调这个函数
-              onNotification: (scrollNotification) {
-                if (scrollNotification is ScrollUpdateNotification &&
-                    scrollNotification.depth == 0) {
-                  //1、只监测ListView的滚动（深度设为0），2、监测滚动的时候（ScrollUpdateNotification）
-                  _onScroll(scrollNotification.metrics.pixels);
-                }
-              },
-              child: ListView(children: <Widget>[
-                Container(
-                  padding: EdgeInsets.only(top: 40),
-                  alignment: Alignment.bottomRight,
-                  height: 70.0,
-                  decoration: BoxDecoration(color: Color(0xffFE5155)),
-                  child: IconButton(
-                    icon: Icon(
-                      Icons.settings,
-                      color: Colors.white,
-                      size: 20,
-                    ),
-                    onPressed: () => _toSettings(),
-                  ),
-                ),
-                Container(
-                  width: double.infinity,
-                  height: 293,
-                  child: Stack(
-                    children: <Widget>[
-                      Container(
-                        height: 191,
-                        color: Color(0xffFE5155),
-                        child: Column(
-                          children: <Widget>[
-                            InkWell(
-                              onTap: () => _toPersonalData(),
-                              child: ListTile(
-                                leading: Icon(
-                                  Icons.account_circle,
-                                  size: 54,
-                                ),
-                                title: Text(this.account_name),
-                                subtitle: Text('关注 0｜粉丝 0'),
-                              ),
-                            ),
-                            shoppingcartfootprint(),
-                          ],
-                        ),
+    SystemUiOverlayStyle systemUiOverlayStyle = SystemUiOverlayStyle(
+      statusBarColor: Colors.black,
+      /*状态栏 背景透明*/
+    );
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Color(0xffF8F8F8),
+        body: Stack(
+          children: <Widget>[
+            MediaQuery.removePadding(
+              //移除ListView得padding
+              removeTop: true, //移除Top
+              context: context,
+              child: NotificationListener(
+                //实现对列表得监听  --  接收 onNotification 得回调，每次滚动得时候都会回调这个函数
+                onNotification: (scrollNotification) {
+                  if (scrollNotification is ScrollUpdateNotification &&
+                      scrollNotification.depth == 0) {
+                    //1、只监测ListView的滚动（深度设为0），2、监测滚动的时候（ScrollUpdateNotification）
+                    _onScroll(scrollNotification.metrics.pixels);
+                  }
+                },
+                child: ListView(children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.only(top: 40),
+                    alignment: Alignment.bottomRight,
+                    height: 70.0,
+                    decoration: BoxDecoration(color: Color(0xffFE5155)),
+                    child: IconButton(
+                      icon: Icon(
+                        Icons.settings,
+                        color: Colors.white,
+                        size: 20,
                       ),
-                      Positioned(
-                        left: 14,
-                        right: 14,
-                        top: 121,
-                        child: Container(
-                          width: double.infinity,
-                          height: 34,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color: Colors.white12,
-                          ),
-                          child: FlatButton(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Text(
-                                  '偷偷告诉你，实名认证后宝贝更易卖出哦~',
-                                  style: TextStyle(
-                                    color: Colors.white70,
-                                    fontSize: 12,
+                      onPressed: () => _toSettings(),
+                    ),
+                  ),
+                  Container(
+                    width: double.infinity,
+                    height: 293,
+                    child: Stack(
+                      children: <Widget>[
+                        Container(
+                          height: 191,
+                          color: Color(0xffFE5155),
+                          child: Column(
+                            children: <Widget>[
+                              InkWell(
+                                onTap: () => _toPersonalData(),
+                                child: ListTile(
+                                  leading: Icon(
+                                    Icons.account_circle,
+                                    size: 54,
                                   ),
+                                  title: Text(this.account_name),
+                                  subtitle: Text('关注 0｜粉丝 0'),
                                 ),
-                                Icon(
-                                  Icons.navigate_next,
-                                  color: Colors.white,
-                                ),
-                              ],
-                            ),
-                            onPressed: () => _toPlacetheorder(),
+                              ),
+                              shoppingcartfootprint(),
+                            ],
                           ),
                         ),
-                      ),
-                      Positioned(
-                        left: 12,
-                        right: 13,
-                        top: 167,
-                        child: mytrading(),
-                      ),
-                    ],
-                  ),
-                ),
-                makemoney(),
-                recommendedtools(),
-                SizedBox(height: 50),
-              ]),
-            ),
-          ),
-          Opacity(
-            opacity: appBarAlpha,
-            child: Container(
-              alignment: Alignment.topCenter,
-              //按屏幕比例变化
-              height: screenheight * 0.09,
-              child: AppBar(
-                // brightness: Brightness.dark,
-                backgroundColor: Color(0xffFE5155),
-                elevation: 0,
-                title: Text(this.account_name),
-                actions: <Widget>[
-                  IconButton(
-                    icon: Icon(
-                      Icons.settings,
-                      color: Colors.white,
-                      size: 20,
+                        Positioned(
+                          left: 14,
+                          right: 14,
+                          top: 121,
+                          child: Container(
+                            width: double.infinity,
+                            height: 34,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: Colors.white12,
+                            ),
+                            child: FlatButton(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Text(
+                                    '偷偷告诉你，实名认证后宝贝更易卖出哦~',
+                                    style: TextStyle(
+                                      color: Colors.white70,
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                  Icon(
+                                    Icons.navigate_next,
+                                    color: Colors.white,
+                                  ),
+                                ],
+                              ),
+                              onPressed: () => _toPlacetheorder(),
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          left: 12,
+                          right: 13,
+                          top: 167,
+                          child: mytrading(),
+                        ),
+                      ],
                     ),
-                    onPressed: () => _toSettings(),
                   ),
-                ],
+                  makemoney(),
+                  recommendedtools(),
+                  SizedBox(height: 50),
+                ]),
               ),
             ),
-          ),
-        ],
+            Opacity(
+              opacity: appBarAlpha,
+              child: Container(
+                alignment: Alignment.topCenter,
+                //按屏幕比例变化
+                height: 50,
+                child: AppBar(
+                  // brightness: Brightness.dark,
+                  backgroundColor: Color(0xffFE5155),
+                  elevation: 0,
+                  title: Text(this.account_name),
+                  actions: <Widget>[
+                    IconButton(
+                      icon: Icon(
+                        Icons.settings,
+                        color: Colors.white,
+                        size: 20,
+                      ),
+                      onPressed: () => _toSettings(),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
