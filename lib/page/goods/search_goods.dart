@@ -57,9 +57,9 @@ class _SearchGoodsViewState extends State<SearchGoodsView> {
                           right: ScreenUtil.instance.setWidth(30.0)),
                       decoration: BoxDecoration(
                         color: Color(0xfff0f0f0),
-                        border: Border.all(
-                            color: Colors.blue,
-                            width: ScreenUtil.instance.setWidth(1.0)),
+                        // border: Border.all(
+                        //     color: Colors.blue,
+                        //     width: ScreenUtil.instance.setWidth(1.0)),
                         borderRadius: BorderRadius.circular(
                             ScreenUtil.instance.setWidth(40.0)),
                       ),
@@ -174,8 +174,8 @@ class _SearchGoodsViewState extends State<SearchGoodsView> {
             _sortView(),
             Container(
                 height: double.infinity,
-                margin:
-                    EdgeInsets.only(top: ScreenUtil.instance.setHeight(210.0)),
+                // margin:
+                //     EdgeInsets.only(top: ScreenUtil.instance.setHeight(210.0)),
                 child: _goods == null || _goods.length == 0
                     ? EmptyView()
                     : GridView.builder(
@@ -239,8 +239,8 @@ class _SearchGoodsViewState extends State<SearchGoodsView> {
     final sizewidth = size.width;
     final sizeheight = size.height;
     return Container(
-        margin: EdgeInsets.only(top: ScreenUtil.instance.setHeight(110.0)),
-        height: ScreenUtil.instance.setHeight(sizeheight / 4),
+        margin: EdgeInsets.only(top: ScreenUtil.instance.setHeight(10.0)),
+        height: ScreenUtil.instance.setHeight(157),
         child: Column(
           children: [
             Container(
@@ -260,7 +260,7 @@ class _SearchGoodsViewState extends State<SearchGoodsView> {
               ),
             ),
             Container(
-              height: 60,
+              height: 80,
               width: double.infinity,
               child: Wrap(
                 //元素横轴之间的距离

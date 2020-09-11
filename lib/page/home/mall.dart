@@ -9,6 +9,7 @@ import 'package:mall/page/home/search.dart';
 import 'package:mall/page/login/landing.dart';
 import 'package:mall/page/mine/jiaohu.dart';
 
+import 'about_seller.dart';
 import 'evaluation.dart';
 import 'home_page.dart';
 import 'main_page.dart';
@@ -30,7 +31,7 @@ class _MallMainViewState extends State<MallMainView> {
     _list
       ..add(HomePage())
       // ..add(CategoryView())
-      ..add(AssetsPage())
+      ..add(SellerPage())
       // ..add(CartView())
       ..add(landingPage())
       ..add(MineView());

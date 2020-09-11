@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'dart:ui';
 
 class EvaluationPage extends StatelessWidget {
   const EvaluationPage({Key key}) : super(key: key);
@@ -198,174 +201,205 @@ class _CategorizeState extends State<Categorize> {
   int _chick;
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.instance = ScreenUtil(width: 375, height: 812)..init(context);
     return Container(
-      height: 100,
+      height: ScreenUtil.instance.setHeight(595.0),
+      // color: Colors.yellow,
       width: double.infinity,
-      child: Column(
-        children: [
-          Container(
-            height: 30,
-            margin: EdgeInsets.only(top: 20),
-            padding: EdgeInsets.only(left: 12),
-            width: double.infinity,
-            child: Row(
-              children: [
-                Container(
-                  height: 30,
-                  width: 101,
-                  margin: EdgeInsets.only(right: 14),
-                  child: RaisedButton(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15)),
-                      child: Text(
-                        '全部 211',
-                        style: TextStyle(
-                          fontSize: 10,
-                          color: this._chick == 1
-                              ? Color(0xffe51c23)
-                              : Colors.black,
+      child: Expanded(
+        child: Column(
+          children: [
+            Container(
+              height: 30,
+              margin: EdgeInsets.only(top: 20),
+              padding: EdgeInsets.only(left: 12),
+              width: double.infinity,
+              child: Row(
+                children: [
+                  Container(
+                    height: 30,
+                    width: 101,
+                    margin: EdgeInsets.only(right: 14),
+                    child: RaisedButton(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15)),
+                        child: Text(
+                          '全部 211',
+                          style: TextStyle(
+                            fontSize: 10,
+                            color: this._chick == 1
+                                ? Color(0xffe51c23)
+                                : Colors.black,
+                          ),
                         ),
-                      ),
-                      color:
-                          this._chick == 1 ? Color(0xffffe8e8) : Colors.white,
-                      onPressed: () {
-                        setState(() {
-                          this._chick = 1;
-                        });
-                      }),
-                ),
-                Container(
-                  height: 30,
-                  width: 101,
-                  margin: EdgeInsets.only(right: 14),
-                  child: RaisedButton(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15)),
-                      child: Text(
-                        '来自卖家 4',
-                        style: TextStyle(
-                          fontSize: 10,
-                          color: this._chick == 2
-                              ? Color(0xffe51c23)
-                              : Colors.black,
+                        color:
+                            this._chick == 1 ? Color(0xffffe8e8) : Colors.white,
+                        onPressed: () {
+                          setState(() {
+                            this._chick = 1;
+                          });
+                        }),
+                  ),
+                  Container(
+                    height: 30,
+                    width: 101,
+                    margin: EdgeInsets.only(right: 14),
+                    child: RaisedButton(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15)),
+                        child: Text(
+                          '来自卖家 4',
+                          style: TextStyle(
+                            fontSize: 10,
+                            color: this._chick == 2
+                                ? Color(0xffe51c23)
+                                : Colors.black,
+                          ),
                         ),
-                      ),
-                      color:
-                          this._chick == 2 ? Color(0xffffe8e8) : Colors.white,
-                      onPressed: () {
-                        setState(() {
-                          this._chick = 2;
-                        });
-                      }),
-                ),
-                Container(
-                  height: 30,
-                  width: 101,
-                  margin: EdgeInsets.only(right: 14),
-                  child: RaisedButton(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15)),
-                      child: Text(
-                        '来自买家 217',
-                        style: TextStyle(
-                          fontSize: 10,
-                          color: this._chick == 3
-                              ? Color(0xffe51c23)
-                              : Colors.black,
+                        color:
+                            this._chick == 2 ? Color(0xffffe8e8) : Colors.white,
+                        onPressed: () {
+                          setState(() {
+                            this._chick = 2;
+                          });
+                        }),
+                  ),
+                  Container(
+                    height: 30,
+                    width: 101,
+                    margin: EdgeInsets.only(right: 14),
+                    child: RaisedButton(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15)),
+                        child: Text(
+                          '来自买家 217',
+                          style: TextStyle(
+                            fontSize: 10,
+                            color: this._chick == 3
+                                ? Color(0xffe51c23)
+                                : Colors.black,
+                          ),
                         ),
-                      ),
-                      color:
-                          this._chick == 3 ? Color(0xffffe8e8) : Colors.white,
-                      onPressed: () {
-                        setState(() {
-                          this._chick = 3;
-                        });
-                      }),
-                ),
-              ],
+                        color:
+                            this._chick == 3 ? Color(0xffffe8e8) : Colors.white,
+                        onPressed: () {
+                          setState(() {
+                            this._chick = 3;
+                          });
+                        }),
+                  ),
+                ],
+              ),
             ),
-          ),
-          Container(
-            height: 30,
-            margin: EdgeInsets.only(top: 10),
-            padding: EdgeInsets.only(left: 12),
-            width: double.infinity,
-            child: Row(
-              children: [
-                Container(
-                  height: 30,
-                  width: 101,
-                  margin: EdgeInsets.only(right: 14),
-                  child: RaisedButton(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15)),
-                      child: Text('非常满意 214',
-                          style: TextStyle(
-                            fontSize: 10,
-                            color: this._chick == 4
-                                ? Color(0xffe51c23)
-                                : Colors.black,
-                          )),
-                      color:
-                          this._chick == 4 ? Color(0xffffe8e8) : Colors.white,
-                      onPressed: () {
-                        setState(() {
-                          this._chick = 4;
-                        });
-                      }),
-                ),
-                Container(
-                  height: 30,
-                  width: 101,
-                  margin: EdgeInsets.only(right: 14),
-                  child: RaisedButton(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15)),
-                      child: Text('令人失望 4',
-                          style: TextStyle(
-                            fontSize: 10,
-                            color: this._chick == 5
-                                ? Color(0xffe51c23)
-                                : Colors.black,
-                          )),
-                      color:
-                          this._chick == 5 ? Color(0xffffe8e8) : Colors.white,
-                      onPressed: () {
-                        setState(() {
-                          this._chick = 5;
-                        });
-                      }),
-                ),
-                Container(
-                  height: 30,
-                  width: 101,
-                  margin: EdgeInsets.only(right: 14),
-                  child: RaisedButton(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15)),
-                      child: Text('值得改进 3',
-                          style: TextStyle(
-                            fontSize: 10,
-                            color: this._chick == 6
-                                ? Color(0xffe51c23)
-                                : Colors.black,
-                          )),
-                      color:
-                          this._chick == 6 ? Color(0xffffe8e8) : Colors.white,
-                      onPressed: () {
-                        setState(() {
-                          this._chick = 6;
-                        });
-                      }),
-                ),
-              ],
+            Container(
+              height: 30,
+              margin: EdgeInsets.only(top: 10),
+              padding: EdgeInsets.only(left: 12),
+              width: double.infinity,
+              child: Row(
+                children: [
+                  Container(
+                    height: 30,
+                    width: 101,
+                    margin: EdgeInsets.only(right: 14),
+                    child: RaisedButton(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15)),
+                        child: Text('非常满意 214',
+                            style: TextStyle(
+                              fontSize: 10,
+                              color: this._chick == 4
+                                  ? Color(0xffe51c23)
+                                  : Colors.black,
+                            )),
+                        color:
+                            this._chick == 4 ? Color(0xffffe8e8) : Colors.white,
+                        onPressed: () {
+                          setState(() {
+                            this._chick = 4;
+                          });
+                        }),
+                  ),
+                  Container(
+                    height: 30,
+                    width: 101,
+                    margin: EdgeInsets.only(right: 14),
+                    child: RaisedButton(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15)),
+                        child: Text('令人失望 4',
+                            style: TextStyle(
+                              fontSize: 10,
+                              color: this._chick == 5
+                                  ? Color(0xffe51c23)
+                                  : Colors.black,
+                            )),
+                        color:
+                            this._chick == 5 ? Color(0xffffe8e8) : Colors.white,
+                        onPressed: () {
+                          setState(() {
+                            this._chick = 5;
+                          });
+                        }),
+                  ),
+                  Container(
+                    height: 30,
+                    width: 101,
+                    margin: EdgeInsets.only(right: 14),
+                    child: RaisedButton(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15)),
+                        child: Text('值得改进 3',
+                            style: TextStyle(
+                              fontSize: 10,
+                              color: this._chick == 6
+                                  ? Color(0xffe51c23)
+                                  : Colors.black,
+                            )),
+                        color:
+                            this._chick == 6 ? Color(0xffffe8e8) : Colors.white,
+                        onPressed: () {
+                          setState(() {
+                            this._chick = 6;
+                          });
+                        }),
+                  ),
+                ],
+              ),
             ),
-          )
-        ],
+
+//****************************************//
+            FutureBuilder(
+              // future: _getBackInfo(context),
+              builder: (context, snapshot) {
+                //判断是否有数据
+                if (snapshot.hasData) {
+                  //如果有数据返回一个Container
+                  return Container(
+                    child: ListView(
+                      children: <Widget>[],
+                    ),
+                  );
+                } else {
+                  return Text('加载中......'); //没有数据的情况
+                }
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
+  //  Future _getBackInfo(BuildContext context) async{
+  //   await Provide.value<DetailsInfoProvide>(context).getGoodsInfo(goodsId);
+  //   //print('加载完成...........');
+  //   return '完成加载';
+  // }
 }
+
+/*
+***星星评价***
+*/
 
 class XFStarRating extends StatefulWidget {
   final double rating;
