@@ -35,7 +35,7 @@ class SellerPage extends StatelessWidget {
         backgroundColor: Color(0xff7e9cf6),
         elevation: 0,
         iconTheme: IconThemeData(
-          color: Color(0xffbfbfbf), //修改颜色
+          color: Color(0xffffffff), //修改颜色
         ),
       ),
       body: SellerBody(),
@@ -588,6 +588,7 @@ class evaluation extends StatefulWidget {
 class _evaluationState extends State<evaluation> {
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.instance = ScreenUtil(width: 375, height: 750)..init(context);
     return Container(
       height: ScreenUtil.instance.setHeight(140.0),
       width: double.infinity,
@@ -640,6 +641,7 @@ class firstPage extends StatefulWidget {
 class _firstPageState extends State<firstPage> {
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.instance = ScreenUtil(width: 375, height: 750)..init(context);
     return Column(
       children: [
         Row(

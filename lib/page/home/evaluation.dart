@@ -370,9 +370,7 @@ class _CategorizeState extends State<Categorize> {
             ),
 
 //****************************************//
-            Container(
-              height: ScreenUtil.instance.setHeight(495.0),
-              width: double.infinity,
+            Flexible(
               child: ListView(
                 children: [
                   Container(
