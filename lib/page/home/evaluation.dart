@@ -198,6 +198,7 @@ class Categorize extends StatefulWidget {
 }
 
 class _CategorizeState extends State<Categorize> {
+  String time = '2019-12-12';
   int _chick;
   @override
   Widget build(BuildContext context) {
@@ -369,22 +370,260 @@ class _CategorizeState extends State<Categorize> {
             ),
 
 //****************************************//
-            FutureBuilder(
-              // future: _getBackInfo(context),
-              builder: (context, snapshot) {
-                //判断是否有数据
-                if (snapshot.hasData) {
-                  //如果有数据返回一个Container
-                  return Container(
-                    child: ListView(
-                      children: <Widget>[],
+            Container(
+              height: ScreenUtil.instance.setHeight(495.0),
+              width: double.infinity,
+              child: ListView(
+                children: [
+                  Container(
+                    height: ScreenUtil.instance.setHeight(240.0),
+                    width: double.infinity,
+                    child: Column(
+                      children: [
+                        ListTile(
+                          leading: ClipOval(
+                            child: Image.network(
+                              'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
+                              height: 40,
+                              width: 40,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          title: Text(
+                            '越***6',
+                            style: TextStyle(fontSize: 16),
+                          ),
+                          subtitle: Text(
+                            '买家 丨 ' + time,
+                            style: TextStyle(fontSize: 13, color: Colors.grey),
+                          ),
+                          trailing: Container(
+                            height: 20,
+                            width: 55,
+                            margin: EdgeInsets.only(right: 10),
+                            child: Text(
+                              '非常满意',
+                              style:
+                                  TextStyle(fontSize: 13, color: Colors.grey),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          height: ScreenUtil.instance.setHeight(140.0),
+                          width: double.infinity,
+                          margin: EdgeInsets.only(
+                            left: ScreenUtil.instance.setWidth(60.0),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                height: ScreenUtil.instance.setHeight(25.0),
+                                width: double.infinity,
+                                child: Text(
+                                  '东西不错',
+                                  style: TextStyle(fontSize: 18),
+                                ),
+                              ),
+                              Wrap(
+                                spacing: 8,
+                                runSpacing: 10,
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(14),
+                                    child: Container(
+                                      height:
+                                          ScreenUtil.instance.setHeight(60.0),
+                                      width: ScreenUtil.instance.setWidth(60.0),
+                                      child: Image.network(
+                                        'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
+                                        height: 60,
+                                        width: 60,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                        Container(
+                            height: 1,
+                            width: double.infinity,
+                            margin: EdgeInsets.only(
+                                left: ScreenUtil.instance.setWidth(62.0)),
+                            color: Color(0xffe0e0e0))
+                      ],
                     ),
-                  );
-                } else {
-                  return Text('加载中......'); //没有数据的情况
-                }
-              },
-            ),
+                  ),
+                  Container(
+                    height: ScreenUtil.instance.setHeight(240.0),
+                    width: double.infinity,
+                    child: Column(
+                      children: [
+                        ListTile(
+                          leading: ClipOval(
+                            child: Image.network(
+                              'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
+                              height: 40,
+                              width: 40,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          title: Text(
+                            '越***6',
+                            style: TextStyle(fontSize: 16),
+                          ),
+                          subtitle: Text(
+                            '买家 丨 ' + time,
+                            style: TextStyle(fontSize: 13, color: Colors.grey),
+                          ),
+                          trailing: Container(
+                            height: 20,
+                            width: 55,
+                            margin: EdgeInsets.only(right: 10),
+                            child: Text(
+                              '非常满意',
+                              style:
+                                  TextStyle(fontSize: 13, color: Colors.grey),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          height: ScreenUtil.instance.setHeight(140.0),
+                          width: double.infinity,
+                          margin: EdgeInsets.only(
+                            left: ScreenUtil.instance.setWidth(60.0),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                height: ScreenUtil.instance.setHeight(25.0),
+                                width: double.infinity,
+                                child: Text(
+                                  '东西不错',
+                                  style: TextStyle(fontSize: 18),
+                                ),
+                              ),
+                              Wrap(
+                                spacing: 8,
+                                runSpacing: 10,
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(14),
+                                    child: Container(
+                                      height:
+                                          ScreenUtil.instance.setHeight(60.0),
+                                      width: ScreenUtil.instance.setWidth(60.0),
+                                      child: Image.network(
+                                        'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
+                                        height: 60,
+                                        width: 60,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                        Container(
+                            height: 1,
+                            width: double.infinity,
+                            margin: EdgeInsets.only(
+                                left: ScreenUtil.instance.setWidth(62.0)),
+                            color: Color(0xffe0e0e0))
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: ScreenUtil.instance.setHeight(240.0),
+                    width: double.infinity,
+                    child: Column(
+                      children: [
+                        ListTile(
+                          leading: ClipOval(
+                            child: Image.network(
+                              'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
+                              height: 40,
+                              width: 40,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          title: Text(
+                            '越***6',
+                            style: TextStyle(fontSize: 16),
+                          ),
+                          subtitle: Text(
+                            '买家 丨 ' + time,
+                            style: TextStyle(fontSize: 13, color: Colors.grey),
+                          ),
+                          trailing: Container(
+                            height: 20,
+                            width: 55,
+                            margin: EdgeInsets.only(right: 10),
+                            child: Text(
+                              '非常满意',
+                              style:
+                                  TextStyle(fontSize: 13, color: Colors.grey),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          height: ScreenUtil.instance.setHeight(140.0),
+                          width: double.infinity,
+                          margin: EdgeInsets.only(
+                            left: ScreenUtil.instance.setWidth(60.0),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                height: ScreenUtil.instance.setHeight(25.0),
+                                width: double.infinity,
+                                child: Text(
+                                  '东西不错',
+                                  style: TextStyle(fontSize: 18),
+                                ),
+                              ),
+                              Wrap(
+                                spacing: 8,
+                                runSpacing: 10,
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(14),
+                                    child: Container(
+                                      height:
+                                          ScreenUtil.instance.setHeight(60.0),
+                                      width: ScreenUtil.instance.setWidth(60.0),
+                                      child: Image.network(
+                                        'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
+                                        height: 60,
+                                        width: 60,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                        Container(
+                            height: 1,
+                            width: double.infinity,
+                            margin: EdgeInsets.only(
+                                left: ScreenUtil.instance.setWidth(62.0)),
+                            color: Color(0xffe0e0e0))
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            )
           ],
         ),
       ),

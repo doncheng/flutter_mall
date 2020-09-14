@@ -3,8 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'dart:ui';
 
-import 'package:mall/widgets/icon_text_arrow.dart';
-
 import 'evaluation.dart';
 
 class SellerPage extends StatelessWidget {
@@ -150,7 +148,7 @@ class _SellerBodyState extends State<SellerBody> {
                                     border: Border.all(
                                         color: Colors.grey, width: 1)),
                                 height: ScreenUtil.instance.setHeight(22.0),
-                                width: ScreenUtil.instance.setWidth(80.0),
+                                width: ScreenUtil.instance.setWidth(90.0),
                                 child: Row(
                                   children: [
                                     Icon(
@@ -179,7 +177,7 @@ class _SellerBodyState extends State<SellerBody> {
                                     border: Border.all(
                                         color: Colors.grey, width: 1)),
                                 height: ScreenUtil.instance.setHeight(22.0),
-                                width: ScreenUtil.instance.setWidth(80.0),
+                                width: ScreenUtil.instance.setWidth(92.0),
                                 child: Row(
                                   children: [
                                     Icon(
@@ -219,15 +217,18 @@ class _SellerBodyState extends State<SellerBody> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Container(
-                                height: ScreenUtil.instance.setHeight(14.0),
+                                height: ScreenUtil.instance.setHeight(15.0),
                                 width: ScreenUtil.instance.setWidth(80.0),
                                 child: Center(
-                                  child: Text('关注$concerns' + '    粉丝$fens'),
+                                  child: Text(
+                                    '关注$concerns' + '    粉丝$fens',
+                                    style: TextStyle(fontSize: 12),
+                                  ),
                                 ),
                               ),
                               Container(
                                 height: ScreenUtil.instance.setHeight(32.0),
-                                width: ScreenUtil.instance.setWidth(66.0),
+                                width: ScreenUtil.instance.setWidth(70.0),
                                 child: RaisedButton(
                                     color: Colors.red,
                                     child: Text(
@@ -275,9 +276,9 @@ class _SellerBodyState extends State<SellerBody> {
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.only(right: 5),
+                  margin: EdgeInsets.only(right: 5),
                   height: ScreenUtil.instance.setHeight(20.0),
-                  width: ScreenUtil.instance.setWidth(60.0),
+                  width: ScreenUtil.instance.setWidth(70.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -295,7 +296,7 @@ class _SellerBodyState extends State<SellerBody> {
           ),
         ),
         Container(
-          height: ScreenUtil.instance.setHeight(136.0),
+          height: ScreenUtil.instance.setHeight(140.0),
           width: double.infinity,
           child: Row(
             children: [
@@ -314,7 +315,7 @@ class _SellerBodyState extends State<SellerBody> {
                         child: Column(
                           children: [
                             Container(
-                              height: ScreenUtil.instance.setHeight(51.0),
+                              height: ScreenUtil.instance.setHeight(46.0),
                               margin: EdgeInsets.only(
                                   bottom: ScreenUtil.instance.setHeight(6.0)),
                               child: Center(
@@ -343,7 +344,7 @@ class _SellerBodyState extends State<SellerBody> {
                         child: Column(
                           children: [
                             Container(
-                              height: ScreenUtil.instance.setHeight(51.0),
+                              height: ScreenUtil.instance.setHeight(46.0),
                               margin: EdgeInsets.only(
                                   bottom: ScreenUtil.instance.setHeight(6.0)),
                               child: Center(
@@ -519,21 +520,21 @@ class _SellerBodyState extends State<SellerBody> {
                 ),
               ),
               evaluation(),
-              ListTile(
-                trailing: Container(
-                    height: 20,
-                    width: 150,
-                    margin: EdgeInsets.only(right: 10),
-                    child: Row(
-                      children: [
-                        Text(
-                          '问问大家的交易感受',
-                          style: TextStyle(fontSize: 14, color: Colors.black),
-                        ),
-                        Icon(Icons.arrow_right)
-                      ],
-                    )),
-              )
+              Container(
+                  height: 20,
+                  width: 150,
+                  margin: EdgeInsets.only(
+                      top: 4, left: ScreenUtil.instance.setWidth(215.0)),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Text(
+                        '问问大家的交易感受',
+                        style: TextStyle(fontSize: 14, color: Colors.black),
+                      ),
+                      Icon(Icons.arrow_right)
+                    ],
+                  )),
             ],
           ),
         ),
@@ -594,6 +595,7 @@ class _evaluationState extends State<evaluation> {
         left: ScreenUtil.instance.setWidth(60.0),
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
             height: ScreenUtil.instance.setHeight(25.0),
@@ -608,7 +610,7 @@ class _evaluationState extends State<evaluation> {
             runSpacing: 10,
             children: [
               ClipRRect(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(14),
                 child: Container(
                   height: ScreenUtil.instance.setHeight(60.0),
                   width: ScreenUtil.instance.setWidth(60.0),
@@ -645,7 +647,7 @@ class _firstPageState extends State<firstPage> {
           children: [
             Container(
               height: ScreenUtil.instance.setHeight(274.0),
-              width: ScreenUtil.instance.setWidth(174.0),
+              width: ScreenUtil.instance.setWidth(170.0),
               margin: EdgeInsets.only(
                 left: ScreenUtil.instance.setWidth(10.0),
                 top: ScreenUtil.instance.setHeight(20.0),
@@ -656,7 +658,7 @@ class _firstPageState extends State<firstPage> {
                     borderRadius: BorderRadius.circular(10),
                     child: Container(
                       height: ScreenUtil.instance.setHeight(154.0),
-                      width: ScreenUtil.instance.setWidth(174.0),
+                      width: ScreenUtil.instance.setWidth(170.0),
                       child: Image.network(
                         'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
                         height: 160,
@@ -671,7 +673,7 @@ class _firstPageState extends State<firstPage> {
                         top: ScreenUtil.instance.setHeight(10.0),
                       ),
                       height: ScreenUtil.instance.setHeight(31.0),
-                      width: ScreenUtil.instance.setWidth(143.0),
+                      width: ScreenUtil.instance.setWidth(139.0),
                       child: Expanded(
                         child: Text(
                           '清末民初回流纯老银壶一套，清末民初回流纯老…',
@@ -747,7 +749,7 @@ class _firstPageState extends State<firstPage> {
             ),
             Container(
               height: ScreenUtil.instance.setHeight(274.0),
-              width: ScreenUtil.instance.setWidth(174.0),
+              width: ScreenUtil.instance.setWidth(170.0),
               margin: EdgeInsets.only(
                 left: ScreenUtil.instance.setWidth(10.0),
                 top: ScreenUtil.instance.setHeight(20.0),
@@ -758,7 +760,7 @@ class _firstPageState extends State<firstPage> {
                     borderRadius: BorderRadius.circular(10),
                     child: Container(
                       height: ScreenUtil.instance.setHeight(154.0),
-                      width: ScreenUtil.instance.setWidth(174.0),
+                      width: ScreenUtil.instance.setWidth(170.0),
                       child: Image.network(
                         'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
                         height: 160,
@@ -773,7 +775,7 @@ class _firstPageState extends State<firstPage> {
                         top: ScreenUtil.instance.setHeight(10.0),
                       ),
                       height: ScreenUtil.instance.setHeight(31.0),
-                      width: ScreenUtil.instance.setWidth(143.0),
+                      width: ScreenUtil.instance.setWidth(139.0),
                       child: Expanded(
                         child: Text(
                           '清末民初回流纯老银壶一套，清末民初回流纯老…',
