@@ -1163,19 +1163,19 @@ class _SellerState extends State<Seller> {
             ClipRRect(
               borderRadius: BorderRadius.circular(14),
               child: Container(
-                  height: 274.0,
-                  width: 174.0,
+                  width: ScreenUtil.instance.setWidth(174.0),
+                  height: ScreenUtil.instance.setHeight(274.0),
                   child: Column(
                     children: [
                       Image.network(
                         'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
                         height: 154,
-                        width: 1740,
+                        width: 174,
                         fit: BoxFit.cover,
                       ),
                       Container(
-                        height: 41,
-                        width: 143,
+                        width: ScreenUtil.instance.setWidth(143.0),
+                        height: ScreenUtil.instance.setHeight(41.0),
                         margin: EdgeInsets.fromLTRB(12, 10, 19, 10),
                         child: Text(
                           '清末民初回流纯老银壶一套，清末民初回流纯老…',
@@ -1279,19 +1279,19 @@ class _SellerState extends State<Seller> {
             ClipRRect(
               borderRadius: BorderRadius.circular(14),
               child: Container(
-                  height: 274.0,
-                  width: 174.0,
+                  height: ScreenUtil.instance.setHeight(274.0),
+                  width: ScreenUtil.instance.setWidth(174.0),
                   child: Column(
                     children: [
                       Image.network(
                         'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
                         height: 154,
-                        width: 1740,
+                        width: 174,
                         fit: BoxFit.cover,
                       ),
                       Container(
-                        height: 41,
-                        width: 143,
+                        height: ScreenUtil.instance.setHeight(41.0),
+                        width: ScreenUtil.instance.setWidth(143.0),
                         margin: EdgeInsets.fromLTRB(12, 10, 19, 10),
                         child: Text(
                           '清末民初回流纯老银壶一套，清末民初回流纯老…',
@@ -1395,23 +1395,24 @@ class _SellerState extends State<Seller> {
           ],
         ),
         Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(14),
               child: Container(
-                  height: 274.0,
-                  width: 174.0,
+                  height: ScreenUtil.instance.setHeight(274.0),
+                  width: ScreenUtil.instance.setWidth(174.0),
                   child: Column(
                     children: [
                       Image.network(
                         'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
                         height: 154,
-                        width: 1740,
+                        width: 174,
                         fit: BoxFit.cover,
                       ),
                       Container(
-                        height: 41,
-                        width: 143,
+                        height: ScreenUtil.instance.setHeight(41.0),
+                        width: ScreenUtil.instance.setWidth(143.0),
                         margin: EdgeInsets.fromLTRB(12, 10, 19, 10),
                         child: Text(
                           '清末民初回流纯老银壶一套，清末民初回流纯老…',
@@ -1512,11 +1513,160 @@ class _SellerState extends State<Seller> {
                     ],
                   )),
             ),
-
-            /********/
+            Container(
+              height: ScreenUtil.instance.setHeight(274.0),
+              width: ScreenUtil.instance.setWidth(174.0),
+              child: Column(
+                children: [
+                  Container(
+                    height: 23,
+                    width: 150,
+                    margin: EdgeInsets.only(top: 30),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          height: 2,
+                          width: 30,
+                          color: Color(0xffc6c6c6),
+                          margin: EdgeInsets.only(right: 10),
+                        ),
+                        Text(
+                          '选购热点',
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold),
+                        ),
+                        Container(
+                          height: 2,
+                          width: 30,
+                          color: Color(0xffc6c6c6),
+                          margin: EdgeInsets.only(left: 10),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Column(
+                        children: [
+                          Container(
+                            height: 30,
+                            width: 70,
+                            margin: EdgeInsets.only(top: 16),
+                            child: Center(
+                              child: Text(
+                                '港澳版',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            height: 30,
+                            width: 70,
+                            margin: EdgeInsets.only(top: 20),
+                            child: Center(
+                              child: Text(
+                                '4G',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            height: 30,
+                            width: 70,
+                            margin: EdgeInsets.only(top: 20),
+                            child: Center(
+                              child: Text(
+                                '日韩',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            height: 30,
+                            width: 70,
+                            margin: EdgeInsets.only(top: 20),
+                            child: Center(
+                              child: Text(
+                                '同城',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          Container(
+                            height: 30,
+                            width: 70,
+                            margin: EdgeInsets.only(top: 16),
+                            child: Center(
+                              child: Text(
+                                '美版',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            height: 30,
+                            width: 70,
+                            margin: EdgeInsets.only(top: 20),
+                            child: Center(
+                              child: Text(
+                                '全新',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            height: 30,
+                            width: 70,
+                            margin: EdgeInsets.only(top: 20),
+                            child: Center(
+                              child: Text(
+                                '国行',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            height: 30,
+                            width: 70,
+                            margin: EdgeInsets.only(top: 20),
+                            child: Center(
+                              child: Text(
+                                '其他…',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ),
+                          )
+                        ],
+                      )
+                    ],
+                  )
+                ],
+              ),
+            )
           ],
         )
-        /****/
       ],
     );
   }
