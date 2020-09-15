@@ -11,7 +11,7 @@ class EvaluationPage extends StatefulWidget {
 }
 
 class _EvaluationPageState extends State<EvaluationPage> {
-  double starmun = 3.6;
+  // double starmun = 4.1;
   String time = '2019-12-12';
   int _chick;
   @override
@@ -44,6 +44,7 @@ class _EvaluationPageState extends State<EvaluationPage> {
             padding: EdgeInsets.only(left: 12),
             width: double.infinity,
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Container(
                   height: 30,
@@ -126,7 +127,7 @@ class _EvaluationPageState extends State<EvaluationPage> {
             padding: EdgeInsets.only(left: 12),
             width: double.infinity,
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Container(
                   height: 30,
@@ -461,7 +462,7 @@ class EvaluationBody extends StatefulWidget {
 }
 
 class _EvaluationBodyState extends State<EvaluationBody> {
-  double starmun = 3.6;
+  double starmun = 4.1;
   String time = '2019-12-12';
   int _chick;
   @override
@@ -523,7 +524,8 @@ class _EvaluationBodyState extends State<EvaluationBody> {
                             child: Center(
                               child: Text(
                                 '收到评价221次',
-                                style: TextStyle(fontSize: 13),
+                                style: TextStyle(
+                                    fontSize: 13, color: Color(0xff999999)),
                               ),
                             ),
                           ),
@@ -538,15 +540,18 @@ class _EvaluationBodyState extends State<EvaluationBody> {
                             height: 20,
                             width: 35,
                             child: Center(
-                              child: Text(starmun.toString()),
+                              child: Text(
+                                starmun.toString() + '分',
+                                style: TextStyle(
+                                    fontSize: 13, color: Color(0xff999999)),
+                              ),
                             ),
                           ),
                           Container(
-                            height: 18,
-                            width: 18,
-                            child: Image.network(
-                                'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3668245563,4097734658&fm=26&gp=0.jpg'),
-                          )
+                              height: 18,
+                              width: 18,
+                              child: Icon(Icons.help_outline,
+                                  size: 16, color: Color(0xff999999)))
                         ],
                       )),
                   Container(
@@ -556,15 +561,19 @@ class _EvaluationBodyState extends State<EvaluationBody> {
                         children: [
                           Container(
                             height: 20,
-                            width: 90,
+                            width: 100,
                             child: Center(
-                              child: Text('宝贝描述:' + starmun.toString() + '分'),
+                              child: Text(
+                                '宝贝描述:' + starmun.toString() + '分',
+                                style: TextStyle(
+                                    fontSize: 13, color: Color(0xff999999)),
+                              ),
                             ),
                           ),
                           Container(
                             margin: EdgeInsets.only(left: 5),
                             height: 20,
-                            width: 38,
+                            width: 35,
                             decoration: BoxDecoration(
                                 color: Color(0xffbb2312),
                                 borderRadius: BorderRadius.circular(3)),
@@ -577,16 +586,20 @@ class _EvaluationBodyState extends State<EvaluationBody> {
                           ),
                           Container(
                             height: 20,
-                            width: 90,
-                            margin: EdgeInsets.only(left: 20),
+                            width: 100,
+                            margin: EdgeInsets.only(left: 10),
                             child: Center(
-                              child: Text('沟通态度::' + starmun.toString() + '分'),
+                              child: Text(
+                                '沟通态度::' + starmun.toString() + '分',
+                                style: TextStyle(
+                                    fontSize: 13, color: Color(0xff999999)),
+                              ),
                             ),
                           ),
                           Container(
                             margin: EdgeInsets.only(left: 5),
                             height: 20,
-                            width: 38,
+                            width: 35,
                             decoration: BoxDecoration(
                                 color: Color(0xffbb2312),
                                 borderRadius: BorderRadius.circular(3)),

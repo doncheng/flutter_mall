@@ -28,6 +28,7 @@ class _SearchGoodsViewState extends State<SearchGoodsView> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.instance = ScreenUtil(width: 375, height: 750)..init(context);
     final size = MediaQuery.of(context).size;
     final sizewidth = size.width;
     final sizeheight = size.height;
@@ -48,13 +49,13 @@ class _SearchGoodsViewState extends State<SearchGoodsView> {
               height: ScreenUtil.instance.setHeight(100.0),
               // color: Color(0xffffffff),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
                       margin: EdgeInsets.only(
-                          left: ScreenUtil.instance.setWidth(30.0),
                           top: ScreenUtil.instance.setHeight(10.0),
                           bottom: ScreenUtil.instance.setHeight(10.0),
-                          right: ScreenUtil.instance.setWidth(30.0)),
+                          right: ScreenUtil.instance.setWidth(20.0)),
                       decoration: BoxDecoration(
                         color: Color(0xfff0f0f0),
                         // border: Border.all(
@@ -112,31 +113,34 @@ class _SearchGoodsViewState extends State<SearchGoodsView> {
                                       print("onCanceled");
                                     },
                                   ),
-                                  Icon(Icons.arrow_drop_down)
+                                  Icon(
+                                    Icons.keyboard_arrow_down,
+                                    color: Colors.black,
+                                  )
                                 ],
                               ),
                             ),
                           ),
                           Container(
                             height: 40,
-                            width: sizewidth / 2,
+                            width: ScreenUtil.instance.setWidth(200.0),
                             child: TextField(
                               onEditingComplete: _sort,
                               controller: _editingController,
                               textInputAction: TextInputAction.search,
                               style: TextStyle(
                                   color: Colors.black54,
-                                  fontSize: ScreenUtil.instance.setSp(26.0)),
+                                  fontSize: ScreenUtil.instance.setSp(16.0)),
                               decoration: InputDecoration(
                                 prefixIcon: Icon(
                                   Icons.search,
-                                  size: ScreenUtil.instance.setWidth(50.0),
+                                  size: 25,
                                   color: Colors.grey,
                                 ),
                                 hintText: text,
                                 hintStyle: TextStyle(
                                     color: Colors.grey,
-                                    fontSize: ScreenUtil.instance.setSp(26.0)),
+                                    fontSize: ScreenUtil.instance.setSp(16.0)),
                                 focusedBorder: UnderlineInputBorder(
                                   borderSide:
                                       BorderSide(color: Colors.transparent),
@@ -152,7 +156,7 @@ class _SearchGoodsViewState extends State<SearchGoodsView> {
                       )),
                   Container(
                     height: 40,
-                    width: 50,
+                    width: 45,
                     child: Center(
                       child: Text(
                         '取消',

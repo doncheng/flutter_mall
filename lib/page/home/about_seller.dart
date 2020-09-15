@@ -51,9 +51,9 @@ class SellerBody extends StatefulWidget {
 }
 
 class _SellerBodyState extends State<SellerBody> {
-  double starmun = 3.6;
+  double starmun = 4.1;
   int concerns = 1;
-  int fens = 78;
+  int fens = 178;
   String time = '2019-12-12';
   @override
   Widget build(BuildContext context) {
@@ -78,18 +78,18 @@ class _SellerBodyState extends State<SellerBody> {
                     ClipOval(
                       child: Image.network(
                         'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
-                        height: ScreenUtil.instance.setHeight(60.0),
-                        width: ScreenUtil.instance.setWidth(60.0),
+                        height: 60,
+                        width: 60,
                         fit: BoxFit.cover,
                       ),
                     ),
                     Container(
                       height: ScreenUtil.instance.setWidth(60.0),
-                      width: ScreenUtil.instance.setWidth(153.0),
+                      width: ScreenUtil.instance.setWidth(155.0),
                       child: Column(
                         children: [
                           Container(
-                            width: ScreenUtil.instance.setWidth(153.0),
+                            width: ScreenUtil.instance.setWidth(155.0),
                             height: ScreenUtil.instance.setWidth(30.0),
                             child: Text(
                               '蔡师傅工作室 2号店',
@@ -100,7 +100,7 @@ class _SellerBodyState extends State<SellerBody> {
                             ),
                           ),
                           Container(
-                            width: ScreenUtil.instance.setWidth(55.0),
+                            width: 100,
                             height: ScreenUtil.instance.setWidth(20.0),
                             margin: EdgeInsets.only(
                               right: ScreenUtil.instance.setWidth(99.0),
@@ -147,8 +147,8 @@ class _SellerBodyState extends State<SellerBody> {
                                     color: Color(0xfff5f5f5),
                                     border: Border.all(
                                         color: Colors.grey, width: 1)),
-                                height: ScreenUtil.instance.setHeight(22.0),
-                                width: ScreenUtil.instance.setWidth(90.0),
+                                height: 22,
+                                width: 100,
                                 child: Row(
                                   children: [
                                     Icon(
@@ -168,16 +168,14 @@ class _SellerBodyState extends State<SellerBody> {
                                 alignment: Alignment.center,
                                 margin: EdgeInsets.only(
                                   top: ScreenUtil.instance.setHeight(20.0),
-                                  // left: ScreenUtil.instance.setWidth(20.0),
-                                  // right: ScreenUtil.instance.setWidth(10.0)
                                 ),
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(5),
                                     color: Color(0xfff5f5f5),
                                     border: Border.all(
                                         color: Colors.grey, width: 1)),
-                                height: ScreenUtil.instance.setHeight(22.0),
-                                width: ScreenUtil.instance.setWidth(92.0),
+                                height: 22,
+                                width: 110,
                                 child: Row(
                                   children: [
                                     Icon(
@@ -217,8 +215,8 @@ class _SellerBodyState extends State<SellerBody> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Container(
-                                height: ScreenUtil.instance.setHeight(15.0),
-                                width: ScreenUtil.instance.setWidth(80.0),
+                                height: 15,
+                                width: 90,
                                 child: Center(
                                   child: Text(
                                     '关注$concerns' + '    粉丝$fens',
@@ -227,10 +225,13 @@ class _SellerBodyState extends State<SellerBody> {
                                 ),
                               ),
                               Container(
-                                height: ScreenUtil.instance.setHeight(32.0),
-                                width: ScreenUtil.instance.setWidth(70.0),
+                                height: 32,
+                                width: 80,
                                 child: RaisedButton(
                                     color: Colors.red,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
                                     child: Text(
                                       '+ 关注',
                                       style: TextStyle(
@@ -266,8 +267,8 @@ class _SellerBodyState extends State<SellerBody> {
               children: [
                 Container(
                   margin: EdgeInsets.only(left: 14),
-                  height: ScreenUtil.instance.setHeight(25.0),
-                  width: ScreenUtil.instance.setWidth(73.0),
+                  height: 25,
+                  width: 75,
                   child: Center(
                     child: Text(
                       '交易评价',
@@ -279,7 +280,7 @@ class _SellerBodyState extends State<SellerBody> {
                 Container(
                   margin: EdgeInsets.only(right: 5),
                   height: ScreenUtil.instance.setHeight(20.0),
-                  width: ScreenUtil.instance.setWidth(70.0),
+                  width: 75,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -288,7 +289,7 @@ class _SellerBodyState extends State<SellerBody> {
                         style:
                             TextStyle(fontSize: 13, color: Color(0xff999999)),
                       ),
-                      Icon(Icons.arrow_right)
+                      Icon(Icons.keyboard_arrow_right)
                     ],
                   ),
                 ),
@@ -389,7 +390,7 @@ class _SellerBodyState extends State<SellerBody> {
                     Row(
                       children: [
                         SizedBox(
-                          width: ScreenUtil.instance.setWidth(20.0),
+                          width: ScreenUtil.instance.setWidth(14.0),
                         ),
                         XFStarRating(
                           rating: starmun,
@@ -399,8 +400,8 @@ class _SellerBodyState extends State<SellerBody> {
                           unselectedColor: Colors.white,
                         ),
                         Container(
-                          height: ScreenUtil.instance.setHeight(20.0),
-                          width: ScreenUtil.instance.setWidth(35.0),
+                          height: 20,
+                          width: 35,
                           child: Center(
                             child: Text(starmun.toString() + '分'),
                           ),
@@ -412,6 +413,7 @@ class _SellerBodyState extends State<SellerBody> {
                             width: ScreenUtil.instance.setWidth(18.0),
                             child: Icon(
                               Icons.help,
+                              size: 19,
                               color: Colors.grey,
                             ))
                       ],
@@ -423,10 +425,10 @@ class _SellerBodyState extends State<SellerBody> {
                       children: [
                         Container(
                           margin: EdgeInsets.only(
-                            left: ScreenUtil.instance.setHeight(20.0),
+                            left: ScreenUtil.instance.setHeight(14.0),
                           ),
-                          height: ScreenUtil.instance.setHeight(20.0),
-                          width: ScreenUtil.instance.setWidth(80.0),
+                          height: 20,
+                          width: 95,
                           child: Text(
                             '宝贝描述:' + starmun.toString() + '分',
                             style: TextStyle(fontSize: 13),
@@ -438,7 +440,7 @@ class _SellerBodyState extends State<SellerBody> {
                           width: ScreenUtil.instance.setWidth(38.0),
                           decoration: BoxDecoration(
                               color: Colors.red,
-                              borderRadius: BorderRadius.circular(3)),
+                              borderRadius: BorderRadius.circular(4)),
                           child: Center(
                             child: Text(
                               '高',
@@ -455,13 +457,13 @@ class _SellerBodyState extends State<SellerBody> {
                     Row(
                       children: [
                         Container(
-                          height: ScreenUtil.instance.setHeight(20.0),
-                          width: ScreenUtil.instance.setWidth(80.0),
+                          height: 20,
+                          width: 95,
                           margin: EdgeInsets.only(
-                            left: ScreenUtil.instance.setHeight(20.0),
+                            left: ScreenUtil.instance.setHeight(14.0),
                           ),
                           child: Text(
-                            '沟通态度::' + starmun.toString() + '分',
+                            '沟通态度:' + starmun.toString() + '分',
                             style: TextStyle(fontSize: 13),
                             textAlign: TextAlign.left,
                           ),
@@ -472,7 +474,7 @@ class _SellerBodyState extends State<SellerBody> {
                           width: ScreenUtil.instance.setWidth(38.0),
                           decoration: BoxDecoration(
                               color: Colors.red,
-                              borderRadius: BorderRadius.circular(3)),
+                              borderRadius: BorderRadius.circular(4)),
                           child: Center(
                             child: Text(
                               '高',
@@ -614,8 +616,8 @@ class _evaluationState extends State<evaluation> {
               ClipRRect(
                 borderRadius: BorderRadius.circular(14),
                 child: Container(
-                  height: ScreenUtil.instance.setHeight(60.0),
-                  width: ScreenUtil.instance.setWidth(60.0),
+                  height: 60,
+                  width: 60,
                   child: Image.network(
                     'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
                     height: 60,

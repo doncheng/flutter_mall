@@ -211,8 +211,8 @@ class _toSellerState extends State<toSeller> {
           ClipOval(
             child: Image.network(
               'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
-              height: ScreenUtil.instance.setHeight(36.0),
-              width: ScreenUtil.instance.setWidth(36.0),
+              height: 36,
+              width: 36,
               fit: BoxFit.cover,
             ),
           ),
@@ -691,8 +691,8 @@ class _SellerState extends State<Seller> {
             leading: ClipOval(
               child: Image.network(
                 'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
-                height: ScreenUtil.instance.setHeight(36.0),
-                width: ScreenUtil.instance.setWidth(36.0),
+                height: 36,
+                width: 36,
                 fit: BoxFit.cover,
               ),
             ),
@@ -914,17 +914,12 @@ class _SellerState extends State<Seller> {
             SizedBox(
               width: 10,
             ),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(14),
-              child: Container(
-                height: ScreenUtil.instance.setHeight(40.0),
-                width: ScreenUtil.instance.setWidth(40.0),
-                child: Image.network(
-                  'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
-                  height: 40,
-                  width: 40,
-                  fit: BoxFit.cover,
-                ),
+            ClipOval(
+              child: Image.network(
+                'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
+                height: 40,
+                width: 40,
+                fit: BoxFit.cover,
               ),
             ),
             Flexible(
@@ -964,17 +959,12 @@ class _SellerState extends State<Seller> {
           height: 30,
         ),
         ListTile(
-          leading: ClipRRect(
-            borderRadius: BorderRadius.circular(14),
-            child: Container(
-              height: ScreenUtil.instance.setHeight(40.0),
-              width: ScreenUtil.instance.setWidth(40.0),
-              child: Image.network(
-                'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
-                height: 40,
-                width: 40,
-                fit: BoxFit.cover,
-              ),
+          leading: ClipOval(
+            child: Image.network(
+              'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
+              height: 40,
+              width: 40,
+              fit: BoxFit.cover,
             ),
           ),
           title: Text(
@@ -993,17 +983,12 @@ class _SellerState extends State<Seller> {
           ),
         ),
         ListTile(
-          leading: ClipRRect(
-            borderRadius: BorderRadius.circular(14),
-            child: Container(
-              height: ScreenUtil.instance.setHeight(40.0),
-              width: ScreenUtil.instance.setWidth(40.0),
-              child: Image.network(
-                'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
-                height: 40,
-                width: 40,
-                fit: BoxFit.cover,
-              ),
+          leading: ClipOval(
+            child: Image.network(
+              'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
+              height: 40,
+              width: 40,
+              fit: BoxFit.cover,
             ),
           ),
           title: Text(
