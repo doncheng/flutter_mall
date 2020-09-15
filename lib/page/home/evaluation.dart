@@ -3,11 +3,22 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'dart:ui';
 
-class EvaluationPage extends StatelessWidget {
-  const EvaluationPage({Key key}) : super(key: key);
+class EvaluationPage extends StatefulWidget {
+  EvaluationPage({Key key}) : super(key: key);
 
   @override
+  _EvaluationPageState createState() => _EvaluationPageState();
+}
+
+class _EvaluationPageState extends State<EvaluationPage> {
+  double starmun = 3.6;
+  String time = '2019-12-12';
+  int _chick;
+  @override
   Widget build(BuildContext context) {
+    ScreenUtil.instance = ScreenUtil(width: 375, height: 812)..init(context);
+    final size = MediaQuery.of(context).size;
+    final sizewidth = size.width;
     return Scaffold(
       backgroundColor: Color(0xffffffff),
       appBar: AppBar(
@@ -23,7 +34,421 @@ class EvaluationPage extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: EvaluationBody(),
+      body: SafeArea(
+          child: Column(
+        children: [
+          EvaluationBody(),
+          Container(
+            height: 30,
+            margin: EdgeInsets.only(top: 20),
+            padding: EdgeInsets.only(left: 12),
+            width: double.infinity,
+            child: Row(
+              children: [
+                Container(
+                  height: 30,
+                  width: 101,
+                  margin: EdgeInsets.only(right: 14),
+                  child: RaisedButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15)),
+                      child: Text(
+                        '全部 211',
+                        style: TextStyle(
+                          fontSize: 10,
+                          color: this._chick == 1
+                              ? Color(0xffe51c23)
+                              : Colors.black,
+                        ),
+                      ),
+                      color:
+                          this._chick == 1 ? Color(0xffffe8e8) : Colors.white,
+                      onPressed: () {
+                        setState(() {
+                          this._chick = 1;
+                        });
+                      }),
+                ),
+                Container(
+                  height: 30,
+                  width: 101,
+                  margin: EdgeInsets.only(right: 14),
+                  child: RaisedButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15)),
+                      child: Text(
+                        '来自卖家 4',
+                        style: TextStyle(
+                          fontSize: 10,
+                          color: this._chick == 2
+                              ? Color(0xffe51c23)
+                              : Colors.black,
+                        ),
+                      ),
+                      color:
+                          this._chick == 2 ? Color(0xffffe8e8) : Colors.white,
+                      onPressed: () {
+                        setState(() {
+                          this._chick = 2;
+                        });
+                      }),
+                ),
+                Container(
+                  height: 30,
+                  width: 101,
+                  margin: EdgeInsets.only(right: 14),
+                  child: RaisedButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15)),
+                      child: Text(
+                        '来自买家 217',
+                        style: TextStyle(
+                          fontSize: 10,
+                          color: this._chick == 3
+                              ? Color(0xffe51c23)
+                              : Colors.black,
+                        ),
+                      ),
+                      color:
+                          this._chick == 3 ? Color(0xffffe8e8) : Colors.white,
+                      onPressed: () {
+                        setState(() {
+                          this._chick = 3;
+                        });
+                      }),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            height: 30,
+            margin: EdgeInsets.only(top: 10),
+            padding: EdgeInsets.only(left: 12),
+            width: double.infinity,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  height: 30,
+                  width: 101,
+                  margin: EdgeInsets.only(right: 14),
+                  child: RaisedButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15)),
+                      child: Text('非常满意 214',
+                          style: TextStyle(
+                            fontSize: 10,
+                            color: this._chick == 4
+                                ? Color(0xffe51c23)
+                                : Colors.black,
+                          )),
+                      color:
+                          this._chick == 4 ? Color(0xffffe8e8) : Colors.white,
+                      onPressed: () {
+                        setState(() {
+                          this._chick = 4;
+                        });
+                      }),
+                ),
+                Container(
+                  height: 30,
+                  width: 101,
+                  margin: EdgeInsets.only(right: 14),
+                  child: RaisedButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15)),
+                      child: Text('令人失望 4',
+                          style: TextStyle(
+                            fontSize: 10,
+                            color: this._chick == 5
+                                ? Color(0xffe51c23)
+                                : Colors.black,
+                          )),
+                      color:
+                          this._chick == 5 ? Color(0xffffe8e8) : Colors.white,
+                      onPressed: () {
+                        setState(() {
+                          this._chick = 5;
+                        });
+                      }),
+                ),
+                Container(
+                  height: 30,
+                  width: 101,
+                  margin: EdgeInsets.only(right: 14),
+                  child: RaisedButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15)),
+                      child: Text('值得改进 3',
+                          style: TextStyle(
+                            fontSize: 10,
+                            color: this._chick == 6
+                                ? Color(0xffe51c23)
+                                : Colors.black,
+                          )),
+                      color:
+                          this._chick == 6 ? Color(0xffffe8e8) : Colors.white,
+                      onPressed: () {
+                        setState(() {
+                          this._chick = 6;
+                        });
+                      }),
+                ),
+              ],
+            ),
+          ),
+//****************************************//
+          SizedBox(
+            height: 10,
+          ),
+          Flexible(
+            child: ListView(
+              children: [
+                Container(
+                  height: ScreenUtil.instance.setHeight(240.0),
+                  width: double.infinity,
+                  child: Column(
+                    children: [
+                      ListTile(
+                        leading: ClipOval(
+                          child: Image.network(
+                            'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
+                            height: 40,
+                            width: 40,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        title: Text(
+                          '越***6',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                        subtitle: Text(
+                          '买家 丨 ' + time,
+                          style: TextStyle(fontSize: 13, color: Colors.grey),
+                        ),
+                        trailing: Container(
+                          height: 20,
+                          width: 55,
+                          margin: EdgeInsets.only(right: 10),
+                          child: Text(
+                            '非常满意',
+                            style: TextStyle(fontSize: 13, color: Colors.grey),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        height: ScreenUtil.instance.setHeight(140.0),
+                        width: double.infinity,
+                        margin: EdgeInsets.only(
+                          left: ScreenUtil.instance.setWidth(60.0),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              height: ScreenUtil.instance.setHeight(25.0),
+                              width: double.infinity,
+                              child: Text(
+                                '东西不错',
+                                style: TextStyle(fontSize: 18),
+                              ),
+                            ),
+                            Wrap(
+                              spacing: 8,
+                              runSpacing: 10,
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(14),
+                                  child: Container(
+                                    height: ScreenUtil.instance.setHeight(60.0),
+                                    width: ScreenUtil.instance.setWidth(60.0),
+                                    child: Image.network(
+                                      'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
+                                      height: 60,
+                                      width: 60,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                      Container(
+                          height: 1,
+                          width: double.infinity,
+                          margin: EdgeInsets.only(
+                              left: ScreenUtil.instance.setWidth(62.0)),
+                          color: Color(0xffe0e0e0))
+                    ],
+                  ),
+                ),
+                Container(
+                  height: ScreenUtil.instance.setHeight(240.0),
+                  width: double.infinity,
+                  child: Column(
+                    children: [
+                      ListTile(
+                        leading: ClipOval(
+                          child: Image.network(
+                            'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
+                            height: 40,
+                            width: 40,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        title: Text(
+                          '越***6',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                        subtitle: Text(
+                          '买家 丨 ' + time,
+                          style: TextStyle(fontSize: 13, color: Colors.grey),
+                        ),
+                        trailing: Container(
+                          height: 20,
+                          width: 55,
+                          margin: EdgeInsets.only(right: 10),
+                          child: Text(
+                            '非常满意',
+                            style: TextStyle(fontSize: 13, color: Colors.grey),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        height: ScreenUtil.instance.setHeight(140.0),
+                        width: double.infinity,
+                        margin: EdgeInsets.only(
+                          left: ScreenUtil.instance.setWidth(60.0),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              height: ScreenUtil.instance.setHeight(25.0),
+                              width: double.infinity,
+                              child: Text(
+                                '东西不错',
+                                style: TextStyle(fontSize: 18),
+                              ),
+                            ),
+                            Wrap(
+                              spacing: 8,
+                              runSpacing: 10,
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(14),
+                                  child: Container(
+                                    height: ScreenUtil.instance.setHeight(60.0),
+                                    width: ScreenUtil.instance.setWidth(60.0),
+                                    child: Image.network(
+                                      'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
+                                      height: 60,
+                                      width: 60,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                      Container(
+                          height: 1,
+                          width: double.infinity,
+                          margin: EdgeInsets.only(
+                              left: ScreenUtil.instance.setWidth(62.0)),
+                          color: Color(0xffe0e0e0))
+                    ],
+                  ),
+                ),
+                Container(
+                  height: ScreenUtil.instance.setHeight(240.0),
+                  width: double.infinity,
+                  child: Column(
+                    children: [
+                      ListTile(
+                        leading: ClipOval(
+                          child: Image.network(
+                            'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
+                            height: 40,
+                            width: 40,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        title: Text(
+                          '越***6',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                        subtitle: Text(
+                          '买家 丨 ' + time,
+                          style: TextStyle(fontSize: 13, color: Colors.grey),
+                        ),
+                        trailing: Container(
+                          height: 20,
+                          width: 55,
+                          margin: EdgeInsets.only(right: 10),
+                          child: Text(
+                            '非常满意',
+                            style: TextStyle(fontSize: 13, color: Colors.grey),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        height: ScreenUtil.instance.setHeight(140.0),
+                        width: double.infinity,
+                        margin: EdgeInsets.only(
+                          left: ScreenUtil.instance.setWidth(60.0),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              height: ScreenUtil.instance.setHeight(25.0),
+                              width: double.infinity,
+                              child: Text(
+                                '东西不错',
+                                style: TextStyle(fontSize: 18),
+                              ),
+                            ),
+                            Wrap(
+                              spacing: 8,
+                              runSpacing: 10,
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(14),
+                                  child: Container(
+                                    height: ScreenUtil.instance.setHeight(60.0),
+                                    width: ScreenUtil.instance.setWidth(60.0),
+                                    child: Image.network(
+                                      'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
+                                      height: 60,
+                                      width: 60,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                      Container(
+                          height: 1,
+                          width: double.infinity,
+                          margin: EdgeInsets.only(
+                              left: ScreenUtil.instance.setWidth(62.0)),
+                          color: Color(0xffe0e0e0))
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          )
+        ],
+      )),
     );
   }
 }
@@ -37,11 +462,14 @@ class EvaluationBody extends StatefulWidget {
 
 class _EvaluationBodyState extends State<EvaluationBody> {
   double starmun = 3.6;
+  String time = '2019-12-12';
+  int _chick;
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.instance = ScreenUtil(width: 375, height: 812)..init(context);
     final size = MediaQuery.of(context).size;
     final sizewidth = size.width;
-    return ListView(
+    return Column(
       children: [
         Container(
           height: 100,
@@ -184,454 +612,9 @@ class _EvaluationBodyState extends State<EvaluationBody> {
           width: double.infinity,
           color: Color(0xfff8f8f8),
         ),
-        Categorize(),
       ],
     );
   }
-}
-
-class Categorize extends StatefulWidget {
-  Categorize({Key key}) : super(key: key);
-
-  @override
-  _CategorizeState createState() => _CategorizeState();
-}
-
-class _CategorizeState extends State<Categorize> {
-  String time = '2019-12-12';
-  int _chick;
-  @override
-  Widget build(BuildContext context) {
-    ScreenUtil.instance = ScreenUtil(width: 375, height: 812)..init(context);
-    return Container(
-      height: ScreenUtil.instance.setHeight(595.0),
-      // color: Colors.yellow,
-      width: double.infinity,
-      child: Expanded(
-        child: Column(
-          children: [
-            Container(
-              height: 30,
-              margin: EdgeInsets.only(top: 20),
-              padding: EdgeInsets.only(left: 12),
-              width: double.infinity,
-              child: Row(
-                children: [
-                  Container(
-                    height: 30,
-                    width: 101,
-                    margin: EdgeInsets.only(right: 14),
-                    child: RaisedButton(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15)),
-                        child: Text(
-                          '全部 211',
-                          style: TextStyle(
-                            fontSize: 10,
-                            color: this._chick == 1
-                                ? Color(0xffe51c23)
-                                : Colors.black,
-                          ),
-                        ),
-                        color:
-                            this._chick == 1 ? Color(0xffffe8e8) : Colors.white,
-                        onPressed: () {
-                          setState(() {
-                            this._chick = 1;
-                          });
-                        }),
-                  ),
-                  Container(
-                    height: 30,
-                    width: 101,
-                    margin: EdgeInsets.only(right: 14),
-                    child: RaisedButton(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15)),
-                        child: Text(
-                          '来自卖家 4',
-                          style: TextStyle(
-                            fontSize: 10,
-                            color: this._chick == 2
-                                ? Color(0xffe51c23)
-                                : Colors.black,
-                          ),
-                        ),
-                        color:
-                            this._chick == 2 ? Color(0xffffe8e8) : Colors.white,
-                        onPressed: () {
-                          setState(() {
-                            this._chick = 2;
-                          });
-                        }),
-                  ),
-                  Container(
-                    height: 30,
-                    width: 101,
-                    margin: EdgeInsets.only(right: 14),
-                    child: RaisedButton(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15)),
-                        child: Text(
-                          '来自买家 217',
-                          style: TextStyle(
-                            fontSize: 10,
-                            color: this._chick == 3
-                                ? Color(0xffe51c23)
-                                : Colors.black,
-                          ),
-                        ),
-                        color:
-                            this._chick == 3 ? Color(0xffffe8e8) : Colors.white,
-                        onPressed: () {
-                          setState(() {
-                            this._chick = 3;
-                          });
-                        }),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              height: 30,
-              margin: EdgeInsets.only(top: 10),
-              padding: EdgeInsets.only(left: 12),
-              width: double.infinity,
-              child: Row(
-                children: [
-                  Container(
-                    height: 30,
-                    width: 101,
-                    margin: EdgeInsets.only(right: 14),
-                    child: RaisedButton(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15)),
-                        child: Text('非常满意 214',
-                            style: TextStyle(
-                              fontSize: 10,
-                              color: this._chick == 4
-                                  ? Color(0xffe51c23)
-                                  : Colors.black,
-                            )),
-                        color:
-                            this._chick == 4 ? Color(0xffffe8e8) : Colors.white,
-                        onPressed: () {
-                          setState(() {
-                            this._chick = 4;
-                          });
-                        }),
-                  ),
-                  Container(
-                    height: 30,
-                    width: 101,
-                    margin: EdgeInsets.only(right: 14),
-                    child: RaisedButton(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15)),
-                        child: Text('令人失望 4',
-                            style: TextStyle(
-                              fontSize: 10,
-                              color: this._chick == 5
-                                  ? Color(0xffe51c23)
-                                  : Colors.black,
-                            )),
-                        color:
-                            this._chick == 5 ? Color(0xffffe8e8) : Colors.white,
-                        onPressed: () {
-                          setState(() {
-                            this._chick = 5;
-                          });
-                        }),
-                  ),
-                  Container(
-                    height: 30,
-                    width: 101,
-                    margin: EdgeInsets.only(right: 14),
-                    child: RaisedButton(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15)),
-                        child: Text('值得改进 3',
-                            style: TextStyle(
-                              fontSize: 10,
-                              color: this._chick == 6
-                                  ? Color(0xffe51c23)
-                                  : Colors.black,
-                            )),
-                        color:
-                            this._chick == 6 ? Color(0xffffe8e8) : Colors.white,
-                        onPressed: () {
-                          setState(() {
-                            this._chick = 6;
-                          });
-                        }),
-                  ),
-                ],
-              ),
-            ),
-
-//****************************************//
-            Flexible(
-              child: ListView(
-                children: [
-                  Container(
-                    height: ScreenUtil.instance.setHeight(240.0),
-                    width: double.infinity,
-                    child: Column(
-                      children: [
-                        ListTile(
-                          leading: ClipOval(
-                            child: Image.network(
-                              'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
-                              height: 40,
-                              width: 40,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          title: Text(
-                            '越***6',
-                            style: TextStyle(fontSize: 16),
-                          ),
-                          subtitle: Text(
-                            '买家 丨 ' + time,
-                            style: TextStyle(fontSize: 13, color: Colors.grey),
-                          ),
-                          trailing: Container(
-                            height: 20,
-                            width: 55,
-                            margin: EdgeInsets.only(right: 10),
-                            child: Text(
-                              '非常满意',
-                              style:
-                                  TextStyle(fontSize: 13, color: Colors.grey),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          height: ScreenUtil.instance.setHeight(140.0),
-                          width: double.infinity,
-                          margin: EdgeInsets.only(
-                            left: ScreenUtil.instance.setWidth(60.0),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                height: ScreenUtil.instance.setHeight(25.0),
-                                width: double.infinity,
-                                child: Text(
-                                  '东西不错',
-                                  style: TextStyle(fontSize: 18),
-                                ),
-                              ),
-                              Wrap(
-                                spacing: 8,
-                                runSpacing: 10,
-                                children: [
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(14),
-                                    child: Container(
-                                      height:
-                                          ScreenUtil.instance.setHeight(60.0),
-                                      width: ScreenUtil.instance.setWidth(60.0),
-                                      child: Image.network(
-                                        'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
-                                        height: 60,
-                                        width: 60,
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              )
-                            ],
-                          ),
-                        ),
-                        Container(
-                            height: 1,
-                            width: double.infinity,
-                            margin: EdgeInsets.only(
-                                left: ScreenUtil.instance.setWidth(62.0)),
-                            color: Color(0xffe0e0e0))
-                      ],
-                    ),
-                  ),
-                  Container(
-                    height: ScreenUtil.instance.setHeight(240.0),
-                    width: double.infinity,
-                    child: Column(
-                      children: [
-                        ListTile(
-                          leading: ClipOval(
-                            child: Image.network(
-                              'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
-                              height: 40,
-                              width: 40,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          title: Text(
-                            '越***6',
-                            style: TextStyle(fontSize: 16),
-                          ),
-                          subtitle: Text(
-                            '买家 丨 ' + time,
-                            style: TextStyle(fontSize: 13, color: Colors.grey),
-                          ),
-                          trailing: Container(
-                            height: 20,
-                            width: 55,
-                            margin: EdgeInsets.only(right: 10),
-                            child: Text(
-                              '非常满意',
-                              style:
-                                  TextStyle(fontSize: 13, color: Colors.grey),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          height: ScreenUtil.instance.setHeight(140.0),
-                          width: double.infinity,
-                          margin: EdgeInsets.only(
-                            left: ScreenUtil.instance.setWidth(60.0),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                height: ScreenUtil.instance.setHeight(25.0),
-                                width: double.infinity,
-                                child: Text(
-                                  '东西不错',
-                                  style: TextStyle(fontSize: 18),
-                                ),
-                              ),
-                              Wrap(
-                                spacing: 8,
-                                runSpacing: 10,
-                                children: [
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(14),
-                                    child: Container(
-                                      height:
-                                          ScreenUtil.instance.setHeight(60.0),
-                                      width: ScreenUtil.instance.setWidth(60.0),
-                                      child: Image.network(
-                                        'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
-                                        height: 60,
-                                        width: 60,
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              )
-                            ],
-                          ),
-                        ),
-                        Container(
-                            height: 1,
-                            width: double.infinity,
-                            margin: EdgeInsets.only(
-                                left: ScreenUtil.instance.setWidth(62.0)),
-                            color: Color(0xffe0e0e0))
-                      ],
-                    ),
-                  ),
-                  Container(
-                    height: ScreenUtil.instance.setHeight(240.0),
-                    width: double.infinity,
-                    child: Column(
-                      children: [
-                        ListTile(
-                          leading: ClipOval(
-                            child: Image.network(
-                              'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
-                              height: 40,
-                              width: 40,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          title: Text(
-                            '越***6',
-                            style: TextStyle(fontSize: 16),
-                          ),
-                          subtitle: Text(
-                            '买家 丨 ' + time,
-                            style: TextStyle(fontSize: 13, color: Colors.grey),
-                          ),
-                          trailing: Container(
-                            height: 20,
-                            width: 55,
-                            margin: EdgeInsets.only(right: 10),
-                            child: Text(
-                              '非常满意',
-                              style:
-                                  TextStyle(fontSize: 13, color: Colors.grey),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          height: ScreenUtil.instance.setHeight(140.0),
-                          width: double.infinity,
-                          margin: EdgeInsets.only(
-                            left: ScreenUtil.instance.setWidth(60.0),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                height: ScreenUtil.instance.setHeight(25.0),
-                                width: double.infinity,
-                                child: Text(
-                                  '东西不错',
-                                  style: TextStyle(fontSize: 18),
-                                ),
-                              ),
-                              Wrap(
-                                spacing: 8,
-                                runSpacing: 10,
-                                children: [
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(14),
-                                    child: Container(
-                                      height:
-                                          ScreenUtil.instance.setHeight(60.0),
-                                      width: ScreenUtil.instance.setWidth(60.0),
-                                      child: Image.network(
-                                        'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
-                                        height: 60,
-                                        width: 60,
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              )
-                            ],
-                          ),
-                        ),
-                        Container(
-                            height: 1,
-                            width: double.infinity,
-                            margin: EdgeInsets.only(
-                                left: ScreenUtil.instance.setWidth(62.0)),
-                            color: Color(0xffe0e0e0))
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-  //  Future _getBackInfo(BuildContext context) async{
-  //   await Provide.value<DetailsInfoProvide>(context).getGoodsInfo(goodsId);
-  //   //print('加载完成...........');
-  //   return '完成加载';
-  // }
 }
 
 /*

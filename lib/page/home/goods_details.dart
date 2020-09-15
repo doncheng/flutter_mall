@@ -13,6 +13,8 @@ class GoodsDetails extends StatefulWidget {
 }
 
 class _GoodsDetailsState extends State<GoodsDetails> {
+  int want = 0;
+  int collect = 0;
   @override
   Widget build(BuildContext context) {
     ScreenUtil.instance = ScreenUtil(width: 375, height: 750)..init(context);
@@ -67,18 +69,28 @@ class _GoodsDetailsState extends State<GoodsDetails> {
                   child: Column(
                     children: [
                       InkWell(
-                        onTap: () {},
-                        child: Image.network(
-                          'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1752460159,226752426&fm=26&gp=0.jpg',
-                          height: 25,
-                          width: 25,
-                          fit: BoxFit.cover,
+                        onTap: () {
+                          setState(() {
+                            if (want == 0) {
+                              want = 1;
+                            } else {
+                              want = 0;
+                            }
+                          });
+                        },
+                        child: Icon(
+                          Icons.favorite,
+                          size: 25,
+                          color: want == 1 ? Colors.red : Colors.grey,
                         ),
                       ),
                       Text(
                         '想要',
                         style: TextStyle(
-                            fontSize: 10, fontWeight: FontWeight.normal),
+                          fontSize: 10,
+                          fontWeight: FontWeight.normal,
+                          color: want == 1 ? Colors.red : Colors.black,
+                        ),
                       )
                     ],
                   ),
@@ -92,18 +104,27 @@ class _GoodsDetailsState extends State<GoodsDetails> {
                   child: Column(
                     children: [
                       InkWell(
-                        onTap: () {},
-                        child: Image.network(
-                          'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1752460159,226752426&fm=26&gp=0.jpg',
-                          height: 25,
-                          width: 25,
-                          fit: BoxFit.cover,
+                        onTap: () {
+                          setState(() {
+                            if (collect == 0) {
+                              collect = 1;
+                            } else {
+                              collect = 0;
+                            }
+                          });
+                        },
+                        child: Icon(
+                          Icons.star,
+                          size: 25,
+                          color: collect == 1 ? Color(0xfffeb60a) : Colors.grey,
                         ),
                       ),
                       Text(
                         '收藏夹',
                         style: TextStyle(
                           fontSize: 10,
+                          color:
+                              collect == 1 ? Color(0xfffeb60a) : Colors.black,
                         ),
                       )
                     ],
@@ -1546,58 +1567,78 @@ class _SellerState extends State<Seller> {
                     ),
                   ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Column(
                         children: [
-                          Container(
-                            height: 30,
-                            width: 70,
-                            margin: EdgeInsets.only(top: 16),
-                            child: Center(
-                              child: Text(
-                                '港澳版',
-                                style: TextStyle(
-                                  fontSize: 12,
+                          InkWell(
+                            onTap: () {
+                              print('港澳版');
+                            },
+                            child: Container(
+                              height: 30,
+                              width: 70,
+                              margin: EdgeInsets.only(top: 16),
+                              child: Center(
+                                child: Text(
+                                  '港澳版',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                  ),
                                 ),
                               ),
                             ),
                           ),
-                          Container(
-                            height: 30,
-                            width: 70,
-                            margin: EdgeInsets.only(top: 20),
-                            child: Center(
-                              child: Text(
-                                '4G',
-                                style: TextStyle(
-                                  fontSize: 12,
+                          InkWell(
+                            onTap: () {
+                              print('4G');
+                            },
+                            child: Container(
+                              height: 30,
+                              width: 70,
+                              margin: EdgeInsets.only(top: 20),
+                              child: Center(
+                                child: Text(
+                                  '4G',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                  ),
                                 ),
                               ),
                             ),
                           ),
-                          Container(
-                            height: 30,
-                            width: 70,
-                            margin: EdgeInsets.only(top: 20),
-                            child: Center(
-                              child: Text(
-                                '日韩',
-                                style: TextStyle(
-                                  fontSize: 12,
+                          InkWell(
+                            onTap: () {
+                              print('日韩');
+                            },
+                            child: Container(
+                              height: 30,
+                              width: 70,
+                              margin: EdgeInsets.only(top: 20),
+                              child: Center(
+                                child: Text(
+                                  '日韩',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                  ),
                                 ),
                               ),
                             ),
                           ),
-                          Container(
-                            height: 30,
-                            width: 70,
-                            margin: EdgeInsets.only(top: 20),
-                            child: Center(
-                              child: Text(
-                                '同城',
-                                style: TextStyle(
-                                  fontSize: 12,
+                          InkWell(
+                            onTap: () {
+                              print('同城');
+                            },
+                            child: Container(
+                              height: 30,
+                              width: 70,
+                              margin: EdgeInsets.only(top: 20),
+                              child: Center(
+                                child: Text(
+                                  '同城',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                  ),
                                 ),
                               ),
                             ),
@@ -1606,60 +1647,80 @@ class _SellerState extends State<Seller> {
                       ),
                       Column(
                         children: [
-                          Container(
-                            height: 30,
-                            width: 70,
-                            margin: EdgeInsets.only(top: 16),
-                            child: Center(
-                              child: Text(
-                                '美版',
-                                style: TextStyle(
-                                  fontSize: 12,
+                          InkWell(
+                            onTap: () {
+                              print('美版');
+                            },
+                            child: Container(
+                              height: 30,
+                              width: 70,
+                              margin: EdgeInsets.only(top: 16),
+                              child: Center(
+                                child: Text(
+                                  '美版',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                  ),
                                 ),
                               ),
                             ),
                           ),
-                          Container(
-                            height: 30,
-                            width: 70,
-                            margin: EdgeInsets.only(top: 20),
-                            child: Center(
-                              child: Text(
-                                '全新',
-                                style: TextStyle(
-                                  fontSize: 12,
+                          InkWell(
+                            onTap: () {
+                              print('全新');
+                            },
+                            child: Container(
+                              height: 30,
+                              width: 70,
+                              margin: EdgeInsets.only(top: 20),
+                              child: Center(
+                                child: Text(
+                                  '全新',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                  ),
                                 ),
                               ),
                             ),
                           ),
-                          Container(
-                            height: 30,
-                            width: 70,
-                            margin: EdgeInsets.only(top: 20),
-                            child: Center(
-                              child: Text(
-                                '国行',
-                                style: TextStyle(
-                                  fontSize: 12,
+                          InkWell(
+                            onTap: () {
+                              print('国行');
+                            },
+                            child: Container(
+                              height: 30,
+                              width: 70,
+                              margin: EdgeInsets.only(top: 20),
+                              child: Center(
+                                child: Text(
+                                  '国行',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                  ),
                                 ),
                               ),
                             ),
                           ),
-                          Container(
-                            height: 30,
-                            width: 70,
-                            margin: EdgeInsets.only(top: 20),
-                            child: Center(
-                              child: Text(
-                                '其他…',
-                                style: TextStyle(
-                                  fontSize: 12,
+                          InkWell(
+                            onTap: () {
+                              print('其他…');
+                            },
+                            child: Container(
+                              height: 30,
+                              width: 70,
+                              margin: EdgeInsets.only(top: 20),
+                              child: Center(
+                                child: Text(
+                                  '其他…',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                  ),
                                 ),
                               ),
                             ),
                           )
                         ],
-                      )
+                      ),
                     ],
                   )
                 ],

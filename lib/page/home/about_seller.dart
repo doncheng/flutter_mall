@@ -265,6 +265,7 @@ class _SellerBodyState extends State<SellerBody> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
+                  margin: EdgeInsets.only(left: 14),
                   height: ScreenUtil.instance.setHeight(25.0),
                   width: ScreenUtil.instance.setWidth(73.0),
                   child: Center(
@@ -670,19 +671,20 @@ class _firstPageState extends State<firstPage> {
                     ),
                   ),
                   Container(
-                      margin: EdgeInsets.only(
-                        left: ScreenUtil.instance.setWidth(12.0),
-                        top: ScreenUtil.instance.setHeight(10.0),
-                      ),
-                      height: ScreenUtil.instance.setHeight(31.0),
-                      width: ScreenUtil.instance.setWidth(139.0),
-                      child: Expanded(
-                        child: Text(
-                          '清末民初回流纯老银壶一套，清末民初回流纯老…',
-                          style: TextStyle(
-                              fontSize: 13, fontWeight: FontWeight.bold),
-                        ),
-                      )),
+                    margin: EdgeInsets.only(
+                      left: ScreenUtil.instance.setWidth(12.0),
+                      top: ScreenUtil.instance.setHeight(10.0),
+                    ),
+                    height: ScreenUtil.instance.setHeight(35.0),
+                    width: ScreenUtil.instance.setWidth(139.0),
+                    child: Text(
+                      '清末民初回流纯老银壶一套，清末民初回流纯老…',
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style:
+                          TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+                    ),
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -772,19 +774,20 @@ class _firstPageState extends State<firstPage> {
                     ),
                   ),
                   Container(
-                      margin: EdgeInsets.only(
-                        left: ScreenUtil.instance.setWidth(12.0),
-                        top: ScreenUtil.instance.setHeight(10.0),
-                      ),
-                      height: ScreenUtil.instance.setHeight(31.0),
-                      width: ScreenUtil.instance.setWidth(139.0),
-                      child: Expanded(
-                        child: Text(
-                          '清末民初回流纯老银壶一套，清末民初回流纯老…',
-                          style: TextStyle(
-                              fontSize: 13, fontWeight: FontWeight.bold),
-                        ),
-                      )),
+                    margin: EdgeInsets.only(
+                      left: ScreenUtil.instance.setWidth(12.0),
+                      top: ScreenUtil.instance.setHeight(10.0),
+                    ),
+                    height: ScreenUtil.instance.setHeight(35.0),
+                    width: ScreenUtil.instance.setWidth(139.0),
+                    child: Text(
+                      '清末民初回流纯老银壶一套，清末民初回流纯老…',
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style:
+                          TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+                    ),
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
