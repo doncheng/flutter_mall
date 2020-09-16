@@ -2,7 +2,9 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'about_seller.dart';
-// import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:expandable/expandable.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class GoodsDetails extends StatefulWidget {
   GoodsDetails({Key key}) : super(key: key);
@@ -255,6 +257,8 @@ class mainBody extends StatefulWidget {
 }
 
 class _mainBodyState extends State<mainBody> {
+  String contentText =
+      '“认证手机好卖家”金牌老店。\n仅换oled屏幕，最接fffff近原fffffffff装的屏幕，有原彩显...';
   @override
   Widget build(BuildContext context) {
     ScreenUtil.instance = ScreenUtil(width: 375, height: 750)..init(context);
@@ -505,17 +509,15 @@ class _mainBodyState extends State<mainBody> {
                   child: Text(
                     '苹果X IPhoneX 99新苹果x99新iPhonex 99新苹果x64g苹果x 256g',
                     style: TextStyle(fontSize: 15),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
                 Text(
                   '--------------------------',
                   style: TextStyle(fontSize: 15),
                 ),
-                Expanded(
-                    child: Text(
-                  '“认证手机好卖家”金牌老店。仅换oled屏幕，最接近原装的屏幕，有原彩显... 展开',
-                  style: TextStyle(fontSize: 15),
-                ))
+                ExpandableText(text: contentText, maxLines: 2),
               ],
             )),
         Container(
@@ -1893,5 +1895,64 @@ class _goodsForState extends State<goodsFor> {
       runSpacing: 10,
       children: getData(),
     );
+  }
+}
+
+class ExpandableText extends StatefulWidget {
+  final String text;
+  final int maxLines;
+  final TextStyle style;
+  final TextOverflow overflow;
+  ExpandableText(
+      {Key key,
+      @required this.text,
+      this.maxLines,
+      this.style,
+      this.overflow = TextOverflow.fade})
+      : super(key: key);
+
+  @override
+  _ExpandableTextState createState() => _ExpandableTextState();
+}
+
+class _ExpandableTextState extends State<ExpandableText> {
+  int get maxLines => widget.maxLines;
+  String get text => widget.text;
+  TextStyle get style => widget.style;
+  TextOverflow get overflow => widget.overflow;
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(builder: (context, size) {
+      final span = TextSpan(text: text, style: style);
+      final tp = TextPainter(
+          text: span, maxLines: maxLines, textDirection: TextDirection.ltr);
+      tp.layout(maxWidth: size.maxWidth);
+
+      if (tp.didExceedMaxLines) {
+        // 判断文字是否溢出
+        return ExpandableNotifier(
+          child: Column(children: [
+            Expandable(
+              collapsed: Row(children: [
+                Text(text,
+                    maxLines: maxLines, overflow: overflow, style: style),
+                ExpandableButton(
+                  child: Text('展开', style: TextStyle(color: Colors.blue)),
+                )
+              ]),
+              expanded: Row(children: [
+                Text(text, style: style),
+                ExpandableButton(
+                  child: Text('收起', style: TextStyle(color: Colors.blue)),
+                ),
+              ]),
+            )
+          ]),
+        );
+      } else {
+        return Text(text, style: style);
+      }
+    });
   }
 }

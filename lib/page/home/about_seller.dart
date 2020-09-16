@@ -593,7 +593,7 @@ class _evaluationState extends State<evaluation> {
   Widget build(BuildContext context) {
     ScreenUtil.instance = ScreenUtil(width: 375, height: 750)..init(context);
     return Container(
-      height: ScreenUtil.instance.setHeight(140.0),
+      constraints: BoxConstraints(maxHeight: double.infinity),
       width: double.infinity,
       margin: EdgeInsets.only(
         left: ScreenUtil.instance.setWidth(60.0),
@@ -651,7 +651,7 @@ class _firstPageState extends State<firstPage> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
-              height: ScreenUtil.instance.setHeight(274.0),
+              constraints: BoxConstraints(maxHeight: double.infinity),
               width: ScreenUtil.instance.setWidth(170.0),
               margin: EdgeInsets.only(
                 left: ScreenUtil.instance.setWidth(10.0),
@@ -677,10 +677,10 @@ class _firstPageState extends State<firstPage> {
                       left: ScreenUtil.instance.setWidth(12.0),
                       top: ScreenUtil.instance.setHeight(10.0),
                     ),
-                    height: ScreenUtil.instance.setHeight(35.0),
+                    constraints: BoxConstraints(maxHeight: double.infinity),
                     width: ScreenUtil.instance.setWidth(139.0),
                     child: Text(
-                      '清末民初回流纯老银壶一套，清末民初回流纯老…',
+                      '清末民初回流纯老银壶一ttttttttttt套，清末民初回流纯老…',
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style:
@@ -749,12 +749,15 @@ class _firstPageState extends State<firstPage> {
                         ),
                       )
                     ],
+                  ),
+                  SizedBox(
+                    height: 5,
                   )
                 ],
               ),
             ),
             Container(
-              height: ScreenUtil.instance.setHeight(274.0),
+              constraints: BoxConstraints(maxHeight: double.infinity),
               width: ScreenUtil.instance.setWidth(170.0),
               margin: EdgeInsets.only(
                 left: ScreenUtil.instance.setWidth(10.0),
@@ -780,7 +783,7 @@ class _firstPageState extends State<firstPage> {
                       left: ScreenUtil.instance.setWidth(12.0),
                       top: ScreenUtil.instance.setHeight(10.0),
                     ),
-                    height: ScreenUtil.instance.setHeight(35.0),
+                    constraints: BoxConstraints(maxHeight: double.infinity),
                     width: ScreenUtil.instance.setWidth(139.0),
                     child: Text(
                       '清末民初回流纯老银壶一套，清末民初回流纯老…',
@@ -828,7 +831,7 @@ class _firstPageState extends State<firstPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
-                        height: 14,
+                        constraints: BoxConstraints(maxHeight: double.infinity),
                         width: 70,
                         margin: EdgeInsets.only(left: 25, top: 15),
                         child: Center(
@@ -840,7 +843,7 @@ class _firstPageState extends State<firstPage> {
                         ),
                       ),
                       Container(
-                        height: 14,
+                        constraints: BoxConstraints(maxHeight: double.infinity),
                         width: 44,
                         margin: EdgeInsets.only(right: 15, top: 15),
                         child: Center(
@@ -852,6 +855,9 @@ class _firstPageState extends State<firstPage> {
                         ),
                       )
                     ],
+                  ),
+                  SizedBox(
+                    height: 5,
                   )
                 ],
               ),
