@@ -154,14 +154,19 @@ class _SearchGoodsViewState extends State<SearchGoodsView> {
                           )
                         ],
                       )),
-                  Container(
-                    height: 40,
-                    width: 45,
-                    child: Center(
-                      child: Text(
-                        '取消',
-                        style:
-                            TextStyle(fontSize: 16, color: Color(0xffff3e45)),
+                  InkWell(
+                    onTap: () {
+                      print('object');
+                    },
+                    child: Container(
+                      height: 40,
+                      width: 45,
+                      child: Center(
+                        child: Text(
+                          '取消',
+                          style:
+                              TextStyle(fontSize: 16, color: Color(0xffff3e45)),
+                        ),
                       ),
                     ),
                   )
@@ -223,7 +228,7 @@ class _SearchGoodsViewState extends State<SearchGoodsView> {
           });
         },
         child: Container(
-          height: 24,
+          constraints: BoxConstraints(maxHeight: double.infinity),
           margin: EdgeInsets.only(left: 10),
           padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
           decoration: BoxDecoration(

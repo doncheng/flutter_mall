@@ -90,8 +90,9 @@ class _SearchPageState extends State<SearchPage> {
                         ),
                       ),
                       Container(
+                        color: Colors.yellow,
                         alignment: Alignment.centerLeft,
-                        width: sizewidth * 0.2,
+                        constraints: BoxConstraints(maxWidth: double.infinity),
                         height: 30,
                         margin: EdgeInsets.only(top: 10),
                         child: TextField(
@@ -106,6 +107,7 @@ class _SearchPageState extends State<SearchPage> {
             InkWell(
               onTap: () {
                 showSearch(context: context, delegate: SearchBarDelegate());
+                print('object');
               },
               child: Container(
                 height: 20,
@@ -161,16 +163,18 @@ class _SearchBodyState extends State<SearchBody> {
           });
         },
         child: Container(
-          height: 24,
-          margin: EdgeInsets.only(left: 10),
-          padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(6), color: Color(0xfff0f0f0)),
-          child: Text(
-            value["name"],
-            style: TextStyle(fontSize: 12),
-          ),
-        ),
+            // constraints: BoxConstraints(maxHeight: double.infinity),
+            height: 40,
+            margin: EdgeInsets.only(left: 10),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(6),
+                color: Color(0xfff0f0f0)),
+            child: Center(
+              child: Text(
+                value["name"],
+                style: TextStyle(fontSize: 12),
+              ),
+            )),
       );
     });
     return tempList.toList();

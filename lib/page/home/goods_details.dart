@@ -16,6 +16,7 @@ class GoodsDetails extends StatefulWidget {
 class _GoodsDetailsState extends State<GoodsDetails> {
   int want = 0;
   int collect = 0;
+  int action = 1;
   @override
   Widget build(BuildContext context) {
     ScreenUtil.instance = ScreenUtil(width: 375, height: 750)..init(context);
@@ -54,10 +55,65 @@ class _GoodsDetailsState extends State<GoodsDetails> {
             children: [
               toSeller(),
               mainBody(),
-              Container(
-                width: double.infinity,
-                height: 1000,
-                child: goodsFor(),
+              Column(
+                children: [
+                  Container(
+                    height: 40,
+                    width: double.infinity,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(left: 10),
+                          height: 36,
+                          width: 70,
+                          child: RaisedButton(
+                            elevation: 0,
+                            color: Colors.white,
+                            shape: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: action == 1
+                                      ? Colors.red
+                                      : Colors.transparent),
+                            ),
+                            child: Text('推荐'),
+                            onPressed: () {
+                              setState(() {
+                                action = 1;
+                              });
+                            },
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(left: 10),
+                          height: 36,
+                          width: 70,
+                          child: RaisedButton(
+                            elevation: 0,
+                            color: Colors.white,
+                            shape: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: action == 2
+                                      ? Colors.red
+                                      : Colors.transparent),
+                            ),
+                            child: Text('推荐2'),
+                            onPressed: () {
+                              setState(() {
+                                action = 2;
+                              });
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    width: double.infinity,
+                    constraints: BoxConstraints(maxHeight: double.infinity),
+                    child: goodsFor(),
+                  )
+                ],
               )
             ],
           )),
@@ -1898,19 +1954,26 @@ class _goodsForState extends State<goodsFor> {
     "https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png",
     "https://dss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1906469856,4113625838&fm=26&gp=0.jpg",
     "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1442998595,1306184984&fm=26&gp=0.jpg",
+    "https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1141259048,554497535&fm=26&gp=0.jpg",
+    "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2396361575,51762536&fm=26&gp=0.jpg",
+    "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=151472226,3497652000&fm=26&gp=0.jpg",
+    "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1719041626,3512470598&fm=26&gp=0.jpg",
+    "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1157223566,1739204122&fm=11&gp=0.jpg",
     "https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png",
     "https://dss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1906469856,4113625838&fm=26&gp=0.jpg",
     "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1442998595,1306184984&fm=26&gp=0.jpg",
-    "https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png",
-    "https://dss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1906469856,4113625838&fm=26&gp=0.jpg",
-    "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1442998595,1306184984&fm=26&gp=0.jpg",
-    "https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png",
-    "https://dss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1906469856,4113625838&fm=26&gp=0.jpg",
-    "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1442998595,1306184984&fm=26&gp=0.jpg",
+    "https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1141259048,554497535&fm=26&gp=0.jpg",
+    "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2396361575,51762536&fm=26&gp=0.jpg",
+    "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=151472226,3497652000&fm=26&gp=0.jpg",
+    "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1719041626,3512470598&fm=26&gp=0.jpg",
+    "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1157223566,1739204122&fm=11&gp=0.jpg",
+    "https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png"
   ];
   @override
   Widget build(BuildContext context) {
     return StaggeredGridView.countBuilder(
+      physics: NeverScrollableScrollPhysics(), //禁用滑动事件
+      shrinkWrap: true, //解决无限高度问题
       padding: const EdgeInsets.all(8.0),
       crossAxisCount: 4,
       itemCount: imgList.length,
@@ -1948,7 +2011,7 @@ class _goodsForState extends State<goodsFor> {
                 width: 143,
                 margin: EdgeInsets.fromLTRB(12, 10, 19, 10),
                 child: Text(
-                  'value["content"]',
+                  '清末民初回流纯老银壶一套，清末民初回流纯老…',
                   style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
@@ -1974,7 +2037,7 @@ class _goodsForState extends State<goodsFor> {
                           ),
                         ),
                         Text(
-                          'value',
+                          '1999',
                           style: TextStyle(
                               fontSize: 16,
                               color: Color(0xffff1a22),
@@ -2019,7 +2082,7 @@ class _goodsForState extends State<goodsFor> {
                     height: 15,
                     margin: EdgeInsets.only(left: 5),
                     child: Text(
-                      'value["adress"]',
+                      '北京朝阳',
                       style: TextStyle(
                         fontSize: 12,
                       ),
