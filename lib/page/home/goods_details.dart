@@ -54,7 +54,11 @@ class _GoodsDetailsState extends State<GoodsDetails> {
             children: [
               toSeller(),
               mainBody(),
-              goodsFor(),
+              Container(
+                width: double.infinity,
+                height: 1000,
+                child: goodsFor(),
+              )
             ],
           )),
           Container(
@@ -258,7 +262,7 @@ class mainBody extends StatefulWidget {
 
 class _mainBodyState extends State<mainBody> {
   String contentText =
-      '“认证手机好卖家”金牌老店。\n仅换oled屏幕，最接fffff近原fffffffff装的屏幕，有原彩显...';
+      '“认证手机好卖家”金牌老店。\n仅换oled屏幕，最接fffff近原fffffffff装的屏幕，有原彩显“认证手机好卖家”金牌老店。\n仅换oled屏幕，最接fffff近原fffffffff装的屏幕，有原彩显“认证手机好卖家”金牌老店。\n仅换oled屏幕，最接fffff近原fffffffff装的屏幕，有原彩显“认证手机好卖家”金牌老店。\n仅换oled屏幕，最接fffff近原fffffffff装的屏幕，有原彩显“认证手机好卖家”金牌老店。\n仅换oled屏幕，最接fffff近原fffffffff装的屏幕，有原彩显...';
   @override
   Widget build(BuildContext context) {
     ScreenUtil.instance = ScreenUtil(width: 375, height: 750)..init(context);
@@ -499,25 +503,28 @@ class _mainBodyState extends State<mainBody> {
           ],
         ),
         Container(
-            height: 125,
+            // height: 155,
+            constraints: BoxConstraints(maxHeight: double.infinity),
             width: double.infinity,
             margin: EdgeInsets.only(top: 26, left: 12, right: 16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Expanded(
-                  child: Text(
-                    '苹果X IPhoneX 99新苹果x99新iPhonex 99新苹果x64g苹果x 256g',
-                    style: TextStyle(fontSize: 15),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
+                Text(
+                  '苹果X IPhoneX 99新苹果x99新iPhonex 99新苹果x64g苹果x 256g',
+                  style: TextStyle(fontSize: 15),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
                 ),
                 Text(
                   '--------------------------',
                   style: TextStyle(fontSize: 15),
                 ),
-                ExpandableText(text: contentText, maxLines: 2),
+                ExpandableText(
+                  text: contentText,
+                  maxLines: 2,
+                  style: TextStyle(fontSize: 15),
+                ),
               ],
             )),
         Container(
@@ -1728,172 +1735,317 @@ class goodsFor extends StatefulWidget {
 }
 
 class _goodsForState extends State<goodsFor> {
-  List list = [
-    {
-      "url":
-          'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
-      "content": '清末民初回流纯老银壶一套，清末民初回流纯老…',
-      "value": '1470',
-      "adress": '北京朝阳'
-    },
-    {
-      "url":
-          'https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1141259048,554497535&fm=26&gp=0.jpg',
-      "content": '清末民初回流纯老银壶一套，清末民初回流纯老…',
-      "value": '9999',
-      "adress": '北京朝阳'
-    },
-    {
-      "url":
-          'https://dss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1906469856,4113625838&fm=26&gp=0.jpg',
-      "content": '清末民初回流纯老银壶一套，清末民初回流纯老…',
-      "value": '999',
-      "adress": '北京朝阳'
-    },
-    {
-      "url":
-          'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1442998595,1306184984&fm=26&gp=0.jpg',
-      "content": '清末民初回流纯老银壶一套，清末民初回流纯老…',
-      "value": '2999',
-      "adress": '北京朝阳'
-    },
-    {
-      "url":
-          'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=207394417,1723065323&fm=26&gp=0.jpg',
-      "content": '清末民初回流纯老银壶一套，清末民初回流纯老…',
-      "value": '1999',
-      "adress": '北京朝阳'
-    },
+  // List list = [
+  //   {
+  //     "url":
+  //         'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
+  //     "content": '清末民初回流纯老银壶一套，清末民初回流纯老…',
+  //     "value": '1470',
+  //     "adress": '北京朝阳'
+  //   },
+  //   {
+  //     "url":
+  //         'https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1141259048,554497535&fm=26&gp=0.jpg',
+  //     "content": '清末民初回流纯老银壶一套，清末民初回流纯老…',
+  //     "value": '9999',
+  //     "adress": '北京朝阳'
+  //   },
+  //   {
+  //     "url":
+  //         'https://dss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1906469856,4113625838&fm=26&gp=0.jpg',
+  //     "content": '清末民初回流纯老银壶一套，清末民初回流纯老…',
+  //     "value": '999',
+  //     "adress": '北京朝阳'
+  //   },
+  //   {
+  //     "url":
+  //         'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1442998595,1306184984&fm=26&gp=0.jpg',
+  //     "content": '清末民初回流纯老银壶一套，清末民初回流纯老…',
+  //     "value": '2999',
+  //     "adress": '北京朝阳'
+  //   },
+  //   {
+  //     "url":
+  //         'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=207394417,1723065323&fm=26&gp=0.jpg',
+  //     "content": '清末民初回流纯老银壶一套，清末民初回流纯老…',
+  //     "value": '1999',
+  //     "adress": '北京朝阳'
+  //   },
+  // ];
+  // List<Widget> getData() {
+  //   var forlist = list.map((value) {
+  //     return ClipRRect(
+  //       borderRadius: BorderRadius.circular(14),
+  //       child: Container(
+  //           constraints: BoxConstraints(maxHeight: double.infinity),
+  //           width: 174,
+  //           child: Column(
+  //             children: [
+  //               Image.network(
+  //                 value["url"],
+  //                 width: 174,
+  //                 fit: BoxFit.cover,
+  //               ),
+  //               Container(
+  //                 height: 41,
+  //                 width: 143,
+  //                 margin: EdgeInsets.fromLTRB(12, 10, 19, 10),
+  //                 child: Text(
+  //                   value["content"],
+  //                   style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+  //                   maxLines: 2,
+  //                   overflow: TextOverflow.ellipsis,
+  //                 ),
+  //               ),
+  //               Row(
+  //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //                 children: [
+  //                   Container(
+  //                     height: 15,
+  //                     width: 55,
+  //                     margin: EdgeInsets.only(left: 10),
+  //                     child: Row(
+  //                       children: [
+  //                         Container(
+  //                           margin: EdgeInsets.only(top: 3),
+  //                           height: 13,
+  //                           width: 10,
+  //                           child: Text(
+  //                             '¥',
+  //                             style: TextStyle(
+  //                                 fontSize: 14, color: Color(0xffff1a22)),
+  //                           ),
+  //                         ),
+  //                         Text(
+  //                           value["value"],
+  //                           style: TextStyle(
+  //                               fontSize: 16,
+  //                               color: Color(0xffff1a22),
+  //                               fontWeight: FontWeight.bold),
+  //                         ),
+  //                       ],
+  //                     ),
+  //                   ),
+  //                   Container(
+  //                     height: 18,
+  //                     width: 60,
+  //                     margin: EdgeInsets.only(right: 10),
+  //                     decoration: BoxDecoration(
+  //                         borderRadius: BorderRadius.circular(5),
+  //                         color: Color(0xffffe8e8)),
+  //                     child: Center(
+  //                       child: Text(
+  //                         '千万保障',
+  //                         style:
+  //                             TextStyle(fontSize: 14, color: Color(0xffe51c23)),
+  //                       ),
+  //                     ),
+  //                   )
+  //                 ],
+  //               ),
+  //               Row(
+  //                 mainAxisAlignment: MainAxisAlignment.center,
+  //                 children: [
+  //                   SizedBox(
+  //                     width: 6,
+  //                   ),
+  //                   ClipOval(
+  //                     child: Image.network(
+  //                       'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
+  //                       height: 22,
+  //                       width: 22,
+  //                       fit: BoxFit.cover,
+  //                     ),
+  //                   ),
+  //                   Container(
+  //                     width: 56,
+  //                     height: 15,
+  //                     margin: EdgeInsets.only(left: 5),
+  //                     child: Text(
+  //                       value["adress"],
+  //                       style: TextStyle(
+  //                         fontSize: 12,
+  //                       ),
+  //                       textAlign: TextAlign.left,
+  //                       overflow: TextOverflow.ellipsis,
+  //                     ),
+  //                   ),
+  //                   Container(
+  //                     width: 49,
+  //                     height: 15,
+  //                     margin: EdgeInsets.only(
+  //                       left: ScreenUtil.instance.setWidth(25.0),
+  //                     ),
+  //                     child: Text(
+  //                       '当前在线',
+  //                       style:
+  //                           TextStyle(fontSize: 12, color: Color(0xffc8c8c8)),
+  //                       textAlign: TextAlign.left,
+  //                     ),
+  //                   ),
+  //                 ],
+  //               ),
+  //               SizedBox(
+  //                 height: 5,
+  //               )
+  //             ],
+  //           )),
+  //     );
+  //   });
+  //   return forlist.toList();
+  // }
+  List imgList = [
+    "https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png",
+    "https://dss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1906469856,4113625838&fm=26&gp=0.jpg",
+    "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1442998595,1306184984&fm=26&gp=0.jpg",
+    "https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png",
+    "https://dss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1906469856,4113625838&fm=26&gp=0.jpg",
+    "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1442998595,1306184984&fm=26&gp=0.jpg",
+    "https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png",
+    "https://dss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1906469856,4113625838&fm=26&gp=0.jpg",
+    "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1442998595,1306184984&fm=26&gp=0.jpg",
+    "https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png",
+    "https://dss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1906469856,4113625838&fm=26&gp=0.jpg",
+    "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1442998595,1306184984&fm=26&gp=0.jpg",
   ];
-  List<Widget> getData() {
-    var forlist = list.map((value) {
-      return ClipRRect(
-        borderRadius: BorderRadius.circular(14),
-        child: Container(
-            constraints: BoxConstraints(maxHeight: double.infinity),
-            width: 174,
-            child: Column(
-              children: [
-                Image.network(
-                  value["url"],
-                  width: 174,
-                  fit: BoxFit.cover,
-                ),
-                Container(
-                  height: 41,
-                  width: 143,
-                  margin: EdgeInsets.fromLTRB(12, 10, 19, 10),
-                  child: Text(
-                    value["content"],
-                    style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      height: 15,
-                      width: 55,
-                      margin: EdgeInsets.only(left: 10),
-                      child: Row(
-                        children: [
-                          Container(
-                            margin: EdgeInsets.only(top: 3),
-                            height: 13,
-                            width: 10,
-                            child: Text(
-                              '¥',
-                              style: TextStyle(
-                                  fontSize: 14, color: Color(0xffff1a22)),
-                            ),
-                          ),
-                          Text(
-                            value["value"],
-                            style: TextStyle(
-                                fontSize: 16,
-                                color: Color(0xffff1a22),
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      height: 18,
-                      width: 60,
-                      margin: EdgeInsets.only(right: 10),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          color: Color(0xffffe8e8)),
-                      child: Center(
-                        child: Text(
-                          '千万保障',
-                          style:
-                              TextStyle(fontSize: 14, color: Color(0xffe51c23)),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      width: 6,
-                    ),
-                    ClipOval(
-                      child: Image.network(
-                        'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
-                        height: 22,
-                        width: 22,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    Container(
-                      width: 56,
-                      height: 15,
-                      margin: EdgeInsets.only(left: 5),
-                      child: Text(
-                        value["adress"],
-                        style: TextStyle(
-                          fontSize: 12,
-                        ),
-                        textAlign: TextAlign.left,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                    Container(
-                      width: 49,
-                      height: 15,
-                      margin: EdgeInsets.only(
-                        left: ScreenUtil.instance.setWidth(25.0),
-                      ),
-                      child: Text(
-                        '当前在线',
-                        style:
-                            TextStyle(fontSize: 12, color: Color(0xffc8c8c8)),
-                        textAlign: TextAlign.left,
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 5,
-                )
-              ],
-            )),
-      );
-    });
-    return forlist.toList();
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Wrap(
-      spacing: 10,
-      runSpacing: 10,
-      children: getData(),
+    return StaggeredGridView.countBuilder(
+      padding: const EdgeInsets.all(8.0),
+      crossAxisCount: 4,
+      itemCount: imgList.length,
+      itemBuilder: (context, i) {
+        return itemWidget(i);
+      },
+      staggeredTileBuilder: (index) => new StaggeredTile.fit(2),
+      // staggeredTileBuilder: (int index) =>
+      //     new StaggeredTile.count(2, index == 0 ? 2.5 : 3), //
+      mainAxisSpacing: 10.0,
+      crossAxisSpacing: 10.0,
+    );
+  }
+
+  Widget itemWidget(int index) {
+    String imgPath = imgList[index];
+    return new Material(
+      elevation: 4.0,
+      borderRadius: new BorderRadius.all(
+        new Radius.circular(14.0),
+      ),
+      child: new InkWell(
+          onTap: () {},
+          child: Column(
+            children: [
+              new CachedNetworkImage(
+                imageUrl: imgPath,
+                width: 174,
+                fit: BoxFit.cover,
+                /*    placeholder: (context, url) =>
+                      Image.asset('assets/wallfy.png'),*/
+              ),
+              Container(
+                height: 41,
+                width: 143,
+                margin: EdgeInsets.fromLTRB(12, 10, 19, 10),
+                child: Text(
+                  'value["content"]',
+                  style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    height: 15,
+                    width: 55,
+                    margin: EdgeInsets.only(left: 10),
+                    child: Row(
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(top: 3),
+                          height: 13,
+                          width: 10,
+                          child: Text(
+                            '¥',
+                            style: TextStyle(
+                                fontSize: 14, color: Color(0xffff1a22)),
+                          ),
+                        ),
+                        Text(
+                          'value',
+                          style: TextStyle(
+                              fontSize: 16,
+                              color: Color(0xffff1a22),
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: 18,
+                    width: 60,
+                    margin: EdgeInsets.only(right: 10),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        color: Color(0xffffe8e8)),
+                    child: Center(
+                      child: Text(
+                        '千万保障',
+                        style:
+                            TextStyle(fontSize: 14, color: Color(0xffe51c23)),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    width: 6,
+                  ),
+                  ClipOval(
+                    child: Image.network(
+                      'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
+                      height: 22,
+                      width: 22,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  Container(
+                    width: 56,
+                    height: 15,
+                    margin: EdgeInsets.only(left: 5),
+                    child: Text(
+                      'value["adress"]',
+                      style: TextStyle(
+                        fontSize: 12,
+                      ),
+                      textAlign: TextAlign.left,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  Container(
+                    width: 49,
+                    height: 15,
+                    margin: EdgeInsets.only(
+                      left: ScreenUtil.instance.setWidth(25.0),
+                    ),
+                    child: Text(
+                      '当前在线',
+                      style: TextStyle(fontSize: 12, color: Color(0xffc8c8c8)),
+                      textAlign: TextAlign.left,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 5,
+              )
+            ],
+          )),
     );
   }
 }
@@ -1903,6 +2055,7 @@ class ExpandableText extends StatefulWidget {
   final int maxLines;
   final TextStyle style;
   final TextOverflow overflow;
+
   ExpandableText(
       {Key key,
       @required this.text,
@@ -1934,17 +2087,19 @@ class _ExpandableTextState extends State<ExpandableText> {
         return ExpandableNotifier(
           child: Column(children: [
             Expandable(
-              collapsed: Row(children: [
+              collapsed:
+                  Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
                 Text(text,
                     maxLines: maxLines, overflow: overflow, style: style),
                 ExpandableButton(
-                  child: Text('展开', style: TextStyle(color: Colors.blue)),
+                  child: Text('展开 ▼ ', style: TextStyle(color: Colors.blue)),
                 )
               ]),
-              expanded: Row(children: [
+              expanded:
+                  Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
                 Text(text, style: style),
                 ExpandableButton(
-                  child: Text('收起', style: TextStyle(color: Colors.blue)),
+                  child: Text('收起 ▲ ', style: TextStyle(color: Colors.blue)),
                 ),
               ]),
             )
