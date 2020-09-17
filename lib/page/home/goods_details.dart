@@ -1240,7 +1240,7 @@ class _SellerState extends State<Seller> {
               borderRadius: BorderRadius.circular(14),
               child: Container(
                   width: ScreenUtil.instance.setWidth(174.0),
-                  height: ScreenUtil.instance.setHeight(274.0),
+                  constraints: BoxConstraints(maxHeight: double.infinity),
                   child: Column(
                     children: [
                       Image.network(
@@ -1316,8 +1316,8 @@ class _SellerState extends State<Seller> {
                           ClipOval(
                             child: Image.network(
                               'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
-                              height: ScreenUtil.instance.setHeight(22.0),
-                              width: ScreenUtil.instance.setWidth(22.0),
+                              height: 22,
+                              width: 22,
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -1355,7 +1355,7 @@ class _SellerState extends State<Seller> {
             ClipRRect(
               borderRadius: BorderRadius.circular(14),
               child: Container(
-                  height: ScreenUtil.instance.setHeight(274.0),
+                  constraints: BoxConstraints(maxHeight: double.infinity),
                   width: ScreenUtil.instance.setWidth(174.0),
                   child: Column(
                     children: [
@@ -1432,8 +1432,8 @@ class _SellerState extends State<Seller> {
                           ClipOval(
                             child: Image.network(
                               'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
-                              height: ScreenUtil.instance.setHeight(22.0),
-                              width: ScreenUtil.instance.setWidth(22.0),
+                              height: 22,
+                              width: 22,
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -1476,7 +1476,7 @@ class _SellerState extends State<Seller> {
             ClipRRect(
               borderRadius: BorderRadius.circular(14),
               child: Container(
-                  height: ScreenUtil.instance.setHeight(274.0),
+                  constraints: BoxConstraints(maxHeight: double.infinity),
                   width: ScreenUtil.instance.setWidth(174.0),
                   child: Column(
                     children: [
@@ -1553,8 +1553,8 @@ class _SellerState extends State<Seller> {
                           ClipOval(
                             child: Image.network(
                               'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
-                              height: ScreenUtil.instance.setHeight(22.0),
-                              width: ScreenUtil.instance.setWidth(22.0),
+                              height: 22,
+                              width: 22,
                               fit: BoxFit.cover,
                             ),
                           ),
