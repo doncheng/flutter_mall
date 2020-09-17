@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -6,7 +5,6 @@ import 'about_seller.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:expandable/expandable.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'dart:convert' as convert;
 
 class GoodsDetails extends StatefulWidget {
   GoodsDetails({Key key}) : super(key: key);
@@ -1793,184 +1791,7 @@ class goodsFor extends StatefulWidget {
 }
 
 class _goodsForState extends State<goodsFor> {
-  // List list = [
-  //   {
-  //     "url":
-  //         'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
-  //     "content": '清末民初回流纯老银壶一套，清末民初回流纯老…',
-  //     "value": '1470',
-  //     "adress": '北京朝阳'
-  //   },
-  //   {
-  //     "url":
-  //         'https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1141259048,554497535&fm=26&gp=0.jpg',
-  //     "content": '清末民初回流纯老银壶一套，清末民初回流纯老…',
-  //     "value": '9999',
-  //     "adress": '北京朝阳'
-  //   },
-  //   {
-  //     "url":
-  //         'https://dss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1906469856,4113625838&fm=26&gp=0.jpg',
-  //     "content": '清末民初回流纯老银壶一套，清末民初回流纯老…',
-  //     "value": '999',
-  //     "adress": '北京朝阳'
-  //   },
-  //   {
-  //     "url":
-  //         'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1442998595,1306184984&fm=26&gp=0.jpg',
-  //     "content": '清末民初回流纯老银壶一套，清末民初回流纯老…',
-  //     "value": '2999',
-  //     "adress": '北京朝阳'
-  //   },
-  //   {
-  //     "url":
-  //         'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=207394417,1723065323&fm=26&gp=0.jpg',
-  //     "content": '清末民初回流纯老银壶一套，清末民初回流纯老…',
-  //     "value": '1999',
-  //     "adress": '北京朝阳'
-  //   },
-  // ];
-  // List<Widget> getData() {
-  //   var forlist = list.map((value) {
-  //     return ClipRRect(
-  //       borderRadius: BorderRadius.circular(14),
-  //       child: Container(
-  //           constraints: BoxConstraints(maxHeight: double.infinity),
-  //           width: 174,
-  //           child: Column(
-  //             children: [
-  //               Image.network(
-  //                 value["url"],
-  //                 width: 174,
-  //                 fit: BoxFit.cover,
-  //               ),
-  //               Container(
-  //                 height: 41,
-  //                 width: 143,
-  //                 margin: EdgeInsets.fromLTRB(12, 10, 19, 10),
-  //                 child: Text(
-  //                   value["content"],
-  //                   style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
-  //                   maxLines: 2,
-  //                   overflow: TextOverflow.ellipsis,
-  //                 ),
-  //               ),
-  //               Row(
-  //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //                 children: [
-  //                   Container(
-  //                     height: 15,
-  //                     width: 55,
-  //                     margin: EdgeInsets.only(left: 10),
-  //                     child: Row(
-  //                       children: [
-  //                         Container(
-  //                           margin: EdgeInsets.only(top: 3),
-  //                           height: 13,
-  //                           width: 10,
-  //                           child: Text(
-  //                             '¥',
-  //                             style: TextStyle(
-  //                                 fontSize: 14, color: Color(0xffff1a22)),
-  //                           ),
-  //                         ),
-  //                         Text(
-  //                           value["value"],
-  //                           style: TextStyle(
-  //                               fontSize: 16,
-  //                               color: Color(0xffff1a22),
-  //                               fontWeight: FontWeight.bold),
-  //                         ),
-  //                       ],
-  //                     ),
-  //                   ),
-  //                   Container(
-  //                     height: 18,
-  //                     width: 60,
-  //                     margin: EdgeInsets.only(right: 10),
-  //                     decoration: BoxDecoration(
-  //                         borderRadius: BorderRadius.circular(5),
-  //                         color: Color(0xffffe8e8)),
-  //                     child: Center(
-  //                       child: Text(
-  //                         '千万保障',
-  //                         style:
-  //                             TextStyle(fontSize: 14, color: Color(0xffe51c23)),
-  //                       ),
-  //                     ),
-  //                   )
-  //                 ],
-  //               ),
-  //               Row(
-  //                 mainAxisAlignment: MainAxisAlignment.center,
-  //                 children: [
-  //                   SizedBox(
-  //                     width: 6,
-  //                   ),
-  //                   ClipOval(
-  //                     child: Image.network(
-  //                       'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
-  //                       height: 22,
-  //                       width: 22,
-  //                       fit: BoxFit.cover,
-  //                     ),
-  //                   ),
-  //                   Container(
-  //                     width: 56,
-  //                     height: 15,
-  //                     margin: EdgeInsets.only(left: 5),
-  //                     child: Text(
-  //                       value["adress"],
-  //                       style: TextStyle(
-  //                         fontSize: 12,
-  //                       ),
-  //                       textAlign: TextAlign.left,
-  //                       overflow: TextOverflow.ellipsis,
-  //                     ),
-  //                   ),
-  //                   Container(
-  //                     width: 49,
-  //                     height: 15,
-  //                     margin: EdgeInsets.only(
-  //                       left: ScreenUtil.instance.setWidth(25.0),
-  //                     ),
-  //                     child: Text(
-  //                       '当前在线',
-  //                       style:
-  //                           TextStyle(fontSize: 12, color: Color(0xffc8c8c8)),
-  //                       textAlign: TextAlign.left,
-  //                     ),
-  //                   ),
-  //                 ],
-  //               ),
-  //               SizedBox(
-  //                 height: 5,
-  //               )
-  //             ],
-  //           )),
-  //     );
-  //   });
-  //   return forlist.toList();
-  // }
   List imgList = [
-    // "https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png",
-    // "https://dss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1906469856,4113625838&fm=26&gp=0.jpg",
-    // "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1442998595,1306184984&fm=26&gp=0.jpg",
-    // "https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1141259048,554497535&fm=26&gp=0.jpg",
-    // "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2396361575,51762536&fm=26&gp=0.jpg",
-    // "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=151472226,3497652000&fm=26&gp=0.jpg",
-    // "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1719041626,3512470598&fm=26&gp=0.jpg",
-    // "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1157223566,1739204122&fm=11&gp=0.jpg",
-    // "https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png",
-    // "https://dss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1906469856,4113625838&fm=26&gp=0.jpg",
-    // "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1442998595,1306184984&fm=26&gp=0.jpg",
-    // "https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1141259048,554497535&fm=26&gp=0.jpg",
-    // "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2396361575,51762536&fm=26&gp=0.jpg",
-    // "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=151472226,3497652000&fm=26&gp=0.jpg",
-    // "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1719041626,3512470598&fm=26&gp=0.jpg",
-    // "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1157223566,1739204122&fm=11&gp=0.jpg",
-    // "https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png"
-    //   {
     {
       "url":
           'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
@@ -2028,9 +1849,7 @@ class _goodsForState extends State<goodsFor> {
 
   Widget itemWidget(index) {
     var indexa = new Map<String, dynamic>.from(index);
-    // List list = json.decode(indexa);
 
-    print(indexa["content"]);
     return new Material(
       elevation: 0,
       borderRadius: new BorderRadius.all(
