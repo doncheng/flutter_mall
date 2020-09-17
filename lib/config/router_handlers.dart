@@ -135,7 +135,7 @@ var addressselectionPageHandler = Handler(
 
 var SearchPageHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> parameters) {
-  return SearchPage();
+  return SearchGoodsView();
 });
 var goodsDetailsHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<Object>> parameters) {

@@ -31,9 +31,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    SharedPreferencesUtils.getToken().then((token){
-
-    });
+    SharedPreferencesUtils.getToken().then((token) {});
     _queryHomeData();
   }
 
@@ -133,7 +131,8 @@ class _HomePageState extends State<HomePage> {
                       physics: NeverScrollableScrollPhysics(),
                       itemCount: _homeEntity.floorGoodsList.length,
                       itemBuilder: (BuildContext context, int index) {
-                        return _floorGoodsWidget(_homeEntity.floorGoodsList[index]);
+                        return _floorGoodsWidget(
+                            _homeEntity.floorGoodsList[index]);
                       })
                 ],
               )),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mall/constant/string.dart';
+import 'package:mall/page/home/search.dart';
 import 'package:mall/service/goods_service.dart';
 import 'package:mall/utils/toast_util.dart';
 import 'package:mall/widgets/empty_view.dart';
@@ -156,7 +157,13 @@ class _SearchGoodsViewState extends State<SearchGoodsView> {
                       )),
                   InkWell(
                     onTap: () {
-                      print('object');
+                      setState(() {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                //导航打开新视图
+                                builder: (context) => SearchBarDemo()));
+                      });
                     },
                     child: Container(
                       height: 40,

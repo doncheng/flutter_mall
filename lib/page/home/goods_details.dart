@@ -762,16 +762,21 @@ class _SellerState extends State<Seller> {
               ),
             ),
             title: Container(
-              width: ScreenUtil.instance.setWidth(138.0),
-              height: ScreenUtil.instance.setHeight(24.0),
+              constraints: BoxConstraints(maxWidth: double.infinity),
+              height: 24,
               margin: EdgeInsets.only(left: 5),
               child: Row(
                 children: [
-                  Text(
-                    '蔡师傅工作室 2号店',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                    textAlign: TextAlign.left,
-                    overflow: TextOverflow.ellipsis,
+                  Container(
+                    height: 24,
+                    constraints: BoxConstraints(maxWidth: double.infinity),
+                    child: Text(
+                      '蔡师傅工作室 2号店',
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.left,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
                   Container(
                       height: 18,
