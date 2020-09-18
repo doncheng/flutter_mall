@@ -736,6 +736,7 @@ class Seller extends StatefulWidget {
 }
 
 class _SellerState extends State<Seller> {
+  int chick = 0;
   @override
   Widget build(BuildContext context) {
     ScreenUtil.instance = ScreenUtil(width: 375, height: 750)..init(context);
@@ -1176,18 +1177,40 @@ class _SellerState extends State<Seller> {
             ),
           ),
         ),
-        Container(
-          constraints: BoxConstraints(maxHeight: double.infinity),
-          width: double.infinity,
-          margin: EdgeInsets.only(left: 10, right: 10, top: 10),
-          child: ExpansionTile(
-            title: Text('展开更多',
-                style: TextStyle(fontSize: 13, color: Color(0xff2245ff))),
-            // backgroundColor: Colors.lightBlue,
-            initiallyExpanded: false, //默认是否展开
-            children: <Widget>[
-              comments(),
-            ],
+        InkWell(
+          onTap: () {
+            setState(() {
+              chick = 1;
+            });
+          },
+          child: Container(
+            constraints: BoxConstraints(maxHeight: double.infinity),
+            width: double.infinity,
+            margin: EdgeInsets.only(left: 10, right: 10, top: 10),
+            child: chick == 1
+                ? Column(
+                    children: [
+                      comments(),
+                      InkWell(
+                        onTap: () {
+                          setState(() {
+                            chick = 0;
+                          });
+                        },
+                        child: Container(
+                          height: 20,
+                          width: double.infinity,
+                          child: Text('收起',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize: 15, color: Color(0xff2245ff))),
+                        ),
+                      )
+                    ],
+                  )
+                : Text('展开更多',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 15, color: Color(0xff2245ff))),
           ),
         ),
         Container(
