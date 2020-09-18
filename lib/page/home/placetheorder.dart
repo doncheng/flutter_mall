@@ -28,6 +28,7 @@ class _PlacetheorderPageState extends State<PlacetheorderPage> {
               leading: InkWell(
                 child: Icon(
                   Icons.navigate_before,
+                  size: 36.0,
                   color: Colors.grey,
                 ),
                 onTap: () {

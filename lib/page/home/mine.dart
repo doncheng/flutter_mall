@@ -458,18 +458,18 @@ class _makemoneyState extends State<makemoney> {
           SizedBox(
             height: 7,
           ),
-          Container(
-            height: 60,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                InkWell(
+          Row(
+            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Expanded(
+                flex: 1,
+                child: InkWell(
                   onTap: () {
                     print('sss');
                   },
                   child: Container(
                       height: 60,
-                      width: screenwith * 0.41,
+                      // width: screenwith * 0.41,
                       child: Row(
                         children: <Widget>[
                           Container(
@@ -498,43 +498,46 @@ class _makemoneyState extends State<makemoney> {
                         ],
                       )),
                 ),
-                InkWell(
+              ),
+              SizedBox(width: 10),
+              Expanded(
+                flex: 1,
+                child: InkWell(
                   onTap: () {
                     print('sss');
                   },
                   child: Container(
-                      width: screenwith * 0.41,
+                      // width: screenwith * 0.41,
                       child: Row(
+                    children: <Widget>[
+                      Container(
+                        width: 46,
+                        height: 48,
+                        child: Image.network(
+                          'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3901429284,1378079784&fm=26&gp=0.jpg',
+                        ),
+                      ),
+                      SizedBox(width: 6),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Container(
-                            width: 46,
-                            height: 48,
-                            child: Image.network(
-                              'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3901429284,1378079784&fm=26&gp=0.jpg',
-                            ),
+                          Text(
+                            '签到领现金',
+                            style: TextStyle(fontSize: 14),
                           ),
-                          SizedBox(width: 6),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Text(
-                                '签到领现金',
-                                style: TextStyle(fontSize: 14),
-                              ),
-                              Text(
-                                '提现至微信零钱',
-                                style:
-                                    TextStyle(fontSize: 12, color: Colors.grey),
-                              )
-                            ],
+                          Text(
+                            '提现至微信零钱',
+                            style: TextStyle(fontSize: 12, color: Colors.grey),
                           )
                         ],
-                      )),
+                      )
+                    ],
+                  )),
                 ),
-              ],
-            ),
-          )
+              ),
+            ],
+          ),
         ],
       ),
     );

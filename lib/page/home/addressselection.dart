@@ -18,7 +18,10 @@ class _addressselectionPageState extends State<addressselectionPage> {
       backgroundColor: Color(0xfff5f5f5),
       appBar: AppBar(
         leading: InkWell(
-          child: Icon(Icons.navigate_before),
+          child: Icon(
+            Icons.navigate_before,
+            size: 36,
+          ),
           onTap: () {
             Navigator.pop(context);
           },

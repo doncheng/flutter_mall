@@ -102,6 +102,7 @@ class _personaldataPageState extends State<personaldataPage> {
           child: Icon(
             Icons.navigate_before,
             color: Colors.grey,
+            size: 36,
           ),
           onTap: () {
             Navigator.pop(context);
