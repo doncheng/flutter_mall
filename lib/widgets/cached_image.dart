@@ -16,25 +16,25 @@ class CachedImageView extends StatelessWidget {
       width: this.width,
       height: this.height,
       alignment: Alignment.center,
-      child: CachedNetworkImage(
-        imageUrl: this.url,
+      child: Image.network(
+        this.url,
         fit: BoxFit.fill,
         width: this.width,
         height: this.height,
-        placeholder: (BuildContext context, String url) {
-          return Container(
-            width: this.width,
-            color: Colors.grey[350],
-            height: this.height,
-            alignment: Alignment.center,
-            child: Text(
-              Strings.LOADING,
-              style: TextStyle(
-                  fontSize: ScreenUtil.instance.setSp(26.0),
-                  color: Colors.white),
-            ),
-          );
-        },
+        // placeholder: (BuildContext context, String url) {
+        //   return Container(
+        //     width: this.width,
+        //     color: Colors.grey[350],
+        //     height: this.height,
+        //     alignment: Alignment.center,
+        //     child: Text(
+        //       Strings.LOADING,
+        //       style: TextStyle(
+        //           fontSize: ScreenUtil.instance.setSp(26.0),
+        //           color: Colors.white),
+        //     ),
+        //   );
+        // },
       ),
     );
   }
