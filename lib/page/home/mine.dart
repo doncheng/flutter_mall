@@ -31,15 +31,13 @@ class _MineViewState extends State<MineView> {
   String account_name = '李天霸';
   @override
   Widget build(BuildContext context) {
+    final double statusBarHeight = MediaQuery.of(context).padding.top;
+
     final size = MediaQuery.of(context).size;
     final screenheight = size.height;
-    // print(screenheight);
-    // final double topPadding = MediaQuery.of(context).padding.top;
-    SystemUiOverlayStyle systemUiOverlayStyle = SystemUiOverlayStyle(
-      statusBarColor: Colors.black,
-      /*状态栏 背景透明*/
-    );
-    return SafeArea(
+
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle.light,
       child: Scaffold(
         backgroundColor: Color(0xffF8F8F8),
         body: Stack(
@@ -153,7 +151,7 @@ class _MineViewState extends State<MineView> {
               child: Container(
                 alignment: Alignment.topCenter,
                 //按屏幕比例变化
-                height: 50,
+                height: statusBarHeight + 50,
                 child: AppBar(
                   // brightness: Brightness.dark,
                   backgroundColor: Color(0xffFE5155),

@@ -18,7 +18,7 @@ class _ProjectSelectionViewState extends State<ProjectSelectionView> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: ScreenUtil.instance.setHeight(400.0),
+      height: ScreenUtil.instance.setHeight(403.0),
       child: ListView.builder(
           itemCount: widget.projectSelections.length,
           scrollDirection: Axis.horizontal,
