@@ -171,7 +171,9 @@ class _LoginViewState extends State<LoginView> {
         _showToast(Strings.LOGIN_SUCESS);
 //        Provider.of<UserInfoModel>(context, listen: true)
 //            .updateInfo(userEntity);
-        loginEventBus.fire(LoginEvent(true,url: userEntity.userInfo.avatarUrl,nickName: userEntity.userInfo.nickName));
+        loginEventBus.fire(LoginEvent(true,
+            url: userEntity.userInfo.avatarUrl,
+            nickName: userEntity.userInfo.nickName));
         Navigator.pop(context);
       }, (onFail) {
         print(onFail);
@@ -185,14 +187,14 @@ class _LoginViewState extends State<LoginView> {
   }
 
   _showToast(message) {
-    Fluttertoast.showToast(
-        msg: message,
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.CENTER,
-        timeInSecForIos: 1,
-        backgroundColor: Colors.deepOrangeAccent,
-        textColor: Colors.white,
-        fontSize: ScreenUtil.instance.setSp(28.0));
+    // Fluttertoast.showToast(
+    //     msg: message,
+    //     toastLength: Toast.LENGTH_SHORT,
+    //     gravity: ToastGravity.CENTER,
+    //     timeInSecForIos: 1,
+    //     backgroundColor: Colors.deepOrangeAccent,
+    //     textColor: Colors.white,
+    //     fontSize: ScreenUtil.instance.setSp(28.0));
   }
 
   _saveUserInfo() async {
