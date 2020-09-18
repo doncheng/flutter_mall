@@ -7,17 +7,7 @@ import 'package:image_crop/image_crop.dart';
 import 'package:mall/page/home/nicknamechange.dart';
 import 'package:mall/utils/navigator_util.dart';
 import 'package:permission_handler/permission_handler.dart';
-
-// requestPermiss() async {
-//   print('oooooooooo');
-//   //请求权限
-//   Map<PermissionGroup, PermissionStatus> permissions =
-//       await PermissionHandler().requestPermissions([PermissionGroup.camera]);
-//   //校验权限
-//   if (permissions[PermissionGroup.camera] != PermissionStatus.granted) {
-//     print("无相册权限");
-//   }
-// }
+import 'package:photo_manager/photo_manager.dart';
 
 class personaldataPage extends StatefulWidget {
   final nickname;
@@ -36,24 +26,24 @@ class _personaldataPageState extends State<personaldataPage> {
   File _image;
   final picker = ImagePicker();
 
-  Future getImage() async {
-    print('oooooooooooooo');
-    // //请求权限
-    // Map<PermissionGroup, PermissionStatus> permissions =
-    //     await PermissionHandler().requestPermissions([PermissionGroup.photos]);
-    // //校验权限
-    // if (permissions[PermissionGroup.photos] != PermissionStatus.granted) {
-    //   print("无相册权限");
-    // }
-    // print('pppppp');
+  // Future getImage() async {
+  //   print('oooooooooooooo');
 
-    // final pickedFile = await picker.getImage(source: ImageSource.camera);
-    // ignore: deprecated_member_use
-    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+  //   final pickedFile = await picker.getImage(source: ImageSource.gallery);
 
-    setState(() {
-      _image = File(pickedFile.path);
-    });
+  //   setState(() {
+  //     _image = File(pickedFile.path);
+  //   });
+  // }
+
+  getImage() async {
+    var result = await PhotoManager.requestPermission();
+    if (result) {
+      print('sss');
+    } else {
+      // fail
+      /// if result is fail, you can call `PhotoManager.openSetting();`  to open android/ios applicaton's setting to get permission
+    }
   }
 
   String sex = '男';
