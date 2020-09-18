@@ -293,7 +293,7 @@ class _toSellerState extends State<toSeller> {
           ),
           Container(
             width: ScreenUtil.instance.setWidth(50.0),
-            height: ScreenUtil.instance.setHeight(15.0),
+            height: 16,
             margin: EdgeInsets.only(
               left: ScreenUtil.instance.setWidth(118.0),
             ),
@@ -769,7 +769,7 @@ class _SellerState extends State<Seller> {
                 children: [
                   Container(
                     height: 24,
-                    constraints: BoxConstraints(maxWidth: double.infinity),
+                    width: 90,
                     child: Text(
                       '蔡师傅工作室 2号店',
                       style:
@@ -1350,6 +1350,9 @@ class _SellerState extends State<Seller> {
                           ),
                         ],
                       ),
+                      SizedBox(
+                        height: 10,
+                      )
                     ],
                   )),
             ),
@@ -1467,6 +1470,9 @@ class _SellerState extends State<Seller> {
                           ),
                         ],
                       ),
+                      SizedBox(
+                        height: 10,
+                      )
                     ],
                   )),
             ),
@@ -1589,6 +1595,9 @@ class _SellerState extends State<Seller> {
                           ),
                         ],
                       ),
+                      SizedBox(
+                        height: 10,
+                      )
                     ],
                   )),
             ),
@@ -1872,12 +1881,17 @@ class _goodsForState extends State<goodsFor> {
                   width: 174,
                   child: Column(
                     children: [
-                      new CachedNetworkImage(
-                        imageUrl: indexa["url"],
+                      // new CachedNetworkImage(
+                      //   imageUrl: indexa["url"],
+                      //   width: 174,
+                      //   fit: BoxFit.cover,
+                      //   /*    placeholder: (context, url) =>
+                      // Image.asset('assets/wallfy.png'),*/
+                      // ),
+                      Image.network(
+                        indexa["url"],
                         width: 174,
                         fit: BoxFit.cover,
-                        /*    placeholder: (context, url) =>
-                      Image.asset('assets/wallfy.png'),*/
                       ),
                       Container(
                         height: 41,
