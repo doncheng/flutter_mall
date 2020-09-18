@@ -1251,7 +1251,7 @@ class _SellerState extends State<Seller> {
                       ),
                       Container(
                         width: ScreenUtil.instance.setWidth(143.0),
-                        height: ScreenUtil.instance.setHeight(41.0),
+                        height: ScreenUtil.instance.setHeight(45.0),
                         margin: EdgeInsets.fromLTRB(12, 10, 19, 10),
                         child: Text(
                           '清末民初回流纯老银壶一套，清末民初回流纯老…',
@@ -1266,7 +1266,8 @@ class _SellerState extends State<Seller> {
                         children: [
                           Container(
                             height: 15,
-                            width: 55,
+                            constraints:
+                                BoxConstraints(maxWidth: double.infinity),
                             margin: EdgeInsets.only(left: 10),
                             child: Row(
                               children: [
@@ -1366,7 +1367,7 @@ class _SellerState extends State<Seller> {
                         fit: BoxFit.cover,
                       ),
                       Container(
-                        height: ScreenUtil.instance.setHeight(41.0),
+                        height: ScreenUtil.instance.setHeight(45.0),
                         width: ScreenUtil.instance.setWidth(143.0),
                         margin: EdgeInsets.fromLTRB(12, 10, 19, 10),
                         child: Text(
@@ -1382,7 +1383,8 @@ class _SellerState extends State<Seller> {
                         children: [
                           Container(
                             height: 15,
-                            width: 55,
+                            constraints:
+                                BoxConstraints(maxWidth: double.infinity),
                             margin: EdgeInsets.only(left: 10),
                             child: Row(
                               children: [
@@ -1487,7 +1489,7 @@ class _SellerState extends State<Seller> {
                         fit: BoxFit.cover,
                       ),
                       Container(
-                        height: ScreenUtil.instance.setHeight(41.0),
+                        height: ScreenUtil.instance.setHeight(45.0),
                         width: ScreenUtil.instance.setWidth(143.0),
                         margin: EdgeInsets.fromLTRB(12, 10, 19, 10),
                         child: Text(
@@ -1503,7 +1505,8 @@ class _SellerState extends State<Seller> {
                         children: [
                           Container(
                             height: 15,
-                            width: 55,
+                            constraints:
+                                BoxConstraints(maxWidth: double.infinity),
                             margin: EdgeInsets.only(left: 10),
                             child: Row(
                               children: [
@@ -1590,7 +1593,7 @@ class _SellerState extends State<Seller> {
                   )),
             ),
             Container(
-              height: ScreenUtil.instance.setHeight(274.0),
+              constraints: BoxConstraints(maxHeight: double.infinity),
               width: ScreenUtil.instance.setWidth(174.0),
               child: Column(
                 children: [
