@@ -93,9 +93,6 @@ class _WithdrawalBodyState extends State<WithdrawalBody> {
                               fontWeight: FontWeight.bold, fontSize: 20),
                         ),
                       )),
-                  // Text(withdrawal,
-                  //     style:
-                  //         TextStyle(fontWeight: FontWeight.bold, fontSize: 18))
                 ],
               )
             ],
@@ -155,13 +152,7 @@ class _PayMethodState extends State<PayMethod> {
 
   @override
   Widget build(BuildContext context) {
-    return
-        //  Container(
-        //   color: Colors.white,
-        //   height: 412,
-        //   margin: EdgeInsets.all(10),
-        //   child:
-        Column(
+    return Column(
       children: [
         Container(
             margin: EdgeInsets.only(left: 20, top: 20, bottom: 10),
@@ -221,32 +212,37 @@ class _BankCardState extends State<BankCard> {
     {"name": '建设银行储蓄卡', "number": '4641', "val": '2'},
     {"name": '农业银行储蓄卡', "number": '5874', "val": '3'},
   ];
-  int radio = 0;
+
+  int item = 0;
 //自定义方法
   List<Widget> _getData() {
 //循环
     var tempList = list.map((value) {
-      return ListTile(
-        leading: SizedBox(
-          width: 20,
-        ),
-        title: Text(
-          value["name"] + "(" + value["number"] + ")",
-          style: TextStyle(
-              fontSize: 14,
-              color: this.radio == int.parse(value["val"])
-                  ? Colors.blue
-                  : Colors.black),
-        ),
-        trailing: Radio(
-            value: int.parse(value["val"]),
-            groupValue: radio,
-            onChanged: (v) {
-              setState(() {
-                this.radio = v;
-              });
-            }),
-      );
+      return InkWell(
+          onTap: () {
+            setState(() {
+              item = int.parse(value["val"]);
+            });
+          },
+          child: ListTile(
+            leading: SizedBox(
+              width: 20,
+            ),
+            title: Text(
+              value["name"] + "(" + value["number"] + ")",
+              style: TextStyle(
+                  fontSize: 14,
+                  color: this.item == int.parse(value["val"])
+                      ? Colors.blue
+                      : Colors.black),
+            ),
+            trailing: Icon(
+              Icons.check_circle,
+              color: this.item == int.parse(value["val"])
+                  ? Colors.red
+                  : Colors.transparent,
+            ),
+          ));
     });
     return tempList.toList();
   }

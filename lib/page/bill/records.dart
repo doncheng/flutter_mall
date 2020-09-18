@@ -24,38 +24,161 @@ class Record extends StatefulWidget {
 class _RecordState extends State<Record> {
   var now = DateTime.now();
   var time = TimeOfDay.now();
+  int item = 1;
+  int item1 = 1;
+  int item2 = 1;
 
   @override
   Widget build(BuildContext context) {
     return ListView(
       children: [
-        Container(
-          height: 40,
-          child: Text(
-            "2020年3月",
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 20),
-          ),
+        InkWell(
+          onTap: () {
+            setState(() {
+              if (item == 0) {
+                item = 1;
+              } else {
+                item = 0;
+              }
+            });
+          },
+          child: item == 0
+              ? Column(
+                  children: [
+                    Container(
+                      height: 40,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "2020年3月",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(fontSize: 20),
+                          ),
+                          Icon(Icons.arrow_drop_down)
+                        ],
+                      ),
+                    ),
+                  ],
+                )
+              : Container(
+                  height: 40,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "2020年3月",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      Icon(Icons.arrow_drop_up)
+                    ],
+                  ),
+                ),
         ),
-        HomeContent(),
         Container(
-          height: 40,
-          child: Text(
-            "2020年2月",
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 20),
-          ),
+          constraints: BoxConstraints(maxHeight: double.infinity),
+          width: double.infinity,
+          child: item == 1 ? HomeContent() : null,
         ),
-        HomeContent(),
+        InkWell(
+          onTap: () {
+            setState(() {
+              if (item1 == 0) {
+                item1 = 1;
+              } else {
+                item1 = 0;
+              }
+            });
+          },
+          child: item1 == 0
+              ? Column(
+                  children: [
+                    Container(
+                      height: 40,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "2020年2月",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(fontSize: 20),
+                          ),
+                          Icon(Icons.arrow_drop_down)
+                        ],
+                      ),
+                    ),
+                  ],
+                )
+              : Container(
+                  height: 40,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "2020年2月",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      Icon(Icons.arrow_drop_up)
+                    ],
+                  ),
+                ),
+        ),
         Container(
-          height: 40,
-          child: Text(
-            "2020年1月",
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 20),
-          ),
+          constraints: BoxConstraints(maxHeight: double.infinity),
+          width: double.infinity,
+          child: item1 == 1 ? HomeContent() : null,
         ),
-        HomeContent(),
+        InkWell(
+          onTap: () {
+            setState(() {
+              if (item2 == 0) {
+                item2 = 1;
+              } else {
+                item2 = 0;
+              }
+            });
+          },
+          child: item2 == 0
+              ? Column(
+                  children: [
+                    Container(
+                      height: 40,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "2020年1月",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(fontSize: 20),
+                          ),
+                          Icon(Icons.arrow_drop_down)
+                        ],
+                      ),
+                    ),
+                  ],
+                )
+              : Container(
+                  height: 40,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "2020年1月",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      Icon(Icons.arrow_drop_up)
+                    ],
+                  ),
+                ),
+        ),
+        Container(
+          constraints: BoxConstraints(maxHeight: double.infinity),
+          width: double.infinity,
+          child: item2 == 1 ? HomeContent() : null,
+        ),
       ],
     );
   }
@@ -63,13 +186,13 @@ class _RecordState extends State<Record> {
 
 class HomeContent extends StatelessWidget {
   List list = [
-    {"item": '游戏点卡', "time": '16:40', "price": '100'},
-    {"item": 'QQ会员', "time": '16:40', "price": '50'},
-    {"item": '游戏交易', "time": '16:40', "price": '1000'},
-    {"item": '游戏交易', "time": '16:40', "price": '1000'},
-    {"item": '游戏交易', "time": '16:40', "price": '1000'},
-    {"item": '游戏交易', "time": '16:40', "price": '1000'},
-    {"item": '游戏交易', "time": '16:40', "price": '1000'}
+    {"item": '游戏点卡', "time": '16:40', "price": '+100'},
+    {"item": 'QQ会员', "time": '16:40', "price": '-50'},
+    {"item": '游戏交易', "time": '16:40', "price": '-1000'},
+    {"item": '游戏交易', "time": '16:40', "price": '+1000'},
+    {"item": '游戏交易', "time": '16:40', "price": '-1000'},
+    {"item": '游戏交易', "time": '16:40', "price": '+1000'},
+    {"item": '游戏交易', "time": '16:40', "price": '+1000'}
   ];
 //自定义方法
   List<Widget> _getData() {
@@ -82,7 +205,9 @@ class HomeContent extends StatelessWidget {
         subtitle: Text(value["time"]),
         trailing: Text(
           value["price"],
-          style: TextStyle(fontSize: 20, color: Colors.red),
+          style: TextStyle(
+              fontSize: 20,
+              color: int.parse(value["price"]) > 0 ? Colors.red : Colors.black),
         ),
       );
     });

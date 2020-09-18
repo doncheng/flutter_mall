@@ -109,16 +109,10 @@ class PayMethod extends StatefulWidget {
 class _PayMethodState extends State<PayMethod> {
   Animation animation;
   int radio = 0;
-
+  int item = 0;
   @override
   Widget build(BuildContext context) {
-    return
-        //  Container(
-        //   color: Colors.white,
-        //   height: 412,
-        //   margin: EdgeInsets.all(10),
-        //   child:
-        Column(
+    return Column(
       children: [
         Container(
             margin: EdgeInsets.all(20),
@@ -135,74 +129,154 @@ class _PayMethodState extends State<PayMethod> {
         Divider(
           color: Color(0xffdddddd),
         ),
-        Container(
-          margin: EdgeInsets.only(left: 15, bottom: 10, top: 5),
-          child: Row(
-            children: [
-              Container(
-                height: 26,
-                width: 26,
-                child: Image.network("https://kf.qq.com/img/wechat.png"),
-              ),
-              SizedBox(
-                width: 15,
-              ),
-              Text(
-                "微信支付",
-                style: TextStyle(fontSize: 15),
-              )
-            ],
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.only(left: 15, top: 5),
-          child: Row(
-            children: [
-              Container(
-                height: 26,
-                width: 26,
-                margin: EdgeInsets.only(bottom: 5),
-                padding: EdgeInsets.all(2),
-                child: Image.network(
-                    "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1816752600,129898364&fm=26&gp=0.jpg"),
-              ),
-              SizedBox(
-                width: 15,
-              ),
-              Text(
-                "支付宝支付",
-                style: TextStyle(fontSize: 15),
-              )
-            ],
-          ),
-        ),
-        ExpansionTile(
-          leading: Image.network(
-            'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3673269788,472516603&fm=26&gp=0.jpg',
-            height: 26,
-            width: 26,
-          ),
-          title: Text('银行卡', style: TextStyle(fontSize: 15)),
-          // backgroundColor: Colors.lightBlue,
-          initiallyExpanded: false, //默认是否展开
-          children: <Widget>[
-            BankCard(),
-            ListTile(
-              leading:
-                  IconButton(icon: Icon(Icons.add_circle), onPressed: () {}),
-              title: Text(
-                "添加银行卡",
-                style: TextStyle(
-                  fontSize: 14,
+        InkWell(
+          onTap: () {
+            setState(() {
+              if (item == 1) {
+                item = 0;
+              } else {
+                item = 1;
+              }
+            });
+          },
+          child: Container(
+            margin: EdgeInsets.only(left: 15, bottom: 10, top: 5),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  height: 26,
+                  width: 150,
+                  child: Row(
+                    children: [
+                      Container(
+                        height: 26,
+                        width: 26,
+                        child:
+                            Image.network("https://kf.qq.com/img/wechat.png"),
+                      ),
+                      SizedBox(
+                        width: 15,
+                      ),
+                      Text(
+                        "微信支付",
+                        style: TextStyle(
+                            fontSize: 15,
+                            color: item == 1 ? Colors.blue : Colors.black),
+                      )
+                    ],
+                  ),
                 ),
-              ),
+                Container(
+                  height: 26,
+                  width: 26,
+                  margin: EdgeInsets.only(right: 20),
+                  child: Icon(
+                    Icons.check_circle,
+                    color: item == 1 ? Colors.red : Colors.transparent,
+                  ),
+                )
+              ],
             ),
-          ],
+          ),
+        ),
+        InkWell(
+          onTap: () {
+            setState(() {
+              if (item == 2) {
+                item = 0;
+              } else {
+                item = 2;
+              }
+            });
+          },
+          child: Container(
+            margin: EdgeInsets.only(left: 15, bottom: 10, top: 5),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  height: 26,
+                  width: 150,
+                  child: Row(
+                    children: [
+                      Container(
+                        height: 26,
+                        width: 26,
+                        child: Image.network(
+                            "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1816752600,129898364&fm=26&gp=0.jpg"),
+                      ),
+                      SizedBox(
+                        width: 15,
+                      ),
+                      Text(
+                        "支付宝支付",
+                        style: TextStyle(
+                            fontSize: 15,
+                            color: item == 2 ? Colors.blue : Colors.black),
+                      )
+                    ],
+                  ),
+                ),
+                Container(
+                  height: 26,
+                  width: 26,
+                  margin: EdgeInsets.only(right: 20),
+                  child: Icon(
+                    Icons.check_circle,
+                    color: item == 2 ? Colors.red : Colors.transparent,
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
+        InkWell(
+          onTap: () {
+            setState(() {
+              if (item == 3) {
+                item = 0;
+              } else {
+                item = 3;
+              }
+            });
+          },
+          child: Container(
+            constraints: BoxConstraints(maxHeight: double.infinity),
+            width: double.infinity,
+            child: ListTile(
+              leading: Image.network(
+                'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3673269788,472516603&fm=26&gp=0.jpg',
+                height: 26,
+                width: 26,
+              ),
+              title: Text('银行卡', style: TextStyle(fontSize: 15)),
+            ),
+          ),
+        ),
+        Container(
+          width: double.infinity,
+          constraints: BoxConstraints(maxHeight: double.infinity),
+          child: item == 3
+              ? Column(
+                  children: [
+                    BankCard(),
+                    ListTile(
+                      leading: IconButton(
+                          icon: Icon(Icons.add_circle), onPressed: () {}),
+                      title: Text(
+                        "添加银行卡",
+                        style: TextStyle(
+                          fontSize: 14,
+                        ),
+                      ),
+                    )
+                  ],
+                )
+              : null,
         ),
       ],
-    )
-        // )
-        ;
+    );
   }
 }
 
@@ -247,32 +321,36 @@ class _BankCardState extends State<BankCard> {
     {"name": '建设银行储蓄卡', "number": '4641', "val": '2'},
     {"name": '农业银行储蓄卡', "number": '5874', "val": '3'},
   ];
-  int radio = 0;
+  int item = 0;
 //自定义方法
   List<Widget> _getData() {
 //循环
     var tempList = list.map((value) {
-      return ListTile(
-        leading: SizedBox(
-          width: 20,
-        ),
-        title: Text(
-          value["name"] + "(" + value["number"] + ")",
-          style: TextStyle(
-              fontSize: 14,
-              color: this.radio == int.parse(value["val"])
-                  ? Colors.blue
-                  : Colors.black),
-        ),
-        trailing: Radio(
-            value: int.parse(value["val"]),
-            groupValue: radio,
-            onChanged: (v) {
-              setState(() {
-                this.radio = v;
-              });
-            }),
-      );
+      return InkWell(
+          onTap: () {
+            setState(() {
+              item = int.parse(value["val"]);
+            });
+          },
+          child: ListTile(
+            leading: SizedBox(
+              width: 20,
+            ),
+            title: Text(
+              value["name"] + "(" + value["number"] + ")",
+              style: TextStyle(
+                  fontSize: 14,
+                  color: this.item == int.parse(value["val"])
+                      ? Colors.blue
+                      : Colors.black),
+            ),
+            trailing: Icon(
+              Icons.check_circle,
+              color: this.item == int.parse(value["val"])
+                  ? Colors.red
+                  : Colors.transparent,
+            ),
+          ));
     });
     return tempList.toList();
   }

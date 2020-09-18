@@ -786,7 +786,7 @@ class _SellerState extends State<Seller> {
                 children: [
                   Container(
                     height: 24,
-                    width: 138,
+                    width: 125,
                     child: Text(
                       '蔡师傅工作室 2号店',
                       style:
