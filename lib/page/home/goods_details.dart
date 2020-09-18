@@ -706,6 +706,22 @@ class _mainBodyState extends State<mainBody> {
             ],
           ),
         ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Container(
+              height: 20,
+              width: 190,
+              margin: EdgeInsets.only(right: 10, top: 10, bottom: 20),
+              child: Center(
+                child: Text(
+                  '1713人想要 丨 149411次浏览',
+                  style: TextStyle(fontSize: 13, color: Color(0xff999999)),
+                ),
+              ),
+            )
+          ],
+        ),
         Seller(),
       ],
     );
@@ -769,7 +785,7 @@ class _SellerState extends State<Seller> {
                 children: [
                   Container(
                     height: 24,
-                    width: 90,
+                    width: 138,
                     child: Text(
                       '蔡师傅工作室 2号店',
                       style:
@@ -803,7 +819,7 @@ class _SellerState extends State<Seller> {
             ),
             subtitle: Container(
               width: ScreenUtil.instance.setWidth(138.0),
-              height: ScreenUtil.instance.setHeight(24.0),
+              height: 24,
               margin: EdgeInsets.only(left: 5),
               child: Text(
                 '90后 处女座 女士 当前在线',
@@ -849,7 +865,7 @@ class _SellerState extends State<Seller> {
               width: 60,
               height: 63,
               padding: EdgeInsets.only(top: 12),
-              margin: EdgeInsets.only(right: 20, left: 20),
+              margin: EdgeInsets.only(right: 10, left: 10),
               child: Column(
                 children: [
                   Text(
@@ -876,7 +892,7 @@ class _SellerState extends State<Seller> {
               width: 60,
               height: 63,
               padding: EdgeInsets.only(top: 12),
-              margin: EdgeInsets.only(right: 20),
+              margin: EdgeInsets.only(left: 20),
               child: Column(
                 children: [
                   Text(
@@ -902,58 +918,142 @@ class _SellerState extends State<Seller> {
               spacing: 10,
               runSpacing: 11,
               children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(14),
-                  child: Container(
-                    height: ScreenUtil.instance.setHeight(78.0),
-                    width: ScreenUtil.instance.setWidth(78.0),
-                    child: Image.network(
-                      'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
-                      height: 60,
-                      width: 60,
-                      fit: BoxFit.cover,
-                    ),
+                Container(
+                  height: 78,
+                  width: 78,
+                  child: Stack(
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(14),
+                        child: Container(
+                          height: 78.0,
+                          width: 78.0,
+                          child: Image.network(
+                            'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
+                            height: 78,
+                            width: 78,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                      Stack(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(top: 56, left: 8),
+                            height: 15,
+                            width: 40,
+                            child: Text(
+                              '¥2700',
+                              style: TextStyle(color: Colors.red, fontSize: 13),
+                            ),
+                          )
+                        ],
+                      )
+                    ],
                   ),
                 ),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(14),
-                  child: Container(
-                    height: ScreenUtil.instance.setHeight(78.0),
-                    width: ScreenUtil.instance.setWidth(78.0),
-                    child: Image.network(
-                      'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
-                      height: 60,
-                      width: 60,
-                      fit: BoxFit.cover,
-                    ),
+                Container(
+                  height: 78,
+                  width: 78,
+                  child: Stack(
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(14),
+                        child: Container(
+                          height: 78.0,
+                          width: 78.0,
+                          child: Image.network(
+                            'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
+                            height: 78,
+                            width: 78,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                      Stack(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(top: 56, left: 8),
+                            height: 15,
+                            width: 40,
+                            child: Text(
+                              '¥2700',
+                              style: TextStyle(color: Colors.red, fontSize: 13),
+                            ),
+                          )
+                        ],
+                      )
+                    ],
                   ),
                 ),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(14),
-                  child: Container(
-                    height: ScreenUtil.instance.setHeight(78.0),
-                    width: ScreenUtil.instance.setWidth(78.0),
-                    child: Image.network(
-                      'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
-                      height: 60,
-                      width: 60,
-                      fit: BoxFit.cover,
-                    ),
+                Container(
+                  height: 78,
+                  width: 78,
+                  child: Stack(
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(14),
+                        child: Container(
+                          height: 78.0,
+                          width: 78.0,
+                          child: Image.network(
+                            'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
+                            height: 78,
+                            width: 78,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                      Stack(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(top: 56, left: 8),
+                            height: 15,
+                            width: 40,
+                            child: Text(
+                              '¥2700',
+                              style: TextStyle(color: Colors.red, fontSize: 13),
+                            ),
+                          )
+                        ],
+                      )
+                    ],
                   ),
                 ),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(14),
-                  child: Container(
-                    height: ScreenUtil.instance.setHeight(78.0),
-                    width: ScreenUtil.instance.setWidth(78.0),
-                    child: Image.network(
-                      'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
-                      height: 60,
-                      width: 60,
-                      fit: BoxFit.cover,
-                    ),
+                Container(
+                  height: 78,
+                  width: 78,
+                  child: Stack(
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(14),
+                        child: Container(
+                          height: 78.0,
+                          width: 78.0,
+                          child: Image.network(
+                            'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
+                            height: 78,
+                            width: 78,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                      Stack(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(top: 56, left: 8),
+                            height: 15,
+                            width: 40,
+                            child: Text(
+                              '¥2700',
+                              style: TextStyle(color: Colors.red, fontSize: 13),
+                            ),
+                          )
+                        ],
+                      )
+                    ],
                   ),
-                )
+                ),
               ],
             )
           ],
@@ -1077,8 +1177,18 @@ class _SellerState extends State<Seller> {
           ),
         ),
         Container(
-          height: 440,
+          constraints: BoxConstraints(maxHeight: double.infinity),
           width: double.infinity,
+          margin: EdgeInsets.only(left: 10, right: 10, top: 10),
+          child: ExpansionTile(
+            title: Text('展开更多',
+                style: TextStyle(fontSize: 13, color: Color(0xff2245ff))),
+            // backgroundColor: Colors.lightBlue,
+            initiallyExpanded: false, //默认是否展开
+            children: <Widget>[
+              comments(),
+            ],
+          ),
         ),
         Container(
           height: 25,
@@ -1251,7 +1361,7 @@ class _SellerState extends State<Seller> {
                       ),
                       Container(
                         width: ScreenUtil.instance.setWidth(143.0),
-                        height: ScreenUtil.instance.setHeight(45.0),
+                        height: 41,
                         margin: EdgeInsets.fromLTRB(12, 10, 19, 10),
                         child: Text(
                           '清末民初回流纯老银壶一套，清末民初回流纯老…',
@@ -1324,7 +1434,7 @@ class _SellerState extends State<Seller> {
                           ),
                           Container(
                             width: ScreenUtil.instance.setWidth(46.0),
-                            height: ScreenUtil.instance.setHeight(15.0),
+                            height: 15,
                             margin: EdgeInsets.only(left: 5),
                             child: Text(
                               '北京朝阳',
@@ -1337,7 +1447,7 @@ class _SellerState extends State<Seller> {
                           ),
                           Container(
                             width: ScreenUtil.instance.setWidth(49.0),
-                            height: ScreenUtil.instance.setHeight(15.0),
+                            height: 15,
                             margin: EdgeInsets.only(
                               left: ScreenUtil.instance.setWidth(25.0),
                             ),
@@ -1370,7 +1480,7 @@ class _SellerState extends State<Seller> {
                         fit: BoxFit.cover,
                       ),
                       Container(
-                        height: ScreenUtil.instance.setHeight(45.0),
+                        height: 41,
                         width: ScreenUtil.instance.setWidth(143.0),
                         margin: EdgeInsets.fromLTRB(12, 10, 19, 10),
                         child: Text(
@@ -1444,7 +1554,7 @@ class _SellerState extends State<Seller> {
                           ),
                           Container(
                             width: ScreenUtil.instance.setWidth(46.0),
-                            height: ScreenUtil.instance.setHeight(15.0),
+                            height: 15,
                             margin: EdgeInsets.only(left: 5),
                             child: Text(
                               '北京朝阳',
@@ -1457,7 +1567,7 @@ class _SellerState extends State<Seller> {
                           ),
                           Container(
                             width: ScreenUtil.instance.setWidth(49.0),
-                            height: ScreenUtil.instance.setHeight(15.0),
+                            height: 15,
                             margin: EdgeInsets.only(
                               left: ScreenUtil.instance.setWidth(25.0),
                             ),
@@ -1495,7 +1605,7 @@ class _SellerState extends State<Seller> {
                         fit: BoxFit.cover,
                       ),
                       Container(
-                        height: ScreenUtil.instance.setHeight(45.0),
+                        height: 41,
                         width: ScreenUtil.instance.setWidth(143.0),
                         margin: EdgeInsets.fromLTRB(12, 10, 19, 10),
                         child: Text(
@@ -1569,7 +1679,7 @@ class _SellerState extends State<Seller> {
                           ),
                           Container(
                             width: ScreenUtil.instance.setWidth(46.0),
-                            height: ScreenUtil.instance.setHeight(15.0),
+                            height: 15,
                             margin: EdgeInsets.only(left: 5),
                             child: Text(
                               '北京朝阳',
@@ -1582,7 +1692,7 @@ class _SellerState extends State<Seller> {
                           ),
                           Container(
                             width: ScreenUtil.instance.setWidth(49.0),
-                            height: ScreenUtil.instance.setHeight(15.0),
+                            height: 15,
                             margin: EdgeInsets.only(
                               left: ScreenUtil.instance.setWidth(25.0),
                             ),
@@ -2061,5 +2171,86 @@ class _ExpandableTextState extends State<ExpandableText> {
         return Text(text, style: style);
       }
     });
+  }
+}
+
+class comments extends StatefulWidget {
+  comments({Key key}) : super(key: key);
+
+  @override
+  _commentsState createState() => _commentsState();
+}
+
+class _commentsState extends State<comments> {
+  List list = [
+    {
+      "url":
+          'https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1141259048,554497535&fm=26&gp=0.jpg',
+      "comments": '放假哦给你了风间奥卡菲娜 拉好感爱好气啊那ioga爱国',
+      "time": '官方小助手 1分钟前',
+    },
+    {
+      "url":
+          'https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1141259048,554497535&fm=26&gp=0.jpg',
+      "comments": '放假哦给你了风间奥卡菲娜 拉好感爱好气啊那ioga爱国',
+      "time": '官方小助手 1分钟前',
+    },
+    {
+      "url":
+          'https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1141259048,554497535&fm=26&gp=0.jpg',
+      "comments": '放假哦给你了风间奥卡菲娜 拉好感爱好气啊那ioga爱国',
+      "time": '官方小助手 1分钟前',
+    },
+    {
+      "url":
+          'https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1141259048,554497535&fm=26&gp=0.jpg',
+      "comments": '放假哦给你了风间奥卡菲娜 拉好感爱好气啊那ioga爱国',
+      "time": '官方小助手 1分钟前',
+    },
+  ];
+  List<Widget> _getData() {
+//循环
+    var tempList = list.map((value) {
+      return Column(
+        children: [
+          ListTile(
+            leading: ClipOval(
+              child: Image.network(
+                value["url"],
+                height: 40,
+                width: 40,
+                fit: BoxFit.cover,
+              ),
+            ),
+            title: Text(
+              value["time"],
+              style: TextStyle(
+                fontSize: 13,
+                color: Color(0xff999999),
+              ),
+            ),
+            subtitle: Text(
+              value["comments"],
+              style: TextStyle(
+                fontSize: 16,
+                color: Color(0xff101010),
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          )
+        ],
+      );
+    });
+    return tempList.toList();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+// TODO: implement build
+    return Column(
+      children: this._getData(),
+    );
   }
 }
