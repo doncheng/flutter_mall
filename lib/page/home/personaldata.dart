@@ -7,8 +7,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:image_crop/image_crop.dart';
 import 'package:mall/page/home/nicknamechange.dart';
 import 'package:mall/utils/navigator_util.dart';
-import 'package:permission_handler/permission_handler.dart';
-import 'package:photo_manager/photo_manager.dart';
+
+enum Option { getImageGallery, getImageCamera }
 
 class personaldataPage extends StatefulWidget {
   final nickname;
@@ -33,6 +33,7 @@ class _personaldataPageState extends State<personaldataPage> {
   static const platform = const MethodChannel(CHINAL_NAME);
   String _result = "";
 
+  //相册 图片访问
   final picker = ImagePicker();
   Future getImageGallery() async {
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
@@ -50,20 +51,38 @@ class _personaldataPageState extends State<personaldataPage> {
 
   //选择弹窗
   _simpleDialog() async {
-    var result = await showDialog(
+    final option = await showDialog(
       context: context,
       builder: (context) {
         return SimpleDialog(
           title: Text('选择方式'),
           children: <Widget>[
-            SimpleDialogOption(child: Text('相册'), onPressed: getImageGallery),
+            SimpleDialogOption(
+              child: Text('相册'),
+              onPressed: () {
+                Navigator.of(context).pop(Option.getImageGallery);
+              },
+            ),
             Divider(),
-            SimpleDialogOption(child: Text('相机'), onPressed: getImageCamera),
+            SimpleDialogOption(
+              child: Text('相机'),
+              onPressed: () {
+                Navigator.of(context).pop(Option.getImageCamera);
+              },
+            ),
           ],
         );
       },
     );
-    print(result);
+
+    switch (option) {
+      case Option.getImageGallery:
+        getImageGallery();
+        break;
+      case Option.getImageCamera:
+        getImageCamera();
+        break;
+    }
   }
 
   @override
@@ -97,20 +116,17 @@ class _personaldataPageState extends State<personaldataPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               InkWell(
-                // onTap: getImage,
-                onTap:
-                    // Platform.isIOS
-                    //     ? () async {
-                    //         String result = await platform
-                    //             .invokeMethod("visitAlbum")
-                    //             .then((value) {
-                    //           setState(() {
-                    //             _imagedynamic = value;
-                    //           });
-                    //         });
-                    //       }
-                    //     :
-                    _simpleDialog,
+                onTap: Platform.isIOS
+                    ? () async {
+                        String result = await platform
+                            .invokeMethod("visitAlbum")
+                            .then((value) {
+                          setState(() {
+                            _imagedynamic = value;
+                          });
+                        });
+                      }
+                    : _simpleDialog,
                 child: Column(
                   children: <Widget>[
                     _imagedynamic == null && _headimagefile == null
