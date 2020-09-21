@@ -8,9 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */; };
-		1850AFF225063C8400D5BC41 /* AuthenticationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1850AFF025063C7B00D5BC41 /* AuthenticationServices.framework */; };
 		1850AFF6250640F700D5BC41 /* AppleLandingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1850AFF5250640F700D5BC41 /* AppleLandingViewController.m */; };
 		1887E05024FF50C300D46691 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1887E04F24FF50C300D46691 /* ViewController.m */; };
+		18DF58AA25189C4D00D132B5 /* AuthenticationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1850AFF025063C7B00D5BC41 /* AuthenticationServices.framework */; };
+		18DF58AB25189C4D00D132B5 /* AuthenticationServices.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1850AFF025063C7B00D5BC41 /* AuthenticationServices.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2A71FCA1893A48DB6E58D61A /* libPods-Runner.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE4E6DDB240FEECC97A0D06 /* libPods-Runner.a */; };
 		3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */; };
 		9740EEB41CF90195004384FC /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 9740EEB21CF90195004384FC /* Debug.xcconfig */; };
@@ -20,6 +21,20 @@
 		97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
 		97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		18DF58AC25189C4D00D132B5 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				18DF58AB25189C4D00D132B5 /* AuthenticationServices.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		1498D2321E8E86230040F4C2 /* GeneratedPluginRegistrant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeneratedPluginRegistrant.h; sourceTree = "<group>"; };
@@ -54,7 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1850AFF225063C8400D5BC41 /* AuthenticationServices.framework in Frameworks */,
+				18DF58AA25189C4D00D132B5 /* AuthenticationServices.framework in Frameworks */,
 				2A71FCA1893A48DB6E58D61A /* libPods-Runner.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -155,6 +170,7 @@
 				97C146EC1CF9000F007C117D /* Resources */,
 				3B06AD1E1E4923F5004D2608 /* Thin Binary */,
 				FF70291583C4D9D77EE3ABC0 /* [CP] Embed Pods Frameworks */,
+				18DF58AC25189C4D00D132B5 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);

@@ -140,9 +140,6 @@ class _personaldataPageState extends State<personaldataPage> {
                                       _imagedynamic,
                                       fit: BoxFit.cover,
                                     ),
-                                    // decoration: BoxDecoration(
-                                    //   borderRadius: BorderRadius.circular(100),
-                                    // ),
                                   )
                                 : Image.file(
                                     _headimagefile,
