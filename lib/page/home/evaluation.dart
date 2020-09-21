@@ -13,7 +13,287 @@ class EvaluationPage extends StatefulWidget {
 class _EvaluationPageState extends State<EvaluationPage> {
   // double starmun = 4.1;
   String time = '2019-12-12';
-  int _chick;
+  int _chick = 1;
+  List evaluationList1 = [
+    {
+      "head":
+          "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=300539781,202866527&fm=26&gp=0.jpg",
+      "title": "gfdg越***6",
+      "subtitle": "买家 丨 ",
+      "evaluation": "非常满意",
+      "content": "东西不错",
+      "image":
+          "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3377972169,3851046994&fm=26&gp=0.jpg"
+    },
+    {
+      "head":
+          "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=41492875,80840841&fm=26&gp=0.jpg",
+      "title": "越***6",
+      "subtitle": "买家 丨 ",
+      "evaluation": "非常满意",
+      "content": "东西不错",
+      "image":
+          "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3686341429,1115221234&fm=26&gp=0.jpg"
+    },
+    {
+      "head":
+          "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3825527476,269867957&fm=26&gp=0.jpg",
+      "title": "越***6",
+      "subtitle": "买家 丨 ",
+      "evaluation": "非常满意",
+      "content": "东西不错",
+      "image":
+          "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2938071793,1717382227&fm=26&gp=0.jpg"
+    },
+  ];
+  List evaluationList2 = [
+    {
+      "head":
+          "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1812065335,2733388662&fm=26&gp=0.jpg",
+      "title": "jsf越***6",
+      "subtitle": "买家 丨 ",
+      "evaluation": "非常满意",
+      "content": "东西不错",
+      "image":
+          "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3931334255,3744456938&fm=26&gp=0.jpg"
+    },
+    {
+      "head":
+          "https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png",
+      "title": "越***6",
+      "subtitle": "买家 丨 ",
+      "evaluation": "非常满意",
+      "content": "东西不错",
+      "image":
+          "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1358846947,3130783210&fm=26&gp=0.jpg"
+    },
+    {
+      "head":
+          "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3271719620,98794636&fm=15&gp=0.jpg",
+      "title": "越***6",
+      "subtitle": "买家 丨 ",
+      "evaluation": "非常满意",
+      "content": "东西不错",
+      "image":
+          "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3271719620,98794636&fm=15&gp=0.jpg"
+    },
+  ];
+  List evaluationList3 = [
+    {
+      "head":
+          "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3618479410,4168353002&fm=26&gp=0.jpg",
+      "title": "83越***6",
+      "subtitle": "买家 丨 ",
+      "evaluation": "非常满意",
+      "content": "东西不错",
+      "image":
+          "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3618479410,4168353002&fm=26&gp=0.jpg"
+    },
+    {
+      "head":
+          "https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png",
+      "title": "越***6",
+      "subtitle": "买家 丨 ",
+      "evaluation": "非常满意",
+      "content": "东西不错",
+      "image":
+          "https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png"
+    },
+    {
+      "head":
+          "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1184165774,1621872064&fm=26&gp=0.jpg",
+      "title": "越***6",
+      "subtitle": "买家 丨 ",
+      "evaluation": "非常满意",
+      "content": "东西不错",
+      "image":
+          "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1184165774,1621872064&fm=26&gp=0.jpg"
+    },
+  ];
+  List evaluationList4 = [
+    {
+      "head":
+          "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1668854219,2502849905&fm=26&gp=0.jpg",
+      "title": "78越***6",
+      "subtitle": "买家 丨 ",
+      "evaluation": "非常满意",
+      "content": "东西不错",
+      "image":
+          "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1668854219,2502849905&fm=26&gp=0.jpg"
+    },
+    {
+      "head":
+          "https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png",
+      "title": "越***6",
+      "subtitle": "买家 丨 ",
+      "evaluation": "非常满意",
+      "content": "东西不错",
+      "image":
+          "https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png"
+    },
+    {
+      "head":
+          "https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png",
+      "title": "越***6",
+      "subtitle": "买家 丨 ",
+      "evaluation": "非常满意",
+      "content": "东西不错",
+      "image":
+          "https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png"
+    },
+  ];
+  List evaluationList5 = [
+    {
+      "head":
+          "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1392593788,1459572734&fm=26&gp=0.jpg",
+      "title": "越99***6",
+      "subtitle": "买家 丨 ",
+      "evaluation": "非常满意",
+      "content": "东西不错",
+      "image":
+          "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1262136314,640414401&fm=26&gp=0.jpg"
+    },
+    {
+      "head":
+          "https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png",
+      "title": "越***6",
+      "subtitle": "买家 丨 ",
+      "evaluation": "非常满意",
+      "content": "东西不错",
+      "image":
+          "https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png"
+    },
+    {
+      "head":
+          "https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png",
+      "title": "越***6",
+      "subtitle": "买家 丨 ",
+      "evaluation": "非常满意",
+      "content": "东西不错",
+      "image":
+          "https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png"
+    },
+  ];
+  List evaluationList6 = [
+    {
+      "head":
+          "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3640180560,1099506620&fm=26&gp=0.jpg",
+      "title": "越54***6",
+      "subtitle": "买家 丨 ",
+      "evaluation": "非常满意",
+      "content": "东西不错",
+      "image":
+          "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3640180560,1099506620&fm=26&gp=0.jpg"
+    },
+    {
+      "head":
+          "https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png",
+      "title": "越***6",
+      "subtitle": "买家 丨 ",
+      "evaluation": "非常满意",
+      "content": "东西不错",
+      "image":
+          "https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png"
+    },
+    {
+      "head":
+          "https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png",
+      "title": "越***6",
+      "subtitle": "买家 丨 ",
+      "evaluation": "非常满意",
+      "content": "东西不错",
+      "image":
+          "https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png"
+    },
+  ];
+  List<Widget> _getData(List inlist) {
+//循环
+
+    var tempList = inlist.map((value) {
+      return Container(
+        height: ScreenUtil.instance.setHeight(240.0),
+        width: double.infinity,
+        child: Column(
+          children: [
+            ListTile(
+              leading: ClipOval(
+                child: Image.network(
+                  value["head"],
+                  height: 40,
+                  width: 40,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              title: Text(
+                value["title"],
+                style: TextStyle(fontSize: 16),
+              ),
+              subtitle: Text(
+                value["subtitle"] + time,
+                style: TextStyle(fontSize: 13, color: Colors.grey),
+              ),
+              trailing: Container(
+                height: 20,
+                width: 55,
+                margin: EdgeInsets.only(right: 10),
+                child: Text(
+                  value["evaluation"],
+                  style: TextStyle(fontSize: 13, color: Colors.grey),
+                ),
+              ),
+            ),
+            Container(
+              height: ScreenUtil.instance.setHeight(140.0),
+              width: double.infinity,
+              margin: EdgeInsets.only(
+                left: ScreenUtil.instance.setWidth(60.0),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    height: ScreenUtil.instance.setHeight(25.0),
+                    width: double.infinity,
+                    child: Text(
+                      value["content"],
+                      style: TextStyle(fontSize: 18),
+                    ),
+                  ),
+                  Wrap(
+                    spacing: 8,
+                    runSpacing: 10,
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(14),
+                        child: Container(
+                          height: ScreenUtil.instance.setHeight(60.0),
+                          width: ScreenUtil.instance.setWidth(60.0),
+                          child: Image.network(
+                            value["image"],
+                            height: 60,
+                            width: 60,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      )
+                    ],
+                  )
+                ],
+              ),
+            ),
+            Container(
+                height: 1,
+                width: double.infinity,
+                margin:
+                    EdgeInsets.only(left: ScreenUtil.instance.setWidth(62.0)),
+                color: Color(0xffe0e0e0))
+          ],
+        ),
+      );
+    });
+    return tempList.toList();
+  }
+
   @override
   Widget build(BuildContext context) {
     ScreenUtil.instance = ScreenUtil(width: 375, height: 812)..init(context);
@@ -204,248 +484,17 @@ class _EvaluationPageState extends State<EvaluationPage> {
           ),
           Flexible(
             child: ListView(
-              children: [
-                Container(
-                  height: ScreenUtil.instance.setHeight(240.0),
-                  width: double.infinity,
-                  child: Column(
-                    children: [
-                      ListTile(
-                        leading: ClipOval(
-                          child: Image.network(
-                            'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
-                            height: 40,
-                            width: 40,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        title: Text(
-                          '越***6',
-                          style: TextStyle(fontSize: 16),
-                        ),
-                        subtitle: Text(
-                          '买家 丨 ' + time,
-                          style: TextStyle(fontSize: 13, color: Colors.grey),
-                        ),
-                        trailing: Container(
-                          height: 20,
-                          width: 55,
-                          margin: EdgeInsets.only(right: 10),
-                          child: Text(
-                            '非常满意',
-                            style: TextStyle(fontSize: 13, color: Colors.grey),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        height: ScreenUtil.instance.setHeight(140.0),
-                        width: double.infinity,
-                        margin: EdgeInsets.only(
-                          left: ScreenUtil.instance.setWidth(60.0),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              height: ScreenUtil.instance.setHeight(25.0),
-                              width: double.infinity,
-                              child: Text(
-                                '东西不错',
-                                style: TextStyle(fontSize: 18),
-                              ),
-                            ),
-                            Wrap(
-                              spacing: 8,
-                              runSpacing: 10,
-                              children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(14),
-                                  child: Container(
-                                    height: ScreenUtil.instance.setHeight(60.0),
-                                    width: ScreenUtil.instance.setWidth(60.0),
-                                    child: Image.network(
-                                      'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
-                                      height: 60,
-                                      width: 60,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                )
-                              ],
-                            )
-                          ],
-                        ),
-                      ),
-                      Container(
-                          height: 1,
-                          width: double.infinity,
-                          margin: EdgeInsets.only(
-                              left: ScreenUtil.instance.setWidth(62.0)),
-                          color: Color(0xffe0e0e0))
-                    ],
-                  ),
-                ),
-                Container(
-                  height: ScreenUtil.instance.setHeight(240.0),
-                  width: double.infinity,
-                  child: Column(
-                    children: [
-                      ListTile(
-                        leading: ClipOval(
-                          child: Image.network(
-                            'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
-                            height: 40,
-                            width: 40,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        title: Text(
-                          '越***6',
-                          style: TextStyle(fontSize: 16),
-                        ),
-                        subtitle: Text(
-                          '买家 丨 ' + time,
-                          style: TextStyle(fontSize: 13, color: Colors.grey),
-                        ),
-                        trailing: Container(
-                          height: 20,
-                          width: 55,
-                          margin: EdgeInsets.only(right: 10),
-                          child: Text(
-                            '非常满意',
-                            style: TextStyle(fontSize: 13, color: Colors.grey),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        height: ScreenUtil.instance.setHeight(140.0),
-                        width: double.infinity,
-                        margin: EdgeInsets.only(
-                          left: ScreenUtil.instance.setWidth(60.0),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              height: ScreenUtil.instance.setHeight(25.0),
-                              width: double.infinity,
-                              child: Text(
-                                '东西不错',
-                                style: TextStyle(fontSize: 18),
-                              ),
-                            ),
-                            Wrap(
-                              spacing: 8,
-                              runSpacing: 10,
-                              children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(14),
-                                  child: Container(
-                                    height: ScreenUtil.instance.setHeight(60.0),
-                                    width: ScreenUtil.instance.setWidth(60.0),
-                                    child: Image.network(
-                                      'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
-                                      height: 60,
-                                      width: 60,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                )
-                              ],
-                            )
-                          ],
-                        ),
-                      ),
-                      Container(
-                          height: 1,
-                          width: double.infinity,
-                          margin: EdgeInsets.only(
-                              left: ScreenUtil.instance.setWidth(62.0)),
-                          color: Color(0xffe0e0e0))
-                    ],
-                  ),
-                ),
-                Container(
-                  height: ScreenUtil.instance.setHeight(240.0),
-                  width: double.infinity,
-                  child: Column(
-                    children: [
-                      ListTile(
-                        leading: ClipOval(
-                          child: Image.network(
-                            'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
-                            height: 40,
-                            width: 40,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        title: Text(
-                          '越***6',
-                          style: TextStyle(fontSize: 16),
-                        ),
-                        subtitle: Text(
-                          '买家 丨 ' + time,
-                          style: TextStyle(fontSize: 13, color: Colors.grey),
-                        ),
-                        trailing: Container(
-                          height: 20,
-                          width: 55,
-                          margin: EdgeInsets.only(right: 10),
-                          child: Text(
-                            '非常满意',
-                            style: TextStyle(fontSize: 13, color: Colors.grey),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        height: ScreenUtil.instance.setHeight(140.0),
-                        width: double.infinity,
-                        margin: EdgeInsets.only(
-                          left: ScreenUtil.instance.setWidth(60.0),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              height: ScreenUtil.instance.setHeight(25.0),
-                              width: double.infinity,
-                              child: Text(
-                                '东西不错',
-                                style: TextStyle(fontSize: 18),
-                              ),
-                            ),
-                            Wrap(
-                              spacing: 8,
-                              runSpacing: 10,
-                              children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(14),
-                                  child: Container(
-                                    height: ScreenUtil.instance.setHeight(60.0),
-                                    width: ScreenUtil.instance.setWidth(60.0),
-                                    child: Image.network(
-                                      'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
-                                      height: 60,
-                                      width: 60,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                )
-                              ],
-                            )
-                          ],
-                        ),
-                      ),
-                      Container(
-                          height: 1,
-                          width: double.infinity,
-                          margin: EdgeInsets.only(
-                              left: ScreenUtil.instance.setWidth(62.0)),
-                          color: Color(0xffe0e0e0))
-                    ],
-                  ),
-                ),
-              ],
+              children: _chick == 1
+                  ? _getData(evaluationList1)
+                  : _chick == 2
+                      ? _getData(evaluationList2)
+                      : _chick == 3
+                          ? _getData(evaluationList3)
+                          : _chick == 4
+                              ? _getData(evaluationList4)
+                              : _chick == 5
+                                  ? _getData(evaluationList5)
+                                  : _getData(evaluationList6),
             ),
           )
         ],

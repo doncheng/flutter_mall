@@ -105,7 +105,7 @@ class _SearchDemoState extends State<SearchDemo> {
         appBar: new SearchAppBarWidget(
           focusNode: _focusNode,
           controller: _controller,
-          elevation: 2.0,
+          elevation: 1.0,
 //        leading: IconButton(
 //          icon: Icon(Icons.arrow_back),
 //          onPressed: () {

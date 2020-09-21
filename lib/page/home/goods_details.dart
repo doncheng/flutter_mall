@@ -379,6 +379,11 @@ class _mainBodyState extends State<mainBody> {
         ),
         Container(
           height: 30,
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: NetworkImage(
+                      'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2391009783,4242902779&fm=26&gp=0.jpg'))),
           width: double.infinity,
           margin: EdgeInsets.only(top: 10, left: 13, right: 13),
           child: Row(
@@ -395,7 +400,7 @@ class _mainBodyState extends State<mainBody> {
                 ),
               ),
               Container(
-                height: 14,
+                height: 18,
                 width: 85,
                 child: Center(
                   child: Text(
