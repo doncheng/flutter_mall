@@ -32,11 +32,12 @@
 //                 result(@"ok");
                  //UIAlertControllerStyleAlert弹窗在屏幕中间，UIAlertControllerStyleActionSheet弹窗在屏幕下面
                  UIAlertController *alert=[UIAlertController alertControllerWithTitle:@"选取图片" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-//                 UIAlertAction *cameraAction=[UIAlertAction actionWithTitle:@"相机" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-//                     self.imagePickerController.sourceType=UIImagePickerControllerSourceTypeCamera;
-//                     self.imagePickerController.cameraDevice=UIImagePickerControllerCameraDeviceRear;
-//                     [self.navigationController  presentViewController:self.imagePickerController animated:YES completion:nil];
-//                 }];
+                 
+                 UIAlertAction *cameraAction=[UIAlertAction actionWithTitle:@"相机" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                     self.imagePickerController.sourceType=UIImagePickerControllerSourceTypeCamera;
+                     self.imagePickerController.cameraDevice=UIImagePickerControllerCameraDeviceRear;
+                     [self.rootViewController  presentViewController:self.imagePickerController animated:YES completion:nil];
+                 }];
                  
                  UIAlertAction *photosAlbumAction=[UIAlertAction actionWithTitle:@"图片" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                      self.imagePickerController.sourceType=UIImagePickerControllerSourceTypeSavedPhotosAlbum;
@@ -48,6 +49,7 @@
                  }];
                  
                  [alert addAction:photosAlbumAction];
+                 [alert addAction:cameraAction];
                  [alert addAction:cancelAction];
                  
                  [self.rootViewController presentViewController:alert animated:YES completion:nil];
@@ -99,6 +101,7 @@
     }
     return _imagePickerController;
 }
+//拿到图片的回调
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey,id> *)info{
     [picker dismissViewControllerAnimated:YES completion:nil];
         UIImage *image = info[UIImagePickerControllerOriginalImage];

@@ -20,43 +20,33 @@ class personaldataPage extends StatefulWidget {
 
 class _personaldataPageState extends State<personaldataPage> {
   String personaldataPagenicknanme;
+  String sex = '男';
+  File _headimagefile;
+  dynamic _imagedynamic;
 
   _personaldataPageState(nicknanme) {
     this.personaldataPagenicknanme = nicknanme;
   }
 
+  //原生交互
   static const String CHINAL_NAME = "example.mall/call_native"; //同步路径
   static const platform = const MethodChannel(CHINAL_NAME);
   String _result = "";
 
-  File _headimagefile;
-  Image _headimage;
-  Image _image;
   final picker = ImagePicker();
-
-  Future getImage() async {
-    print('oooooooooooooo');
-
+  Future getImageGallery() async {
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
-
     setState(() {
-      _image = File(pickedFile.path) as Image;
+      _headimagefile = File(pickedFile.path);
     });
   }
 
-  // getImage() async {
-  //   print('qqq');
-  //   var result = await PhotoManager.requestPermission();
-
-  //   if (result) {
-  //     print('sss');
-  //   } else {
-  //     // fail
-  //     /// if result is fail, you can call `PhotoManager.openSetting();`  to open android/ios applicaton's setting to get permission
-  //   }
-  // }
-
-  String sex = '男';
+  Future getImageCamera() async {
+    final pickedFile = await picker.getImage(source: ImageSource.camera);
+    setState(() {
+      _headimagefile = File(pickedFile.path);
+    });
+  }
 
   //选择弹窗
   _simpleDialog() async {
@@ -64,28 +54,11 @@ class _personaldataPageState extends State<personaldataPage> {
       context: context,
       builder: (context) {
         return SimpleDialog(
-          title: Text('你想从'),
+          title: Text('选择方式'),
           children: <Widget>[
-            SimpleDialogOption(
-              child: Text('Option A'),
-              onPressed: () {
-                Navigator.pop(context, 'A');
-              },
-            ),
+            SimpleDialogOption(child: Text('相册'), onPressed: getImageGallery),
             Divider(),
-            SimpleDialogOption(
-              child: Text('Option B'),
-              onPressed: () {
-                Navigator.pop(context, 'B');
-              },
-            ),
-            Divider(),
-            SimpleDialogOption(
-              child: Text('Option C'),
-              onPressed: () {
-                Navigator.pop(context, 'C');
-              },
-            ),
+            SimpleDialogOption(child: Text('相机'), onPressed: getImageCamera),
           ],
         );
       },
@@ -125,52 +98,32 @@ class _personaldataPageState extends State<personaldataPage> {
             children: <Widget>[
               InkWell(
                 // onTap: getImage,
-                onTap: Platform.isIOS
-                    ? () async {
-                        String result = await platform
-                            .invokeMethod("visitAlbum")
-                            .then((value) {
-                          _image = Image.memory(value);
-                          setState(() {
-                            _headimage = _image;
-                          });
-                        });
-                      }
-                    : getImage,
-
-                // setState(() {
-                //   _result = result;
-                //   print("_result ---->" + _result);
-                //   if (result != null) {
-                //     _image = result as File;
-                //     // print(result);
-                //     // showModalBottomSheet(
-                //     //     context: context,
-                //     //     builder: (BuildContext context) {
-                //     //       return new Container(
-                //     //         child: new Center(
-                //     //           child: new Text(
-                //     //             result,
-                //     //             style: new TextStyle(color: Colors.brown),
-                //     //             textAlign: TextAlign.center,
-                //     //           ),
-                //     //         ),
-                //     //         height: 40.0,
-                //     //       );
-                //     //     });
-                //   }
-                // });
-
+                onTap:
+                    // Platform.isIOS
+                    //     ? () async {
+                    //         String result = await platform
+                    //             .invokeMethod("visitAlbum")
+                    //             .then((value) {
+                    //           setState(() {
+                    //             _imagedynamic = value;
+                    //           });
+                    //         });
+                    //       }
+                    //     :
+                    _simpleDialog,
                 child: Column(
                   children: <Widget>[
-                    _headimage == null
+                    _imagedynamic == null && _headimagefile == null
                         ? Icon(Icons.account_circle, size: 100)
                         : ClipOval(
                             child: Platform.isIOS
                                 ? Container(
                                     height: 100,
                                     width: 100,
-                                    child: _headimage,
+                                    child: Image.memory(
+                                      _imagedynamic,
+                                      fit: BoxFit.cover,
+                                    ),
                                     // decoration: BoxDecoration(
                                     //   borderRadius: BorderRadius.circular(100),
                                     // ),
@@ -182,15 +135,11 @@ class _personaldataPageState extends State<personaldataPage> {
                                     fit: BoxFit.cover,
                                   ),
                           ),
-                    // Image.network(
-                    //     'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1789308275,2124804861&fm=26&gp=0.jpg',
-                    //     height: 100,
-                    //     width: 100,
-                    //     fit: BoxFit.cover,
-                    //   ),
                     SizedBox(height: 6),
                     Text(
-                      '点击更换头像',
+                      _imagedynamic == null && _headimagefile == null
+                          ? '点击更换头像'
+                          : ' ',
                       style: TextStyle(fontSize: 14),
                     )
                   ],
