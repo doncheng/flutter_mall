@@ -1369,370 +1369,388 @@ class _SellerState extends State<Seller> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(14),
-              child: Container(
-                  width: ScreenUtil.instance.setWidth(174.0),
-                  constraints: BoxConstraints(maxHeight: double.infinity),
-                  child: Column(
-                    children: [
-                      Image.network(
-                        'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
-                        height: 154,
-                        width: 174,
-                        fit: BoxFit.cover,
-                      ),
-                      Container(
-                        width: ScreenUtil.instance.setWidth(143.0),
-                        height: 41,
-                        margin: EdgeInsets.fromLTRB(12, 10, 19, 10),
-                        child: Text(
-                          '清末民初回流纯老银壶一套，清末民初回流纯老…',
-                          style: TextStyle(
-                              fontSize: 13, fontWeight: FontWeight.bold),
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
+            InkWell(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        //导航打开新视图
+                        builder: (context) => GoodsDetails()));
+              },
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(14),
+                child: Container(
+                    width: ScreenUtil.instance.setWidth(174.0),
+                    constraints: BoxConstraints(maxHeight: double.infinity),
+                    child: Column(
+                      children: [
+                        Image.network(
+                          'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
+                          height: 154,
+                          width: 174,
+                          fit: BoxFit.cover,
                         ),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            height: 15,
-                            constraints:
-                                BoxConstraints(maxWidth: double.infinity),
-                            margin: EdgeInsets.only(left: 10),
-                            child: Row(
-                              children: [
-                                Container(
-                                  margin: EdgeInsets.only(top: 3),
-                                  height: 13,
-                                  width: 10,
-                                  child: Text(
-                                    '¥',
-                                    style: TextStyle(
-                                        fontSize: 14, color: Color(0xffff1a22)),
+                        Container(
+                          width: ScreenUtil.instance.setWidth(143.0),
+                          height: 41,
+                          margin: EdgeInsets.fromLTRB(12, 10, 19, 10),
+                          child: Text(
+                            '清末民初回流纯老银壶一套，清末民初回流纯老…',
+                            style: TextStyle(
+                                fontSize: 13, fontWeight: FontWeight.bold),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              height: 15,
+                              constraints:
+                                  BoxConstraints(maxWidth: double.infinity),
+                              margin: EdgeInsets.only(left: 10),
+                              child: Row(
+                                children: [
+                                  Container(
+                                    margin: EdgeInsets.only(top: 3),
+                                    height: 13,
+                                    width: 10,
+                                    child: Text(
+                                      '¥',
+                                      style: TextStyle(
+                                          fontSize: 14,
+                                          color: Color(0xffff1a22)),
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  '2700 ',
+                                  Text(
+                                    '2700 ',
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        color: Color(0xffff1a22),
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              height: 18,
+                              width: 60,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
+                                  color: Color(0xffffe8e8)),
+                              margin: EdgeInsets.only(right: 10),
+                              child: Center(
+                                child: Text(
+                                  '千万保障',
                                   style: TextStyle(
-                                      fontSize: 16,
-                                      color: Color(0xffff1a22),
-                                      fontWeight: FontWeight.bold),
+                                      fontSize: 14, color: Color(0xffe51c23)),
                                 ),
-                              ],
+                              ),
+                            )
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              width: ScreenUtil.instance.setWidth(10.0),
                             ),
-                          ),
-                          Container(
-                            height: 18,
-                            width: 60,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                color: Color(0xffffe8e8)),
-                            margin: EdgeInsets.only(right: 10),
-                            child: Center(
+                            ClipOval(
+                              child: Image.network(
+                                'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
+                                height: 22,
+                                width: 22,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            Container(
+                              width: ScreenUtil.instance.setWidth(46.0),
+                              height: 15,
+                              margin: EdgeInsets.only(left: 5),
                               child: Text(
-                                '千万保障',
+                                '北京朝阳',
                                 style: TextStyle(
-                                    fontSize: 14, color: Color(0xffe51c23)),
+                                  fontSize: 12,
+                                ),
+                                textAlign: TextAlign.left,
+                                overflow: TextOverflow.ellipsis,
                               ),
                             ),
-                          )
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SizedBox(
-                            width: ScreenUtil.instance.setWidth(10.0),
-                          ),
-                          ClipOval(
-                            child: Image.network(
-                              'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
-                              height: 22,
-                              width: 22,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          Container(
-                            width: ScreenUtil.instance.setWidth(46.0),
-                            height: 15,
-                            margin: EdgeInsets.only(left: 5),
-                            child: Text(
-                              '北京朝阳',
-                              style: TextStyle(
-                                fontSize: 12,
+                            Container(
+                              width: ScreenUtil.instance.setWidth(49.0),
+                              height: 15,
+                              margin: EdgeInsets.only(
+                                left: ScreenUtil.instance.setWidth(25.0),
                               ),
-                              textAlign: TextAlign.left,
-                              overflow: TextOverflow.ellipsis,
+                              child: Text(
+                                '当前在线',
+                                style: TextStyle(
+                                    fontSize: 12, color: Color(0xffc8c8c8)),
+                                textAlign: TextAlign.left,
+                              ),
                             ),
-                          ),
-                          Container(
-                            width: ScreenUtil.instance.setWidth(49.0),
-                            height: 15,
-                            margin: EdgeInsets.only(
-                              left: ScreenUtil.instance.setWidth(25.0),
-                            ),
-                            child: Text(
-                              '当前在线',
-                              style: TextStyle(
-                                  fontSize: 12, color: Color(0xffc8c8c8)),
-                              textAlign: TextAlign.left,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 10,
-                      )
-                    ],
-                  )),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 10,
+                        )
+                      ],
+                    )),
+              ),
             ),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(14),
-              child: Container(
-                  constraints: BoxConstraints(maxHeight: double.infinity),
-                  width: ScreenUtil.instance.setWidth(174.0),
-                  child: Column(
-                    children: [
-                      Image.network(
-                        'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
-                        height: 154,
-                        width: 174,
-                        fit: BoxFit.cover,
-                      ),
-                      Container(
-                        height: 41,
-                        width: ScreenUtil.instance.setWidth(143.0),
-                        margin: EdgeInsets.fromLTRB(12, 10, 19, 10),
-                        child: Text(
-                          '清末民初回流纯老银壶一套，清末民初回流纯老…',
-                          style: TextStyle(
-                              fontSize: 13, fontWeight: FontWeight.bold),
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
+            InkWell(
+              onTap: () {},
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(14),
+                child: Container(
+                    constraints: BoxConstraints(maxHeight: double.infinity),
+                    width: ScreenUtil.instance.setWidth(174.0),
+                    child: Column(
+                      children: [
+                        Image.network(
+                          'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
+                          height: 154,
+                          width: 174,
+                          fit: BoxFit.cover,
                         ),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            height: 15,
-                            constraints:
-                                BoxConstraints(maxWidth: double.infinity),
-                            margin: EdgeInsets.only(left: 10),
-                            child: Row(
-                              children: [
-                                Container(
-                                  margin: EdgeInsets.only(top: 3),
-                                  height: 13,
-                                  width: 10,
-                                  child: Text(
-                                    '¥',
-                                    style: TextStyle(
-                                        fontSize: 14, color: Color(0xffff1a22)),
+                        Container(
+                          height: 41,
+                          width: ScreenUtil.instance.setWidth(143.0),
+                          margin: EdgeInsets.fromLTRB(12, 10, 19, 10),
+                          child: Text(
+                            '清末民初回流纯老银壶一套，清末民初回流纯老…',
+                            style: TextStyle(
+                                fontSize: 13, fontWeight: FontWeight.bold),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              height: 15,
+                              constraints:
+                                  BoxConstraints(maxWidth: double.infinity),
+                              margin: EdgeInsets.only(left: 10),
+                              child: Row(
+                                children: [
+                                  Container(
+                                    margin: EdgeInsets.only(top: 3),
+                                    height: 13,
+                                    width: 10,
+                                    child: Text(
+                                      '¥',
+                                      style: TextStyle(
+                                          fontSize: 14,
+                                          color: Color(0xffff1a22)),
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  '2700 ',
+                                  Text(
+                                    '2700 ',
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        color: Color(0xffff1a22),
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              height: 18,
+                              width: 60,
+                              margin: EdgeInsets.only(right: 10),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
+                                  color: Color(0xffffe8e8)),
+                              child: Center(
+                                child: Text(
+                                  '千万保障',
                                   style: TextStyle(
-                                      fontSize: 16,
-                                      color: Color(0xffff1a22),
-                                      fontWeight: FontWeight.bold),
+                                      fontSize: 14, color: Color(0xffe51c23)),
                                 ),
-                              ],
+                              ),
+                            )
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              width: ScreenUtil.instance.setWidth(10.0),
                             ),
-                          ),
-                          Container(
-                            height: 18,
-                            width: 60,
-                            margin: EdgeInsets.only(right: 10),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                color: Color(0xffffe8e8)),
-                            child: Center(
+                            ClipOval(
+                              child: Image.network(
+                                'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
+                                height: 22,
+                                width: 22,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            Container(
+                              width: ScreenUtil.instance.setWidth(46.0),
+                              height: 15,
+                              margin: EdgeInsets.only(left: 5),
                               child: Text(
-                                '千万保障',
+                                '北京朝阳',
                                 style: TextStyle(
-                                    fontSize: 14, color: Color(0xffe51c23)),
+                                  fontSize: 12,
+                                ),
+                                textAlign: TextAlign.left,
+                                overflow: TextOverflow.ellipsis,
                               ),
                             ),
-                          )
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SizedBox(
-                            width: ScreenUtil.instance.setWidth(10.0),
-                          ),
-                          ClipOval(
-                            child: Image.network(
-                              'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
-                              height: 22,
-                              width: 22,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          Container(
-                            width: ScreenUtil.instance.setWidth(46.0),
-                            height: 15,
-                            margin: EdgeInsets.only(left: 5),
-                            child: Text(
-                              '北京朝阳',
-                              style: TextStyle(
-                                fontSize: 12,
+                            Container(
+                              width: ScreenUtil.instance.setWidth(49.0),
+                              height: 15,
+                              margin: EdgeInsets.only(
+                                left: ScreenUtil.instance.setWidth(25.0),
                               ),
-                              textAlign: TextAlign.left,
-                              overflow: TextOverflow.ellipsis,
+                              child: Text(
+                                '当前在线',
+                                style: TextStyle(
+                                    fontSize: 12, color: Color(0xffc8c8c8)),
+                                textAlign: TextAlign.left,
+                              ),
                             ),
-                          ),
-                          Container(
-                            width: ScreenUtil.instance.setWidth(49.0),
-                            height: 15,
-                            margin: EdgeInsets.only(
-                              left: ScreenUtil.instance.setWidth(25.0),
-                            ),
-                            child: Text(
-                              '当前在线',
-                              style: TextStyle(
-                                  fontSize: 12, color: Color(0xffc8c8c8)),
-                              textAlign: TextAlign.left,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 10,
-                      )
-                    ],
-                  )),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 10,
+                        )
+                      ],
+                    )),
+              ),
             ),
           ],
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(14),
-              child: Container(
-                  constraints: BoxConstraints(maxHeight: double.infinity),
-                  width: ScreenUtil.instance.setWidth(174.0),
-                  child: Column(
-                    children: [
-                      Image.network(
-                        'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
-                        height: 154,
-                        width: 174,
-                        fit: BoxFit.cover,
-                      ),
-                      Container(
-                        height: 41,
-                        width: ScreenUtil.instance.setWidth(143.0),
-                        margin: EdgeInsets.fromLTRB(12, 10, 19, 10),
-                        child: Text(
-                          '清末民初回流纯老银壶一套，清末民初回流纯老…',
-                          style: TextStyle(
-                              fontSize: 13, fontWeight: FontWeight.bold),
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
+            InkWell(
+              onTap: () {},
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(14),
+                child: Container(
+                    constraints: BoxConstraints(maxHeight: double.infinity),
+                    width: ScreenUtil.instance.setWidth(174.0),
+                    child: Column(
+                      children: [
+                        Image.network(
+                          'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
+                          height: 154,
+                          width: 174,
+                          fit: BoxFit.cover,
                         ),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            height: 15,
-                            constraints:
-                                BoxConstraints(maxWidth: double.infinity),
-                            margin: EdgeInsets.only(left: 10),
-                            child: Row(
-                              children: [
-                                Container(
-                                  margin: EdgeInsets.only(top: 3),
-                                  height: 13,
-                                  width: 10,
-                                  child: Text(
-                                    '¥',
-                                    style: TextStyle(
-                                        fontSize: 14, color: Color(0xffff1a22)),
+                        Container(
+                          height: 41,
+                          width: ScreenUtil.instance.setWidth(143.0),
+                          margin: EdgeInsets.fromLTRB(12, 10, 19, 10),
+                          child: Text(
+                            '清末民初回流纯老银壶一套，清末民初回流纯老…',
+                            style: TextStyle(
+                                fontSize: 13, fontWeight: FontWeight.bold),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              height: 15,
+                              constraints:
+                                  BoxConstraints(maxWidth: double.infinity),
+                              margin: EdgeInsets.only(left: 10),
+                              child: Row(
+                                children: [
+                                  Container(
+                                    margin: EdgeInsets.only(top: 3),
+                                    height: 13,
+                                    width: 10,
+                                    child: Text(
+                                      '¥',
+                                      style: TextStyle(
+                                          fontSize: 14,
+                                          color: Color(0xffff1a22)),
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  '2700 ',
+                                  Text(
+                                    '2700 ',
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        color: Color(0xffff1a22),
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              height: 18,
+                              width: 60,
+                              margin: EdgeInsets.only(right: 10),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
+                                  color: Color(0xffffe8e8)),
+                              child: Center(
+                                child: Text(
+                                  '千万保障',
                                   style: TextStyle(
-                                      fontSize: 16,
-                                      color: Color(0xffff1a22),
-                                      fontWeight: FontWeight.bold),
+                                      fontSize: 14, color: Color(0xffe51c23)),
                                 ),
-                              ],
+                              ),
+                            )
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              width: ScreenUtil.instance.setWidth(10.0),
                             ),
-                          ),
-                          Container(
-                            height: 18,
-                            width: 60,
-                            margin: EdgeInsets.only(right: 10),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                color: Color(0xffffe8e8)),
-                            child: Center(
+                            ClipOval(
+                              child: Image.network(
+                                'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
+                                height: 22,
+                                width: 22,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            Container(
+                              width: ScreenUtil.instance.setWidth(46.0),
+                              height: 15,
+                              margin: EdgeInsets.only(left: 5),
                               child: Text(
-                                '千万保障',
+                                '北京朝阳',
                                 style: TextStyle(
-                                    fontSize: 14, color: Color(0xffe51c23)),
+                                  fontSize: 12,
+                                ),
+                                textAlign: TextAlign.left,
+                                overflow: TextOverflow.ellipsis,
                               ),
                             ),
-                          )
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SizedBox(
-                            width: ScreenUtil.instance.setWidth(10.0),
-                          ),
-                          ClipOval(
-                            child: Image.network(
-                              'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
-                              height: 22,
-                              width: 22,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          Container(
-                            width: ScreenUtil.instance.setWidth(46.0),
-                            height: 15,
-                            margin: EdgeInsets.only(left: 5),
-                            child: Text(
-                              '北京朝阳',
-                              style: TextStyle(
-                                fontSize: 12,
+                            Container(
+                              width: ScreenUtil.instance.setWidth(49.0),
+                              height: 15,
+                              margin: EdgeInsets.only(
+                                left: ScreenUtil.instance.setWidth(25.0),
                               ),
-                              textAlign: TextAlign.left,
-                              overflow: TextOverflow.ellipsis,
+                              child: Text(
+                                '当前在线',
+                                style: TextStyle(
+                                    fontSize: 12, color: Color(0xffc8c8c8)),
+                                textAlign: TextAlign.left,
+                              ),
                             ),
-                          ),
-                          Container(
-                            width: ScreenUtil.instance.setWidth(49.0),
-                            height: 15,
-                            margin: EdgeInsets.only(
-                              left: ScreenUtil.instance.setWidth(25.0),
-                            ),
-                            child: Text(
-                              '当前在线',
-                              style: TextStyle(
-                                  fontSize: 12, color: Color(0xffc8c8c8)),
-                              textAlign: TextAlign.left,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 10,
-                      )
-                    ],
-                  )),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 10,
+                        )
+                      ],
+                    )),
+              ),
             ),
             Container(
               constraints: BoxConstraints(maxHeight: double.infinity),
@@ -2006,7 +2024,13 @@ class _goodsForState extends State<goodsFor> {
         new Radius.circular(14.0),
       ),
       child: new InkWell(
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    //导航打开新视图
+                    builder: (context) => GoodsDetails()));
+          },
           child: ClipRRect(
               borderRadius: BorderRadius.circular(15),
               child: Container(
