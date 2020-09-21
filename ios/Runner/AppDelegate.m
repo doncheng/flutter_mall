@@ -27,11 +27,52 @@
              if ([call.method isEqualToString:@"Applelanding"]) {
                  AppleLandingViewController *appleLandingViewController =[[AppleLandingViewController alloc]init];
                  result(@"ss");
+             }
+             if ([call.method isEqualToString:@"visitAlbum"]) {
+//                 result(@"ok");
+                 //UIAlertControllerStyleAlert弹窗在屏幕中间，UIAlertControllerStyleActionSheet弹窗在屏幕下面
+                 UIAlertController *alert=[UIAlertController alertControllerWithTitle:@"选取图片" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+//                 UIAlertAction *cameraAction=[UIAlertAction actionWithTitle:@"相机" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//                     self.imagePickerController.sourceType=UIImagePickerControllerSourceTypeCamera;
+//                     self.imagePickerController.cameraDevice=UIImagePickerControllerCameraDeviceRear;
+//                     [self.navigationController  presentViewController:self.imagePickerController animated:YES completion:nil];
+//                 }];
                  
-                     
+                 UIAlertAction *photosAlbumAction=[UIAlertAction actionWithTitle:@"图片" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                     self.imagePickerController.sourceType=UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+                     [self.rootViewController presentViewController:self.imagePickerController animated:YES completion:nil];
+                 }];
                  
+                 UIAlertAction *cancelAction=[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                     [self.rootViewController dismissViewControllerAnimated:YES completion:nil];
+                 }];
+                 
+                 [alert addAction:photosAlbumAction];
+                 [alert addAction:cancelAction];
+                 
+                 [self.rootViewController presentViewController:alert animated:YES completion:nil];
                  
              }
+              self.methodCannelResultBlock = result; //拿到回调block，回传照片时用 = result;
+                          
+             //例子
+             //             if ([call.method isEqualToString:@"iOSFlutter"]) {
+             //                   TargetViewController *vc = [[TargetViewController alloc] init];
+             //                   [self.navigationController pushViewController:vc animated:YES];
+             //               }
+                          
+             //             if ([call.method isEqualToString:@"iOSFlutter1"]) {
+             //                        NSDictionary *dic = call.arguments;
+             //                        NSLog(@"arguments = %@", dic);
+             //                        NSString *code = dic[@"code"];
+             //                        NSArray *data = dic[@"data"];
+             //                        NSLog(@"code = %@", code);
+             //                        NSLog(@"data = %@",data);
+             //                        NSLog(@"data 第一个元素%@",data[0]);
+             //                        NSLog(@"data 第一个元素类型%@",[data[0] class]);
+             //
+             //                    }
+             
 //             if ([call.method isEqualToString:@"iOSFlutter2"]) {
 //                 if (result) {
 //                     // iOSFlutter2 对应的方法flutter中主动出发 并且将下面的值（Native的值）传给flutter
@@ -42,5 +83,28 @@
   // Override point for customization after application launch.
   return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }
+- (UIViewController*)rootViewController{
+    UIViewController *rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
+    while (rootViewController.presentedViewController) {
+        rootViewController = rootViewController.presentedViewController;
+    }
+    return rootViewController;
+}
+#pragma mark -imagePickerController
+- (UIImagePickerController *)imagePickerController{
+    if (_imagePickerController==nil) {
+        _imagePickerController=[[UIImagePickerController alloc]init];
+        _imagePickerController.delegate=self;
+        _imagePickerController.allowsEditing=YES;
+    }
+    return _imagePickerController;
+}
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey,id> *)info{
+    [picker dismissViewControllerAnimated:YES completion:nil];
+        UIImage *image = info[UIImagePickerControllerOriginalImage];
 
+    NSData *imageData = UIImagePNGRepresentation(image);
+
+    self.methodCannelResultBlock(imageData);
+}
 @end

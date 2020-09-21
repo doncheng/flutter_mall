@@ -11,9 +11,11 @@ class landingPage extends StatefulWidget {
 class _landingPageState extends State<landingPage> {
   double textfontsize = 12.0;
   double iconsize = 30;
+
   static const String CHINAL_NAME = "example.mall/call_native"; //同步路径
   static const platform = const MethodChannel(CHINAL_NAME);
   String _result = "";
+
   @override
   void initState() {
     super.initState();

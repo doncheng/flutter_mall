@@ -2,6 +2,8 @@
 #import <UIKit/UIKit.h>
 #import "WXApi.h"
 #import <AuthenticationServices/AuthenticationServices.h>
-@interface AppDelegate : FlutterAppDelegate<UIApplicationDelegate, WXApiDelegate,ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding>
+@interface AppDelegate : FlutterAppDelegate<UIApplicationDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, WXApiDelegate,ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding>
 
+@property (nonatomic,strong)UIImagePickerController *imagePickerController;
+@property(nonatomic, strong) FlutterResult methodCannelResultBlock;
 @end

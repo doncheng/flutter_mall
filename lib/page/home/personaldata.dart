@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image_crop/image_crop.dart';
 import 'package:mall/page/home/nicknamechange.dart';
@@ -19,32 +20,41 @@ class personaldataPage extends StatefulWidget {
 
 class _personaldataPageState extends State<personaldataPage> {
   String personaldataPagenicknanme;
+
   _personaldataPageState(nicknanme) {
     this.personaldataPagenicknanme = nicknanme;
   }
 
-  File _image;
+  static const String CHINAL_NAME = "example.mall/call_native"; //同步路径
+  static const platform = const MethodChannel(CHINAL_NAME);
+  String _result = "";
+
+  File _headimagefile;
+  Image _headimage;
+  Image _image;
   final picker = ImagePicker();
 
-  // Future getImage() async {
-  //   print('oooooooooooooo');
+  Future getImage() async {
+    print('oooooooooooooo');
 
-  //   final pickedFile = await picker.getImage(source: ImageSource.gallery);
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
 
-  //   setState(() {
-  //     _image = File(pickedFile.path);
-  //   });
-  // }
-
-  getImage() async {
-    var result = await PhotoManager.requestPermission();
-    if (result) {
-      print('sss');
-    } else {
-      // fail
-      /// if result is fail, you can call `PhotoManager.openSetting();`  to open android/ios applicaton's setting to get permission
-    }
+    setState(() {
+      _image = File(pickedFile.path) as Image;
+    });
   }
+
+  // getImage() async {
+  //   print('qqq');
+  //   var result = await PhotoManager.requestPermission();
+
+  //   if (result) {
+  //     print('sss');
+  //   } else {
+  //     // fail
+  //     /// if result is fail, you can call `PhotoManager.openSetting();`  to open android/ios applicaton's setting to get permission
+  //   }
+  // }
 
   String sex = '男';
 
@@ -114,19 +124,63 @@ class _personaldataPageState extends State<personaldataPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               InkWell(
-                onTap: getImage,
-                // onTap: this._simpleDialog,
+                // onTap: getImage,
+                onTap: Platform.isIOS
+                    ? () async {
+                        String result = await platform
+                            .invokeMethod("visitAlbum")
+                            .then((value) {
+                          _image = Image.memory(value);
+                          setState(() {
+                            _headimage = _image;
+                          });
+                        });
+                      }
+                    : getImage,
+
+                // setState(() {
+                //   _result = result;
+                //   print("_result ---->" + _result);
+                //   if (result != null) {
+                //     _image = result as File;
+                //     // print(result);
+                //     // showModalBottomSheet(
+                //     //     context: context,
+                //     //     builder: (BuildContext context) {
+                //     //       return new Container(
+                //     //         child: new Center(
+                //     //           child: new Text(
+                //     //             result,
+                //     //             style: new TextStyle(color: Colors.brown),
+                //     //             textAlign: TextAlign.center,
+                //     //           ),
+                //     //         ),
+                //     //         height: 40.0,
+                //     //       );
+                //     //     });
+                //   }
+                // });
+
                 child: Column(
                   children: <Widget>[
-                    _image == null
+                    _headimage == null
                         ? Icon(Icons.account_circle, size: 100)
                         : ClipOval(
-                            child: Image.file(
-                              _image,
-                              height: 100,
-                              width: 100,
-                              fit: BoxFit.cover,
-                            ),
+                            child: Platform.isIOS
+                                ? Container(
+                                    height: 100,
+                                    width: 100,
+                                    child: _headimage,
+                                    // decoration: BoxDecoration(
+                                    //   borderRadius: BorderRadius.circular(100),
+                                    // ),
+                                  )
+                                : Image.file(
+                                    _headimagefile,
+                                    height: 100,
+                                    width: 100,
+                                    fit: BoxFit.cover,
+                                  ),
                           ),
                     // Image.network(
                     //     'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1789308275,2124804861&fm=26&gp=0.jpg',
