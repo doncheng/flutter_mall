@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mall/page/bill/recharge.dart';
 import 'package:mall/utils/navigator_util.dart';
 
 class AssetsPage extends StatefulWidget {
@@ -109,17 +110,30 @@ class _AssetsBodyState extends State<AssetsBody> {
               SizedBox(
                 height: 26,
               ),
-              Text(
-                '可用余额',
-                style: TextStyle(fontSize: 12, color: Colors.white),
+              InkWell(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          //导航打开新视图
+                          builder: (context) => RechargePage()));
+                },
+                child: Column(
+                  children: [
+                    Text(
+                      '可用余额',
+                      style: TextStyle(fontSize: 12, color: Colors.white),
+                    ),
+                    Text(
+                      '2255.00',
+                      style: TextStyle(
+                          fontSize: 36,
+                          fontWeight: FontWeight.w800,
+                          color: Colors.white),
+                    )
+                  ],
+                ),
               ),
-              Text(
-                '2255.00',
-                style: TextStyle(
-                    fontSize: 36,
-                    fontWeight: FontWeight.w800,
-                    color: Colors.white),
-              )
             ],
           ),
         ),

@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:mall/page/bill/my_assets.dart';
 import 'package:mall/utils/navigator_util.dart';
 import 'package:barcode_scan/barcode_scan.dart';
+import './placetheorder.dart';
 
 const APPBAR_SCROLL_OFFSET = 100;
 
@@ -128,7 +129,15 @@ class _MineViewState extends State<MineView> {
                                   ),
                                 ],
                               ),
-                              onPressed: () => _toPlacetheorder(),
+                              // onPressed: () => _toPlacetheorder(),
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        //导航打开新视图
+                                        builder: (context) =>
+                                            PlacetheorderPage()));
+                              },
                             ),
                           ),
                         ),

@@ -1,33 +1,39 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
-//充值，支付
-class RechargePage extends StatelessWidget {
-  const RechargePage({Key key}) : super(key: key);
+class RechargePage extends StatefulWidget {
+  RechargePage({Key key}) : super(key: key);
+
+  @override
+  _RechargePageState createState() => _RechargePageState();
+}
+
+class _RechargePageState extends State<RechargePage> {
+  int _chick = 0;
+  String need = '请输入充值金额';
+  String pay = "";
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final width = size.width;
     final screenHeight = size.height;
+
     return Scaffold(
       appBar: AppBar(
         title: Text('充值'),
         centerTitle: true,
       ),
       body: SafeArea(
-          child: Expanded(
-              child: Column(
+          child: Column(
         children: [
           Flexible(
-            // height: screenHeight - 130,
-            // // height: 670,
-
             child: ListView(
               children: [
                 //充值模块
-                Amnout(),
+                amnout(),
                 //支付模块
                 Pay(),
               ],
@@ -46,9 +52,9 @@ class RechargePage extends StatelessWidget {
                 Container(
                   margin: EdgeInsets.fromLTRB(10, 8, 10, 0),
                   height: 35,
-                  width: 40,
+                  constraints: BoxConstraints(maxWidth: double.infinity),
                   child: Text(
-                    "¥50",
+                    pay == '' ? "¥ 0" : "¥ " + pay,
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 20, color: Colors.red),
                   ),
@@ -72,22 +78,11 @@ class RechargePage extends StatelessWidget {
             ),
           )
         ],
-      ))),
+      )),
     );
   }
-}
 
-class Amnout extends StatefulWidget {
-  Amnout({Key key}) : super(key: key);
-
-  @override
-  _AmnoutState createState() => _AmnoutState();
-}
-
-class _AmnoutState extends State<Amnout> {
-  int _chick = 0;
-  @override
-  Widget build(BuildContext context) {
+  amnout() {
     return Container(
       height: 230,
       width: double.infinity,
@@ -109,8 +104,25 @@ class _AmnoutState extends State<Amnout> {
             height: 10,
           ),
           TextField(
-            decoration: InputDecoration(
-                border: OutlineInputBorder(), hintText: '请输入充值金额'),
+            controller: TextEditingController.fromValue(TextEditingValue(
+                // 设置内容
+                text: pay,
+                // 保持光标在最后
+                selection: TextSelection.fromPosition(TextPosition(
+                    affinity: TextAffinity.downstream, offset: pay.length)))),
+            enableInteractiveSelection: true,
+            inputFormatters: [
+              // ignore: deprecated_member_use
+              WhitelistingTextInputFormatter(RegExp("[0-9.]")), //只允许输入小数
+            ],
+            onChanged: (value) {
+              setState(() {
+                this._chick = 0;
+                pay = value;
+              });
+            },
+            decoration:
+                InputDecoration(border: OutlineInputBorder(), hintText: need),
           ),
           SizedBox(
             height: 15,
@@ -128,6 +140,8 @@ class _AmnoutState extends State<Amnout> {
                   onPressed: () {
                     setState(() {
                       this._chick = 1;
+
+                      pay = '50';
                     });
                   }),
             ),
@@ -143,6 +157,8 @@ class _AmnoutState extends State<Amnout> {
                   onPressed: () {
                     setState(() {
                       this._chick = 2;
+
+                      pay = '200';
                     });
                   }),
             ),
@@ -157,6 +173,8 @@ class _AmnoutState extends State<Amnout> {
                   onPressed: () {
                     setState(() {
                       this._chick = 3;
+
+                      pay = '500';
                     });
                   }),
             )
@@ -178,6 +196,8 @@ class _AmnoutState extends State<Amnout> {
                     onPressed: () {
                       setState(() {
                         this._chick = 4;
+
+                        pay = '1000';
                       });
                     }),
               ),
@@ -192,6 +212,8 @@ class _AmnoutState extends State<Amnout> {
                     onPressed: () {
                       setState(() {
                         this._chick = 5;
+
+                        pay = '1500';
                       });
                     }),
               ),
@@ -206,6 +228,8 @@ class _AmnoutState extends State<Amnout> {
                     onPressed: () {
                       setState(() {
                         this._chick = 6;
+
+                        pay = '1998';
                       });
                     }),
               )
