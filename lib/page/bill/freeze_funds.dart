@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-/*******
+/* ******
  * 
  * 
  * 资金冻结明细

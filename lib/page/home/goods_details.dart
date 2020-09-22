@@ -55,6 +55,7 @@ class _GoodsDetailsState extends State<GoodsDetails> {
             children: [
               toSeller(),
               mainBody(),
+              //瀑布流布局
               Column(
                 children: [
                   Container(
@@ -130,6 +131,7 @@ class _GoodsDetailsState extends State<GoodsDetails> {
                   ),
                   child: Column(
                     children: [
+                      //收藏，喜欢的颜色变化
                       InkWell(
                         onTap: () {
                           setState(() {
@@ -581,8 +583,9 @@ class _mainBodyState extends State<mainBody> {
                   '--------------------------',
                   style: TextStyle(fontSize: 15),
                 ),
+                //展开显示更多文本
                 ExpandableText(
-                  text: contentText,
+                  text: contentText, //文本的内容
                   maxLines: 2,
                   style: TextStyle(fontSize: 15),
                 ),
@@ -1183,6 +1186,7 @@ class _SellerState extends State<Seller> {
           ),
         ),
         InkWell(
+          //展开和收起更多内容
           onTap: () {
             setState(() {
               chick = 1;

@@ -3,6 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'dart:ui';
 
+/* ***********
+ * 评论
+ * ************/
 class EvaluationPage extends StatefulWidget {
   EvaluationPage({Key key}) : super(key: key);
 
@@ -14,6 +17,7 @@ class _EvaluationPageState extends State<EvaluationPage> {
   // double starmun = 4.1;
   String time = '2019-12-12';
   int _chick = 1;
+  //模拟网上获取的不同评论
   List evaluationList1 = [
     {
       "head":
@@ -206,6 +210,7 @@ class _EvaluationPageState extends State<EvaluationPage> {
           "https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png"
     },
   ];
+  //传入不同评论内容画出不同的column
   List<Widget> _getData(List inlist) {
 //循环
 
@@ -483,6 +488,7 @@ class _EvaluationPageState extends State<EvaluationPage> {
             height: 10,
           ),
           Flexible(
+            //根据按键的不同值选择画出不同的列表
             child: ListView(
               children: _chick == 1
                   ? _getData(evaluationList1)

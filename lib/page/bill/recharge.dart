@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
+//充值，支付
 class RechargePage extends StatelessWidget {
   const RechargePage({Key key}) : super(key: key);
 

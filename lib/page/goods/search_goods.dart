@@ -11,6 +11,11 @@ import 'package:mall/entity/goods_entity.dart';
 import 'package:mall/utils/navigator_util.dart';
 import 'package:mall/widgets/cached_image.dart';
 
+/* *
+ * 
+ * 套用项目原有的搜索页面
+ * 
+ * **/
 class SearchGoodsView extends StatefulWidget {
   @override
   _SearchGoodsViewState createState() => _SearchGoodsViewState();

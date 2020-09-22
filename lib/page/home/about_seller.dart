@@ -5,6 +5,11 @@ import 'dart:ui';
 
 import 'evaluation.dart';
 
+/* *
+ * 
+ * 交易评价
+ * 
+ * */
 class SellerPage extends StatelessWidget {
   const SellerPage({Key key}) : super(key: key);
 
@@ -392,9 +397,10 @@ class _SellerBodyState extends State<SellerBody> {
                         SizedBox(
                           width: ScreenUtil.instance.setWidth(14.0),
                         ),
+                        //五星评分函数
                         XFStarRating(
-                          rating: starmun,
-                          maxRating: 5,
+                          rating: starmun, //评分
+                          maxRating: 5, //星星数
                           size: 18,
                           selectedColor: Colors.blue,
                           unselectedColor: Colors.white,

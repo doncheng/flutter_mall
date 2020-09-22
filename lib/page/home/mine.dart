@@ -658,6 +658,7 @@ class _recommendedtoolsState extends State<recommendedtools> {
     return tempList.toList();
   }
 
+//扫码回调的信息
   String _scanResultStr = "";
   //扫码
   Future _scan() async {
