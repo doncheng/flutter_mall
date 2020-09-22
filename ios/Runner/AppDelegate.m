@@ -6,7 +6,7 @@
 
 - (BOOL)application:(UIApplication *)application
     didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-        
+
     FlutterViewController* flutterViewController = (FlutterViewController*)self.window.rootViewController;
          
          // 要与main.dart中一致
@@ -25,6 +25,9 @@
                  
              }
              if ([call.method isEqualToString:@"Applelanding"]) {
+                 //Apple登陆状态
+                 [self authorizationStatus];
+                 
                  if (@available(iOS 13.0, *)) {
                      
                      [self Applelanding];
@@ -130,7 +133,39 @@
     self.methodCannelResultBlock(imageData);
 }
 
-#pragma mark -AppleLanding
+#pragma mark -Apple
+-(void)authorizationStatus{
+    if (@available(iOS 13.0, *)) {
+//        NSString *userIdentifier = 钥匙串中取出的 userIdentifier;
+        NSString *userIdentifier = userIdentifier;
+        if (userIdentifier) {
+            ASAuthorizationAppleIDProvider *appleIDProvider = [ASAuthorizationAppleIDProvider new];
+            [appleIDProvider getCredentialStateForUserID:userIdentifier
+                                              completion:^(ASAuthorizationAppleIDProviderCredentialState credentialState,
+                                                           NSError * _Nullable error)
+            {
+                switch (credentialState) {
+//                    授权状态有效；
+                    case ASAuthorizationAppleIDProviderCredentialAuthorized:
+                        // The Apple ID credential is valid
+                        break;
+//                        上次使用苹果账号登录的凭据已被移除，需解除绑定并重新引导用户使用苹果登录；
+                    case ASAuthorizationAppleIDProviderCredentialRevoked:
+                        // Apple ID Credential revoked, handle unlink
+                        break;
+//                        未登录授权，直接弹出登录页面，引导用户登录。
+                    case ASAuthorizationAppleIDProviderCredentialNotFound:
+                        // Credential not found, show login UI
+                        break;
+                    case ASAuthorizationAppleIDProviderCredentialTransferred:
+                        //
+                        break;
+                }
+            }];
+        }
+    }
+}
+
 -(void)Applelanding API_AVAILABLE(ios(13.0)){
     ASAuthorizationAppleIDProvider *appleIDProvider = [[ASAuthorizationAppleIDProvider alloc]init];
     ASAuthorizationAppleIDRequest *request = [appleIDProvider createRequest];
@@ -146,31 +181,49 @@
 //    return self.rootViewController;
 //}
 
--(void)authorizationController:(ASAuthorizationController *)controller didCompleteWithAuthorization:(ASAuthorization *)authorization API_AVAILABLE(ios(13.0)){
-        if([authorization.credential isKindOfClass:[ASAuthorizationAppleIDCredential class]]){
-            ASAuthorizationAppleIDCredential *apple = authorization.credential;
-            ///将返回得到的user 存储起来
-            NSString *userIdentifier = apple.user;
-            NSPersonNameComponents *fullName = apple.fullName;
-            NSString *email = apple.email;
-            //用于后台像苹果服务器验证身份信息
-            NSData *identityToken = apple.identityToken;
-            
-            
-            NSLog(@"%@%@%@%@",userIdentifier,fullName,email,identityToken);
-        }else if ([authorization.credential isKindOfClass:[ASPasswordCredential class]]){
-            
-            //// Sign in using an existing iCloud Keychain credential.
-            ASPasswordCredential *pass = authorization.credential;
-            NSString *username = pass.user;
-            NSString *passw = pass.password;
-            
-        }
-    
+- (void)authorizationController:(ASAuthorizationController *)controller didCompleteWithAuthorization:(ASAuthorization *)authorization API_AVAILABLE(ios(13.0))
+{
+    if ([authorization.credential isKindOfClass:[ASAuthorizationAppleIDCredential class]])       {
+        ASAuthorizationAppleIDCredential *credential = authorization.credential;
+        
+        NSString *state = credential.state;
+        NSString *userID = credential.user;
+        NSPersonNameComponents *fullName = credential.fullName;
+        NSString *email = credential.email;
+        NSString *authorizationCode = [[NSString alloc] initWithData:credential.authorizationCode encoding:NSUTF8StringEncoding]; // refresh token
+        NSString *identityToken = [[NSString alloc] initWithData:credential.identityToken encoding:NSUTF8StringEncoding]; // access token
+        ASUserDetectionStatus realUserStatus = credential.realUserStatus;
+        
+        NSLog(@"state: %@", state);
+        NSLog(@"userID: %@", userID);
+        NSLog(@"fullName: %@", fullName);
+        NSLog(@"email: %@", email);
+        NSLog(@"authorizationCode: %@", authorizationCode);
+        NSLog(@"identityToken: %@", identityToken);
+        NSLog(@"realUserStatus: %@", @(realUserStatus));
+    }
 }
 
-///回调失败
--(void)authorizationController:(ASAuthorizationController *)controller didCompleteWithError:(NSError *)error API_AVAILABLE(ios(13.0)){
-    NSLog(@"%@",error);
+- (void)authorizationController:(ASAuthorizationController *)controller didCompleteWithError:(NSError *)error API_AVAILABLE(ios(13.0))
+{
+    NSString *errorMsg = nil;
+    switch (error.code) {
+        case ASAuthorizationErrorCanceled:
+            errorMsg = @"用户取消了授权请求";
+            break;
+        case ASAuthorizationErrorFailed:
+            errorMsg = @"授权请求失败";
+            break;
+        case ASAuthorizationErrorInvalidResponse:
+            errorMsg = @"授权请求响应无效";
+            break;
+        case ASAuthorizationErrorNotHandled:
+            errorMsg = @"未能处理授权请求";
+            break;
+        case ASAuthorizationErrorUnknown:
+            errorMsg = @"授权请求失败未知原因";
+            break;
+    }
+    NSLog(@"%@", errorMsg);
 }
 @end
