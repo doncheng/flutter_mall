@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
 
+/*******
+ * 
+ * 
+ * 资金冻结明细
+ * 
+ * ********/
 class FreezePage extends StatefulWidget {
   FreezePage({Key key}) : super(key: key);
 

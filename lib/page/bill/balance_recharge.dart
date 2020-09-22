@@ -33,7 +33,6 @@ class BalanceRechargeBody extends StatefulWidget {
 }
 
 class _BalanceRechargeBodyState extends State<BalanceRechargeBody> {
-  String reacharge = '1000';
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -74,12 +73,14 @@ class _BalanceRechargeBodyState extends State<BalanceRechargeBody> {
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 28),
                     ),
                   ),
+                  //输入金额文本框
                   Container(
                       margin: EdgeInsets.only(bottom: 10),
                       height: 40,
                       width: width - 70,
                       child: Center(
                         child: TextField(
+                          onChanged: (value) {},
                           decoration: InputDecoration(
                             border: InputBorder.none,
                           ),
@@ -93,12 +94,13 @@ class _BalanceRechargeBodyState extends State<BalanceRechargeBody> {
           ),
         ),
         PayMethod(),
-        Chick()
+        Chick() //点击触发的事件
       ],
     );
   }
 }
 
+//支付的模块
 class PayMethod extends StatefulWidget {
   PayMethod({Key key}) : super(key: key);
 
@@ -131,6 +133,7 @@ class _PayMethodState extends State<PayMethod> {
         ),
         InkWell(
           onTap: () {
+            //点击勾选或取消
             setState(() {
               if (item == 1) {
                 item = 0;
@@ -182,6 +185,7 @@ class _PayMethodState extends State<PayMethod> {
         ),
         InkWell(
           onTap: () {
+            //点击勾选或取消
             setState(() {
               if (item == 2) {
                 item = 0;
@@ -234,6 +238,7 @@ class _PayMethodState extends State<PayMethod> {
         InkWell(
           onTap: () {
             setState(() {
+              //展开银行卡列表
               if (item == 3) {
                 item = 0;
               } else {
@@ -260,7 +265,7 @@ class _PayMethodState extends State<PayMethod> {
           child: item == 3
               ? Column(
                   children: [
-                    BankCard(),
+                    BankCard(), //循环列出卡表
                     ListTile(
                       leading: IconButton(
                           icon: Icon(Icons.add_circle), onPressed: () {}),

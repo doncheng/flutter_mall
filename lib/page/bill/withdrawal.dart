@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:ui';
 
-import 'package:mall/utils/navigator_util.dart';
-
 class WithdrawalPage extends StatelessWidget {
   const WithdrawalPage({Key key}) : super(key: key);
 
@@ -126,16 +124,10 @@ class _ChickState extends State<Chick> {
           style: TextStyle(fontSize: 18, color: Colors.white),
         ),
         onPressed: () {
-          setState(() {
-            _toAssets();
-          });
+          setState(() {});
         },
       ),
     );
-  }
-
-  _toAssets() {
-    NavigatorUtils.goAssetsPage(context);
   }
 }
 
@@ -149,7 +141,7 @@ class PayMethod extends StatefulWidget {
 class _PayMethodState extends State<PayMethod> {
   Animation animation;
   int radio = 0;
-
+  int item = 0;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -169,28 +161,50 @@ class _PayMethodState extends State<PayMethod> {
         // Divider(
         //   color: Color(0xffdddddd),
         // ),
-        ExpansionTile(
-          leading: Image.network(
-            'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3673269788,472516603&fm=26&gp=0.jpg',
-            height: 26,
-            width: 26,
-          ),
-          title: Text('选择银行卡', style: TextStyle(fontSize: 15)),
-          // backgroundColor: Colors.lightBlue,
-          initiallyExpanded: false, //默认是否展开
-          children: <Widget>[
-            BankCard(),
-            ListTile(
-              leading:
-                  IconButton(icon: Icon(Icons.add_circle), onPressed: () {}),
-              title: Text(
-                "添加银行卡",
-                style: TextStyle(
-                  fontSize: 14,
-                ),
+        InkWell(
+          onTap: () {
+            setState(() {
+              //展开银行卡列表
+              if (item == 3) {
+                item = 0;
+              } else {
+                item = 3;
+              }
+            });
+          },
+          child: Container(
+            constraints: BoxConstraints(maxHeight: double.infinity),
+            width: double.infinity,
+            child: ListTile(
+              leading: Image.network(
+                'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3673269788,472516603&fm=26&gp=0.jpg',
+                height: 26,
+                width: 26,
               ),
+              title: Text('中国银行', style: TextStyle(fontSize: 15)),
             ),
-          ],
+          ),
+        ),
+        Container(
+          width: double.infinity,
+          constraints: BoxConstraints(maxHeight: double.infinity),
+          child: item == 3
+              ? Column(
+                  children: [
+                    BankCard(), //循环列出卡表
+                    ListTile(
+                      leading: IconButton(
+                          icon: Icon(Icons.add_circle), onPressed: () {}),
+                      title: Text(
+                        "添加银行卡",
+                        style: TextStyle(
+                          fontSize: 14,
+                        ),
+                      ),
+                    )
+                  ],
+                )
+              : null,
         ),
       ],
     )

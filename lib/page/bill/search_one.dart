@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+/**
+ * 自定义搜索
+ * **/
 class SearchAppBarWidget extends StatefulWidget implements PreferredSizeWidget {
   final double height;
   final double elevation; //阴影
@@ -78,6 +81,7 @@ class SearchAppBarState extends State<SearchAppBarWidget> {
                         child: Row(
                           children: [
                             PopupMenuButton(
+                              //选择宝贝或者商家
                               child: Text(selectedValue,
                                   style: TextStyle(
                                     fontSize: 14,

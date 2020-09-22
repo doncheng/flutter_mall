@@ -73,18 +73,22 @@ class AssetsBody extends StatefulWidget {
 }
 
 class _AssetsBodyState extends State<AssetsBody> {
+  //跳转到资金冻结
   _toFreezePage() {
     NavigatorUtils.goFreezePage(context);
   }
 
+//跳转到余额充值
   _toBalanceRechargePage() {
     NavigatorUtils.goBalanceRechargePage(context);
   }
 
+//跳转到提现
   _toWithdrawalPage() {
     NavigatorUtils.goWithdrawalPage(context);
   }
 
+//跳转到银行卡包
   _toWalletCardPage() {
     NavigatorUtils.goWalletCardPage(context);
   }

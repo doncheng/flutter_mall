@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mall/page/bill/my_assets.dart';
 import 'package:mall/utils/navigator_util.dart';
+import 'package:barcode_scan/barcode_scan.dart';
 
 const APPBAR_SCROLL_OFFSET = 100;
 
@@ -596,7 +597,7 @@ class _recommendedtoolsState extends State<recommendedtools> {
           ),
           InkWell(
             onTap: () {
-              print('sss');
+              _scan();
             },
             child: Container(
                 height: 54,
@@ -655,6 +656,36 @@ class _recommendedtoolsState extends State<recommendedtools> {
       );
     });
     return tempList.toList();
+  }
+
+  String _scanResultStr = "";
+  //扫码
+  Future _scan() async {
+    //利用try-catch来进行异常处理
+    try {
+      //调起摄像头开始扫码
+      String barcode = await BarcodeScanner.scan();
+      setState(() {
+        return this._scanResultStr = barcode;
+      });
+    } on PlatformException catch (e) {
+      //如果没有调用摄像头的权限，则提醒
+      if (e.code == BarcodeScanner.CameraAccessDenied) {
+        setState(() {
+          return this._scanResultStr =
+              'The user did not grant the camera permission!';
+        });
+      } else {
+        setState(() {
+          return this._scanResultStr = 'Unknown error: $e';
+        });
+      }
+    } on FormatException {
+      setState(() => this._scanResultStr =
+          'null (User returned using the "back"-button before scanning anything. Result)');
+    } catch (e) {
+      setState(() => this._scanResultStr = 'Unknown error: $e');
+    }
   }
 
   @override
