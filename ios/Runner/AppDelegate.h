@@ -2,6 +2,7 @@
 #import <UIKit/UIKit.h>
 #import "WXApi.h"
 #import <AuthenticationServices/AuthenticationServices.h>
+API_AVAILABLE(ios(13.0))
 @interface AppDelegate : FlutterAppDelegate<UIApplicationDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, WXApiDelegate,ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding>
 
 
