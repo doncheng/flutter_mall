@@ -219,7 +219,7 @@ class _ProblemBodyState extends State<ProblemBody> {
         ),
         Container(
           width: double.infinity,
-          height: sizeheight - 550,
+          constraints: BoxConstraints(maxHeight: double.infinity),
           color: Color(0xfff5f5f5),
           child: TextField(
             maxLines: 10,

@@ -122,8 +122,7 @@ class _CustomerBodyState extends State<CustomerBody> {
             color: Colors.white,
             width: double.infinity,
             constraints: BoxConstraints(maxHeight: double.infinity),
-            child: Flexible(
-                child: Column(
+            child: Column(
               children: [
                 InkWell(
                   onTap: () {
@@ -317,17 +316,17 @@ class _CustomerBodyState extends State<CustomerBody> {
                   ),
                 ),
                 Container(
-                  height: sizeheight / 3 - 150,
+                  constraints: BoxConstraints(maxHeight: double.infinity),
                   color: Color(0xfff5f5f5),
                   child: TextField(
-                    maxLines: 10,
+                    maxLines: 6,
                     decoration: InputDecoration(
                       border: InputBorder.none,
                     ),
                   ),
                 )
               ],
-            ))),
+            )),
         Container(
           height: 50,
           // margin: EdgeInsets.only(bottom: 50),
