@@ -2,6 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mall/page/bill/my_assets.dart';
+import 'package:mall/page/help/customer_service.dart';
+import 'package:mall/page/help/set.dart';
 import 'package:mall/utils/navigator_util.dart';
 import 'package:barcode_scan/barcode_scan.dart';
 import './placetheorder.dart';
@@ -587,7 +589,11 @@ class _recommendedtoolsState extends State<recommendedtools> {
         children: <Widget>[
           InkWell(
             onTap: () {
-              print('sss');
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      //导航打开新视图
+                      builder: (context) => CustomerPage()));
             },
             child: Container(
                 height: 54,
@@ -625,7 +631,11 @@ class _recommendedtoolsState extends State<recommendedtools> {
           ),
           InkWell(
             onTap: () {
-              print('sss');
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      //导航打开新视图
+                      builder: (context) => MySetingPage()));
             },
             child: Container(
                 height: 54,

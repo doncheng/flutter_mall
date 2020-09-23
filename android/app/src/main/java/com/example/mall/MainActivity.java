@@ -18,13 +18,20 @@ public class MainActivity extends FlutterActivity {
                 new MethodChannel.MethodCallHandler() {
                     @Override
                     public void onMethodCall(MethodCall methodCall, MethodChannel.Result result) {
-                        if(methodCall.method.equals("call_native_method")){
-                            result.success("mab555");
+                        if(methodCall.method.equals("NoValidationlanding")){
+                            result.success("免验证");
                         }
-                    else if(methodCall.method.equals("call_native")){
+                    else if(methodCall.method.equals("WeChatlanding")){
 
-                        result.success("mab404");
-                    }
+                            result.success("微信");
+                        }
+                        else if(methodCall.method.equals("Alipaylanding")){
+
+                            result.success("支付宝");
+                        }else if(methodCall.method.equals("call_native_method")){
+                            
+                            result.success("手机一键登陆");
+                        }
                         else{
                             result.success("I don't know what you say");
                         }

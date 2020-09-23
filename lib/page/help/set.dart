@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mall/page/home/user_phone.dart';
 
 class MySetingPage extends StatelessWidget {
   const MySetingPage({Key key}) : super(key: key);
@@ -37,8 +38,7 @@ class _SetBodyState extends State<SetBody> {
     final sizeheight = size.height;
     final sizewidth = size.width;
     return SafeArea(
-        child: Expanded(
-            child: Column(
+        child: Column(
       children: [
         Flexible(
             child: Column(
@@ -75,7 +75,13 @@ class _SetBodyState extends State<SetBody> {
               margin: EdgeInsets.only(left: 20),
             ),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        //导航打开新视图
+                        builder: (context) => UserPhonePage()));
+              },
               child: Container(
                 margin: EdgeInsets.only(top: 5, bottom: 5),
                 padding: EdgeInsets.only(left: 20, top: 10),
@@ -154,6 +160,6 @@ class _SetBodyState extends State<SetBody> {
           ),
         ),
       ],
-    )));
+    ));
   }
 }

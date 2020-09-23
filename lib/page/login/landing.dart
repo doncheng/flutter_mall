@@ -37,13 +37,7 @@ class _landingPageState extends State<landingPage> {
         this.systemVersion = systemVersion;
         print(this.systemVersion);
       });
-    } else if (Platform.isAndroid) {
-      AndroidDeviceInfo androidDeviceInfo = await deviceInfo.androidInfo;
-      setState(() {
-        this.systemVersion = systemVersion;
-        print(this.systemVersion);
-      });
-    }
+    } else if (Platform.isAndroid) {}
   }
 
   @override

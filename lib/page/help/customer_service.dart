@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mall/page/help/problem.dart';
 
 class CustomerPage extends StatefulWidget {
   CustomerPage({Key key}) : super(key: key);
@@ -8,6 +9,13 @@ class CustomerPage extends StatefulWidget {
 }
 
 class _CustomerPageState extends State<CustomerPage> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    print('11111');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,7 +68,10 @@ class _CustomerBodyState extends State<CustomerBody> {
                       color: Color(0xffbfbfbf),
                       height: 40,
                       width: 40,
-                      child: Image.network(''),
+                      child: Image.network(
+                        'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
+                        fit: BoxFit.cover,
+                      ),
                     ),
                     SizedBox(
                       width: 88,
@@ -70,7 +81,10 @@ class _CustomerBodyState extends State<CustomerBody> {
                       color: Color(0xffbfbfbf),
                       height: 40,
                       width: 40,
-                      child: Image.network(''),
+                      child: Image.network(
+                        'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
+                        fit: BoxFit.cover,
+                      ),
                     )
                   ],
                 ),
@@ -110,30 +124,39 @@ class _CustomerBodyState extends State<CustomerBody> {
             height: sizeheight - 320,
             child: Column(
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(left: 20, top: 10),
-                      height: 20,
-                      width: 56,
-                      child: Text(
-                        '常见问题',
-                        style: TextStyle(
-                            fontWeight: FontWeight.w600, fontSize: 14),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            //导航打开新视图
+                            builder: (context) => ProblemPage()));
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(left: 20, top: 10),
+                        height: 20,
+                        width: 56,
+                        child: Text(
+                          '常见问题',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w600, fontSize: 14),
+                        ),
                       ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(right: 20, top: 10),
-                      height: 20,
-                      width: 84,
-                      child: Text(
-                        '查看所有问题',
-                        style:
-                            TextStyle(fontSize: 14, color: Color(0xffbfbfbf)),
-                      ),
-                    )
-                  ],
+                      Container(
+                        margin: EdgeInsets.only(right: 20, top: 10),
+                        height: 20,
+                        width: 84,
+                        child: Text(
+                          '查看所有问题',
+                          style:
+                              TextStyle(fontSize: 14, color: Color(0xffbfbfbf)),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
                 Divider(),
                 InkWell(
@@ -317,7 +340,10 @@ class _CustomerBodyState extends State<CustomerBody> {
                     width: 20,
                     height: 20,
                     color: Colors.green,
-                    child: Image.network(''),
+                    child: Image.network(
+                      'https://i0.hdslb.com/bfs/archive/31b8d2617cb8d6b01e98425b7eba39ae9f973c20.png',
+                      fit: BoxFit.cover,
+                    ),
                   ),
                   Text('在线客服')
                 ],
