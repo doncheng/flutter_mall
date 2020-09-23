@@ -157,41 +157,42 @@ class _landingPageState extends State<landingPage> {
                       )),
                 ],
               ),
-              Container(
-                  constraints: BoxConstraints(
-                      maxHeight: double.infinity, maxWidth: double.infinity),
-                  child: Platform.isIOS
-                      ? Column(
-                          children: <Widget>[
-                            Container(
-                              height: 44,
-                              width: 44,
-                              child: InkWell(
-                                child: Image.network(
-                                  'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1342457926,2446972823&fm=26&gp=0.jpg',
-                                ),
-                                onTap: () async {
-                                  String result = await platform
-                                      .invokeMethod("Applelanding");
-                                  print(result);
-                                },
+              Platform.isIOS
+                  ? Container(
+                      constraints: BoxConstraints(
+                          maxHeight: double.infinity,
+                          maxWidth: double.infinity),
+                      child: Column(
+                        children: <Widget>[
+                          Container(
+                            height: 44,
+                            width: 44,
+                            child: InkWell(
+                              child: Image.network(
+                                'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1342457926,2446972823&fm=26&gp=0.jpg',
                               ),
+                              onTap: () async {
+                                String result =
+                                    await platform.invokeMethod("Applelanding");
+                                print(result);
+                              },
                             ),
-                            SizedBox(height: 10),
-                            Container(
-                                height: 20,
-                                width: 42,
-                                child: Center(
-                                  child: Text(
-                                    'Apple',
-                                    style: TextStyle(
-                                      fontSize: this.textfontsize,
-                                    ),
+                          ),
+                          SizedBox(height: 10),
+                          Container(
+                              height: 20,
+                              width: 42,
+                              child: Center(
+                                child: Text(
+                                  'Apple',
+                                  style: TextStyle(
+                                    fontSize: this.textfontsize,
                                   ),
-                                )),
-                          ],
-                        )
-                      : null),
+                                ),
+                              )),
+                        ],
+                      ))
+                  : null,
               Column(
                 children: <Widget>[
                   Container(
