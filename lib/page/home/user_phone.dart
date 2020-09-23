@@ -62,7 +62,7 @@ class _PhoneBodyState extends State<PhoneBody> {
     }
   }
 
-  String phone_number = "";
+  String phone_number = '';
   String code = '';
   //
   @override
@@ -187,6 +187,14 @@ class _PhoneBodyState extends State<PhoneBody> {
               } else if (code == "") {
                 Fluttertoast.showToast(
                     msg: "请输入验证码",
+                    toastLength: Toast.LENGTH_SHORT,
+                    gravity: ToastGravity.BOTTOM,
+                    timeInSecForIos: 1,
+                    textColor: Colors.white,
+                    backgroundColor: Colors.grey);
+              } else if (code != "网上获取的验证码") {
+                Fluttertoast.showToast(
+                    msg: "验证码不正确",
                     toastLength: Toast.LENGTH_SHORT,
                     gravity: ToastGravity.BOTTOM,
                     timeInSecForIos: 1,
