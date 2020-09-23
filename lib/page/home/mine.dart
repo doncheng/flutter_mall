@@ -83,18 +83,21 @@ class _MineViewState extends State<MineView> {
                           height: 191,
                           color: Color(0xffFE5155),
                           child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               InkWell(
-                                onTap: () => _toPersonalData(),
-                                child: ListTile(
-                                  leading: Icon(
-                                    Icons.account_circle,
-                                    size: 54,
-                                  ),
-                                  title: Text(this.account_name),
-                                  subtitle: Text('关注 0｜粉丝 0'),
-                                ),
-                              ),
+                                  onTap: () => _toPersonalData(),
+                                  child: Container(
+                                    width: 200,
+                                    child: ListTile(
+                                      leading: Icon(
+                                        Icons.account_circle,
+                                        size: 54,
+                                      ),
+                                      title: Text(this.account_name),
+                                      subtitle: Text('关注 0｜粉丝 0'),
+                                    ),
+                                  )),
                               shoppingcartfootprint(),
                             ],
                           ),
