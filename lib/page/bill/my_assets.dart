@@ -239,7 +239,7 @@ class _AssetsBodyState extends State<AssetsBody> {
                     margin: EdgeInsets.only(left: screenWidth - 190),
                     width: 4,
                     child: Icon(
-                      Icons.arrow_right,
+                      Icons.keyboard_arrow_right,
                       size: 30,
                     ),
                   )
@@ -278,7 +278,7 @@ class _AssetsBodyState extends State<AssetsBody> {
                     margin: EdgeInsets.only(left: screenWidth - 190),
                     width: 4,
                     child: Icon(
-                      Icons.arrow_right,
+                      Icons.keyboard_arrow_right,
                       size: 30,
                     ),
                   )
@@ -317,7 +317,7 @@ class _AssetsBodyState extends State<AssetsBody> {
                     margin: EdgeInsets.only(left: screenWidth - 200),
                     width: 4,
                     child: Icon(
-                      Icons.arrow_right,
+                      Icons.keyboard_arrow_right,
                       size: 30,
                     ),
                   )

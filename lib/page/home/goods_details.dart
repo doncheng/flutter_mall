@@ -453,7 +453,7 @@ class _mainBodyState extends State<mainBody> {
                   ),
                 ),
               ),
-              Icon(Icons.arrow_right)
+              Icon(Icons.keyboard_arrow_right)
             ],
           ),
         ),
@@ -837,7 +837,7 @@ class _SellerState extends State<Seller> {
                 overflow: TextOverflow.ellipsis,
               ),
             ),
-            trailing: Icon(Icons.arrow_right),
+            trailing: Icon(Icons.keyboard_arrow_right),
           ),
         ),
         Row(

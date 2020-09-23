@@ -589,11 +589,17 @@ class _recommendedtoolsState extends State<recommendedtools> {
         children: <Widget>[
           InkWell(
             onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      //导航打开新视图
-                      builder: (context) => CustomerPage()));
+              if (value['toolsname1'] == '客服中心') {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        //导航打开新视图
+                        builder: (context) => CustomerPage()));
+              } else if (value['toolsname1'] == '平台规则') {
+                print('平台规则');
+              } else {
+                print('领取中心');
+              }
             },
             child: Container(
                 height: 54,
@@ -612,7 +618,13 @@ class _recommendedtoolsState extends State<recommendedtools> {
           ),
           InkWell(
             onTap: () {
-              _scan();
+              if (value['toolsname2'] == '我的订阅') {
+                print('我的订阅');
+              } else if (value['toolsname2'] == '邀请得现金') {
+                print('邀请得现金');
+              } else {
+                _scan();
+              }
             },
             child: Container(
                 height: 54,
@@ -631,11 +643,18 @@ class _recommendedtoolsState extends State<recommendedtools> {
           ),
           InkWell(
             onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      //导航打开新视图
-                      builder: (context) => MySetingPage()));
+              if (value['toolsname3'] == '我的拼团') {
+                print('我的拼团');
+              } else if (value['toolsname3'] == '活动报名') {
+                print('活动报名');
+              } else {
+                print('天天抽奖');
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        //导航打开新视图
+                        builder: (context) => MySetingPage()));
+              }
             },
             child: Container(
                 height: 54,
@@ -654,7 +673,13 @@ class _recommendedtoolsState extends State<recommendedtools> {
           ),
           InkWell(
             onTap: () {
-              print('sss');
+              if (value['toolsname4'] == '借钱') {
+                print('借钱');
+              } else if (value['toolsname4'] == '租着玩') {
+                print('租着玩');
+              } else {
+                print('签到送礼');
+              }
             },
             child: Container(
                 height: 54,

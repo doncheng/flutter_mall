@@ -87,7 +87,7 @@ class _PhoneBodyState extends State<PhoneBody> {
             onChanged: (number) {
               phone_number = number;
             },
-            style: TextStyle(fontSize: 14, color: Color(0xffbfbfbf)),
+            style: TextStyle(fontSize: 14, color: Colors.grey),
             decoration:
                 InputDecoration(border: InputBorder.none, hintText: '绑定手机号'),
           ),
@@ -168,7 +168,7 @@ class _PhoneBodyState extends State<PhoneBody> {
               style: TextStyle(fontSize: 20, color: Colors.white),
             ),
             onPressed: () {
-              if (phone_number == "" || phone_number.length < 11) {
+              if (phone_number != "" && phone_number.length != 11) {
                 Fluttertoast.showToast(
                     msg: "请输入正确的手机号",
                     toastLength: Toast.LENGTH_SHORT,
