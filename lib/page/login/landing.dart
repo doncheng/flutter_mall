@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -13,6 +14,7 @@ class landingPage extends StatefulWidget {
 class _landingPageState extends State<landingPage> {
   double textfontsize = 12.0;
   double iconsize = 30;
+  String systemVersion;
 
   static const String CHINAL_NAME = "example.mall/call_native"; //同步路径
   static const platform = const MethodChannel(CHINAL_NAME);
@@ -21,11 +23,33 @@ class _landingPageState extends State<landingPage> {
   @override
   void initState() {
     super.initState();
+    getDeviceInfo();
+  }
+
+  void getDeviceInfo() async {
+    print('sssss');
+    DeviceInfoPlugin deviceInfo = new DeviceInfoPlugin();
+    if (Platform.isIOS) {
+      IosDeviceInfo iosDeviceInfo = await deviceInfo.iosInfo;
+      String systemVersion = iosDeviceInfo.systemVersion;
+      print('pppppppppp');
+      setState(() {
+        this.systemVersion = systemVersion;
+        print(this.systemVersion);
+      });
+    } else if (Platform.isAndroid) {
+      AndroidDeviceInfo androidDeviceInfo = await deviceInfo.androidInfo;
+      setState(() {
+        this.systemVersion = systemVersion;
+        print(this.systemVersion);
+      });
+    }
   }
 
   @override
   void dispose() {
     super.dispose();
+    print('shhhhhs');
   }
 
   @override
