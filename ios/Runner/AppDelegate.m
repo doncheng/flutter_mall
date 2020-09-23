@@ -20,6 +20,12 @@
              // result 是给flutter的回调， 该回调只能使用一次
              NSLog(@"method=%@ \narguments = %@", call.method, call.arguments);
              
+             if ([call.method isEqualToString:@"SystemVersion"]) {
+                 NSString* phoneVersion = [[UIDevice currentDevice] systemVersion];
+                 result(phoneVersion);
+                 
+             }
+             
              if ([call.method isEqualToString:@"WeChatlanding"]) {
                  result(@"微信登陆");
                  

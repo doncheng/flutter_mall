@@ -1,6 +1,4 @@
 import 'dart:io';
-
-import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -23,21 +21,14 @@ class _landingPageState extends State<landingPage> {
   @override
   void initState() {
     super.initState();
-    getDeviceInfo();
+    getSystemVersion();
   }
 
-  void getDeviceInfo() async {
-    print('sssss');
-    DeviceInfoPlugin deviceInfo = new DeviceInfoPlugin();
-    if (Platform.isIOS) {
-      IosDeviceInfo iosDeviceInfo = await deviceInfo.iosInfo;
-      String systemVersion = iosDeviceInfo.systemVersion;
-      print('pppppppppp');
-      setState(() {
-        this.systemVersion = systemVersion;
-        print(this.systemVersion);
-      });
-    } else if (Platform.isAndroid) {}
+  void getSystemVersion() async {
+    String result = await platform.invokeMethod("SystemVersion");
+    setState(() {
+      this.systemVersion = result;
+    });
   }
 
   @override
@@ -115,7 +106,7 @@ class _landingPageState extends State<landingPage> {
             ),
           ),
           SizedBox(height: 58),
-          Platform.isIOS
+          Platform.isIOS && double.parse(this.systemVersion) >= 13.0
               ? Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
