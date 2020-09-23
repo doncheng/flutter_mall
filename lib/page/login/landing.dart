@@ -97,168 +97,151 @@ class _landingPageState extends State<landingPage> {
             ),
           ),
           SizedBox(height: 58),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[
-              Column(
-                children: <Widget>[
-                  Container(
-                      height: 44,
-                      width: 44,
-                      child: InkWell(
-                        child: Image.network(
-                          'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1816752600,129898364&fm=26&gp=0.jpg',
-                        ),
-                        onTap: () async {
-                          String result =
-                              await platform.invokeMethod("Alipaylanding");
-                          print(result);
-                        },
-                      )),
-                  SizedBox(height: 10),
-                  Container(
-                      height: 20,
-                      width: 42,
-                      child: Center(
-                        child: Text(
-                          '支付宝',
-                          style: TextStyle(
-                            fontSize: this.textfontsize,
-                          ),
-                        ),
-                      )),
-                ],
-              ),
-              Column(
-                children: <Widget>[
-                  Container(
-                      height: 44,
-                      width: 44,
-                      child: InkWell(
-                          child: Image.network(
-                            'https://kf.qq.com/img/wechat.png',
-                          ),
-                          onTap: () async {
-                            String result =
-                                await platform.invokeMethod("WeChatlanding");
-                            print(result);
-                          })),
-                  SizedBox(height: 10),
-                  Container(
-                      height: 20,
-                      width: 42,
-                      child: Center(
-                        child: Text(
-                          '微信',
-                          style: TextStyle(
-                            fontSize: this.textfontsize,
-                          ),
-                        ),
-                      )),
-                ],
-              ),
-              Platform.isIOS
-                  ? Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Container(
-                            constraints: BoxConstraints(
-                                maxHeight: double.infinity,
-                                maxWidth: double.infinity),
-                            child: Column(
-                              children: <Widget>[
-                                Container(
-                                  height: 44,
-                                  width: 44,
-                                  child: InkWell(
-                                    child: Image.network(
-                                      'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1342457926,2446972823&fm=26&gp=0.jpg',
-                                    ),
-                                    onTap: () async {
-                                      String result = await platform
-                                          .invokeMethod("Applelanding");
-                                      print(result);
-                                    },
-                                  ),
-                                ),
-                                SizedBox(height: 10),
-                                Container(
-                                    height: 20,
-                                    width: 42,
-                                    child: Center(
-                                      child: Text(
-                                        'Apple',
-                                        style: TextStyle(
-                                          fontSize: this.textfontsize,
-                                        ),
-                                      ),
-                                    )),
-                              ],
-                            )),
-                        Column(
-                          children: <Widget>[
-                            Container(
-                                height: 44,
-                                width: 44,
-                                child: InkWell(
-                                  child: Image.network(
-                                    'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1599050553370&di=b5c3ba4c2f35e3504675df2ff7865622&imgtype=0&src=http%3A%2F%2Fbpic.588ku.com%2Felement_origin_min_pic%2F01%2F49%2F66%2F2257447a7b5d1df.jpg',
-                                  ),
-                                  onTap: () async {
-                                    String result = await platform
-                                        .invokeMethod("NoValidationlanding");
-                                    print(result);
-                                  },
-                                )),
-                            SizedBox(height: 10),
-                            Container(
-                                height: 20,
-                                width: 42,
-                                child: Center(
-                                  child: Text(
-                                    '免验证',
-                                    style: TextStyle(
-                                      fontSize: this.textfontsize,
-                                    ),
-                                  ),
-                                )),
-                          ],
-                        ),
-                      ],
-                    )
-                  : Column(
-                      children: <Widget>[
-                        Container(
-                            height: 44,
-                            width: 44,
-                            child: InkWell(
-                              child: Image.network(
-                                'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1599050553370&di=b5c3ba4c2f35e3504675df2ff7865622&imgtype=0&src=http%3A%2F%2Fbpic.588ku.com%2Felement_origin_min_pic%2F01%2F49%2F66%2F2257447a7b5d1df.jpg',
-                              ),
-                              onTap: () async {
-                                String result = await platform
-                                    .invokeMethod("NoValidationlanding");
-                                print(result);
-                              },
-                            )),
-                        SizedBox(height: 10),
-                        Container(
-                            height: 20,
-                            width: 42,
-                            child: Center(
-                              child: Text(
-                                '免验证',
-                                style: TextStyle(
-                                  fontSize: this.textfontsize,
-                                ),
-                              ),
-                            )),
-                      ],
-                    ),
-            ],
-          )
+          Platform.isIOS
+              ? Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    Alipaylanding(),
+                    WeChatlanding(),
+                    Applelanding(),
+                    NoValidationlanding(),
+                  ],
+                )
+              : Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Alipaylanding(),
+                    WeChatlanding(),
+                    NoValidationlanding(),
+                  ],
+                )
         ],
       ),
+    );
+  }
+
+  Alipaylanding() {
+    return Column(
+      children: <Widget>[
+        Container(
+            height: 44,
+            width: 44,
+            child: InkWell(
+              child: Image.network(
+                'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1816752600,129898364&fm=26&gp=0.jpg',
+              ),
+              onTap: () async {
+                String result = await platform.invokeMethod("Alipaylanding");
+                print(result);
+              },
+            )),
+        SizedBox(height: 10),
+        Container(
+            height: 20,
+            width: 42,
+            child: Center(
+              child: Text(
+                '支付宝',
+                style: TextStyle(
+                  fontSize: this.textfontsize,
+                ),
+              ),
+            )),
+      ],
+    );
+  }
+
+  WeChatlanding() {
+    return Column(
+      children: <Widget>[
+        Container(
+            height: 44,
+            width: 44,
+            child: InkWell(
+                child: Image.network(
+                  'https://kf.qq.com/img/wechat.png',
+                ),
+                onTap: () async {
+                  String result = await platform.invokeMethod("WeChatlanding");
+                  print(result);
+                })),
+        SizedBox(height: 10),
+        Container(
+            height: 20,
+            width: 42,
+            child: Center(
+              child: Text(
+                '微信',
+                style: TextStyle(
+                  fontSize: this.textfontsize,
+                ),
+              ),
+            )),
+      ],
+    );
+  }
+
+  Applelanding() {
+    return Column(
+      children: <Widget>[
+        Container(
+          height: 44,
+          width: 44,
+          child: InkWell(
+            child: Image.network(
+              'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1342457926,2446972823&fm=26&gp=0.jpg',
+            ),
+            onTap: () async {
+              String result = await platform.invokeMethod("Applelanding");
+              print(result);
+            },
+          ),
+        ),
+        SizedBox(height: 10),
+        Container(
+            height: 20,
+            width: 42,
+            child: Center(
+              child: Text(
+                'Apple',
+                style: TextStyle(
+                  fontSize: this.textfontsize,
+                ),
+              ),
+            )),
+      ],
+    );
+  }
+
+  NoValidationlanding() {
+    return Column(
+      children: <Widget>[
+        Container(
+            height: 44,
+            width: 44,
+            child: InkWell(
+              child: Image.network(
+                'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1599050553370&di=b5c3ba4c2f35e3504675df2ff7865622&imgtype=0&src=http%3A%2F%2Fbpic.588ku.com%2Felement_origin_min_pic%2F01%2F49%2F66%2F2257447a7b5d1df.jpg',
+              ),
+              onTap: () async {
+                String result =
+                    await platform.invokeMethod("NoValidationlanding");
+                print(result);
+              },
+            )),
+        SizedBox(height: 10),
+        Container(
+            height: 20,
+            width: 42,
+            child: Center(
+              child: Text(
+                '免验证',
+                style: TextStyle(
+                  fontSize: this.textfontsize,
+                ),
+              ),
+            )),
+      ],
     );
   }
 }
