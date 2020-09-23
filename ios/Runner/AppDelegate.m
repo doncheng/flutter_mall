@@ -31,8 +31,9 @@
                  
              }
              if ([call.method isEqualToString:@"Applelanding"]) {
+//                 UIWindow *windoe = self.rootViewController.view.window;
                  //Apple登陆状态
-                 [self authorizationStatus];
+//                 [self authorizationStatus];
                  
                  if (@available(iOS 13.0, *)) {
                      
@@ -140,37 +141,37 @@
 }
 
 #pragma mark -Apple
--(void)authorizationStatus{
-    if (@available(iOS 13.0, *)) {
-//        NSString *userIdentifier = 钥匙串中取出的 userIdentifier;
-        NSString *userIdentifier = userIdentifier;
-        if (userIdentifier) {
-            ASAuthorizationAppleIDProvider *appleIDProvider = [ASAuthorizationAppleIDProvider new];
-            [appleIDProvider getCredentialStateForUserID:userIdentifier
-                                              completion:^(ASAuthorizationAppleIDProviderCredentialState credentialState,
-                                                           NSError * _Nullable error)
-            {
-                switch (credentialState) {
-//                    授权状态有效；
-                    case ASAuthorizationAppleIDProviderCredentialAuthorized:
-                        // The Apple ID credential is valid
-                        break;
-//                        上次使用苹果账号登录的凭据已被移除，需解除绑定并重新引导用户使用苹果登录；
-                    case ASAuthorizationAppleIDProviderCredentialRevoked:
-                        // Apple ID Credential revoked, handle unlink
-                        break;
-//                        未登录授权，直接弹出登录页面，引导用户登录。
-                    case ASAuthorizationAppleIDProviderCredentialNotFound:
-                        // Credential not found, show login UI
-                        break;
-                    case ASAuthorizationAppleIDProviderCredentialTransferred:
-                        //
-                        break;
-                }
-            }];
-        }
-    }
-}
+//-(void)authorizationStatus{
+//    if (@available(iOS 13.0, *)) {
+////        NSString *userIdentifier = 钥匙串中取出的 userIdentifier;
+//        NSString *userIdentifier = userIdentifier;
+//        if (userIdentifier) {
+//            ASAuthorizationAppleIDProvider *appleIDProvider = [ASAuthorizationAppleIDProvider new];
+//            [appleIDProvider getCredentialStateForUserID:userIdentifier
+//                                              completion:^(ASAuthorizationAppleIDProviderCredentialState credentialState,
+//                                                           NSError * _Nullable error)
+//            {
+//                switch (credentialState) {
+////                    授权状态有效；
+//                    case ASAuthorizationAppleIDProviderCredentialAuthorized:
+//                        // The Apple ID credential is valid
+//                        break;
+////                        上次使用苹果账号登录的凭据已被移除，需解除绑定并重新引导用户使用苹果登录；
+//                    case ASAuthorizationAppleIDProviderCredentialRevoked:
+//                        // Apple ID Credential revoked, handle unlink
+//                        break;
+////                        未登录授权，直接弹出登录页面，引导用户登录。
+//                    case ASAuthorizationAppleIDProviderCredentialNotFound:
+//                        // Credential not found, show login UI
+//                        break;
+//                    case ASAuthorizationAppleIDProviderCredentialTransferred:
+//                        //
+//                        break;
+//                }
+//            }];
+//        }
+//    }
+//}
 
 -(void)Applelanding API_AVAILABLE(ios(13.0)){
     ASAuthorizationAppleIDProvider *appleIDProvider = [[ASAuthorizationAppleIDProvider alloc]init];
@@ -183,15 +184,17 @@
 }
 
 ///代理主要用于展示在哪里
-//-(ASPresentationAnchor)presentationAnchorForAuthorizationController:(ASAuthorizationController *)controller API_AVAILABLE(ios(13.0)){
-//    return self.rootViewController;
-//}
+-(ASPresentationAnchor)presentationAnchorForAuthorizationController:(ASAuthorizationController *)controller API_AVAILABLE(ios(13.0)){
+//    return self.view.window;
+    return self.rootViewController.view.window;
+}
 
 - (void)authorizationController:(ASAuthorizationController *)controller didCompleteWithAuthorization:(ASAuthorization *)authorization API_AVAILABLE(ios(13.0))
 {
     if ([authorization.credential isKindOfClass:[ASAuthorizationAppleIDCredential class]])       {
         ASAuthorizationAppleIDCredential *credential = authorization.credential;
         
+        ///将返回得到的user 存储起来
         NSString *state = credential.state;
         NSString *userID = credential.user;
         NSPersonNameComponents *fullName = credential.fullName;
