@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mall/page/home/webview.dart';
 import 'package:mall/utils/navigator_util.dart';
+import 'dart:io';
 
 class SplashView extends StatefulWidget {
   @override
@@ -11,7 +13,14 @@ class _SplashViewState extends State<SplashView> {
   void initState() {
     super.initState();
     Future.delayed(Duration(seconds: 1), () {
-      NavigatorUtils.goMallMainPage(context);
+      // Platform.isAndroid
+      Platform.isIOS
+          ? NavigatorUtils.goMallMainPage(context)
+          : Navigator.push(
+              context,
+              MaterialPageRoute(
+                  //导航打开新视图
+                  builder: (context) => webviewPage()));
     });
   }
 
