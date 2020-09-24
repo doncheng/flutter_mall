@@ -12,7 +12,7 @@ class _SplashViewState extends State<SplashView> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(seconds: 1), () {
+    Future.delayed(Duration(seconds: 0), () {
       Platform.isAndroid
           // Platform.isIOS
           ? NavigatorUtils.goMallMainPage(context)
@@ -26,16 +26,29 @@ class _SplashViewState extends State<SplashView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        color: Colors.deepOrangeAccent,
-        child: Image.asset(
-          "images/splash.png",
-          width: double.infinity,
-          height: double.infinity,
-          fit: BoxFit.fill,
+    return Container(
+      color: Colors.white,
+      child: Center(
+        child: Text(
+          'Loading...',
+          style: TextStyle(
+              fontSize: 25,
+              fontWeight: FontWeight.bold,
+              color: Color(0xff9a9a9a)),
         ),
       ),
-    );
+    )
+        // Scaffold(
+        //   body: Container(
+        //     color: Colors.deepOrangeAccent,
+        //     child: Image.asset(
+        //       "images/splash.png",
+        //       width: double.infinity,
+        //       height: double.infinity,
+        //       fit: BoxFit.fill,
+        //     ),
+        //   ),
+        // )
+        ;
   }
 }
