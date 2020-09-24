@@ -63,7 +63,7 @@ class _MassageBodyState extends State<MassageBody> {
           children: [
             Container(
               margin: EdgeInsets.only(left: 10),
-              height: 35,
+              constraints: BoxConstraints(maxHeight: double.infinity),
               width: 240,
               child: Text(
                 '关注微信公众号,通过微信随时接收用户咨询、订单状态',
@@ -151,7 +151,7 @@ class _commentsState extends State<comments> {
           child: Container(
             width: double.infinity,
             constraints: BoxConstraints(maxHeight: double.infinity),
-            margin: EdgeInsets.only(top: 15, left: 12, right: 12),
+            margin: EdgeInsets.only(top: 10, left: 12, right: 12, bottom: 10),
             child: Row(
               children: [
                 ClipOval(
