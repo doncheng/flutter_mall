@@ -13,8 +13,8 @@ class _SplashViewState extends State<SplashView> {
   void initState() {
     super.initState();
     Future.delayed(Duration(seconds: 1), () {
-      // Platform.isAndroid
-      Platform.isIOS
+      Platform.isAndroid
+          // Platform.isIOS
           ? NavigatorUtils.goMallMainPage(context)
           : Navigator.push(
               context,
