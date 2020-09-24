@@ -8,6 +8,7 @@ import 'package:mall/page/help/set.dart';
 import 'package:mall/utils/navigator_util.dart';
 import 'package:barcode_scan/barcode_scan.dart';
 import 'package:mall/utils/shared_preferences_util.dart';
+import 'package:mall/widgets/webview.dart';
 import './placetheorder.dart';
 
 const APPBAR_SCROLL_OFFSET = 100;
@@ -709,6 +710,11 @@ class _recommendedtoolsState extends State<recommendedtools> {
           InkWell(
             onTap: () {
               if (value['toolsname2'] == '平台规则') {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => WebViewPage(
+                            'https://www.baidu.com/', value['toolsname2'])));
                 print('平台规则');
               } else if (value['toolsname2'] == '邀请得现金') {
                 print('邀请得现金');
@@ -734,6 +740,11 @@ class _recommendedtoolsState extends State<recommendedtools> {
           InkWell(
             onTap: () {
               if (value['toolsname3'] == '邀请得现金') {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => WebViewPage(
+                            'https://www.baidu.com/', value['toolsname3'])));
                 print('邀请得现金');
               } else if (value['toolsname3'] == '活动报名') {
                 print('活动报名');
@@ -764,6 +775,11 @@ class _recommendedtoolsState extends State<recommendedtools> {
           InkWell(
             onTap: () {
               if (value['toolsname4'] == '天天抽奖') {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => WebViewPage(
+                            'https://www.baidu.com/', value['toolsname4'])));
                 print('天天抽奖');
               } else if (value['toolsname4'] == '租着玩') {
                 print('租着玩');
