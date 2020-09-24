@@ -1,8 +1,12 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mall/api/api.dart';
+import 'package:mall/constant/string.dart';
 import 'package:mall/entity/user_entity.dart';
 import 'package:mall/event/login_event.dart';
+import 'package:mall/service/user_service.dart';
+import 'package:mall/utils/http_util.dart';
 
 class landingPage extends StatefulWidget {
   landingPage({Key key}) : super(key: key);
@@ -37,7 +41,6 @@ class _landingPageState extends State<landingPage> {
   @override
   void dispose() {
     super.dispose();
-    print('shhhhhs');
   }
 
   @override
@@ -283,14 +286,38 @@ class _landingPageState extends State<landingPage> {
 //         _autovalidator = true;
 //       });
 //     }
+    print('111111111');
+    Future login(Map<String, dynamic> parameters, OnSuccess onSuccess,
+        OnFail onFail) async {
+      var parameters = {
+        "username": 'user123',
+        "password": 'user123',
+      };
+      try {
+        var response =
+            await HttpUtil.instance.post(Api.LOGIN, parameters: parameters);
+        if (response['errno'] == 0) {
+          UserEntity userEntity = UserEntity.fromJson(response['data']);
+          onSuccess(userEntity);
+          print('2222222');
+        } else {
+          print('333333');
+          onFail(response['errmsg']);
+        }
+      } catch (e) {
+        print(e);
+        onFail(Strings.SERVER_EXCEPTION);
+      }
+    }
+
     Navigator.pop(context);
-    loginEventBus.fire(LoginEvent(
-      true,
-      // url: userEntity.userInfo.avatarUrl,
-      // nickName: userEntity.userInfo.nickName,
-      url:
-          'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3172368692,3210698748&fm=26&gp=0.jpg',
-      nickName: '我已经登陆了',
-    ));
+    // loginEventBus.fire(LoginEvent(
+    //   true,
+    //   // url: userEntity.userInfo.avatarUrl,
+    //   // nickName: userEntity.userInfo.nickName,
+    //   url:
+    //       'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3172368692,3210698748&fm=26&gp=0.jpg',
+    //   nickName: '我已经登录了',
+    // ));
   }
 }
