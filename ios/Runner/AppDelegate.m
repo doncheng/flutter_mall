@@ -31,6 +31,11 @@
                  
              }
              if ([call.method isEqualToString:@"Applelanding"]) {
+                 [[[UIAlertView alloc] initWithTitle:@"Applelanding"
+                                             message:@"Camera not available."
+                                            delegate:nil
+                                   cancelButtonTitle:@"OK"
+                                   otherButtonTitles:nil] show];
 //                 UIWindow *window = self.rootViewController.view.window;
                  //Apple登陆状态
 //                 [self authorizationStatus];
@@ -321,7 +326,11 @@
         ASUserDetectionStatus realUserStatus = credential.realUserStatus;
         
         [[NSUserDefaults standardUserDefaults] setObject:userID forKey:@"appleID"];
-        
+        [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"authorizationCode%@",authorizationCode]
+                                    message:[NSString stringWithFormat:@"identityToken%@",identityToken]
+                                   delegate:nil
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil] show];
         NSLog(@"userID: %@", userID);
         NSLog(@"fullName: %@", fullName);
         NSLog(@"email: %@", email);

@@ -283,6 +283,7 @@ class _landingPageState extends State<landingPage> {
 //         _autovalidator = true;
 //       });
 //     }
+    Navigator.pop(context);
     loginEventBus.fire(LoginEvent(
       true,
       // url: userEntity.userInfo.avatarUrl,

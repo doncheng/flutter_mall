@@ -172,7 +172,13 @@ class _MineViewState extends State<MineView> {
                                               Icons.account_circle,
                                               size: 54,
                                             ),
-                                            title: Text('请登陆'),
+                                            title: Text(
+                                              '点击登陆',
+                                              style: TextStyle(
+                                                fontSize: 18,
+                                                color: Colors.white,
+                                              ),
+                                            ),
                                           ),
                                         )),
                               shoppingcartfootprint(),
@@ -232,7 +238,7 @@ class _MineViewState extends State<MineView> {
                       ],
                     ),
                   ),
-                  makemoney(),
+                  // makemoney(),
                   recommendedtools(),
                   SizedBox(height: 50),
                 ]),
@@ -399,7 +405,7 @@ class _mytradingState extends State<mytrading> {
             child: Row(
               children: <Widget>[
                 Text(
-                  '我的交易',
+                  '我的订单',
                   style: TextStyle(fontWeight: FontWeight.w600),
                 ),
               ],
@@ -649,22 +655,22 @@ class _recommendedtoolsState extends State<recommendedtools> {
   List recommendedtools = [
     {
       'toolsname1': '客服中心',
-      'toolsname2': '我的订阅',
-      'toolsname3': '我的拼团',
-      'toolsname4': '借钱',
+      'toolsname2': '平台规则',
+      'toolsname3': '邀请得现金',
+      'toolsname4': '天天抽奖',
     },
-    {
-      'toolsname1': '平台规则',
-      'toolsname2': '邀请得现金',
-      'toolsname3': '活动报名',
-      'toolsname4': '租着玩',
-    },
-    {
-      'toolsname1': '领取中心',
-      'toolsname2': '活动扫码',
-      'toolsname3': '天天抽奖',
-      'toolsname4': '签到送礼',
-    }
+    // {
+    //   'toolsname1': '平台规则',
+    //   'toolsname2': '邀请得现金',
+    //   'toolsname3': '活动报名',
+    //   'toolsname4': '租着玩',
+    // },
+    // {
+    //   'toolsname1': '领取中心',
+    //   'toolsname2': '活动扫码',
+    //   'toolsname3': '天天抽奖',
+    //   'toolsname4': '签到送礼',
+    // }
   ];
   List<Widget> _recommendedtoolsget() {
     var tempList = recommendedtools.map((value) {
@@ -677,7 +683,7 @@ class _recommendedtoolsState extends State<recommendedtools> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        //导航打开新视图
+                        //导航打开客服中心
                         builder: (context) => CustomerPage()));
               } else if (value['toolsname1'] == '平台规则') {
                 print('平台规则');
@@ -702,8 +708,8 @@ class _recommendedtoolsState extends State<recommendedtools> {
           ),
           InkWell(
             onTap: () {
-              if (value['toolsname2'] == '我的订阅') {
-                print('我的订阅');
+              if (value['toolsname2'] == '平台规则') {
+                print('平台规则');
               } else if (value['toolsname2'] == '邀请得现金') {
                 print('邀请得现金');
               } else {
@@ -727,8 +733,8 @@ class _recommendedtoolsState extends State<recommendedtools> {
           ),
           InkWell(
             onTap: () {
-              if (value['toolsname3'] == '我的拼团') {
-                print('我的拼团');
+              if (value['toolsname3'] == '邀请得现金') {
+                print('邀请得现金');
               } else if (value['toolsname3'] == '活动报名') {
                 print('活动报名');
               } else {
@@ -757,8 +763,8 @@ class _recommendedtoolsState extends State<recommendedtools> {
           ),
           InkWell(
             onTap: () {
-              if (value['toolsname4'] == '借钱') {
-                print('借钱');
+              if (value['toolsname4'] == '天天抽奖') {
+                print('天天抽奖');
               } else if (value['toolsname4'] == '租着玩') {
                 print('租着玩');
               } else {
@@ -824,7 +830,7 @@ class _recommendedtoolsState extends State<recommendedtools> {
           border: Border.all(color: Colors.white),
           color: Colors.white,
           borderRadius: BorderRadius.circular(8)),
-      height: 230,
+      constraints: BoxConstraints(maxHeight: double.infinity),
       width: double.infinity,
       margin: EdgeInsets.only(left: 12, right: 13, top: 20),
       child: Column(
