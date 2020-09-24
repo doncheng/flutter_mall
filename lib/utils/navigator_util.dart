@@ -100,6 +100,11 @@ class NavigatorUtils {
         transition: TransitionType.native);
   }
 
+  static goLandingfPage(BuildContext context) {
+    Application.router.navigateTo(context, Routers.goLandingfPage,
+        transition: TransitionType.native);
+  }
+
   static goGoodsDetails(BuildContext context, int goodsId) {
     Application.router.navigateTo(
         context, Routers.goodsDetail + "?goodsId=$goodsId",

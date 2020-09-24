@@ -1,11 +1,13 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mall/event/login_event.dart';
 import 'package:mall/page/bill/my_assets.dart';
 import 'package:mall/page/help/customer_service.dart';
 import 'package:mall/page/help/set.dart';
 import 'package:mall/utils/navigator_util.dart';
 import 'package:barcode_scan/barcode_scan.dart';
+import 'package:mall/utils/shared_preferences_util.dart';
 import './placetheorder.dart';
 
 const APPBAR_SCROLL_OFFSET = 100;
@@ -16,6 +18,16 @@ class MineView extends StatefulWidget {
 }
 
 class _MineViewState extends State<MineView> {
+  bool isLogin = false;
+  var imageHeadUrl;
+  var nickName = '李天霸';
+
+  @override
+  void initState() {
+    super.initState();
+    _getUserInfo();
+  }
+
   //渐变准备
   final PageController _controller = PageController(initialPage: 0);
   double appBarAlpha = 0;
@@ -32,9 +44,46 @@ class _MineViewState extends State<MineView> {
     // prrint(appBarAlpha);
   }
 
-  String account_name = '李天霸';
+  //监听事件，等待登录完传值过来
+  _refreshEvent() {
+    loginEventBus.on<LoginEvent>().listen((LoginEvent loginEvent) {
+      if (loginEvent.isLogin) {
+        setState(() {
+          isLogin = true;
+          imageHeadUrl = loginEvent.url;
+          nickName = loginEvent.nickName;
+        });
+      } else {
+        setState(() {
+          isLogin = false;
+        });
+      }
+    });
+  }
+
+  _getUserInfo() {
+    SharedPreferencesUtils.getToken().then((token) {
+      if (token != null) {
+        setState(() {
+          isLogin = true;
+        });
+        SharedPreferencesUtils.getImageHead().then((imageHeadAddress) {
+          setState(() {
+            imageHeadUrl = imageHeadAddress;
+          });
+        });
+        SharedPreferencesUtils.getUserName().then((name) {
+          setState(() {
+            nickName = name;
+          });
+        });
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    _refreshEvent();
     final double statusBarHeight = MediaQuery.of(context).padding.top;
 
     final size = MediaQuery.of(context).size;
@@ -86,18 +135,46 @@ class _MineViewState extends State<MineView> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               InkWell(
-                                  onTap: () => _toPersonalData(),
-                                  child: Container(
-                                    width: 200,
-                                    child: ListTile(
-                                      leading: Icon(
-                                        Icons.account_circle,
-                                        size: 54,
-                                      ),
-                                      title: Text(this.account_name),
-                                      subtitle: Text('关注 0｜粉丝 0'),
-                                    ),
-                                  )),
+                                  onTap: () => isLogin
+                                      ? _toPersonalData()
+                                      : _toLandingPage(),
+                                  child: isLogin
+                                      ? Container(
+                                          width: 300,
+                                          child: ListTile(
+                                            leading: Container(
+                                              height: 54,
+                                              width: 54,
+                                              child: ClipOval(
+                                                child: Image.network(
+                                                    this.imageHeadUrl),
+                                              ),
+                                            ),
+                                            title: Text(
+                                              this.nickName,
+                                              style: TextStyle(
+                                                fontSize: 20,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                            subtitle: Text(
+                                              '关注 0 丨 粉丝 0',
+                                              style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: Colors.white),
+                                            ),
+                                          ),
+                                        )
+                                      : Container(
+                                          width: 200,
+                                          child: ListTile(
+                                            leading: Icon(
+                                              Icons.account_circle,
+                                              size: 54,
+                                            ),
+                                            title: Text('请登陆'),
+                                          ),
+                                        )),
                               shoppingcartfootprint(),
                             ],
                           ),
@@ -171,7 +248,7 @@ class _MineViewState extends State<MineView> {
                   // brightness: Brightness.dark,
                   backgroundColor: Color(0xffFE5155),
                   elevation: 0,
-                  title: Text(this.account_name),
+                  title: Text(this.nickName),
                   actions: <Widget>[
                     IconButton(
                       icon: Icon(
@@ -197,6 +274,10 @@ class _MineViewState extends State<MineView> {
 
   _toPlacetheorder() {
     NavigatorUtils.goPlacetheorder(context);
+  }
+
+  _toLandingPage() {
+    NavigatorUtils.goLandingfPage(context);
   }
 
   _toPersonalData() {

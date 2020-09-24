@@ -40,6 +40,11 @@ var settingsPageHandler = Handler(
   return SettingsPage();
 });
 
+var landingfPageHandler = Handler(
+    handlerFunc: (BuildContext context, Map<String, List<String>> parameters) {
+  return landingPage();
+});
+
 var goPlacetheorderHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> parameters) {
   return PlacetheorderPage();

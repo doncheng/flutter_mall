@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mall/entity/user_entity.dart';
+import 'package:mall/event/login_event.dart';
 
 class landingPage extends StatefulWidget {
   landingPage({Key key}) : super(key: key);
@@ -13,6 +15,7 @@ class _landingPageState extends State<landingPage> {
   double textfontsize = 12.0;
   double iconsize = 30;
   String systemVersion;
+  UserEntity userEntity;
 
   static const String CHINAL_NAME = "example.mall/call_native"; //同步路径
   static const platform = const MethodChannel(CHINAL_NAME);
@@ -71,6 +74,7 @@ class _landingPageState extends State<landingPage> {
                 borderRadius: BorderRadius.circular(25),
               ),
               onPressed: () async {
+                _login();
                 String result =
                     await platform.invokeMethod("call_native_method");
                 setState(() {
@@ -110,18 +114,18 @@ class _landingPageState extends State<landingPage> {
               ? Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
-                    Alipaylanding(),
-                    WeChatlanding(),
+                    // Alipaylanding(),
+                    // WeChatlanding(),
                     Applelanding(),
-                    NoValidationlanding(),
+                    // NoValidationlanding(),
                   ],
                 )
               : Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Alipaylanding(),
-                    WeChatlanding(),
-                    NoValidationlanding(),
+                    // Alipaylanding(),
+                    // WeChatlanding(),
+                    // NoValidationlanding(),
                   ],
                 )
         ],
@@ -230,8 +234,7 @@ class _landingPageState extends State<landingPage> {
             width: 44,
             child: InkWell(
               child: Image.network(
-                'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1599050553370&di=b5c3ba4c2f35e3504675df2ff7865622&imgtype=0&src=http%3A%2F%2Fbpic.588ku.com%2Felement_origin_min_pic%2F01%2F49%2F66%2F2257447a7b5d1df.jpg',
-              ),
+                  'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1841811842,2320861044&fm=26&gp=0.jpg'),
               onTap: () async {
                 String result =
                     await platform.invokeMethod("NoValidationlanding");
@@ -252,5 +255,41 @@ class _landingPageState extends State<landingPage> {
             )),
       ],
     );
+  }
+
+  _login() {
+//     if (registerFormKey.currentState.validate()) {
+//       registerFormKey.currentState.save();
+//       Map<String, dynamic> map = Map();
+//       map.putIfAbsent("username", () => _accountTextControl.text.toString());
+//       map.putIfAbsent("password", () => _passwordTextControl.text.toString());
+//       userService.login(map, (success) {
+//         print(success);
+//         userEntity = success;
+//         _saveUserInfo();
+//         _showToast(Strings.LOGIN_SUCESS);
+// //        Provider.of<UserInfoModel>(context, listen: true)
+// //            .updateInfo(userEntity);
+//         loginEventBus.fire(LoginEvent(true,
+//             url: userEntity.userInfo.avatarUrl,
+//             nickName: userEntity.userInfo.nickName));
+//         Navigator.pop(context);
+//       }, (onFail) {
+//         print(onFail);
+//         _showToast(onFail);
+//       });
+//     } else {
+//       setState(() {
+//         _autovalidator = true;
+//       });
+//     }
+    loginEventBus.fire(LoginEvent(
+      true,
+      // url: userEntity.userInfo.avatarUrl,
+      // nickName: userEntity.userInfo.nickName,
+      url:
+          'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3172368692,3210698748&fm=26&gp=0.jpg',
+      nickName: '我已经登陆了',
+    ));
   }
 }

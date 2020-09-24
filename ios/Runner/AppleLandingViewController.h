@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import <AuthenticationServices/AuthenticationServices.h>//记得引入
 NS_ASSUME_NONNULL_BEGIN
 
-@interface AppleLandingViewController : UIViewController
+@interface AppleLandingViewController : UIViewController<ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding>
+
 
 @end
 

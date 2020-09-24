@@ -35,13 +35,16 @@
                  //Apple登陆状态
 //                 [self authorizationStatus];
                  
-                 if (@available(iOS 13.0, *)) {
-                     
-                     [self Applelanding];
-                     
-                 } else {
-                     // Fallback on earlier versions
-                 }
+//                 AppleLandingViewController *appleLandingViewController = [[AppleLandingViewController alloc]init];
+// [self.rootViewController presentViewController:appleLandingViewController animated:YES completion:nil];
+                  [self authorizationAppleID];
+//                 if (@available(iOS 13.0, *)) {
+//
+//                     [self Applelanding];
+//
+//                 } else {
+//                     // Fallback on earlier versions
+//                 }
              }
              
              //访问相册 相机
@@ -174,67 +177,151 @@
 //}
 
 //Authorization 发起授权登录请求
--(void)Applelanding API_AVAILABLE(ios(13.0)){
-    //ASAuthorizationAppleIDProvider主要用于创建一个 ASAuthorizationAppleIDRequest 以及获取对应 userID 的用户授权状态
-    ASAuthorizationAppleIDProvider *appleIDProvider = [[ASAuthorizationAppleIDProvider alloc]init];
-    ASAuthorizationAppleIDRequest *request = [appleIDProvider createRequest];
-    request.requestedScopes = @[ASAuthorizationScopeFullName,ASAuthorizationScopeEmail];
-    //创建 ASAuthorizationController ，它是管理授权请求的控制器
-    ASAuthorizationController *auth = [[ASAuthorizationController alloc]initWithAuthorizationRequests:@[request]];
-    auth.delegate = self;
-    auth.presentationContextProvider = self;
-    //启动授权 performRequests
-    [auth performRequests];
-}
-//已经Sign In with Apple登陆过app的用户,如果设备中存在iCloud Keychain凭证或者AppleID凭证，提示用户直接使用TouchID或FaceID登录即可。
-- (void)perfomExistingAccountSetupFlows {
+//-(void)Applelanding API_AVAILABLE(ios(13.0)){
+//    //ASAuthorizationAppleIDProvider主要用于创建一个 ASAuthorizationAppleIDRequest 以及获取对应 userID 的用户授权状态
+//    ASAuthorizationAppleIDProvider *appleIDProvider = [[ASAuthorizationAppleIDProvider alloc]init];
+//    ASAuthorizationAppleIDRequest *request = [appleIDProvider createRequest];
+//    request.requestedScopes = @[ASAuthorizationScopeFullName,ASAuthorizationScopeEmail];
+//    //创建 ASAuthorizationController ，它是管理授权请求的控制器
+//    ASAuthorizationController *auth = [[ASAuthorizationController alloc]initWithAuthorizationRequests:@[request]];
+//    auth.delegate = self;
+//    auth.presentationContextProvider = self;
+//    //启动授权 performRequests
+//    [auth performRequests];
+//}
+////已经Sign In with Apple登陆过app的用户,如果设备中存在iCloud Keychain凭证或者AppleID凭证，提示用户直接使用TouchID或FaceID登录即可。
+//- (void)perfomExistingAccountSetupFlows {
+//    if (@available(iOS 13.0, *)) {
+//
+//        // 授权请求依赖于用于的AppleID
+//        ASAuthorizationAppleIDRequest *authAppleIDRequest = [[ASAuthorizationAppleIDProvider new] createRequest];
+//        // 为了执行钥匙串凭证分享生成请求的一种机制
+//        ASAuthorizationPasswordRequest *passwordRequest = [[ASAuthorizationPasswordProvider new] createRequest];
+//        NSMutableArray <ASAuthorizationRequest *> *mArr = [NSMutableArray arrayWithCapacity:2];
+//        if (authAppleIDRequest) {
+//            [mArr addObject:authAppleIDRequest];
+//        }
+//        if (passwordRequest) {
+//            [mArr addObject:passwordRequest];
+//        }
+//        // ASAuthorizationRequest：对于不同种类授权请求的基类
+//        NSArray <ASAuthorizationRequest *> *requests = [mArr copy];
+//        // 由ASAuthorizationAppleIDProvider创建的授权请求 管理授权请求的控制器
+//        ASAuthorizationController *authorizationController = [[ASAuthorizationController alloc] initWithAuthorizationRequests:requests];
+//        // 设置授权控制器通知授权请求的成功与失败的代理
+//        authorizationController.delegate = self;
+//        // 设置提供 展示上下文的代理，在这个上下文中 系统可以展示授权界面给用户
+//        authorizationController.presentationContextProvider = self;
+//        // 在控制器初始化期间启动授权流
+//        [authorizationController performRequests];
+//    }
+//}
+//
+/////告诉 ASAuthorizationController 展示在哪个 window 上。
+//-(ASPresentationAnchor)presentationAnchorForAuthorizationController:(ASAuthorizationController *)controller API_AVAILABLE(ios(13.0)){
+////    return self.view.window;
+//    return [UIApplication sharedApplication].delegate.window;
+////    return self.window;
+//}
+//
+//- (void)authorizationController:(ASAuthorizationController *)controller didCompleteWithAuthorization:(ASAuthorization *)authorization API_AVAILABLE(ios(13.0))
+//{
+//    if ([authorization.credential isKindOfClass:[ASAuthorizationAppleIDCredential class]])       {
+//        ASAuthorizationAppleIDCredential *credential = authorization.credential;
+//
+//        ///将返回得到的user 存储起来
+//        NSString *state = credential.state;
+//        NSString *userID = credential.user;
+//        NSPersonNameComponents *fullName = credential.fullName;
+//        NSString *email = credential.email;
+//        NSString *authorizationCode = [[NSString alloc] initWithData:credential.authorizationCode encoding:NSUTF8StringEncoding]; // refresh token
+//        NSString *identityToken = [[NSString alloc] initWithData:credential.identityToken encoding:NSUTF8StringEncoding]; // access token
+//        ASUserDetectionStatus realUserStatus = credential.realUserStatus;
+//
+//        NSLog(@"state: %@", state);
+//        NSLog(@"userID: %@", userID);
+//        NSLog(@"fullName: %@", fullName);
+//        NSLog(@"email: %@", email);
+//        NSLog(@"authorizationCode: %@", authorizationCode);
+//        NSLog(@"identityToken: %@", identityToken);
+//        NSLog(@"realUserStatus: %@", @(realUserStatus));
+//    }
+//}
+//
+//- (void)authorizationController:(ASAuthorizationController *)controller didCompleteWithError:(NSError *)error API_AVAILABLE(ios(13.0))
+//{
+//    NSString *errorMsg = nil;
+//    switch (error.code) {
+//        case ASAuthorizationErrorCanceled:
+//            errorMsg = @"用户取消了授权请求";
+//            break;
+//        case ASAuthorizationErrorFailed:
+//            errorMsg = @"授权请求失败";
+//            break;
+//        case ASAuthorizationErrorInvalidResponse:
+//            errorMsg = @"授权请求响应无效";
+//            break;
+//        case ASAuthorizationErrorNotHandled:
+//            errorMsg = @"未能处理授权请求";
+//            break;
+//        case ASAuthorizationErrorUnknown:
+//            errorMsg = @"授权请求失败未知原因";
+//            break;
+//    }
+//    NSLog(@"%@", errorMsg);
+//}
+#pragma mark- 授权苹果ID
+- (void)authorizationAppleID {
+    
     if (@available(iOS 13.0, *)) {
-                
-        // 授权请求依赖于用于的AppleID
-        ASAuthorizationAppleIDRequest *authAppleIDRequest = [[ASAuthorizationAppleIDProvider new] createRequest];
-        // 为了执行钥匙串凭证分享生成请求的一种机制
-        ASAuthorizationPasswordRequest *passwordRequest = [[ASAuthorizationPasswordProvider new] createRequest];
-        NSMutableArray <ASAuthorizationRequest *> *mArr = [NSMutableArray arrayWithCapacity:2];
+        
+        ASAuthorizationAppleIDProvider * appleIDProvider = [[ASAuthorizationAppleIDProvider alloc] init];
+        ASAuthorizationAppleIDRequest * authAppleIDRequest = [appleIDProvider createRequest];
+        ASAuthorizationPasswordRequest * passwordRequest = [[[ASAuthorizationPasswordProvider alloc] init] createRequest];
+
+        NSMutableArray <ASAuthorizationRequest *> * array = [NSMutableArray arrayWithCapacity:2];
         if (authAppleIDRequest) {
-            [mArr addObject:authAppleIDRequest];
+            [array addObject:authAppleIDRequest];
         }
-        if (passwordRequest) {
-            [mArr addObject:passwordRequest];
-        }
-        // ASAuthorizationRequest：对于不同种类授权请求的基类
-        NSArray <ASAuthorizationRequest *> *requests = [mArr copy];
-        // 由ASAuthorizationAppleIDProvider创建的授权请求 管理授权请求的控制器
-        ASAuthorizationController *authorizationController = [[ASAuthorizationController alloc] initWithAuthorizationRequests:requests];
-        // 设置授权控制器通知授权请求的成功与失败的代理
+//        if (passwordRequest) {
+//            [array addObject:passwordRequest];
+//        }
+        NSArray <ASAuthorizationRequest *> * requests = [array copy];
+        
+        ASAuthorizationController * authorizationController = [[ASAuthorizationController alloc] initWithAuthorizationRequests:requests];
         authorizationController.delegate = self;
-        // 设置提供 展示上下文的代理，在这个上下文中 系统可以展示授权界面给用户
         authorizationController.presentationContextProvider = self;
-        // 在控制器初始化期间启动授权流
         [authorizationController performRequests];
+        
+    } else {
+        // 处理不支持系统版本
+        NSLog(@"系统不支持Apple登录");
     }
 }
-
-///告诉 ASAuthorizationController 展示在哪个 window 上。
--(ASPresentationAnchor)presentationAnchorForAuthorizationController:(ASAuthorizationController *)controller API_AVAILABLE(ios(13.0)){
-//    return self.view.window;
-    return self.window;
-}
-
-- (void)authorizationController:(ASAuthorizationController *)controller didCompleteWithAuthorization:(ASAuthorization *)authorization API_AVAILABLE(ios(13.0))
-{
-    if ([authorization.credential isKindOfClass:[ASAuthorizationAppleIDCredential class]])       {
-        ASAuthorizationAppleIDCredential *credential = authorization.credential;
+#pragma mark- ASAuthorizationControllerDelegate
+// 授权成功
+- (void)authorizationController:(ASAuthorizationController *)controller didCompleteWithAuthorization:(ASAuthorization *)authorization API_AVAILABLE(ios(13.0)) {
+    
+    if ([authorization.credential isKindOfClass:[ASAuthorizationAppleIDCredential class]]) {
         
-        ///将返回得到的user 存储起来
-        NSString *state = credential.state;
-        NSString *userID = credential.user;
-        NSPersonNameComponents *fullName = credential.fullName;
-        NSString *email = credential.email;
-        NSString *authorizationCode = [[NSString alloc] initWithData:credential.authorizationCode encoding:NSUTF8StringEncoding]; // refresh token
-        NSString *identityToken = [[NSString alloc] initWithData:credential.identityToken encoding:NSUTF8StringEncoding]; // access token
+        ASAuthorizationAppleIDCredential * credential = authorization.credential;
+        
+        // 苹果用户唯一标识符，该值在同一个开发者账号下的所有 App 下是一样的，开发者可以用该唯一标识符与自己后台系统的账号体系绑定起来。
+        NSString * userID = credential.user;
+        
+        // 苹果用户信息 如果授权过，可能无法再次获取该信息
+        NSPersonNameComponents * fullName = credential.fullName;
+        NSString * email = credential.email;
+        
+        // 服务器验证需要使用的参数
+        NSString * authorizationCode = [[NSString alloc] initWithData:credential.authorizationCode encoding:NSUTF8StringEncoding];
+        NSString * identityToken = [[NSString alloc] initWithData:credential.identityToken encoding:NSUTF8StringEncoding];
+        
+        // 用于判断当前登录的苹果账号是否是一个真实用户，取值有：unsupported、unknown、likelyReal
         ASUserDetectionStatus realUserStatus = credential.realUserStatus;
         
-        NSLog(@"state: %@", state);
+        [[NSUserDefaults standardUserDefaults] setObject:userID forKey:@"appleID"];
+        
         NSLog(@"userID: %@", userID);
         NSLog(@"fullName: %@", fullName);
         NSLog(@"email: %@", email);
@@ -242,11 +329,28 @@
         NSLog(@"identityToken: %@", identityToken);
         NSLog(@"realUserStatus: %@", @(realUserStatus));
     }
+    else if ([authorization.credential isKindOfClass:[ASPasswordCredential class]]) {
+        
+        // 用户登录使用现有的密码凭证
+        ASPasswordCredential * passwordCredential = authorization.credential;
+        // 密码凭证对象的用户标识 用户的唯一标识
+        NSString * user = passwordCredential.user;
+        // 密码凭证对象的密码
+        NSString * password = passwordCredential.password;
+        
+        NSLog(@"userID: %@", user);
+        NSLog(@"password: %@", password);
+        
+    } else {
+        
+    }
 }
 
-- (void)authorizationController:(ASAuthorizationController *)controller didCompleteWithError:(NSError *)error API_AVAILABLE(ios(13.0))
-{
+// 授权失败
+- (void)authorizationController:(ASAuthorizationController *)controller didCompleteWithError:(NSError *)error API_AVAILABLE(ios(13.0)) {
+    
     NSString *errorMsg = nil;
+    
     switch (error.code) {
         case ASAuthorizationErrorCanceled:
             errorMsg = @"用户取消了授权请求";
@@ -265,5 +369,17 @@
             break;
     }
     NSLog(@"%@", errorMsg);
+}
+
+#pragma mark- ASAuthorizationControllerPresentationContextProviding
+- (ASPresentationAnchor)presentationAnchorForAuthorizationController:(ASAuthorizationController *)controller {
+    
+    return self.rootViewController.view.window;
+}
+
+#pragma mark- apple授权状态 更改通知
+- (void)handleSignInWithAppleStateChanged:(NSNotification *)notification
+{
+    NSLog(@"%@", notification.userInfo);
 }
 @end

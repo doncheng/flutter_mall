@@ -36,6 +36,7 @@ class Routers {
   static String SearchPage = "/SearchPage";
   static String goWithdrawalPage = "/goWithdrawalPage";
   static String goWalletCardPage = "/goWalletCardPage";
+  static String goLandingfPage = "/goLandingfPage";
   //
   static void configureRoutes(Router router) {
     router.notFoundHandler = Handler(handlerFunc:
@@ -46,8 +47,8 @@ class Routers {
     router.define(root, handler: splashHandler);
     router.define(home, handler: homeHandler);
     router.define(categoryGoodsList, handler: categoryGoodsListHandler);
-    router.define(login,
-        handler: loginHandler, transitionType: TransitionType.inFromBottom);
+    router.define(login, handler: loginHandler);
+    router.define(goLandingfPage, handler: landingfPageHandler);
 //路由配置添加
     router.define(goBalanceRechargePage, handler: goBalanceRechargePageHandler);
     router.define(goCapitalPage, handler: goCapitalPageHandler);

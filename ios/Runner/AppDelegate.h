@@ -8,7 +8,6 @@ API_AVAILABLE(ios(13.0))
 
 @property (nonatomic,strong)UIImagePickerController *imagePickerController;
 @property(nonatomic, strong) FlutterResult methodCannelResultBlock;
-@property (nonatomic,strong) ASAuthorizationAppleIDButton *authorizationButton;
 @property (nonatomic,strong) FlutterViewController* flutterViewController;
 @end
 
