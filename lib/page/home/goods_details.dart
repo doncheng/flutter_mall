@@ -1195,7 +1195,7 @@ class _SellerState extends State<Seller> {
           child: Container(
             constraints: BoxConstraints(maxHeight: double.infinity),
             width: double.infinity,
-            margin: EdgeInsets.only(left: 10, right: 10, top: 10),
+            // margin: EdgeInsets.only(left: 10, right: 10, top: 10)，
             child: chick == 1
                 ? Column(
                     children: [

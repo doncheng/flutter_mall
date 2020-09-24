@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:mall/constant/string.dart';
 import 'package:mall/page/bill/my_assets.dart';
+import 'package:mall/page/help/message.dart';
 
 import 'package:mall/page/home/mine.dart';
 import 'package:mall/page/home/search.dart';
@@ -32,7 +33,7 @@ class _MallMainViewState extends State<MallMainView> {
       // ..add(CategoryView())
       ..add(GoodsDetails())
       // ..add(CartView())
-      ..add(landingPage())
+      ..add(MassagePage())
       ..add(MineView());
   }
 

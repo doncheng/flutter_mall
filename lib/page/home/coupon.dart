@@ -31,6 +31,7 @@ class CouponView extends StatelessWidget {
         child: InkWell(
           onTap: () => _recevieCoupon(couponEntity.id),
           child: Card(
+            // color: Colors.red,
             margin: EdgeInsets.all(ScreenUtil.instance.setWidth(20.0)),
             child: Row(
               children: <Widget>[

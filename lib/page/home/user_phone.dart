@@ -138,7 +138,7 @@ class _PhoneBodyState extends State<PhoneBody> {
                     //Http请求发送验证码
                     //...
                     Fluttertoast.showToast(
-                        msg: "发送成功，正在获取...",
+                        msg: "发送成功",
                         toastLength: Toast.LENGTH_SHORT,
                         gravity: ToastGravity.BOTTOM,
                         timeInSecForIos: 1,

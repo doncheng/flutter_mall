@@ -43,13 +43,13 @@ class SwiperView extends StatelessWidget {
                 return CachedImageView(
                     double.infinity, double.infinity, bannerData[index].url);
               },
-              duration: 10000,
+              duration: 1000,
               pagination: SwiperPagination(
                   alignment: Alignment.bottomCenter,
                   builder: DotSwiperPaginationBuilder(
                       size: 8.0,
                       color: Colors.white,
-                      activeColor: Colors.deepOrangeAccent)),
+                      activeColor: Colors.blue)),
             ),
     );
   }

@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:mall/widgets/cached_image.dart';
 
-
 class GroupBuyView extends StatelessWidget {
   List<GrouponList> groupEntitys;
 
@@ -103,7 +102,7 @@ class GroupBuyView extends StatelessWidget {
                     "${groupBuyEntity.grouponMember}成团",
                     style: TextStyle(
                         color: Colors.red,
-                        fontSize: ScreenUtil.instance.setSp(26.0)),
+                        fontSize: ScreenUtil.instance.setSp(23.0)),
                   ),
                 ),
                 Padding(
@@ -122,7 +121,7 @@ class GroupBuyView extends StatelessWidget {
                     "立减${groupBuyEntity.grouponMember}",
                     style: TextStyle(
                         color: Colors.red,
-                        fontSize: ScreenUtil.instance.setSp(26.0)),
+                        fontSize: ScreenUtil.instance.setSp(23.0)),
                   ),
                 ),
                 Padding(
