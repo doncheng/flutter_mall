@@ -21,7 +21,6 @@ class _landingPageState extends State<landingPage> {
   double textfontsize = 12.0;
   double iconsize = 30;
   String systemVersion;
-  UserEntity userEntity;
 
   static const String CHINAL_NAME = "example.mall/call_native"; //同步路径
   static const platform = const MethodChannel(CHINAL_NAME);
@@ -49,7 +48,7 @@ class _landingPageState extends State<landingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('账号登陆'),
+        title: Text('账号登录'),
       ),
       body: Column(
         children: <Widget>[
@@ -101,20 +100,28 @@ class _landingPageState extends State<landingPage> {
           Padding(
             padding: EdgeInsets.only(left: 31, right: 31),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Container(
                   width: 120,
+                  height: 1,
                   child: Divider(
                     color: Colors.black38,
                   ),
                 ),
-                Text(
-                  '其他方式登陆',
-                  style: TextStyle(fontSize: 12, color: Colors.black87),
-                ),
+                Container(
+                    width: 95,
+                    height: 20,
+                    child: Center(
+                      child: Text(
+                        '其他方式登录',
+                        style:
+                            TextStyle(fontSize: 14, color: Color(0xff6c6c6c)),
+                      ),
+                    )),
                 Container(
                   width: 120,
+                  height: 1,
                   child: Divider(
                     color: Colors.black38,
                   ),
@@ -124,23 +131,29 @@ class _landingPageState extends State<landingPage> {
           ),
           SizedBox(height: 58),
           Platform.isIOS && double.parse(this.systemVersion) >= 13.0
-              ? Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: <Widget>[
-                    // Alipaylanding(),
-                    // WeChatlanding(),
-                    Applelanding(),
-                    // NoValidationlanding(),
-                  ],
+              ? Container(
+                  margin: EdgeInsets.only(left: 35, right: 35),
+                  width: double.infinity,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: <Widget>[
+                      // Alipaylanding(),
+                      // WeChatlanding(),
+                      Applelanding(),
+                      // NoValidationlanding(),
+                    ],
+                  ),
                 )
-              : Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    // Alipaylanding(),
-                    // WeChatlanding(),
-                    // NoValidationlanding(),
-                  ],
-                )
+              : Container(
+                  margin: EdgeInsets.only(left: 35, right: 35),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      // Alipaylanding(),
+                      // WeChatlanding(),
+                      // NoValidationlanding(),
+                    ],
+                  ))
         ],
       ),
     );

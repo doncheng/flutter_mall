@@ -36,14 +36,8 @@ class _MineViewState extends State<MineView> {
   }
 
   getUrlHttpClient() async {
-    print('dasadada');
     var url = "http://api.jiaoyibei.com/wx/order/list";
     _httpClient.getUrl(Uri.parse(url)).then((HttpClientRequest request) {
-      // Optionally set up headers...
-      // Optionally write to the request object...
-      // Then call close.
-      // request.write(
-      //     "{\"X-Litemall-Token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0aGlzIGlzIGxpdGVtYWxsIHRva2VuIiwiYXVkIjoiTUlOSUFQUCIsImlzcyI6IkxJVEVNQUxMIiwiZXhwIjoxNjAxMDIyNjY4LCJ1c2VySWQiOjEsImlhdCI6MTYwMTAxNTQ2OH0.D6Fam6s-WYuUPJP7pvJ6yT5WWCh8_D1B2FBt36Z05Ic\"}");
       return request.close();
     }).then((HttpClientResponse response) {
       // Process the response.
@@ -204,7 +198,7 @@ class _MineViewState extends State<MineView> {
                                               size: 54,
                                             ),
                                             title: Text(
-                                              '点击登陆',
+                                              '点击登录',
                                               style: TextStyle(
                                                 fontSize: 18,
                                                 color: Colors.white,
