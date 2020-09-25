@@ -311,13 +311,3 @@ class _LandingbodyState extends State<Landingbody> {
     Navigator.pop(context);
   }
 }
-/*
-RichText(
-                text: TextSpan(
-                    style: DefaultTextStyle.of(context).style,
-                    children: <InlineSpan>[
-                      
-                      
-                    ]),
-              )
-*/
