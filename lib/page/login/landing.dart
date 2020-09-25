@@ -6,6 +6,7 @@ import 'package:mall/api/api.dart';
 import 'package:mall/constant/string.dart';
 import 'package:mall/entity/user_entity.dart';
 import 'package:mall/event/login_event.dart';
+import 'package:mall/page/login/phone_landing.dart';
 import 'package:mall/service/user_service.dart';
 import 'package:mall/utils/http_util.dart';
 
@@ -79,7 +80,12 @@ class _landingPageState extends State<landingPage> {
                 borderRadius: BorderRadius.circular(25),
               ),
               onPressed: () async {
-                _login();
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        //导航打开新视图
+                        builder: (context) => PhoneLanding()));
+
                 String result =
                     await platform.invokeMethod("call_native_method");
                 setState(() {

@@ -10,6 +10,8 @@ import 'package:barcode_scan/barcode_scan.dart';
 import 'package:mall/utils/shared_preferences_util.dart';
 import 'package:mall/widgets/webview.dart';
 import './placetheorder.dart';
+import 'dart:convert';
+import 'dart:io';
 
 const APPBAR_SCROLL_OFFSET = 100;
 
@@ -23,10 +25,53 @@ class _MineViewState extends State<MineView> {
   var imageHeadUrl;
   var nickName = '李天霸';
 
+  //创建HttpClient
+  HttpClient _httpClient = HttpClient();
+
+  //要用async关键字异步请求
+  // getHttpClient() async {
+  //   _httpClient
+  //       .get('https://abc.com', 8090, '/path1')
+  //       .then((HttpClientRequest request) {
+  //     //在这里可以对request请求添加headers操作，写入请求对象数据等等
+  //     // Then call close.
+  //     return request.close();
+  //   }).then((HttpClientResponse response) {
+  //     // 处理response响应
+  //     if (response.statusCode == 200) {
+  //       response.transform(utf8.decoder).join().then((String string) {
+  //         print(string);
+  //       });
+  //     } else {
+  //       print("error");
+  //     }
+  //   });
+  // }
+  getUrlHttpClient() async {
+    print('404');
+    var url = "http://api.jiaoyibei.com/wx/order/list";
+    _httpClient.getUrl(Uri.parse(url)).then((HttpClientRequest request) {
+      // Optionally set up headers...
+      // Optionally write to the request object...
+      // Then call close.
+      return request.close();
+    }).then((HttpClientResponse response) {
+      // Process the response.
+      if (response.statusCode == 200) {
+        response.transform(utf8.decoder).join().then((String string) {
+          print(string);
+        });
+      } else {
+        print("error");
+      }
+    });
+  }
+
   @override
   void initState() {
     super.initState();
     _getUserInfo();
+    getUrlHttpClient();
   }
 
   //渐变准备

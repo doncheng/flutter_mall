@@ -19,7 +19,9 @@ class ProductView extends StatelessWidget {
       shrinkWrap: true, //解决无限高度问题
       padding: const EdgeInsets.all(8.0),
       crossAxisCount: 4,
+
       itemCount: productList.length,
+
       itemBuilder: (context, index) {
         return _getGridViewItem(context, productList[index]);
       },
@@ -60,17 +62,63 @@ return Container(
 
   // double a = 6;
   Widget _getGridViewItem(BuildContext context, Goods productEntity) {
-    return Container(
+    return Material(
+      elevation: 2,
+      borderRadius: new BorderRadius.all(
+        new Radius.circular(16.0),
+      ),
       child: InkWell(
-        onTap: () => _goGoodsDetail(context, productEntity),
-        child: Card(
+          onTap: () => _goGoodsDetail(context, productEntity),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(16),
+            child: Column(
+              children: [
+                Container(
+                    width: 180,
+                    constraints: BoxConstraints(maxHeight: double.infinity),
+                    child: Image.network(
+                      productEntity.picUrl,
+                      fit: BoxFit.cover,
+                      width: 185,
+                      // height: a++ * 20,
+                    )),
+                Padding(
+                  padding: EdgeInsets.only(top: 4.0),
+                ),
+                Container(
+                  padding: EdgeInsets.only(left: 15.0, top: 4.0),
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    productEntity.name,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(color: Colors.black54, fontSize: 14.0),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 4.0),
+                ),
+                Container(
+                  margin: EdgeInsets.only(bottom: 20),
+                  padding: EdgeInsets.only(left: 4.0, top: 4.0),
+                  alignment: Alignment.center,
+                  child: Text(
+                    "￥${productEntity.retailPrice}",
+                    style: TextStyle(color: Colors.red, fontSize: 12.0),
+                  ),
+                )
+              ],
+            ),
+          )
+
+          /*
+        Card(
           elevation: 2.0,
           margin: EdgeInsets.all(6.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               Container(
-                  margin: EdgeInsets.all(5.0),
                   width: ScreenUtil.instance.setHeight(200.0),
                   constraints: BoxConstraints(maxHeight: double.infinity),
                   child: Image.network(
@@ -107,7 +155,8 @@ return Container(
             ],
           ),
         ),
-      ),
+        */
+          ),
     );
   }
 }
