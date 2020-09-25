@@ -14,13 +14,14 @@ class _SplashViewState extends State<SplashView> {
     super.initState();
     Future.delayed(Duration(seconds: 1), () {
       // Platform.isAndroid
-      Platform.isIOS
-          ? NavigatorUtils.goMallMainPage(context)
-          : Navigator.push(
-              context,
-              MaterialPageRoute(
-                  //导航打开新视图
-                  builder: (context) => webviewPage()));
+      // Platform.isIOS
+      //     ?
+      NavigatorUtils.goMallMainPage(context);
+      // : Navigator.push(
+      //     context,
+      //     MaterialPageRoute(
+      //         //导航打开新视图
+      //         builder: (context) => webviewPage()));
     });
   }
 
