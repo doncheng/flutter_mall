@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -20,6 +21,7 @@ class _landingPageState extends State<landingPage> {
   double iconsize = 30;
   String systemVersion;
   UserEntity userEntity;
+  HttpClient _httpClient = HttpClient();
 
   static const String CHINAL_NAME = "example.mall/call_native"; //同步路径
   static const platform = const MethodChannel(CHINAL_NAME);
@@ -260,64 +262,24 @@ class _landingPageState extends State<landingPage> {
     );
   }
 
-  _login() {
-//     if (registerFormKey.currentState.validate()) {
-//       registerFormKey.currentState.save();
-//       Map<String, dynamic> map = Map();
-//       map.putIfAbsent("username", () => _accountTextControl.text.toString());
-//       map.putIfAbsent("password", () => _passwordTextControl.text.toString());
-//       userService.login(map, (success) {
-//         print(success);
-//         userEntity = success;
-//         _saveUserInfo();
-//         _showToast(Strings.LOGIN_SUCESS);
-// //        Provider.of<UserInfoModel>(context, listen: true)
-// //            .updateInfo(userEntity);
-//         loginEventBus.fire(LoginEvent(true,
-//             url: userEntity.userInfo.avatarUrl,
-//             nickName: userEntity.userInfo.nickName));
-//         Navigator.pop(context);
-//       }, (onFail) {
-//         print(onFail);
-//         _showToast(onFail);
-//       });
-//     } else {
-//       setState(() {
-//         _autovalidator = true;
-//       });
-//     }
-    print('111111111');
-    Future login(Map<String, dynamic> parameters, OnSuccess onSuccess,
-        OnFail onFail) async {
-      var parameters = {
-        "username": 'user123',
-        "password": 'user123',
-      };
-      try {
-        var response =
-            await HttpUtil.instance.post(Api.LOGIN, parameters: parameters);
-        if (response['errno'] == 0) {
-          UserEntity userEntity = UserEntity.fromJson(response['data']);
-          onSuccess(userEntity);
-          print('2222222');
-        } else {
-          print('333333');
-          onFail(response['errmsg']);
-        }
-      } catch (e) {
-        print(e);
-        onFail(Strings.SERVER_EXCEPTION);
+  _login() async {
+    var url = Api.LOGIN;
+    _httpClient.postUrl(Uri.parse(url)).then((HttpClientRequest request) {
+      //这里添加POST请求Body的ContentType和内容
+      //这个是application/x-www-form-urlencoded数据类型的传输方式
+      request.headers.contentType = ContentType("application", "raw");
+      request.write("{\"username\":\"user123\",\"password\":\"user123\"}");
+      return request.close();
+    }).then((HttpClientResponse response) {
+      // Process the response.
+      if (response.statusCode == 200) {
+        response.transform(utf8.decoder).join().then((String string) {
+          print(string);
+        });
+      } else {
+        print("error");
       }
-    }
-
+    });
     Navigator.pop(context);
-    // loginEventBus.fire(LoginEvent(
-    //   true,
-    //   // url: userEntity.userInfo.avatarUrl,
-    //   // nickName: userEntity.userInfo.nickName,
-    //   url:
-    //       'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3172368692,3210698748&fm=26&gp=0.jpg',
-    //   nickName: '我已经登录了',
-    // ));
   }
 }

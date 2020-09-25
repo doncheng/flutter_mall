@@ -90,18 +90,18 @@ class _HomePageState extends State<HomePage> {
                     padding: EdgeInsets.only(top: 10.0),
                   ),
                   CategoryMenu(_homeEntity.channel),
-                  Container(
-                    height: 40.0,
-                    alignment: Alignment.center,
-                    child: Text(Strings.COUPON_AREA),
-                  ),
-                  CouponView(_homeEntity.couponList),
-                  Container(
-                    height: 40.0,
-                    alignment: Alignment.center,
-                    child: Text(Strings.GROUP_BUG),
-                  ),
-                  GroupBuyView(_homeEntity.grouponList),
+                  // Container(
+                  //   height: 40.0,
+                  //   alignment: Alignment.center,
+                  //   child: Text(Strings.COUPON_AREA),
+                  // ),
+                  // CouponView(_homeEntity.couponList),
+                  // Container(
+                  //   height: 40.0,
+                  //   alignment: Alignment.center,
+                  //   child: Text(Strings.GROUP_BUG),
+                  // ),
+                  // GroupBuyView(_homeEntity.grouponList),
                   Container(
                     height: 40.0,
                     alignment: Alignment.center,
