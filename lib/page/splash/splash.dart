@@ -40,17 +40,32 @@ class _SplashViewState extends State<SplashView> {
             ),
           )
         : Scaffold(
-            body: Container(
-            color: Colors.white,
-            child: Center(
-              child: Text(
-                'Loading...',
-                style: TextStyle(
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xff9a9a9a)),
-              ),
+            backgroundColor: Colors.white,
+            body: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  height: 250,
+                  decoration:
+                      BoxDecoration(borderRadius: BorderRadius.circular(50)),
+                  width: double.infinity,
+                  margin: EdgeInsets.only(left: 80, right: 80),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Image.asset(
+                      "images/icon.png",
+                      width: 250,
+                      height: 250,
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                ),
+                Text(
+                  '交易呗',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                )
+              ],
             ),
-          ));
+          );
   }
 }
