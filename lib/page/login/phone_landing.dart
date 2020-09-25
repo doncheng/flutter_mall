@@ -300,7 +300,8 @@ class _LandingbodyState extends State<Landingbody> {
                 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2117319092,2336640022&fm=26&gp=0.jpg',
             nickName: map['data']['userInfo']['nickName'],
           ));
-          print(map['data']['userInfo']['avatarUrl']);
+
+          // print(map['data']['userInfo']['avatarUrl']);
           // print(map['data']['userInfo']['nickName']);
         });
       } else {

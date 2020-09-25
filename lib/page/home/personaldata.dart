@@ -20,23 +20,12 @@ class personaldataPage extends StatefulWidget {
 }
 
 class _personaldataPageState extends State<personaldataPage> {
-  String personaldataPagenicknanme;
   String sex = '男';
-  var imageHeadUrl;
   File _headimagefile;
   dynamic _imagedynamic;
-
-  //监听事件，等待登录完传值过来
-  _refreshEvent() {
-    loginEventBus.on<LoginEvent>().listen((LoginEvent loginEvent) {
-      if (loginEvent.isLogin) {
-        setState(() {
-          imageHeadUrl = loginEvent.url;
-          personaldataPagenicknanme = loginEvent.nickName;
-        });
-      } else {}
-    });
-  }
+  bool isLogin = false;
+  var imageHeadUrl;
+  var personaldataPagenicknanme;
 
   _personaldataPageState(nicknanme) {
     this.personaldataPagenicknanme = nicknanme;
@@ -102,6 +91,7 @@ class _personaldataPageState extends State<personaldataPage> {
   @override
   Widget build(BuildContext context) {
     final screenwith = MediaQuery.of(context).size.width;
+
     return Scaffold(
       appBar: AppBar(
         leading: InkWell(
@@ -147,13 +137,10 @@ class _personaldataPageState extends State<personaldataPage> {
                         ? Container(
                             height: 100,
                             width: 100,
-                            child: ClipOval(
-                              child: Image.network(
-                                this.imageHeadUrl,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          )
+                            child: Icon(
+                              Icons.account_circle,
+                              size: 100,
+                            ))
                         : ClipOval(
                             child: Platform.isIOS
                                 ? Container(
