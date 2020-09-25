@@ -294,9 +294,8 @@ class _LandingbodyState extends State<Landingbody> {
           //传值给mine.dart
           loginEventBus.fire(LoginEvent(
             true,
-            // url: userEntity.userInfo.avatarUrl,
-            // nickName: userEntity.userInfo.nickName,
             // url: map['data']['userInfo']['avatarUrl'],
+
             url:
                 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2117319092,2336640022&fm=26&gp=0.jpg',
             nickName: map['data']['userInfo']['nickName'],

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image_crop/image_crop.dart';
+import 'package:mall/event/login_event.dart';
 import 'package:mall/page/home/nicknamechange.dart';
 import 'package:mall/utils/navigator_util.dart';
 
@@ -21,8 +22,21 @@ class personaldataPage extends StatefulWidget {
 class _personaldataPageState extends State<personaldataPage> {
   String personaldataPagenicknanme;
   String sex = '男';
+  var imageHeadUrl;
   File _headimagefile;
   dynamic _imagedynamic;
+
+  //监听事件，等待登录完传值过来
+  _refreshEvent() {
+    loginEventBus.on<LoginEvent>().listen((LoginEvent loginEvent) {
+      if (loginEvent.isLogin) {
+        setState(() {
+          imageHeadUrl = loginEvent.url;
+          personaldataPagenicknanme = loginEvent.nickName;
+        });
+      } else {}
+    });
+  }
 
   _personaldataPageState(nicknanme) {
     this.personaldataPagenicknanme = nicknanme;
@@ -130,7 +144,16 @@ class _personaldataPageState extends State<personaldataPage> {
                 child: Column(
                   children: <Widget>[
                     _imagedynamic == null && _headimagefile == null
-                        ? Icon(Icons.account_circle, size: 100)
+                        ? Container(
+                            height: 100,
+                            width: 100,
+                            child: ClipOval(
+                              child: Image.network(
+                                this.imageHeadUrl,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          )
                         : ClipOval(
                             child: Platform.isIOS
                                 ? Container(

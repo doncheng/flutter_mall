@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:mall/event/login_event.dart';
 import 'package:mall/page/bill/my_assets.dart';
 import 'package:mall/page/help/customer_service.dart';
@@ -24,36 +25,25 @@ class _MineViewState extends State<MineView> {
   bool isLogin = false;
   var imageHeadUrl;
   var nickName = '李天霸';
-
   //创建HttpClient
   HttpClient _httpClient = HttpClient();
 
-  //要用async关键字异步请求
-  // getHttpClient() async {
-  //   _httpClient
-  //       .get('https://abc.com', 8090, '/path1')
-  //       .then((HttpClientRequest request) {
-  //     //在这里可以对request请求添加headers操作，写入请求对象数据等等
-  //     // Then call close.
-  //     return request.close();
-  //   }).then((HttpClientResponse response) {
-  //     // 处理response响应
-  //     if (response.statusCode == 200) {
-  //       response.transform(utf8.decoder).join().then((String string) {
-  //         print(string);
-  //       });
-  //     } else {
-  //       print("error");
-  //     }
-  //   });
-  // }
+  @override
+  void initState() {
+    super.initState();
+    _getUserInfo();
+    getUrlHttpClient();
+  }
+
   getUrlHttpClient() async {
-    print('404');
+    print('dasadada');
     var url = "http://api.jiaoyibei.com/wx/order/list";
     _httpClient.getUrl(Uri.parse(url)).then((HttpClientRequest request) {
       // Optionally set up headers...
       // Optionally write to the request object...
       // Then call close.
+      // request.write(
+      //     "{\"X-Litemall-Token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0aGlzIGlzIGxpdGVtYWxsIHRva2VuIiwiYXVkIjoiTUlOSUFQUCIsImlzcyI6IkxJVEVNQUxMIiwiZXhwIjoxNjAxMDIyNjY4LCJ1c2VySWQiOjEsImlhdCI6MTYwMTAxNTQ2OH0.D6Fam6s-WYuUPJP7pvJ6yT5WWCh8_D1B2FBt36Z05Ic\"}");
       return request.close();
     }).then((HttpClientResponse response) {
       // Process the response.
@@ -65,13 +55,6 @@ class _MineViewState extends State<MineView> {
         print("error");
       }
     });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _getUserInfo();
-    getUrlHttpClient();
   }
 
   //渐变准备

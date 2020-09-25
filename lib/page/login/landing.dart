@@ -82,7 +82,7 @@ class _landingPageState extends State<landingPage> {
                 borderRadius: BorderRadius.circular(25),
               ),
               onPressed: () async {
-                Navigator.push(
+                Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
                         //导航打开新视图
