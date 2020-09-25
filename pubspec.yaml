@@ -75,6 +75,7 @@ flutter:
   -  images/pw.png
   -  images/splash.png
   -  images/network_error.png
+  -  images/icon.png
   #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

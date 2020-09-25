@@ -1,8 +1,12 @@
 import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:mall/api/api.dart';
+import 'package:mall/event/login_event.dart';
 import 'package:mall/widgets/webview.dart';
 
 class PhoneLanding extends StatelessWidget {
@@ -40,6 +44,7 @@ class Landingbody extends StatefulWidget {
 class _LandingbodyState extends State<Landingbody> {
   Timer _timer;
   int _countdownTime = 0;
+  HttpClient _httpClient = HttpClient();
 
   void startCountdownTimer() {
     const oneSec = const Duration(seconds: 1);
@@ -170,7 +175,7 @@ class _LandingbodyState extends State<Landingbody> {
               )),
         ),
         Container(
-          height: 50,
+          height: 40,
           width: double.infinity,
           margin: EdgeInsets.only(left: 20, right: 20, bottom: 10, top: 35),
           child: RaisedButton(
@@ -182,49 +187,51 @@ class _LandingbodyState extends State<Landingbody> {
               style: TextStyle(fontSize: 20, color: Colors.white),
             ),
             onPressed: () {
-              if (check1 == 1) {
-                if (phoneNumber != "" && phoneNumber.length != 11) {
-                  Fluttertoast.showToast(
-                      msg: "请输入正确的手机号",
-                      toastLength: Toast.LENGTH_SHORT,
-                      gravity: ToastGravity.BOTTOM,
-                      timeInSecForIos: 1,
-                      textColor: Colors.white,
-                      backgroundColor: Colors.grey);
-                } else if (phoneNumber == "") {
-                  Fluttertoast.showToast(
-                      msg: "手机号不能为空",
-                      toastLength: Toast.LENGTH_SHORT,
-                      gravity: ToastGravity.BOTTOM,
-                      timeInSecForIos: 1,
-                      textColor: Colors.white,
-                      backgroundColor: Colors.grey);
-                } else if (code == "") {
-                  Fluttertoast.showToast(
-                      msg: "请输入验证码",
-                      toastLength: Toast.LENGTH_SHORT,
-                      gravity: ToastGravity.BOTTOM,
-                      timeInSecForIos: 1,
-                      textColor: Colors.white,
-                      backgroundColor: Colors.grey);
-                } else if (code != "网上获取的验证码") {
-                  Fluttertoast.showToast(
-                      msg: "验证码不正确",
-                      toastLength: Toast.LENGTH_SHORT,
-                      gravity: ToastGravity.BOTTOM,
-                      timeInSecForIos: 1,
-                      textColor: Colors.white,
-                      backgroundColor: Colors.grey);
-                } else {
-                  Fluttertoast.showToast(
-                      msg: "网络连接错误",
-                      toastLength: Toast.LENGTH_SHORT,
-                      gravity: ToastGravity.BOTTOM,
-                      timeInSecForIos: 1,
-                      textColor: Colors.white,
-                      backgroundColor: Colors.grey);
-                }
-              }
+              _login();
+              // if (check1 == 1) {
+              //   if (phoneNumber != "" && phoneNumber.length != 11) {
+              //     Fluttertoast.showToast(
+              //         msg: "请输入正确的手机号",
+              //         toastLength: Toast.LENGTH_SHORT,
+              //         gravity: ToastGravity.BOTTOM,
+              //         timeInSecForIos: 1,
+              //         textColor: Colors.white,
+              //         backgroundColor: Colors.grey);
+              //   } else if (phoneNumber == "") {
+              //     Fluttertoast.showToast(
+              //         msg: "手机号不能为空",
+              //         toastLength: Toast.LENGTH_SHORT,
+              //         gravity: ToastGravity.BOTTOM,
+              //         timeInSecForIos: 1,
+              //         textColor: Colors.white,
+              //         backgroundColor: Colors.grey);
+              //   } else if (code == "") {
+              //     Fluttertoast.showToast(
+              //         msg: "请输入验证码",
+              //         toastLength: Toast.LENGTH_SHORT,
+              //         gravity: ToastGravity.BOTTOM,
+              //         timeInSecForIos: 1,
+              //         textColor: Colors.white,
+              //         backgroundColor: Colors.grey);
+              //   } else if (code != "网上获取的验证码") {
+              //     Fluttertoast.showToast(
+              //         msg: "验证码不正确",
+              //         toastLength: Toast.LENGTH_SHORT,
+              //         gravity: ToastGravity.BOTTOM,
+              //         timeInSecForIos: 1,
+              //         textColor: Colors.white,
+              //         backgroundColor: Colors.grey);
+              //   } else {
+              //     // Fluttertoast.showToast(
+              //     //     msg: "网络连接错误",
+              //     //     toastLength: Toast.LENGTH_SHORT,
+              //     //     gravity: ToastGravity.BOTTOM,
+              //     //     timeInSecForIos: 1,
+              //     //     textColor: Colors.white,
+              //     //     backgroundColor: Colors.grey);
+              //     // _login();
+              //   }
+              // }
             },
           ),
         ),
@@ -268,6 +275,35 @@ class _LandingbodyState extends State<Landingbody> {
         )
       ],
     );
+  }
+
+  _login() async {
+    var url = Api.LOGIN;
+    _httpClient.postUrl(Uri.parse(url)).then((HttpClientRequest request) {
+      //这里添加POST请求Body的ContentType和内容
+      //这个是application/x-www-form-urlencoded数据类型的传输方式
+      request.headers.contentType = ContentType("application", "raw");
+      request.write("{\"username\":\"user123\",\"password\":\"user123\"}");
+      return request.close();
+    }).then((HttpClientResponse response) {
+      // Process the response.
+      if (response.statusCode == 200) {
+        response.transform(utf8.decoder).join().then((String string) {
+          print(string);
+        });
+      } else {
+        print("error");
+      }
+    });
+    loginEventBus.fire(LoginEvent(
+      true,
+      // url: userEntity.userInfo.avatarUrl,
+      // nickName: userEntity.userInfo.nickName,
+      url:
+          'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3172368692,3210698748&fm=26&gp=0.jpg',
+      nickName: '我已经登陆了',
+    ));
+    Navigator.pop(context);
   }
 }
 /*

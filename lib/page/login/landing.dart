@@ -22,7 +22,6 @@ class _landingPageState extends State<landingPage> {
   double iconsize = 30;
   String systemVersion;
   UserEntity userEntity;
-  HttpClient _httpClient = HttpClient();
 
   static const String CHINAL_NAME = "example.mall/call_native"; //同步路径
   static const platform = const MethodChannel(CHINAL_NAME);
@@ -58,8 +57,11 @@ class _landingPageState extends State<landingPage> {
             margin: EdgeInsets.only(top: 52),
             height: 100,
             width: 100,
-            child: CircleAvatar(
-              child: Icon(Icons.home),
+            child: ClipOval(
+              child: Image.asset(
+                'images/icon.png',
+                fit: BoxFit.cover,
+              ),
             ),
           ),
           SizedBox(height: 69),
@@ -70,7 +72,7 @@ class _landingPageState extends State<landingPage> {
             child: RaisedButton(
               color: Colors.red,
               child: Text(
-                '手机一键登陆',
+                '手机登录',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 12,
@@ -266,26 +268,5 @@ class _landingPageState extends State<landingPage> {
             )),
       ],
     );
-  }
-
-  _login() async {
-    var url = Api.LOGIN;
-    _httpClient.postUrl(Uri.parse(url)).then((HttpClientRequest request) {
-      //这里添加POST请求Body的ContentType和内容
-      //这个是application/x-www-form-urlencoded数据类型的传输方式
-      request.headers.contentType = ContentType("application", "raw");
-      request.write("{\"username\":\"user123\",\"password\":\"user123\"}");
-      return request.close();
-    }).then((HttpClientResponse response) {
-      // Process the response.
-      if (response.statusCode == 200) {
-        response.transform(utf8.decoder).join().then((String string) {
-          print(string);
-        });
-      } else {
-        print("error");
-      }
-    });
-    Navigator.pop(context);
   }
 }

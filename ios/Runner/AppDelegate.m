@@ -324,19 +324,20 @@
         
         // 用于判断当前登录的苹果账号是否是一个真实用户，取值有：unsupported、unknown、likelyReal
         ASUserDetectionStatus realUserStatus = credential.realUserStatus;
-        
-        [[NSUserDefaults standardUserDefaults] setObject:userID forKey:@"appleID"];
-        [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"authorizationCode%@",authorizationCode]
-                                    message:[NSString stringWithFormat:@"identityToken%@",identityToken]
-                                   delegate:nil
-                          cancelButtonTitle:@"OK"
-                          otherButtonTitles:nil] show];
         NSLog(@"userID: %@", userID);
         NSLog(@"fullName: %@", fullName);
         NSLog(@"email: %@", email);
         NSLog(@"authorizationCode: %@", authorizationCode);
         NSLog(@"identityToken: %@", identityToken);
         NSLog(@"realUserStatus: %@", @(realUserStatus));
+        
+        //测试弹窗
+        [[NSUserDefaults standardUserDefaults] setObject:userID forKey:@"appleID"];
+        [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"authorizationCode%@",authorizationCode]
+                                    message:[NSString stringWithFormat:@"identityToken%@",identityToken]
+                                   delegate:nil
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil] show];
     }
     else if ([authorization.credential isKindOfClass:[ASPasswordCredential class]]) {
         

@@ -227,6 +227,7 @@ class _MineViewState extends State<MineView> {
                                             ),
                                           ),
                                         )),
+                              SizedBox(height: 14),
                               shoppingcartfootprint(),
                             ],
                           ),
