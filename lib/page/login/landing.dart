@@ -88,12 +88,12 @@ class _landingPageState extends State<landingPage> {
                         //导航打开新视图
                         builder: (context) => PhoneLanding()));
 
-                String result =
-                    await platform.invokeMethod("call_native_method");
-                setState(() {
-                  _result = result;
-                  print("_result ---->" + _result);
-                });
+                // String result =
+                //     await platform.invokeMethod("call_native_method");
+                // setState(() {
+                //   _result = result;
+                //   print("_result ---->" + _result);
+                // });
               },
             ),
           ),

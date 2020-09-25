@@ -288,21 +288,27 @@ class _LandingbodyState extends State<Landingbody> {
     }).then((HttpClientResponse response) {
       // Process the response.
       if (response.statusCode == 200) {
+        // ignore: unnecessary_statements
         response.transform(utf8.decoder).join().then((String string) {
-          print(string);
+          Map<String, dynamic> map = json.decode(string);
+          //传值给mine.dart
+          loginEventBus.fire(LoginEvent(
+            true,
+            // url: userEntity.userInfo.avatarUrl,
+            // nickName: userEntity.userInfo.nickName,
+            // url: map['data']['userInfo']['avatarUrl'],
+            url:
+                'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2117319092,2336640022&fm=26&gp=0.jpg',
+            nickName: map['data']['userInfo']['nickName'],
+          ));
+          print(map['data']['userInfo']['avatarUrl']);
+          // print(map['data']['userInfo']['nickName']);
         });
       } else {
         print("error");
       }
     });
-    loginEventBus.fire(LoginEvent(
-      true,
-      // url: userEntity.userInfo.avatarUrl,
-      // nickName: userEntity.userInfo.nickName,
-      url:
-          'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3172368692,3210698748&fm=26&gp=0.jpg',
-      nickName: '我已经登陆了',
-    ));
+
     Navigator.pop(context);
   }
 }

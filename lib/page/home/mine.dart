@@ -193,7 +193,9 @@ class _MineViewState extends State<MineView> {
                                               width: 54,
                                               child: ClipOval(
                                                 child: Image.network(
-                                                    this.imageHeadUrl),
+                                                  this.imageHeadUrl,
+                                                  fit: BoxFit.cover,
+                                                ),
                                               ),
                                             ),
                                             title: Text(
@@ -227,7 +229,7 @@ class _MineViewState extends State<MineView> {
                                             ),
                                           ),
                                         )),
-                              SizedBox(height: 14),
+                              SizedBox(height: 5),
                               shoppingcartfootprint(),
                             ],
                           ),
