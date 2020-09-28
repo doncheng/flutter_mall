@@ -4,10 +4,18 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mall/api/api.dart';
+import 'package:mall/constant/string.dart';
+import 'package:mall/entity/user_entity.dart';
 import 'package:mall/event/login_event.dart';
+import 'package:mall/model/user_info.dart';
+import 'package:mall/service/user_service.dart';
+import 'package:mall/utils/shared_preferences_util.dart';
 import 'package:mall/widgets/webview.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PhoneLanding extends StatelessWidget {
   const PhoneLanding({Key key}) : super(key: key);
@@ -45,6 +53,12 @@ class _LandingbodyState extends State<Landingbody> {
   Timer _timer;
   int _countdownTime = 0;
   HttpClient _httpClient = HttpClient();
+  UserEntity userEntity;
+  final registerFormKey = GlobalKey<FormState>();
+  TextEditingController _accountTextControl = TextEditingController();
+  TextEditingController _passwordTextControl = TextEditingController();
+  UserService userService = UserService();
+  bool _autovalidator = false;
 
   void startCountdownTimer() {
     const oneSec = const Duration(seconds: 1);
@@ -95,16 +109,17 @@ class _LandingbodyState extends State<Landingbody> {
           height: 40,
           padding: EdgeInsets.only(left: 10, top: 20, bottom: 0),
           child: TextField(
-            inputFormatters: [
-              // ignore: deprecated_member_use
-              WhitelistingTextInputFormatter(RegExp("[0-9.]")), //只允许输入小数
-            ],
+            // inputFormatters: [
+            //   // ignore: deprecated_member_use
+            //   WhitelistingTextInputFormatter(RegExp("[0-9.]")), //只允许输入小数
+            // ],
             onChanged: (number) {
               phoneNumber = number;
             },
             style: TextStyle(fontSize: 14, color: Colors.grey),
             decoration:
                 InputDecoration(border: InputBorder.none, hintText: '输入手机号'),
+            controller: _accountTextControl,
           ),
         ),
         Container(
@@ -133,6 +148,7 @@ class _LandingbodyState extends State<Landingbody> {
                       style: TextStyle(fontSize: 14, color: Color(0xffbfbfbf)),
                       decoration: InputDecoration(
                           border: InputBorder.none, hintText: '请输入验证码'),
+                      controller: _passwordTextControl,
                     ),
                   ),
                   InkWell(
@@ -277,6 +293,55 @@ class _LandingbodyState extends State<Landingbody> {
     );
   }
 
+  // _login() {
+  //   Map<String, dynamic> map = Map();
+  //   //将输入框的内容填入
+  //   map.putIfAbsent("username", () => _accountTextControl.text.toString());
+  //   map.putIfAbsent("password", () => _passwordTextControl.text.toString());
+  //   userService.login(map, (success) {
+  //     print(success);
+  //     userEntity = success;
+  //     _saveUserInfo();
+  //     // _showToast(Strings.LOGIN_SUCESS);
+  //     // Provider.of<UserInfoModel>(context, listen: true).updateInfo(userEntity);
+  //     loginEventBus.fire(LoginEvent(true,
+  //         url: userEntity.userInfo.avatarUrl,
+  //         nickName: userEntity.userInfo.nickName));
+  //     Navigator.pop(context);
+  //   }, (onFail) {
+  //     print(onFail);
+  //     // _showToast(onFail);
+  //   });
+  //   // if (registerFormKey.currentState.validate()) {
+  //   //   registerFormKey.currentState.save();
+
+  //   // } else {
+  //   //   setState(() {
+  //   //     _autovalidator = true;
+  //   //   });
+  //   // }
+  // }
+
+  // _showToast(message) {
+  //   Fluttertoast.showToast(
+  //       msg: message,
+  //       toastLength: Toast.LENGTH_SHORT,
+  //       gravity: ToastGravity.CENTER,
+  //       timeInSecForIos: 1,
+  //       backgroundColor: Colors.deepOrangeAccent,
+  //       textColor: Colors.white,
+  //       fontSize: ScreenUtil.instance.setSp(28.0));
+  // }
+
+  // _saveUserInfo() async {
+  //   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  //   SharedPreferencesUtils.token = userEntity.token;
+  //   await sharedPreferences.setString(Strings.TOKEN, userEntity.token);
+  //   await sharedPreferences.setString(
+  //       Strings.HEAD_URL, userEntity.userInfo.avatarUrl);
+  //   await sharedPreferences.setString(
+  //       Strings.NICK_NAME, userEntity.userInfo.nickName);
+  // }
   _login() async {
     var url = Api.LOGIN;
     _httpClient.postUrl(Uri.parse(url)).then((HttpClientRequest request) {
@@ -289,8 +354,18 @@ class _LandingbodyState extends State<Landingbody> {
       // Process the response.
       if (response.statusCode == 200) {
         // ignore: unnecessary_statements
-        response.transform(utf8.decoder).join().then((String string) {
+        response.transform(utf8.decoder).join().then((String string) async {
           Map<String, dynamic> map = json.decode(string);
+          //存储数据
+          // SharedPreferences sharedPreferences =
+          //     await SharedPreferences.getInstance();
+          // SharedPreferencesUtils.token = map['data']['token'];
+          print(map['data']['token']);
+          // await sharedPreferences.setString(Strings.TOKEN, userEntity.token);
+          // await sharedPreferences.setString(
+          //     Strings.HEAD_URL, userEntity.userInfo.avatarUrl);
+          // await sharedPreferences.setString(
+          //     Strings.NICK_NAME, userEntity.userInfo.nickName);
           //传值给mine.dart
           loginEventBus.fire(LoginEvent(
             true,
@@ -299,6 +374,14 @@ class _LandingbodyState extends State<Landingbody> {
             url:
                 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2117319092,2336640022&fm=26&gp=0.jpg',
             nickName: map['data']['userInfo']['nickName'],
+            mytradingnum1: '1',
+            mytradingnum2: '2',
+            mytradingnum3: '3',
+            mytradingnum4: '4',
+            shoppingcartfootprintnum1: '1',
+            shoppingcartfootprintnum2: '2',
+            shoppingcartfootprintnum3: '3',
+            shoppingcartfootprintnum4: '4',
           ));
 
           // print(map['data']['userInfo']['avatarUrl']);

@@ -21,7 +21,7 @@ class _landingPageState extends State<landingPage> {
   double textfontsize = 12.0;
   double iconsize = 30;
   String systemVersion;
-
+  HttpClient _httpClient = HttpClient();
   static const String CHINAL_NAME = "example.mall/call_native"; //同步路径
   static const platform = const MethodChannel(CHINAL_NAME);
   String _result = "";
@@ -103,7 +103,7 @@ class _landingPageState extends State<landingPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Container(
-                  width: 120,
+                  width: 109,
                   height: 1,
                   child: Divider(
                     color: Colors.black38,
@@ -120,7 +120,7 @@ class _landingPageState extends State<landingPage> {
                       ),
                     )),
                 Container(
-                  width: 120,
+                  width: 109,
                   height: 1,
                   child: Divider(
                     color: Colors.black38,
@@ -224,18 +224,60 @@ class _landingPageState extends State<landingPage> {
     return Column(
       children: <Widget>[
         Container(
-          height: 44,
-          width: 44,
-          child: InkWell(
-            child: Image.network(
-              'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1342457926,2446972823&fm=26&gp=0.jpg',
-            ),
-            onTap: () async {
-              String result = await platform.invokeMethod("Applelanding");
-              print(result);
-            },
-          ),
-        ),
+            height: 44,
+            width: 44,
+            child: InkWell(
+                child: Image.network(
+                  'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1342457926,2446972823&fm=26&gp=0.jpg',
+                ),
+                onTap: () async {
+                  String result = await platform.invokeMethod("Applelanding");
+                  var url = 'http://api.jiaoyibei.com/wx/auth/appleVerify';
+                  _httpClient
+                      .postUrl(Uri.parse(url))
+                      .then((HttpClientRequest request) {
+                    //这里添加POST请求Body的ContentType和内容
+                    //这个是application/x-www-form-urlencoded数据类型的传输方式
+                    request.headers.contentType =
+                        ContentType("application", "x-www-form-urlencoded");
+                    request.write("aud=com.JiaoYiBei&$result");
+                    return request.close();
+                  }).then((HttpClientResponse response) {
+                    // Process the response.
+                    // print(response.transform(utf8.decoder).join());
+                    if (response.statusCode == 200) {
+                      // ignore: unnecessary_statements
+                      response
+                          .transform(utf8.decoder)
+                          .join()
+                          .then((String string) async {
+                        Map<String, dynamic> map = json.decode(string);
+                        //登录成功回调
+                        print(map['msg']);
+                        if (map['msg'] == 'success') {
+                          print('ssssss');
+                          loginEventBus.fire(LoginEvent(
+                            true,
+                            url:
+                                'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2117319092,2336640022&fm=26&gp=0.jpg',
+                            nickName: '苹果登录成功',
+                            mytradingnum1: '1',
+                            mytradingnum2: '2',
+                            mytradingnum3: '3',
+                            mytradingnum4: '4',
+                            shoppingcartfootprintnum1: '1',
+                            shoppingcartfootprintnum2: '2',
+                            shoppingcartfootprintnum3: '3',
+                            shoppingcartfootprintnum4: '4',
+                          ));
+                          Navigator.pop(context);
+                        }
+                      });
+                    } else {
+                      print("error");
+                    }
+                  });
+                })),
         SizedBox(height: 10),
         Container(
             height: 20,

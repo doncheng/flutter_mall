@@ -2,10 +2,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
+import 'package:mall/api/api.dart';
 import 'package:mall/event/login_event.dart';
 import 'package:mall/page/bill/my_assets.dart';
 import 'package:mall/page/help/customer_service.dart';
 import 'package:mall/page/help/set.dart';
+import 'package:mall/service/mine_service.dart';
 import 'package:mall/utils/navigator_util.dart';
 import 'package:barcode_scan/barcode_scan.dart';
 import 'package:mall/utils/shared_preferences_util.dart';
@@ -24,32 +26,56 @@ class MineView extends StatefulWidget {
 class _MineViewState extends State<MineView> {
   bool isLogin = false;
   var imageHeadUrl;
-  var nickName = '李天霸';
+  var nickName = 'hh';
+  String mytradingnum1;
+  String mytradingnum2;
+  String mytradingnum3;
+  String mytradingnum4;
+  String shoppingcartfootprintnum1;
+  String shoppingcartfootprintnum2;
+  String shoppingcartfootprintnum3;
+  String shoppingcartfootprintnum4;
+
   //创建HttpClient
   HttpClient _httpClient = HttpClient();
-
+  var _token;
+  var _page = 1;
+  var _limit = 10;
+  MineService _mineService = MineService();
   @override
   void initState() {
     super.initState();
-    _getUserInfo();
-    getUrlHttpClient();
+    // SharedPreferencesUtils.getToken().then((value) {
+    //   _token = value;
+    //   // _orderData();
+    // });
   }
 
-  getUrlHttpClient() async {
-    var url = "http://api.jiaoyibei.com/wx/order/list";
-    _httpClient.getUrl(Uri.parse(url)).then((HttpClientRequest request) {
-      return request.close();
-    }).then((HttpClientResponse response) {
-      // Process the response.
-      if (response.statusCode == 200) {
-        response.transform(utf8.decoder).join().then((String string) {
-          print(string);
-        });
-      } else {
-        print("error");
-      }
-    });
-  }
+  // _orderData() {
+  //   var parameters = {"page": _page, "limit": _limit};
+  //   _mineService.queryOrder(parameters, (success) {
+  //     setState(() {
+  //       _orders = success;
+  //     });
+  //   }, (error) {
+  //     ToastUtil.showToast(error);
+  //   });
+  // }
+  // getUrlHttpClient() async {
+  //   var url = Api.MINE_ORDERS;
+  //   _httpClient.getUrl(Uri.parse(url)).then((HttpClientRequest request) {
+  //     return request.close();
+  //   }).then((HttpClientResponse response) {
+  //     // Process the response.
+  //     if (response.statusCode == 200) {
+  //       response.transform(utf8.decoder).join().then((String string) {
+  //         print(string);
+  //       });
+  //     } else {
+  //       print("error");
+  //     }
+  //   });
+  // }
 
   //渐变准备
   final PageController _controller = PageController(initialPage: 0);
@@ -75,6 +101,14 @@ class _MineViewState extends State<MineView> {
           isLogin = true;
           imageHeadUrl = loginEvent.url;
           nickName = loginEvent.nickName;
+          mytradingnum1 = loginEvent.mytradingnum1;
+          mytradingnum2 = loginEvent.mytradingnum2;
+          mytradingnum3 = loginEvent.mytradingnum3;
+          mytradingnum4 = loginEvent.mytradingnum4;
+          shoppingcartfootprintnum1 = loginEvent.shoppingcartfootprintnum1;
+          shoppingcartfootprintnum2 = loginEvent.shoppingcartfootprintnum2;
+          shoppingcartfootprintnum3 = loginEvent.shoppingcartfootprintnum3;
+          shoppingcartfootprintnum4 = loginEvent.shoppingcartfootprintnum4;
         });
       } else {
         setState(() {
@@ -315,18 +349,8 @@ class _MineViewState extends State<MineView> {
   _toPersonalData() {
     NavigatorUtils.goPersonalData(context);
   }
-}
 
-class shoppingcartfootprint extends StatefulWidget {
-  shoppingcartfootprint({Key key}) : super(key: key);
-
-  @override
-  _shoppingcartfootprintState createState() => _shoppingcartfootprintState();
-}
-
-class _shoppingcartfootprintState extends State<shoppingcartfootprint> {
-  @override
-  Widget build(BuildContext context) {
+  shoppingcartfootprint() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
@@ -337,7 +361,7 @@ class _shoppingcartfootprintState extends State<shoppingcartfootprint> {
           child: Column(
             children: <Widget>[
               Text(
-                '11',
+                isLogin ? this.shoppingcartfootprintnum1 : '0',
                 style: TextStyle(color: Colors.white),
               ),
               Text(
@@ -354,7 +378,7 @@ class _shoppingcartfootprintState extends State<shoppingcartfootprint> {
           child: Column(
             children: <Widget>[
               Text(
-                '3',
+                isLogin ? this.shoppingcartfootprintnum2 : '0',
                 style: TextStyle(color: Colors.white),
               ),
               Text(
@@ -371,7 +395,7 @@ class _shoppingcartfootprintState extends State<shoppingcartfootprint> {
           child: Column(
             children: <Widget>[
               Text(
-                '7',
+                isLogin ? this.shoppingcartfootprintnum3 : '0',
                 style: TextStyle(color: Colors.white),
               ),
               Text(
@@ -392,7 +416,7 @@ class _shoppingcartfootprintState extends State<shoppingcartfootprint> {
           child: Column(
             children: <Widget>[
               Text(
-                '0',
+                isLogin ? this.shoppingcartfootprintnum4 : '0',
                 style: TextStyle(color: Colors.white),
               ),
               Text(
@@ -405,18 +429,8 @@ class _shoppingcartfootprintState extends State<shoppingcartfootprint> {
       ],
     );
   }
-}
 
-class mytrading extends StatefulWidget {
-  mytrading({Key key}) : super(key: key);
-
-  @override
-  _mytradingState createState() => _mytradingState();
-}
-
-class _mytradingState extends State<mytrading> {
-  @override
-  Widget build(BuildContext context) {
+  mytrading() {
     return Container(
       decoration: BoxDecoration(
           border: Border.all(color: Colors.white),
@@ -453,7 +467,7 @@ class _mytradingState extends State<mytrading> {
                       width: 19,
                       height: 35,
                       child: Text(
-                        '5',
+                        isLogin ? this.mytradingnum1 : '0',
                         style: TextStyle(color: Colors.black, fontSize: 30),
                       ),
                     ),
@@ -478,7 +492,7 @@ class _mytradingState extends State<mytrading> {
                       width: 19,
                       height: 35,
                       child: Text(
-                        '5',
+                        isLogin ? this.mytradingnum2 : '0',
                         style: TextStyle(color: Colors.black, fontSize: 30),
                       ),
                     ),
@@ -503,7 +517,7 @@ class _mytradingState extends State<mytrading> {
                       width: 19,
                       height: 35,
                       child: Text(
-                        '5',
+                        isLogin ? this.mytradingnum3 : '0',
                         style: TextStyle(color: Colors.black, fontSize: 30),
                       ),
                     ),
@@ -528,7 +542,7 @@ class _mytradingState extends State<mytrading> {
                       width: 19,
                       height: 35,
                       child: Text(
-                        '5',
+                        isLogin ? this.mytradingnum4 : '0',
                         style: TextStyle(color: Colors.black, fontSize: 30),
                       ),
                     ),
@@ -550,6 +564,34 @@ class _mytradingState extends State<mytrading> {
     );
   }
 }
+
+// class shoppingcartfootprint extends StatefulWidget {
+//   shoppingcartfootprint({Key key}) : super(key: key);
+
+//   @override
+//   _shoppingcartfootprintState createState() => _shoppingcartfootprintState();
+// }
+
+// class _shoppingcartfootprintState extends State<shoppingcartfootprint> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return
+//   }
+// }
+
+// class mytrading extends StatefulWidget {
+//   mytrading({Key key}) : super(key: key);
+
+//   @override
+//   _mytradingState createState() => _mytradingState();
+// }
+
+// class _mytradingState extends State<mytrading> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return
+//   }
+// }
 
 class makemoney extends StatefulWidget {
   makemoney({Key key}) : super(key: key);
