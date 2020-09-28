@@ -58,5 +58,6 @@ class Api {
   static const String BRAND_DETAIL = BASE_URL + "/brand/detail"; //品牌制造商详情
   static const String RECEIVE_COUPON = BASE_URL + "/coupon/receive"; //领取优惠券
   static const String LOGIN_OUT = BASE_URL + "/auth/logout"; //退出登录
+  static const String Apple_Verify = BASE_URL + "auth/appleVerify"; //苹果登录认证接口
 
 }

@@ -232,7 +232,7 @@ class _landingPageState extends State<landingPage> {
                 ),
                 onTap: () async {
                   String result = await platform.invokeMethod("Applelanding");
-                  var url = 'http://api.jiaoyibei.com/wx/auth/appleVerify';
+                  var url = Api.Apple_Verify;
                   _httpClient
                       .postUrl(Uri.parse(url))
                       .then((HttpClientRequest request) {

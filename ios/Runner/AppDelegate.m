@@ -192,7 +192,7 @@
         // 用于判断当前登录的苹果账号是否是一个真实用户，取值有：unsupported、unknown、likelyReal
         ASUserDetectionStatus realUserStatus = credential.realUserStatus;
 //        NSLog(@"userID: %@", userID);
-//        NSLog(@"fullName: %@", fullName);
+        NSLog(@"fullName: %@", fullName);
 //        NSLog(@"email: %@", email);
 //        NSLog(@"authorizationCode: %@", authorizationCode);
 //        NSLog(@"identityToken: %@", identityToken);
