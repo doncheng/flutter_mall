@@ -40,14 +40,14 @@ class _nicknamechangePageState extends State<nicknamechangePage> {
           ),
           actions: <Widget>[
             FlatButton(
-                padding: EdgeInsets.only(left: 35),
+                padding: EdgeInsets.only(left: 25),
                 onPressed: () => _topersonaldataPage(),
                 child: Text(
                   '保存',
                   style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
+                    color: Colors.red,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
                   ),
                 ))
           ],
@@ -69,23 +69,27 @@ class _nicknamechangePageState extends State<nicknamechangePage> {
                       Text('昵称'),
                       SizedBox(width: 26),
                       Container(
-                        color: Colors.white,
-                        padding: EdgeInsets.only(top: 7),
-                        width: 260,
-                        child: TextField(
-                          decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintText: this.nicknamechangePagenickname,
-                              hintStyle:
-                                  TextStyle(color: Colors.black, fontSize: 14)),
-                          onChanged: (value) {
-                            setState(() {
-                              this.nicknamechangePagenickname = value;
-                              // print(this.nicknamechangePagenickname);
-                            });
-                          },
-                        ),
-                      )
+                          color: Colors.white,
+                          padding: EdgeInsets.only(top: 4),
+                          width: 260,
+                          child: Center(
+                            child: TextField(
+                              textAlignVertical: TextAlignVertical.bottom,
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                    borderSide: BorderSide.none),
+                                hintText: this.nicknamechangePagenickname,
+                                // hintStyle: TextStyle(
+                                //     color: Colors.black, fontSize: 14),
+                              ),
+                              onChanged: (value) {
+                                setState(() {
+                                  this.nicknamechangePagenickname = value;
+                                  // print(this.nicknamechangePagenickname);
+                                });
+                              },
+                            ),
+                          ))
                     ],
                   ),
                 )),

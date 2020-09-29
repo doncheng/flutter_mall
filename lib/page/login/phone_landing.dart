@@ -179,7 +179,7 @@ class _LandingbodyState extends State<Landingbody> {
                           duration: Toast.LENGTH_SHORT, gravity: Toast.CENTER);
                     } else {
                       //获取验证码接口
-                      var url = '';
+                      var url = Api.NoteCodePost;
                       _httpClient
                           .postUrl(Uri.parse(url))
                           .then((HttpClientRequest request) {
@@ -187,9 +187,11 @@ class _LandingbodyState extends State<Landingbody> {
                         //这个是application/x-www-form-urlencoded数据类型的传输方式
                         request.headers.contentType =
                             ContentType("application", "x-www-form-urlencoded");
-                        request.write("phonenum=$phoneNumber");
+
+                        request.write("phone=$phoneNumber");
                         return request.close();
                       }).then((HttpClientResponse response) {
+                        print(response.statusCode);
                         if (response.statusCode == 200) {
                           // ignore: unnecessary_statements
                           response
@@ -198,27 +200,27 @@ class _LandingbodyState extends State<Landingbody> {
                               .then((String string) async {
                             Map<String, dynamic> map = json.decode(string);
                             //登录成功回调
-                            print(map['']);
-                            setState(() {
-                              this.verificationcode = map[''];
-                            });
+                            // print('ooooooo');
+                            // print(map['errno']);
+                            if (map['errno'] == 0) {
+                              // if (_countdownTime == 0) {
+                              //Http请求发送验证码
+                              //...
+                              Toast.show("发送成功", context,
+                                  duration: Toast.LENGTH_SHORT,
+                                  gravity: Toast.CENTER);
+                              setState(() {
+                                _countdownTime = 60;
+                              });
+                              //开始倒计时
+                              startCountdownTimer();
+                              // }
+                            }
                           });
                         } else {
-                          print("error");
+                          print("服务器回调失败");
                         }
                       });
-                      if (_countdownTime == 0) {
-                        //Http请求发送验证码
-                        //...
-                        Toast.show("发送成功", context,
-                            duration: Toast.LENGTH_SHORT,
-                            gravity: Toast.CENTER);
-                        setState(() {
-                          _countdownTime = 60;
-                        });
-                        //开始倒计时
-                        startCountdownTimer();
-                      }
                     }
                   },
                 )
@@ -237,6 +239,21 @@ class _LandingbodyState extends State<Landingbody> {
                 style: TextStyle(fontSize: 20, color: Colors.white),
               ),
               onPressed: () {
+                // loginEventBus.fire(LoginEvent(
+                //   true,
+                //   url:
+                //       'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3901429284,1378079784&fm=26&gp=0.jpg',
+                //   nickName: '手机登录成功',
+                //   mytradingnum1: '1',
+                //   mytradingnum2: '2',
+                //   mytradingnum3: '3',
+                //   mytradingnum4: '4',
+                //   shoppingcartfootprintnum1: '1',
+                //   shoppingcartfootprintnum2: '2',
+                //   shoppingcartfootprintnum3: '3',
+                //   shoppingcartfootprintnum4: '4',
+                // ));
+                // Navigator.pop(context);
                 // _login();
                 if (check1 == 1) {
                   //判断手机号是否正确
@@ -249,54 +266,8 @@ class _LandingbodyState extends State<Landingbody> {
                   } else if (code == "") {
                     Toast.show("请输入验证码", context,
                         duration: Toast.LENGTH_SHORT, gravity: Toast.CENTER);
-                  } else if (code != this.verificationcode) {
-                    Toast.show("验证码不正确", context,
-                        duration: Toast.LENGTH_SHORT, gravity: Toast.CENTER);
                   } else {
-                    //验证手机号与验证码接口
-                    var url = '';
-                    _httpClient
-                        .postUrl(Uri.parse(url))
-                        .then((HttpClientRequest request) {
-                      //这里添加POST请求Body的ContentType和内容
-                      //这个是application/x-www-form-urlencoded数据类型的传输方式
-                      request.headers.contentType =
-                          ContentType("application", "x-www-form-urlencoded");
-                      request.write("phonenum=$phoneNumber&code=$code");
-                      return request.close();
-                    }).then((HttpClientResponse response) {
-                      if (response.statusCode == 200) {
-                        // ignore: unnecessary_statements
-                        response
-                            .transform(utf8.decoder)
-                            .join()
-                            .then((String string) async {
-                          Map<String, dynamic> map = json.decode(string);
-                          //登录成功回调
-                          print(map['']);
-                          if (map[''] == 'success') {
-                            print('ssssss');
-                            loginEventBus.fire(LoginEvent(
-                              true,
-                              url:
-                                  'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2117319092,2336640022&fm=26&gp=0.jpg',
-                              nickName: '苹果登录成功',
-                              mytradingnum1: '1',
-                              mytradingnum2: '2',
-                              mytradingnum3: '3',
-                              mytradingnum4: '4',
-                              shoppingcartfootprintnum1: '1',
-                              shoppingcartfootprintnum2: '2',
-                              shoppingcartfootprintnum3: '3',
-                              shoppingcartfootprintnum4: '4',
-                            ));
-                            Navigator.pop(context);
-                          }
-                        });
-                      } else {
-                        print("error");
-                      }
-                    });
+                    verificationCode();
                   }
                 }
               }),
@@ -341,5 +312,50 @@ class _LandingbodyState extends State<Landingbody> {
         )
       ],
     );
+  }
+
+  verificationCode() {
+    //验证手机号与验证码接口
+    var url = Api.NoteVerity;
+    _httpClient.postUrl(Uri.parse(url)).then((HttpClientRequest request) {
+      //这里添加POST请求Body的ContentType和内容
+      //这个是application/x-www-form-urlencoded数据类型的传输方式
+      request.headers.contentType =
+          ContentType("application", "x-www-form-urlencoded");
+      request.write("phone=$phoneNumber&code=$code");
+      return request.close();
+    }).then((HttpClientResponse response) {
+      if (response.statusCode == 200) {
+        // ignore: unnecessary_statements
+        response.transform(utf8.decoder).join().then((String string) async {
+          Map<String, dynamic> map = json.decode(string);
+          //登录成功回调
+          // print(map);
+          if (map['errno'] == 0) {
+            // print('ssssss');
+            loginEventBus.fire(LoginEvent(
+              true,
+              url:
+                  'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2117319092,2336640022&fm=26&gp=0.jpg',
+              nickName: '手机登录成功',
+              mytradingnum1: '1',
+              mytradingnum2: '2',
+              mytradingnum3: '3',
+              mytradingnum4: '4',
+              shoppingcartfootprintnum1: '1',
+              shoppingcartfootprintnum2: '2',
+              shoppingcartfootprintnum3: '3',
+              shoppingcartfootprintnum4: '4',
+            ));
+            Navigator.pop(context);
+          } else {
+            Toast.show("验证码不正确", context,
+                duration: Toast.LENGTH_SHORT, gravity: Toast.CENTER);
+          }
+        });
+      } else {
+        print("error");
+      }
+    });
   }
 }

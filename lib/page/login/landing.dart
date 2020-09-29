@@ -9,6 +9,7 @@ import 'package:mall/event/login_event.dart';
 import 'package:mall/page/login/phone_landing.dart';
 import 'package:mall/service/user_service.dart';
 import 'package:mall/utils/http_util.dart';
+import 'package:toast/toast.dart';
 
 class landingPage extends StatefulWidget {
   landingPage({Key key}) : super(key: key);
@@ -232,51 +233,57 @@ class _landingPageState extends State<landingPage> {
                 ),
                 onTap: () async {
                   String result = await platform.invokeMethod("Applelanding");
-                  var url = Api.Apple_Verify;
-                  _httpClient
-                      .postUrl(Uri.parse(url))
-                      .then((HttpClientRequest request) {
-                    //这里添加POST请求Body的ContentType和内容
-                    //这个是application/x-www-form-urlencoded数据类型的传输方式
-                    request.headers.contentType =
-                        ContentType("application", "x-www-form-urlencoded");
-                    request.write("aud=com.JiaoYiBei&$result");
-                    return request.close();
-                  }).then((HttpClientResponse response) {
-                    // Process the response.
-                    // print(response.transform(utf8.decoder).join());
-                    if (response.statusCode == 200) {
-                      // ignore: unnecessary_statements
-                      response
-                          .transform(utf8.decoder)
-                          .join()
-                          .then((String string) async {
-                        Map<String, dynamic> map = json.decode(string);
-                        //登录成功回调
-                        print(map['msg']);
-                        if (map['msg'] == 'success') {
-                          print('ssssss');
-                          loginEventBus.fire(LoginEvent(
-                            true,
-                            url:
-                                'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2117319092,2336640022&fm=26&gp=0.jpg',
-                            nickName: '苹果登录成功',
-                            mytradingnum1: '1',
-                            mytradingnum2: '2',
-                            mytradingnum3: '3',
-                            mytradingnum4: '4',
-                            shoppingcartfootprintnum1: '1',
-                            shoppingcartfootprintnum2: '2',
-                            shoppingcartfootprintnum3: '3',
-                            shoppingcartfootprintnum4: '4',
-                          ));
-                          Navigator.pop(context);
-                        }
-                      });
-                    } else {
-                      print("error");
-                    }
-                  });
+                  if (result == '授权失败') {
+                    Toast.show('授权失败', context,
+                        duration: Toast.LENGTH_SHORT, gravity: Toast.CENTER);
+                  } else {
+                    print(result);
+                    var url = Api.Apple_Verify;
+                    _httpClient
+                        .postUrl(Uri.parse(url))
+                        .then((HttpClientRequest request) {
+                      //这里添加POST请求Body的ContentType和内容
+                      //这个是application/x-www-form-urlencoded数据类型的传输方式
+                      request.headers.contentType =
+                          ContentType("application", "x-www-form-urlencoded");
+                      request.write("aud=com.JiaoYiBei&$result");
+                      return request.close();
+                    }).then((HttpClientResponse response) {
+                      // Process the response.
+                      // print(response.transform(utf8.decoder).join());
+                      if (response.statusCode == 200) {
+                        // ignore: unnecessary_statements
+                        response
+                            .transform(utf8.decoder)
+                            .join()
+                            .then((String string) async {
+                          Map<String, dynamic> map = json.decode(string);
+                          //登录成功回调
+                          print(map['msg']);
+                          if (map['msg'] == 'success') {
+                            print('ssssss');
+                            loginEventBus.fire(LoginEvent(
+                              true,
+                              url:
+                                  'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2117319092,2336640022&fm=26&gp=0.jpg',
+                              nickName: '苹果登录成功',
+                              mytradingnum1: '1',
+                              mytradingnum2: '2',
+                              mytradingnum3: '3',
+                              mytradingnum4: '4',
+                              shoppingcartfootprintnum1: '1',
+                              shoppingcartfootprintnum2: '2',
+                              shoppingcartfootprintnum3: '3',
+                              shoppingcartfootprintnum4: '4',
+                            ));
+                            Navigator.pop(context);
+                          }
+                        });
+                      } else {
+                        print("服务器回调失败");
+                      }
+                    });
+                  }
                 })),
         SizedBox(height: 10),
         Container(

@@ -12,11 +12,14 @@ import 'package:mall/utils/navigator_util.dart';
 enum Option { getImageGallery, getImageCamera }
 
 class personaldataPage extends StatefulWidget {
-  final nickname;
-  personaldataPage({Key key, this.nickname = '请输入昵称'}) : super(key: key);
+  final String nickName;
+  final String imageHeadUrl;
+  personaldataPage({Key key, this.nickName, this.imageHeadUrl})
+      : super(key: key);
 
   @override
-  _personaldataPageState createState() => _personaldataPageState(this.nickname);
+  _personaldataPageState createState() => _personaldataPageState(
+      nickName: this.nickName, imageHeadUrl: this.imageHeadUrl);
 }
 
 class _personaldataPageState extends State<personaldataPage> {
@@ -24,12 +27,10 @@ class _personaldataPageState extends State<personaldataPage> {
   File _headimagefile;
   dynamic _imagedynamic;
   bool isLogin = false;
-  var imageHeadUrl;
-  var personaldataPagenicknanme;
+  String imageHeadUrl;
+  String nickName;
 
-  _personaldataPageState(nicknanme) {
-    this.personaldataPagenicknanme = nicknanme;
-  }
+  _personaldataPageState({this.nickName, this.imageHeadUrl});
 
   //原生交互
   static const String CHINAL_NAME = "example.mall/call_native"; //同步路径
@@ -91,7 +92,7 @@ class _personaldataPageState extends State<personaldataPage> {
   @override
   Widget build(BuildContext context) {
     final screenwith = MediaQuery.of(context).size.width;
-
+    // _refreshEvent();
     return Scaffold(
       appBar: AppBar(
         leading: InkWell(
@@ -107,6 +108,21 @@ class _personaldataPageState extends State<personaldataPage> {
         elevation: 0,
         backgroundColor: Colors.white,
         brightness: Brightness.light,
+        actions: <Widget>[
+          FlatButton(
+              padding: EdgeInsets.only(left: 25),
+              onPressed: () {
+                Navigator.of(context).pop(this.nickName);
+              },
+              child: Text(
+                '保存',
+                style: TextStyle(
+                  color: Colors.red,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
+              ))
+        ],
         title: Text(
           '个人资料编辑',
           style: TextStyle(
@@ -137,10 +153,13 @@ class _personaldataPageState extends State<personaldataPage> {
                         ? Container(
                             height: 100,
                             width: 100,
-                            child: Icon(
-                              Icons.account_circle,
-                              size: 100,
-                            ))
+                            child: ClipOval(
+                              child: Image.network(
+                                this.imageHeadUrl,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          )
                         : ClipOval(
                             child: Platform.isIOS
                                 ? Container(
@@ -187,7 +206,7 @@ class _personaldataPageState extends State<personaldataPage> {
                       child: Row(
                         children: <Widget>[
                           Text(
-                            this.personaldataPagenicknanme,
+                            this.nickName,
                             style: TextStyle(fontSize: 14, color: Colors.grey),
                           ),
                           Icon(
@@ -252,64 +271,64 @@ class _personaldataPageState extends State<personaldataPage> {
                 ),
               )),
           Divider(),
-          Padding(
-              padding: EdgeInsets.only(left: 20, right: 20, top: 6, bottom: 6),
-              child: InkWell(
-                onTap: () => _toUserPhonePage(),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Text(
-                      '手机号',
-                      style: TextStyle(fontSize: 14),
-                    ),
-                    Container(
-                      child: Row(
-                        children: <Widget>[
-                          Text(
-                            '未绑定',
-                            style: TextStyle(fontSize: 14, color: Colors.grey),
-                          ),
-                          Icon(
-                            Icons.navigate_next,
-                            color: Colors.grey,
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              )),
-          Divider(),
-          Padding(
-              padding: EdgeInsets.only(left: 20, right: 20, top: 6, bottom: 6),
-              child: InkWell(
-                onTap: () {},
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Text(
-                      'QQ号',
-                      style: TextStyle(fontSize: 14),
-                    ),
-                    Container(
-                      child: Row(
-                        children: <Widget>[
-                          Text(
-                            '110119120',
-                            style: TextStyle(fontSize: 14, color: Colors.grey),
-                          ),
-                          Icon(
-                            Icons.navigate_next,
-                            color: Colors.grey,
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              )),
-          Divider(),
+          // Padding(
+          //     padding: EdgeInsets.only(left: 20, right: 20, top: 6, bottom: 6),
+          //     child: InkWell(
+          //       onTap: () => _toUserPhonePage(),
+          //       child: Row(
+          //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //         children: <Widget>[
+          //           Text(
+          //             '手机号',
+          //             style: TextStyle(fontSize: 14),x
+          //           ),
+          //           Container(
+          //             child: Row(
+          //               children: <Widget>[
+          //                 Text(
+          //                   '未绑定',
+          //                   style: TextStyle(fontSize: 14, color: Colors.grey),
+          //                 ),
+          //                 Icon(
+          //                   Icons.navigate_next,
+          //                   color: Colors.grey,
+          //                 ),
+          //               ],
+          //             ),
+          //           )
+          //         ],
+          //       ),
+          //     )),
+          // Divider(),
+          // Padding(
+          //     padding: EdgeInsets.only(left: 20, right: 20, top: 6, bottom: 6),
+          //     child: InkWell(
+          //       onTap: () {},
+          //       child: Row(
+          //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //         children: <Widget>[
+          //           Text(
+          //             'QQ号',
+          //             style: TextStyle(fontSize: 14),
+          //           ),
+          //           Container(
+          //             child: Row(
+          //               children: <Widget>[
+          //                 Text(
+          //                   '110119120',
+          //                   style: TextStyle(fontSize: 14, color: Colors.grey),
+          //                 ),
+          //                 Icon(
+          //                   Icons.navigate_next,
+          //                   color: Colors.grey,
+          //                 ),
+          //               ],
+          //             ),
+          //           )
+          //         ],
+          //       ),
+          //     )),
+          // Divider(),
         ],
       ),
     );
@@ -320,14 +339,12 @@ class _personaldataPageState extends State<personaldataPage> {
     Navigator.of(context)
         .push(MaterialPageRoute(
             builder: (context) => nicknamechangePage(
-                nicknamefrompersonaldataPage: this.personaldataPagenicknanme)))
+                nicknamefrompersonaldataPage: this.nickName)))
         .then((value) {
       setState(() {
-        value == null
-            ? this.personaldataPagenicknanme = this.personaldataPagenicknanme
-            : this.personaldataPagenicknanme = value;
+        value == null ? this.nickName = this.nickName : this.nickName = value;
       });
-      print(value);
+      // print(value);
     });
   }
 

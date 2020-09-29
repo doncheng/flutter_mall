@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -7,6 +8,7 @@ import 'package:mall/event/login_event.dart';
 import 'package:mall/page/bill/my_assets.dart';
 import 'package:mall/page/help/customer_service.dart';
 import 'package:mall/page/help/set.dart';
+import 'package:mall/page/home/personaldata.dart';
 import 'package:mall/service/mine_service.dart';
 import 'package:mall/utils/navigator_util.dart';
 import 'package:barcode_scan/barcode_scan.dart';
@@ -15,6 +17,8 @@ import 'package:mall/widgets/webview.dart';
 import './placetheorder.dart';
 import 'dart:convert';
 import 'dart:io';
+
+import 'dioManger.dart';
 
 const APPBAR_SCROLL_OFFSET = 100;
 
@@ -27,14 +31,14 @@ class _MineViewState extends State<MineView> {
   bool isLogin = false;
   var imageHeadUrl;
   var nickName = 'hh';
-  String mytradingnum1;
-  String mytradingnum2;
-  String mytradingnum3;
-  String mytradingnum4;
-  String shoppingcartfootprintnum1;
-  String shoppingcartfootprintnum2;
-  String shoppingcartfootprintnum3;
-  String shoppingcartfootprintnum4;
+  String mytradingnum1 = '0';
+  String mytradingnum2 = '0';
+  String mytradingnum3 = '0';
+  String mytradingnum4 = '0';
+  String shoppingcartfootprintnum1 = '0';
+  String shoppingcartfootprintnum2 = '0';
+  String shoppingcartfootprintnum3 = '0';
+  String shoppingcartfootprintnum4 = '0';
 
   //创建HttpClient
   HttpClient _httpClient = HttpClient();
@@ -47,35 +51,8 @@ class _MineViewState extends State<MineView> {
     super.initState();
     // SharedPreferencesUtils.getToken().then((value) {
     //   _token = value;
-    //   // _orderData();
     // });
   }
-
-  // _orderData() {
-  //   var parameters = {"page": _page, "limit": _limit};
-  //   _mineService.queryOrder(parameters, (success) {
-  //     setState(() {
-  //       _orders = success;
-  //     });
-  //   }, (error) {
-  //     ToastUtil.showToast(error);
-  //   });
-  // }
-  // getUrlHttpClient() async {
-  //   var url = Api.MINE_ORDERS;
-  //   _httpClient.getUrl(Uri.parse(url)).then((HttpClientRequest request) {
-  //     return request.close();
-  //   }).then((HttpClientResponse response) {
-  //     // Process the response.
-  //     if (response.statusCode == 200) {
-  //       response.transform(utf8.decoder).join().then((String string) {
-  //         print(string);
-  //       });
-  //     } else {
-  //       print("error");
-  //     }
-  //   });
-  // }
 
   //渐变准备
   final PageController _controller = PageController(initialPage: 0);
@@ -95,26 +72,52 @@ class _MineViewState extends State<MineView> {
 
   //监听事件，等待登录完传值过来
   _refreshEvent() {
-    loginEventBus.on<LoginEvent>().listen((LoginEvent loginEvent) {
-      if (loginEvent.isLogin) {
-        setState(() {
-          isLogin = true;
-          imageHeadUrl = loginEvent.url;
-          nickName = loginEvent.nickName;
-          mytradingnum1 = loginEvent.mytradingnum1;
-          mytradingnum2 = loginEvent.mytradingnum2;
-          mytradingnum3 = loginEvent.mytradingnum3;
-          mytradingnum4 = loginEvent.mytradingnum4;
-          shoppingcartfootprintnum1 = loginEvent.shoppingcartfootprintnum1;
-          shoppingcartfootprintnum2 = loginEvent.shoppingcartfootprintnum2;
-          shoppingcartfootprintnum3 = loginEvent.shoppingcartfootprintnum3;
-          shoppingcartfootprintnum4 = loginEvent.shoppingcartfootprintnum4;
-        });
-      } else {
-        setState(() {
-          isLogin = false;
-        });
-      }
+    loginEventBus.on<LoginEvent>().listen(
+      (LoginEvent loginEvent) {
+        if (loginEvent.isLogin) {
+          setState(() {
+            isLogin = true;
+            imageHeadUrl = loginEvent.url;
+            nickName = loginEvent.nickName;
+            // mytradingnum1 = loginEvent.mytradingnum1;
+            // mytradingnum2 = loginEvent.mytradingnum2;
+            // mytradingnum3 = loginEvent.mytradingnum3;
+            // mytradingnum4 = loginEvent.mytradingnum4;
+            shoppingcartfootprintnum1 = loginEvent.shoppingcartfootprintnum1;
+            shoppingcartfootprintnum2 = loginEvent.shoppingcartfootprintnum2;
+            shoppingcartfootprintnum3 = loginEvent.shoppingcartfootprintnum3;
+            shoppingcartfootprintnum4 = loginEvent.shoppingcartfootprintnum4;
+            getMineOrders();
+          });
+          // personalDataBus.fire(PersonalDataEvent(
+          //   url: loginEvent.url,
+          //   nickName: loginEvent.nickName,
+          // ));
+        } else {
+          setState(() {
+            isLogin = false;
+          });
+        }
+      },
+    );
+  }
+
+//配置dio，通过BaseOptions
+  void getMineOrders() {
+    ///显示指定Map的限定类型
+    Map<String, String> parms = {};
+    Map<String, String> headers = {
+      "X-Litemall-Token":
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0aGlzIGlzIGxpdGVtYWxsIHRva2VuIiwiYXVkIjoiTUlOSUFQUCIsImlzcyI6IkxJVEVNQUxMIiwiZXhwIjoxNjAxMzc4MjU0LCJ1c2VySWQiOjEsImlhdCI6MTYwMTM3MTA1NH0.lla0kP2z5SrU1PuH2Y_dqZBi02K9OGSFXSpndyNQ768'
+    };
+    DioManger.getInstance().get(Api.MINE_ORDERS, parms, headers, (response) {
+      Map<String, dynamic> map = json.decode(response);
+      print(map['errno']);
+
+      /// 登录成功发送全局事件
+      // bus.emit('login', loginMsg);
+    }, (error) {
+      print(error.toString());
     });
   }
 
@@ -167,7 +170,7 @@ class _MineViewState extends State<MineView> {
                 },
                 child: ListView(children: <Widget>[
                   Container(
-                    padding: EdgeInsets.only(top: 40),
+                    padding: EdgeInsets.only(top: 40, right: 9),
                     alignment: Alignment.bottomRight,
                     height: 70.0,
                     decoration: BoxDecoration(color: Color(0xffFE5155)),
@@ -175,7 +178,7 @@ class _MineViewState extends State<MineView> {
                       icon: Icon(
                         Icons.settings,
                         color: Colors.white,
-                        size: 20,
+                        size: 22,
                       ),
                       onPressed: () => _toSettings(),
                     ),
@@ -192,9 +195,32 @@ class _MineViewState extends State<MineView> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               InkWell(
-                                  onTap: () => isLogin
-                                      ? _toPersonalData()
-                                      : _toLandingPage(),
+                                  // onTap: () => isLogin
+                                  //     ? _toPersonalData()
+                                  //     : _toLandingPage(),
+                                  onTap: () {
+                                    if (isLogin) {
+                                      // Navigator.of(context).pop();
+                                      Navigator.of(context)
+                                          .push(new MaterialPageRoute(
+                                              builder: (context) =>
+                                                  new personaldataPage(
+                                                    nickName: this.nickName,
+                                                    imageHeadUrl:
+                                                        this.imageHeadUrl,
+                                                  )))
+                                          .then((value) {
+                                        setState(() {
+                                          value == null
+                                              ? this.nickName = this.nickName
+                                              : this.nickName = value;
+                                        });
+                                        // print(value);
+                                      });
+                                    } else {
+                                      _toLandingPage();
+                                    }
+                                  },
                                   child: isLogin
                                       ? Container(
                                           width: 300,
@@ -346,7 +372,7 @@ class _MineViewState extends State<MineView> {
     NavigatorUtils.goLandingfPage(context);
   }
 
-  _toPersonalData() {
+  _toPersonalData({String nickName}) {
     NavigatorUtils.goPersonalData(context);
   }
 
@@ -564,34 +590,6 @@ class _MineViewState extends State<MineView> {
     );
   }
 }
-
-// class shoppingcartfootprint extends StatefulWidget {
-//   shoppingcartfootprint({Key key}) : super(key: key);
-
-//   @override
-//   _shoppingcartfootprintState createState() => _shoppingcartfootprintState();
-// }
-
-// class _shoppingcartfootprintState extends State<shoppingcartfootprint> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return
-//   }
-// }
-
-// class mytrading extends StatefulWidget {
-//   mytrading({Key key}) : super(key: key);
-
-//   @override
-//   _mytradingState createState() => _mytradingState();
-// }
-
-// class _mytradingState extends State<mytrading> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return
-//   }
-// }
 
 class makemoney extends StatefulWidget {
   makemoney({Key key}) : super(key: key);

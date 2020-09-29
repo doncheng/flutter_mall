@@ -250,6 +250,7 @@
             break;
     }
     NSLog(@"%@", errorMsg);
+    self.result(@"授权失败");
 }
 
 #pragma mark- ASAuthorizationControllerPresentationContextProviding
