@@ -41,21 +41,11 @@ class _MineViewState extends State<MineView> {
   int goodsCount;
   int footprint;
   int shoppingcartfootprintnum3;
-  int shoppingcartfootprintnum4;
+  int couponCount;
 
   //创建HttpClient
   HttpClient _httpClient = HttpClient();
-
-  var _page = 1;
-  var _limit = 10;
   MineService _mineService = MineService();
-  @override
-  void initState() {
-    super.initState();
-    // SharedPreferencesUtils.getToken().then((value) {
-    //   _token = value;
-    // });
-  }
 
   //渐变准备
   final PageController _controller = PageController(initialPage: 0);
@@ -81,6 +71,8 @@ class _MineViewState extends State<MineView> {
           getMineOrders();
           getMINE_FOOTPRINT();
           getCART_LIST();
+          getMINE_COUPON_LIST();
+
           setState(() {
             isLogin = true;
             imageHeadUrl = loginEvent.url;
@@ -100,7 +92,7 @@ class _MineViewState extends State<MineView> {
     );
   }
 
-//配置dio，通过BaseOptions
+//我的订单数据
   void getMineOrders() {
     if (isLogin) {
       ///显示指定Map的限定类型
@@ -121,6 +113,7 @@ class _MineViewState extends State<MineView> {
     }
   }
 
+//足迹数据
   void getMINE_FOOTPRINT() {
     if (isLogin) {
       ///显示指定Map的限定类型
@@ -139,6 +132,7 @@ class _MineViewState extends State<MineView> {
     }
   }
 
+//购物车数据
   void getCART_LIST() {
     if (isLogin) {
       ///显示指定Map的限定类型
@@ -151,6 +145,43 @@ class _MineViewState extends State<MineView> {
         });
       }, (error) {
         print('请求购物车数据错误');
+        print(error.toString());
+      });
+    }
+  }
+
+  //收藏夹数据
+  void getMINE_COLLECT() {
+    if (isLogin) {
+      ///显示指定Map的限定类型
+      Map<String, String> parms = {};
+      Map<String, String> headers = {"X-Litemall-Token": this.token};
+      DioManger.getInstance().get(Api.MINE_COLLECT, parms, headers, (response) {
+        Map<String, dynamic> map = json.decode(response);
+        setState(() {
+          goodsCount = map['data']['total'];
+        });
+      }, (error) {
+        print('请求收藏夹数据错误');
+        print(error.toString());
+      });
+    }
+  }
+
+  //优惠券数据
+  void getMINE_COUPON_LIST() {
+    if (isLogin) {
+      ///显示指定Map的限定类型
+      Map<String, String> parms = {};
+      Map<String, String> headers = {"X-Litemall-Token": this.token};
+      DioManger.getInstance().get(Api.MINE_COUPON_LIST, parms, headers,
+          (response) {
+        Map<String, dynamic> map = json.decode(response);
+        setState(() {
+          couponCount = map['data']['total'];
+        });
+      }, (error) {
+        print('请求优惠券数据错误');
         print(error.toString());
       });
     }
@@ -441,7 +472,7 @@ class _MineViewState extends State<MineView> {
                 style: TextStyle(color: Colors.white),
               ),
               Text(
-                '红包',
+                '收藏夹',
                 style: TextStyle(color: Colors.white),
               )
             ],
@@ -458,11 +489,11 @@ class _MineViewState extends State<MineView> {
           child: Column(
             children: <Widget>[
               Text(
-                isLogin ? '$shoppingcartfootprintnum4' : '0',
+                isLogin ? '$couponCount' : '0',
                 style: TextStyle(color: Colors.white),
               ),
               Text(
-                '钱包',
+                '优惠券',
                 style: TextStyle(color: Colors.white),
               )
             ],
@@ -518,7 +549,8 @@ class _MineViewState extends State<MineView> {
                       width: 53,
                       height: 19,
                       child: Text(
-                        '我发布的',
+                        '待付款',
+                        textAlign: TextAlign.center,
                         style: TextStyle(color: Colors.black54, fontSize: 13),
                       ),
                     ),
@@ -544,7 +576,8 @@ class _MineViewState extends State<MineView> {
                       width: 53,
                       height: 19,
                       child: Text(
-                        '我卖出的',
+                        '待发货',
+                        textAlign: TextAlign.center,
                         style: TextStyle(color: Colors.black54, fontSize: 13),
                       ),
                     ),
@@ -570,7 +603,8 @@ class _MineViewState extends State<MineView> {
                       width: 53,
                       height: 19,
                       child: Text(
-                        '我买到的',
+                        '待收货',
+                        textAlign: TextAlign.center,
                         style: TextStyle(color: Colors.black54, fontSize: 13),
                       ),
                     ),
@@ -596,7 +630,8 @@ class _MineViewState extends State<MineView> {
                       width: 53,
                       height: 19,
                       child: Text(
-                        '我收藏的',
+                        '待评价',
+                        textAlign: TextAlign.center,
                         style: TextStyle(color: Colors.black54, fontSize: 13),
                       ),
                     ),
@@ -761,7 +796,7 @@ class _recommendedtoolsState extends State<recommendedtools> {
   List<Widget> _recommendedtoolsget() {
     var tempList = recommendedtools.map((value) {
       return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           InkWell(
             onTap: () {
@@ -786,6 +821,7 @@ class _recommendedtoolsState extends State<recommendedtools> {
                       Icon(Icons.home),
                       Text(
                         value['toolsname1'],
+                        textAlign: TextAlign.start,
                         style: TextStyle(fontSize: 12),
                       ),
                     ],
@@ -942,37 +978,37 @@ class _recommendedtoolsState extends State<recommendedtools> {
       constraints: BoxConstraints(maxHeight: double.infinity),
       width: double.infinity,
       margin: EdgeInsets.only(left: 12, right: 13, top: 20),
+      padding: EdgeInsets.only(left: 14, top: 13, right: 14),
       child: Column(
         children: <Widget>[
-          Padding(
-            padding: EdgeInsets.only(left: 14, top: 5),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text(
-                  '推荐工具',
-                  style: TextStyle(fontWeight: FontWeight.w600),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Text(
+                '推荐工具',
+                style: TextStyle(fontWeight: FontWeight.w600),
+              ),
+              InkWell(
+                onTap: () {
+                  print('222');
+                },
+                child: Row(
+                  children: <Widget>[
+                    Text(
+                      '更多',
+                      style: TextStyle(fontSize: 12, color: Color(0xff999898)),
+                    ),
+                    Icon(
+                      Icons.navigate_next,
+                      color: Color(0xff999898),
+                    )
+                  ],
                 ),
-                FlatButton(
-                    onPressed: () {},
-                    child: Row(
-                      children: <Widget>[
-                        Text(
-                          '更多',
-                          style:
-                              TextStyle(fontSize: 12, color: Color(0xff999898)),
-                        ),
-                        Icon(
-                          Icons.navigate_next,
-                          color: Color(0xff999898),
-                        )
-                      ],
-                    )),
-              ],
-            ),
+              )
+            ],
           ),
           SizedBox(
-            height: 10,
+            height: 20,
           ),
           Column(children: this._recommendedtoolsget())
         ],
