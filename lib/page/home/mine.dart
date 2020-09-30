@@ -14,10 +14,12 @@ import 'package:mall/utils/navigator_util.dart';
 import 'package:barcode_scan/barcode_scan.dart';
 import 'package:mall/utils/shared_preferences_util.dart';
 import 'package:mall/widgets/webview.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 import './placetheorder.dart';
 import 'dart:convert';
 import 'dart:io';
 
+import 'browser.dart';
 import 'dioManger.dart';
 
 const APPBAR_SCROLL_OFFSET = 100;
@@ -31,14 +33,14 @@ class _MineViewState extends State<MineView> {
   bool isLogin = false;
   var imageHeadUrl;
   var nickName = 'hh';
-  String mytradingnum1 = '0';
-  String mytradingnum2 = '0';
-  String mytradingnum3 = '0';
-  String mytradingnum4 = '0';
-  String shoppingcartfootprintnum1 = '0';
-  String shoppingcartfootprintnum2 = '0';
-  String shoppingcartfootprintnum3 = '0';
-  String shoppingcartfootprintnum4 = '0';
+  int mytradingnum1;
+  int mytradingnum2;
+  int mytradingnum3;
+  int mytradingnum4;
+  int shoppingcartfootprintnum1;
+  int shoppingcartfootprintnum2;
+  int shoppingcartfootprintnum3;
+  int shoppingcartfootprintnum4;
 
   //创建HttpClient
   HttpClient _httpClient = HttpClient();
@@ -75,19 +77,15 @@ class _MineViewState extends State<MineView> {
     loginEventBus.on<LoginEvent>().listen(
       (LoginEvent loginEvent) {
         if (loginEvent.isLogin) {
+          getMineOrders();
           setState(() {
             isLogin = true;
             imageHeadUrl = loginEvent.url;
             nickName = loginEvent.nickName;
-            // mytradingnum1 = loginEvent.mytradingnum1;
-            // mytradingnum2 = loginEvent.mytradingnum2;
-            // mytradingnum3 = loginEvent.mytradingnum3;
-            // mytradingnum4 = loginEvent.mytradingnum4;
             shoppingcartfootprintnum1 = loginEvent.shoppingcartfootprintnum1;
             shoppingcartfootprintnum2 = loginEvent.shoppingcartfootprintnum2;
             shoppingcartfootprintnum3 = loginEvent.shoppingcartfootprintnum3;
             shoppingcartfootprintnum4 = loginEvent.shoppingcartfootprintnum4;
-            getMineOrders();
           });
           // personalDataBus.fire(PersonalDataEvent(
           //   url: loginEvent.url,
@@ -104,21 +102,29 @@ class _MineViewState extends State<MineView> {
 
 //配置dio，通过BaseOptions
   void getMineOrders() {
-    ///显示指定Map的限定类型
-    Map<String, String> parms = {};
-    Map<String, String> headers = {
-      "X-Litemall-Token":
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0aGlzIGlzIGxpdGVtYWxsIHRva2VuIiwiYXVkIjoiTUlOSUFQUCIsImlzcyI6IkxJVEVNQUxMIiwiZXhwIjoxNjAxMzc4MjU0LCJ1c2VySWQiOjEsImlhdCI6MTYwMTM3MTA1NH0.lla0kP2z5SrU1PuH2Y_dqZBi02K9OGSFXSpndyNQ768'
-    };
-    DioManger.getInstance().get(Api.MINE_ORDERS, parms, headers, (response) {
-      Map<String, dynamic> map = json.decode(response);
-      print(map['errno']);
+    if (isLogin) {
+      ///显示指定Map的限定类型
+      Map<String, String> parms = {};
+      Map<String, String> headers = {
+        "X-Litemall-Token":
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0aGlzIGlzIGxpdGVtYWxsIHRva2VuIiwiYXVkIjoiTUlOSUFQUCIsImlzcyI6IkxJVEVNQUxMIiwiZXhwIjoxNjAxNDQyNTc1LCJ1c2VySWQiOjEsImlhdCI6MTYwMTQzNTM3NX0.hbonc3yB-qs5E4WEsrwvOoiuTij7rl2vO9QCT122Q0Y'
+      };
+      DioManger.getInstance().get(Api.MINE_ORDERS, parms, headers, (response) {
+        Map<String, dynamic> map = json.decode(response);
+        print(map['data']['limit']);
+        setState(() {
+          mytradingnum1 = map['data']['total'];
+          mytradingnum2 = map['data']["pages"];
+          mytradingnum3 = map['data']["limit"];
+          mytradingnum4 = map['data']["page"];
+        });
 
-      /// 登录成功发送全局事件
-      // bus.emit('login', loginMsg);
-    }, (error) {
-      print(error.toString());
-    });
+        /// 登录成功发送全局事件
+        // bus.emit('login', loginMsg);
+      }, (error) {
+        print(error.toString());
+      });
+    }
   }
 
   _getUserInfo() {
@@ -144,6 +150,7 @@ class _MineViewState extends State<MineView> {
   @override
   Widget build(BuildContext context) {
     _refreshEvent();
+
     final double statusBarHeight = MediaQuery.of(context).padding.top;
 
     final size = MediaQuery.of(context).size;
@@ -170,7 +177,7 @@ class _MineViewState extends State<MineView> {
                 },
                 child: ListView(children: <Widget>[
                   Container(
-                    padding: EdgeInsets.only(top: 40, right: 9),
+                    padding: EdgeInsets.only(top: 40, right: 1),
                     alignment: Alignment.bottomRight,
                     height: 70.0,
                     decoration: BoxDecoration(color: Color(0xffFE5155)),
@@ -387,7 +394,7 @@ class _MineViewState extends State<MineView> {
           child: Column(
             children: <Widget>[
               Text(
-                isLogin ? this.shoppingcartfootprintnum1 : '0',
+                isLogin ? '$shoppingcartfootprintnum1' : '0',
                 style: TextStyle(color: Colors.white),
               ),
               Text(
@@ -404,7 +411,7 @@ class _MineViewState extends State<MineView> {
           child: Column(
             children: <Widget>[
               Text(
-                isLogin ? this.shoppingcartfootprintnum2 : '0',
+                isLogin ? '$shoppingcartfootprintnum2' : '0',
                 style: TextStyle(color: Colors.white),
               ),
               Text(
@@ -421,7 +428,7 @@ class _MineViewState extends State<MineView> {
           child: Column(
             children: <Widget>[
               Text(
-                isLogin ? this.shoppingcartfootprintnum3 : '0',
+                isLogin ? '$shoppingcartfootprintnum3' : '0',
                 style: TextStyle(color: Colors.white),
               ),
               Text(
@@ -442,7 +449,7 @@ class _MineViewState extends State<MineView> {
           child: Column(
             children: <Widget>[
               Text(
-                isLogin ? this.shoppingcartfootprintnum4 : '0',
+                isLogin ? '$shoppingcartfootprintnum4' : '0',
                 style: TextStyle(color: Colors.white),
               ),
               Text(
@@ -490,10 +497,11 @@ class _MineViewState extends State<MineView> {
                 child: Column(
                   children: <Widget>[
                     Container(
-                      width: 19,
+                      width: 60,
                       height: 35,
                       child: Text(
-                        isLogin ? this.mytradingnum1 : '0',
+                        isLogin ? '$mytradingnum1' : '0',
+                        textAlign: TextAlign.center,
                         style: TextStyle(color: Colors.black, fontSize: 30),
                       ),
                     ),
@@ -515,10 +523,11 @@ class _MineViewState extends State<MineView> {
                 child: Column(
                   children: <Widget>[
                     Container(
-                      width: 19,
+                      width: 60,
                       height: 35,
                       child: Text(
-                        isLogin ? this.mytradingnum2 : '0',
+                        isLogin ? '$mytradingnum2' : '0',
+                        textAlign: TextAlign.center,
                         style: TextStyle(color: Colors.black, fontSize: 30),
                       ),
                     ),
@@ -540,10 +549,11 @@ class _MineViewState extends State<MineView> {
                 child: Column(
                   children: <Widget>[
                     Container(
-                      width: 19,
+                      width: 60,
                       height: 35,
                       child: Text(
-                        isLogin ? this.mytradingnum3 : '0',
+                        isLogin ? '$mytradingnum3' : '0',
+                        textAlign: TextAlign.center,
                         style: TextStyle(color: Colors.black, fontSize: 30),
                       ),
                     ),
@@ -565,10 +575,11 @@ class _MineViewState extends State<MineView> {
                 child: Column(
                   children: <Widget>[
                     Container(
-                      width: 19,
+                      width: 60,
                       height: 35,
                       child: Text(
-                        isLogin ? this.mytradingnum4 : '0',
+                        isLogin ? '$mytradingnum4' : '0',
+                        textAlign: TextAlign.center,
                         style: TextStyle(color: Colors.black, fontSize: 30),
                       ),
                     ),
@@ -775,12 +786,13 @@ class _recommendedtoolsState extends State<recommendedtools> {
           InkWell(
             onTap: () {
               if (value['toolsname2'] == '平台规则') {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => WebViewPage(
-                            'https://www.baidu.com/', value['toolsname2'])));
                 print('平台规则');
+                Navigator.of(context).push(new MaterialPageRoute(builder: (_) {
+                  return Browser(
+                    url: "https://flutter-io.cn/",
+                    title: "Flutter 中文社区",
+                  );
+                }));
               } else if (value['toolsname2'] == '邀请得现金') {
                 print('邀请得现金');
               } else {

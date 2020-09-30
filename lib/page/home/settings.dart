@@ -1,7 +1,13 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:mall/api/api.dart';
 import 'package:mall/constant/string.dart';
 import 'package:mall/event/login_event.dart';
 import 'package:mall/utils/navigator_util.dart';
+import 'package:toast/toast.dart';
+
+import 'dioManger.dart';
 
 class SettingsPage extends StatefulWidget {
   @override
@@ -105,15 +111,25 @@ class _rowgetState extends State<rowget> {
   }
 
   _loginOut() {
-    // _userService.loginOut((success) {
-    //   loginEventBus.fire(LoginEvent(false));
-    // }, (error) {
-    //   loginEventBus.fire(LoginEvent(false));
-    //   ToastUtil.showToast(error);
-    // });
-    // Navigator.pop(context);
-    loginEventBus.fire(LoginEvent(false));
-    Navigator.pop(context);
+    ///显示指定Map的限定类型
+    Map<String, String> parms = {};
+    Map<String, String> headers = {
+      "X-Litemall-Token":
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0aGlzIGlzIGxpdGVtYWxsIHRva2VuIiwiYXVkIjoiTUlOSUFQUCIsImlzcyI6IkxJVEVNQUxMIiwiZXhwIjoxNjAxNDQyMzI5LCJ1c2VySWQiOjEsImlhdCI6MTYwMTQzNTEyOX0.rhn1kgy9ZTcz822_aDuf1qCluCpVOA0Vkgs64VPu1wE'
+    };
+    DioManger.getInstance().post(Api.LOGIN_OUT, parms, headers, (response) {
+      Map<String, dynamic> map = json.decode(response);
+      print(map);
+      Toast.show("退出登录成功", context,
+          duration: Toast.LENGTH_SHORT, gravity: Toast.CENTER);
+
+      loginEventBus.fire(LoginEvent(false));
+      Navigator.pop(context);
+    }, (error) {
+      Toast.show("退出登录失败", context,
+          duration: Toast.LENGTH_SHORT, gravity: Toast.CENTER);
+      print(error.toString());
+    });
   }
   // _toOrder() {
   //   NavigatorUtils.goOrder(context);

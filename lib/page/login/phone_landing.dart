@@ -239,22 +239,17 @@ class _LandingbodyState extends State<Landingbody> {
                 style: TextStyle(fontSize: 20, color: Colors.white),
               ),
               onPressed: () {
-                // loginEventBus.fire(LoginEvent(
-                //   true,
-                //   url:
-                //       'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3901429284,1378079784&fm=26&gp=0.jpg',
-                //   nickName: '手机登录成功',
-                //   mytradingnum1: '1',
-                //   mytradingnum2: '2',
-                //   mytradingnum3: '3',
-                //   mytradingnum4: '4',
-                //   shoppingcartfootprintnum1: '1',
-                //   shoppingcartfootprintnum2: '2',
-                //   shoppingcartfootprintnum3: '3',
-                //   shoppingcartfootprintnum4: '4',
-                // ));
-                // Navigator.pop(context);
-                // _login();
+                loginEventBus.fire(LoginEvent(
+                  true,
+                  url:
+                      'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3901429284,1378079784&fm=26&gp=0.jpg',
+                  nickName: '手机登录成功',
+                  shoppingcartfootprintnum1: 1,
+                  shoppingcartfootprintnum2: 2,
+                  shoppingcartfootprintnum3: 3,
+                  shoppingcartfootprintnum4: 4,
+                ));
+                Navigator.pop(context);
                 if (check1 == 1) {
                   //判断手机号是否正确
                   RegExp exp = RegExp(
@@ -332,28 +327,26 @@ class _LandingbodyState extends State<Landingbody> {
           //登录成功回调
           // print(map);
           if (map['errno'] == 0) {
-            // print('ssssss');
+            print(map['data']["userInfo"]["nickName"]);
             loginEventBus.fire(LoginEvent(
               true,
               url:
                   'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2117319092,2336640022&fm=26&gp=0.jpg',
-              nickName: '手机登录成功',
-              mytradingnum1: '1',
-              mytradingnum2: '2',
-              mytradingnum3: '3',
-              mytradingnum4: '4',
-              shoppingcartfootprintnum1: '1',
-              shoppingcartfootprintnum2: '2',
-              shoppingcartfootprintnum3: '3',
-              shoppingcartfootprintnum4: '4',
+              nickName: map['data']["userInfo"]["nickName"],
+              shoppingcartfootprintnum1: 1,
+              shoppingcartfootprintnum2: 2,
+              shoppingcartfootprintnum3: 3,
+              shoppingcartfootprintnum4: 4,
             ));
             Navigator.pop(context);
           } else {
-            Toast.show("验证码不正确", context,
+            Toast.show("验证码或手机号不正确", context,
                 duration: Toast.LENGTH_SHORT, gravity: Toast.CENTER);
           }
         });
       } else {
+        Toast.show("服务器无响应", context,
+            duration: Toast.LENGTH_SHORT, gravity: Toast.CENTER);
         print("error");
       }
     });
