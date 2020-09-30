@@ -29,7 +29,7 @@ import 'package:mall/page/mine/order.dart';
 import 'package:mall/page/mine/order_detail.dart';
 import 'package:mall/page/goods/search_goods.dart';
 import 'package:mall/page/goods/project_selection_detail.dart';
-import 'package:mall/widgets/webview.dart';
+import 'package:mall/widgets/flutter_webview_plugin.dart';
 import 'package:mall/utils/fluro_convert_utils.dart';
 import 'package:mall/page/home/brand_detail.dart';
 import 'package:mall/page/home/settings.dart';

@@ -267,10 +267,6 @@ class _landingPageState extends State<landingPage> {
                               url:
                                   'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2117319092,2336640022&fm=26&gp=0.jpg',
                               nickName: '苹果登录成功',
-                              shoppingcartfootprintnum1: 1,
-                              shoppingcartfootprintnum2: 2,
-                              shoppingcartfootprintnum3: 3,
-                              shoppingcartfootprintnum4: 4,
                             ));
                             Navigator.pop(context);
                           }

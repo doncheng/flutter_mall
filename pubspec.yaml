@@ -37,6 +37,7 @@ dependencies:
   flutter_easyrefresh: ^2.0.3
   flutter_webview_plugin: ^0.3.11
   webview_flutter: ^0.3.19+9
+  webview_flutter_plus: ^0.1.1+9
   cached_network_image: ^2.0.0
   # cached_network_image: ^2.3.2+1
   # The following adds the Cupertino Icons font to your application.

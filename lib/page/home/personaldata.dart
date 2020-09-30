@@ -271,35 +271,35 @@ class _personaldataPageState extends State<personaldataPage> {
                 ),
               )),
           Divider(),
-          // Padding(
-          //     padding: EdgeInsets.only(left: 20, right: 20, top: 6, bottom: 6),
-          //     child: InkWell(
-          //       onTap: () => _toUserPhonePage(),
-          //       child: Row(
-          //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //         children: <Widget>[
-          //           Text(
-          //             '手机号',
-          //             style: TextStyle(fontSize: 14),x
-          //           ),
-          //           Container(
-          //             child: Row(
-          //               children: <Widget>[
-          //                 Text(
-          //                   '未绑定',
-          //                   style: TextStyle(fontSize: 14, color: Colors.grey),
-          //                 ),
-          //                 Icon(
-          //                   Icons.navigate_next,
-          //                   color: Colors.grey,
-          //                 ),
-          //               ],
-          //             ),
-          //           )
-          //         ],
-          //       ),
-          //     )),
-          // Divider(),
+          Padding(
+              padding: EdgeInsets.only(left: 20, right: 20, top: 6, bottom: 6),
+              child: InkWell(
+                onTap: () => _toUserPhonePage(),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text(
+                      '手机号',
+                      style: TextStyle(fontSize: 14),
+                    ),
+                    Container(
+                      child: Row(
+                        children: <Widget>[
+                          Text(
+                            '更换手机号',
+                            style: TextStyle(fontSize: 14, color: Colors.grey),
+                          ),
+                          Icon(
+                            Icons.navigate_next,
+                            color: Colors.grey,
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              )),
+          Divider(),
           // Padding(
           //     padding: EdgeInsets.only(left: 20, right: 20, top: 6, bottom: 6),
           //     child: InkWell(

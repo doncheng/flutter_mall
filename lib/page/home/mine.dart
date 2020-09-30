@@ -9,12 +9,12 @@ import 'package:mall/page/bill/my_assets.dart';
 import 'package:mall/page/help/customer_service.dart';
 import 'package:mall/page/help/set.dart';
 import 'package:mall/page/home/personaldata.dart';
+import 'package:mall/page/home/webview_flutter_plus.dart';
 import 'package:mall/service/mine_service.dart';
 import 'package:mall/utils/navigator_util.dart';
 import 'package:barcode_scan/barcode_scan.dart';
 import 'package:mall/utils/shared_preferences_util.dart';
-import 'package:mall/widgets/webview.dart';
-import 'package:webview_flutter/webview_flutter.dart';
+import 'package:mall/widgets/flutter_webview_plugin.dart';
 import './placetheorder.dart';
 import 'dart:convert';
 import 'dart:io';
@@ -33,18 +33,19 @@ class _MineViewState extends State<MineView> {
   bool isLogin = false;
   var imageHeadUrl;
   var nickName = 'hh';
+  var token;
   int mytradingnum1;
   int mytradingnum2;
   int mytradingnum3;
   int mytradingnum4;
-  int shoppingcartfootprintnum1;
-  int shoppingcartfootprintnum2;
+  int goodsCount;
+  int footprint;
   int shoppingcartfootprintnum3;
   int shoppingcartfootprintnum4;
 
   //创建HttpClient
   HttpClient _httpClient = HttpClient();
-  var _token;
+
   var _page = 1;
   var _limit = 10;
   MineService _mineService = MineService();
@@ -78,14 +79,13 @@ class _MineViewState extends State<MineView> {
       (LoginEvent loginEvent) {
         if (loginEvent.isLogin) {
           getMineOrders();
+          getMINE_FOOTPRINT();
+          getCART_LIST();
           setState(() {
             isLogin = true;
             imageHeadUrl = loginEvent.url;
             nickName = loginEvent.nickName;
-            shoppingcartfootprintnum1 = loginEvent.shoppingcartfootprintnum1;
-            shoppingcartfootprintnum2 = loginEvent.shoppingcartfootprintnum2;
-            shoppingcartfootprintnum3 = loginEvent.shoppingcartfootprintnum3;
-            shoppingcartfootprintnum4 = loginEvent.shoppingcartfootprintnum4;
+            token = loginEvent.token;
           });
           // personalDataBus.fire(PersonalDataEvent(
           //   url: loginEvent.url,
@@ -105,46 +105,55 @@ class _MineViewState extends State<MineView> {
     if (isLogin) {
       ///显示指定Map的限定类型
       Map<String, String> parms = {};
-      Map<String, String> headers = {
-        "X-Litemall-Token":
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0aGlzIGlzIGxpdGVtYWxsIHRva2VuIiwiYXVkIjoiTUlOSUFQUCIsImlzcyI6IkxJVEVNQUxMIiwiZXhwIjoxNjAxNDQyNTc1LCJ1c2VySWQiOjEsImlhdCI6MTYwMTQzNTM3NX0.hbonc3yB-qs5E4WEsrwvOoiuTij7rl2vO9QCT122Q0Y'
-      };
+      Map<String, String> headers = {"X-Litemall-Token": this.token};
       DioManger.getInstance().get(Api.MINE_ORDERS, parms, headers, (response) {
         Map<String, dynamic> map = json.decode(response);
-        print(map['data']['limit']);
         setState(() {
           mytradingnum1 = map['data']['total'];
           mytradingnum2 = map['data']["pages"];
           mytradingnum3 = map['data']["limit"];
           mytradingnum4 = map['data']["page"];
         });
-
-        /// 登录成功发送全局事件
-        // bus.emit('login', loginMsg);
       }, (error) {
+        print('请求我的订单数据错误');
         print(error.toString());
       });
     }
   }
 
-  _getUserInfo() {
-    SharedPreferencesUtils.getToken().then((token) {
-      if (token != null) {
+  void getMINE_FOOTPRINT() {
+    if (isLogin) {
+      ///显示指定Map的限定类型
+      Map<String, String> parms = {};
+      Map<String, String> headers = {"X-Litemall-Token": this.token};
+      DioManger.getInstance().get(Api.MINE_FOOTPRINT, parms, headers,
+          (response) {
+        Map<String, dynamic> map = json.decode(response);
         setState(() {
-          isLogin = true;
+          footprint = map['data']["total"];
         });
-        SharedPreferencesUtils.getImageHead().then((imageHeadAddress) {
-          setState(() {
-            imageHeadUrl = imageHeadAddress;
-          });
+      }, (error) {
+        print('请求足迹数据错误');
+        print(error.toString());
+      });
+    }
+  }
+
+  void getCART_LIST() {
+    if (isLogin) {
+      ///显示指定Map的限定类型
+      Map<String, String> parms = {};
+      Map<String, String> headers = {"X-Litemall-Token": this.token};
+      DioManger.getInstance().get(Api.CART_LIST, parms, headers, (response) {
+        Map<String, dynamic> map = json.decode(response);
+        setState(() {
+          goodsCount = map['data']["cartTotal"]['goodsCount'];
         });
-        SharedPreferencesUtils.getUserName().then((name) {
-          setState(() {
-            nickName = name;
-          });
-        });
-      }
-    });
+      }, (error) {
+        print('请求购物车数据错误');
+        print(error.toString());
+      });
+    }
   }
 
   @override
@@ -394,7 +403,7 @@ class _MineViewState extends State<MineView> {
           child: Column(
             children: <Widget>[
               Text(
-                isLogin ? '$shoppingcartfootprintnum1' : '0',
+                isLogin ? '$goodsCount' : '0',
                 style: TextStyle(color: Colors.white),
               ),
               Text(
@@ -411,7 +420,7 @@ class _MineViewState extends State<MineView> {
           child: Column(
             children: <Widget>[
               Text(
-                isLogin ? '$shoppingcartfootprintnum2' : '0',
+                isLogin ? '$footprint' : '0',
                 style: TextStyle(color: Colors.white),
               ),
               Text(
@@ -817,12 +826,12 @@ class _recommendedtoolsState extends State<recommendedtools> {
           InkWell(
             onTap: () {
               if (value['toolsname3'] == '邀请得现金') {
+                print('邀请得现金');
                 Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => WebViewPage(
                             'https://www.baidu.com/', value['toolsname3'])));
-                print('邀请得现金');
               } else if (value['toolsname3'] == '活动报名') {
                 print('活动报名');
               } else {
@@ -852,12 +861,19 @@ class _recommendedtoolsState extends State<recommendedtools> {
           InkWell(
             onTap: () {
               if (value['toolsname4'] == '天天抽奖') {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => WebViewPage(
-                            'https://www.baidu.com/', value['toolsname4'])));
                 print('天天抽奖');
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => Webview_flutter_plus(
+                    title: '我是跳转传值',
+                    url: "https://flutter-io.cn/",
+                  ),
+                ));
+                // Navigator.of(context).push(new MaterialPageRoute(builder: (_) {
+                //   return Webview_flutter_plus(
+                //     url: "https://flutter-io.cn/",
+                //     title: "Flutter ",
+                //   );
+                // }));
               } else if (value['toolsname4'] == '租着玩') {
                 print('租着玩');
               } else {

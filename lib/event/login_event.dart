@@ -7,20 +7,13 @@ class LoginEvent {
   bool isLogin;
   String nickName;
   String url;
-
-  int shoppingcartfootprintnum1;
-  int shoppingcartfootprintnum2;
-  int shoppingcartfootprintnum3;
-  int shoppingcartfootprintnum4;
+  String token;
 
   LoginEvent(
     this.isLogin, {
     this.nickName,
     this.url,
-    this.shoppingcartfootprintnum1,
-    this.shoppingcartfootprintnum2,
-    this.shoppingcartfootprintnum3,
-    this.shoppingcartfootprintnum4,
+    this.token,
   });
 }
 

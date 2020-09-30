@@ -12,7 +12,7 @@ import 'package:mall/event/login_event.dart';
 import 'package:mall/model/user_info.dart';
 import 'package:mall/service/user_service.dart';
 import 'package:mall/utils/shared_preferences_util.dart';
-import 'package:mall/widgets/webview.dart';
+import 'package:mall/widgets/flutter_webview_plugin.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toast/toast.dart';
@@ -239,32 +239,22 @@ class _LandingbodyState extends State<Landingbody> {
                 style: TextStyle(fontSize: 20, color: Colors.white),
               ),
               onPressed: () {
-                loginEventBus.fire(LoginEvent(
-                  true,
-                  url:
-                      'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3901429284,1378079784&fm=26&gp=0.jpg',
-                  nickName: '手机登录成功',
-                  shoppingcartfootprintnum1: 1,
-                  shoppingcartfootprintnum2: 2,
-                  shoppingcartfootprintnum3: 3,
-                  shoppingcartfootprintnum4: 4,
-                ));
-                Navigator.pop(context);
-                if (check1 == 1) {
-                  //判断手机号是否正确
-                  RegExp exp = RegExp(
-                      r'^((13[0-9])|(14[0-9])|(15[0-9])|(16[0-9])|(17[0-9])|(18[0-9])|(19[0-9]))\d{8}$');
-                  bool matched = exp.hasMatch(_accountTextControl.text);
-                  if (!matched) {
-                    Toast.show("请输入正确的手机号", context,
-                        duration: Toast.LENGTH_SHORT, gravity: Toast.CENTER);
-                  } else if (code == "") {
-                    Toast.show("请输入验证码", context,
-                        duration: Toast.LENGTH_SHORT, gravity: Toast.CENTER);
-                  } else {
-                    verificationCode();
-                  }
-                }
+                verificationCode();
+                // if (check1 == 1) {
+                //   //判断手机号是否正确
+                //   RegExp exp = RegExp(
+                //       r'^((13[0-9])|(14[0-9])|(15[0-9])|(16[0-9])|(17[0-9])|(18[0-9])|(19[0-9]))\d{8}$');
+                //   bool matched = exp.hasMatch(_accountTextControl.text);
+                //   if (!matched) {
+                //     Toast.show("请输入正确的手机号", context,
+                //         duration: Toast.LENGTH_SHORT, gravity: Toast.CENTER);
+                //   } else if (code == "") {
+                //     Toast.show("请输入验证码", context,
+                //         duration: Toast.LENGTH_SHORT, gravity: Toast.CENTER);
+                //   } else {
+                //     verificationCode();
+                //   }
+                // }
               }),
         ),
         Row(
@@ -317,7 +307,8 @@ class _LandingbodyState extends State<Landingbody> {
       //这个是application/x-www-form-urlencoded数据类型的传输方式
       request.headers.contentType =
           ContentType("application", "x-www-form-urlencoded");
-      request.write("phone=$phoneNumber&code=$code");
+      // request.write("phone=$phoneNumber&code=$code");
+      request.write("phone=13073078664&code=7097");
       return request.close();
     }).then((HttpClientResponse response) {
       if (response.statusCode == 200) {
@@ -327,16 +318,14 @@ class _LandingbodyState extends State<Landingbody> {
           //登录成功回调
           // print(map);
           if (map['errno'] == 0) {
-            print(map['data']["userInfo"]["nickName"]);
+            String token = map['data']['token'];
+            print('Token:$token');
             loginEventBus.fire(LoginEvent(
               true,
               url:
                   'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2117319092,2336640022&fm=26&gp=0.jpg',
-              nickName: map['data']["userInfo"]["nickName"],
-              shoppingcartfootprintnum1: 1,
-              shoppingcartfootprintnum2: 2,
-              shoppingcartfootprintnum3: 3,
-              shoppingcartfootprintnum4: 4,
+              nickName: '手机登录成功',
+              token: token,
             ));
             Navigator.pop(context);
           } else {
