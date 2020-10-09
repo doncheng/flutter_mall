@@ -20,16 +20,31 @@
              // result 是给flutter的回调， 该回调只能使用一次
              NSLog(@"method=%@ \narguments = %@", call.method, call.arguments);
              
+             //系统版本
              if ([call.method isEqualToString:@"SystemVersion"]) {
                  NSString* phoneVersion = [[UIDevice currentDevice] systemVersion];
                  result(phoneVersion);
-                 
              }
-             
+             //软件版本
+             if ([call.method isEqualToString:@"PackageVersion"]) {
+                NSString* packageVersion = [[[NSBundle mainBundle] infoDictionary]objectForKey:@"CFBundleShortVersionString"];
+                            result(packageVersion);
+                        }
+             //软件build
+                         if ([call.method isEqualToString:@"PackageBuild"]) {
+                            NSString* packageBuild = [[[NSBundle mainBundle] infoDictionary]objectForKey:@"CFBundleVersion"];
+                                        result(packageBuild);
+                                    }
+             //设备id
+                        if ([call.method isEqualToString:@"DeviceID"]) {
+                           NSString* deviceID = [UIDevice currentDevice].identifierForVendor.UUIDString;
+                                       result(deviceID);
+                                   }
+        
              if ([call.method isEqualToString:@"WeChatlanding"]) {
                  result(@"微信登陆");
-                 
              }
+             
              if ([call.method isEqualToString:@"Applelanding"]) {
                  [[[UIAlertView alloc] initWithTitle:@"Applelanding"
                                              message:@"Camera not available."

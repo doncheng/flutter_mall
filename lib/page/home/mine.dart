@@ -40,7 +40,7 @@ class _MineViewState extends State<MineView> {
   int mytradingnum4;
   int goodsCount;
   int footprint;
-  int shoppingcartfootprintnum3;
+  int favorite;
   int couponCount;
 
   //创建HttpClient
@@ -72,7 +72,7 @@ class _MineViewState extends State<MineView> {
           getMINE_FOOTPRINT();
           getCART_LIST();
           getMINE_COUPON_LIST();
-
+          getMINE_COLLECT();
           setState(() {
             isLogin = true;
             imageHeadUrl = loginEvent.url;
@@ -154,12 +154,14 @@ class _MineViewState extends State<MineView> {
   void getMINE_COLLECT() {
     if (isLogin) {
       ///显示指定Map的限定类型
-      Map<String, String> parms = {};
+      //传递参数
+      Map<String, String> parms = {'type': '1'};
+      //携带头部
       Map<String, String> headers = {"X-Litemall-Token": this.token};
       DioManger.getInstance().get(Api.MINE_COLLECT, parms, headers, (response) {
         Map<String, dynamic> map = json.decode(response);
         setState(() {
-          goodsCount = map['data']['total'];
+          favorite = map['data']['total'];
         });
       }, (error) {
         print('请求收藏夹数据错误');
@@ -468,7 +470,7 @@ class _MineViewState extends State<MineView> {
           child: Column(
             children: <Widget>[
               Text(
-                isLogin ? '$shoppingcartfootprintnum3' : '0',
+                isLogin ? '$favorite' : '0',
                 style: TextStyle(color: Colors.white),
               ),
               Text(
