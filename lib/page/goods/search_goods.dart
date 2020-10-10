@@ -27,7 +27,7 @@ class _SearchGoodsViewState extends State<SearchGoodsView> {
   List<GoodsEntity> _goods;
   GoodsService _goodsService = GoodsService();
   String selectedValue = '宝贝';
-  String text = '苹果11';
+  String text = '苹果19';
   var _page = 1;
   var _limit = 10;
   var _sortName = Strings.SORT_NAME;
@@ -46,143 +46,151 @@ class _SearchGoodsViewState extends State<SearchGoodsView> {
         brightness: Brightness.light,
         automaticallyImplyLeading: false,
         backgroundColor: Color(0xffffffff),
-        title: Stack(
-          children: <Widget>[
-            Container(
-              height: ScreenUtil.instance.setHeight(100.0),
-              // color: Color(0xffffffff),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                      margin: EdgeInsets.only(
-                          top: ScreenUtil.instance.setHeight(10.0),
-                          bottom: ScreenUtil.instance.setHeight(10.0),
-                          right: ScreenUtil.instance.setWidth(20.0)),
-                      decoration: BoxDecoration(
-                        color: Color(0xfff0f0f0),
-                        // border: Border.all(
-                        //     color: Colors.blue,
-                        //     width: ScreenUtil.instance.setWidth(1.0)),
-                        borderRadius: BorderRadius.circular(
-                            ScreenUtil.instance.setWidth(40.0)),
-                      ),
-                      child: Row(
-                        children: [
-                          Container(
-                            height: 40,
-                            width: 55,
-                            margin: EdgeInsets.only(left: 10),
-                            child: Center(
-                              child: Row(
-                                children: [
-                                  PopupMenuButton(
-                                    child: Text(selectedValue,
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.normal,
-                                        )),
-                                    // tooltip: "长按提示",
-                                    initialValue: "goods",
-                                    padding: EdgeInsets.all(0.0),
-                                    itemBuilder: (BuildContext context) {
-                                      return <PopupMenuItem<String>>[
-                                        PopupMenuItem<String>(
-                                          child: Text("宝贝"),
-                                          value: "goods",
-                                        ),
-                                        PopupMenuItem<String>(
-                                          child: Text("商家"),
-                                          value: "users",
-                                        ),
-                                      ];
-                                    },
-                                    onSelected: (String action) {
-                                      switch (action) {
-                                        case "goods":
-                                          setState(() {
-                                            selectedValue = '宝贝';
-                                          });
-                                          break;
-                                        case "users":
-                                          setState(() {
-                                            selectedValue = '商家';
-                                          });
-                                          break;
-                                      }
-                                    },
-                                    onCanceled: () {
-                                      print("onCanceled");
-                                    },
-                                  ),
-                                  Icon(
-                                    Icons.keyboard_arrow_down,
-                                    color: Colors.black,
-                                  )
-                                ],
+        title: Container(
+          height: ScreenUtil.instance.setHeight(100.0),
+          // color: Color(0xffffffff),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                  margin: EdgeInsets.only(
+                      top: ScreenUtil.instance.setHeight(10.0),
+                      bottom: ScreenUtil.instance.setHeight(10.0),
+                      right: ScreenUtil.instance.setWidth(20.0)),
+                  decoration: BoxDecoration(
+                    color: Color(0xfff0f0f0),
+                    // border: Border.all(
+                    //     color: Colors.blue,
+                    //     width: ScreenUtil.instance.setWidth(1.0)),
+                    borderRadius: BorderRadius.circular(
+                        ScreenUtil.instance.setWidth(40.0)),
+                  ),
+                  child: Row(
+                    children: [
+                      Container(
+                        height: 40,
+                        width: 55,
+                        margin: EdgeInsets.only(left: 10),
+                        child: Center(
+                          child: Row(
+                            children: [
+                              PopupMenuButton(
+                                child: Text(selectedValue,
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.normal,
+                                    )),
+                                // tooltip: "长按提示",
+                                initialValue: "goods",
+                                padding: EdgeInsets.all(0.0),
+                                itemBuilder: (BuildContext context) {
+                                  return <PopupMenuItem<String>>[
+                                    PopupMenuItem<String>(
+                                      child: Text("宝贝"),
+                                      value: "goods",
+                                    ),
+                                    PopupMenuItem<String>(
+                                      child: Text("商家"),
+                                      value: "users",
+                                    ),
+                                  ];
+                                },
+                                onSelected: (String action) {
+                                  switch (action) {
+                                    case "goods":
+                                      setState(() {
+                                        selectedValue = '宝贝';
+                                      });
+                                      break;
+                                    case "users":
+                                      setState(() {
+                                        selectedValue = '商家';
+                                      });
+                                      break;
+                                  }
+                                },
+                                onCanceled: () {
+                                  print("onCanceled");
+                                },
                               ),
-                            ),
+                              Icon(
+                                Icons.keyboard_arrow_down,
+                                color: Colors.black,
+                              )
+                            ],
                           ),
-                          Container(
-                            height: 40,
-                            width: ScreenUtil.instance.setWidth(200.0),
-                            child: TextField(
-                              onEditingComplete: _sort,
-                              controller: _editingController,
-                              textInputAction: TextInputAction.search,
-                              style: TextStyle(
-                                  color: Colors.black54,
-                                  fontSize: ScreenUtil.instance.setSp(16.0)),
-                              decoration: InputDecoration(
-                                prefixIcon: Icon(
-                                  Icons.search,
-                                  size: 25,
-                                  color: Colors.grey,
-                                ),
-                                hintText: text,
-                                hintStyle: TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: ScreenUtil.instance.setSp(16.0)),
-                                focusedBorder: UnderlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Colors.transparent),
-                                ),
-                                enabledBorder: UnderlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Colors.transparent),
-                                ),
-                              ),
-                            ),
-                          )
-                        ],
-                      )),
-                  InkWell(
-                    onTap: () {
-                      setState(() {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                //导航打开新视图
-                                builder: (context) => SearchDemo()));
-                      });
-                    },
-                    child: Container(
-                      height: 40,
-                      width: 45,
-                      child: Center(
-                        child: Text(
-                          '取消',
-                          style:
-                              TextStyle(fontSize: 16, color: Color(0xffff3e45)),
                         ),
                       ),
+                      InkWell(
+                        onTap: () {
+                          print('oopoop');
+                          showSearch(
+                              context: context, delegate: SearchBarDelegate());
+                        },
+                        child: Container(
+                            height: 40,
+                            width: ScreenUtil.instance.setWidth(200.0),
+                            child: Text(
+                              "点我进行搜索",
+                              style:
+                                  TextStyle(color: Colors.grey, fontSize: 15),
+                            )
+                            // TextField(
+                            //   onEditingComplete: _sort,
+                            //   controller: _editingController,
+                            //   textInputAction: TextInputAction.search,
+                            //   style: TextStyle(
+                            //       color: Colors.black54,
+                            //       fontSize: ScreenUtil.instance.setSp(16.0)),
+                            //   decoration: InputDecoration(
+                            //     prefixIcon: Icon(
+                            //       Icons.search,
+                            //       size: 25,
+                            //       color: Colors.grey,
+                            //     ),
+                            //     hintText: text,
+                            //     hintStyle: TextStyle(
+                            //         color: Colors.grey,
+                            //         fontSize: ScreenUtil.instance.setSp(16.0)),
+                            //     focusedBorder: UnderlineInputBorder(
+                            //       borderSide:
+                            //           BorderSide(color: Colors.transparent),
+                            //     ),
+                            //     enabledBorder: UnderlineInputBorder(
+                            //       borderSide:
+                            //           BorderSide(color: Colors.transparent),
+                            //     ),
+                            //   ),
+                            // ),
+                            ),
+                      )
+                    ],
+                  )),
+              InkWell(
+                onTap: () {
+                  // setState(() {
+                  //   Navigator.push(
+                  //       context,
+                  //       MaterialPageRoute(
+                  //           //导航打开新视图
+                  //           builder: (context) => SearchDemo()));
+                  // });
+                  Navigator.pop(context);
+                },
+                child: Container(
+                  height: 40,
+                  width: 45,
+                  child: Center(
+                    child: Text(
+                      '取消',
+                      style: TextStyle(fontSize: 16, color: Color(0xffff3e45)),
                     ),
-                  )
-                ],
-              ),
-            ),
-          ],
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
       ),
       backgroundColor: Colors.white,
@@ -190,24 +198,24 @@ class _SearchGoodsViewState extends State<SearchGoodsView> {
         child: Stack(
           children: [
             _sortView(),
-            Container(
-                height: double.infinity,
-                // margin:
-                //     EdgeInsets.only(top: ScreenUtil.instance.setHeight(210.0)),
-                child: _goods == null || _goods.length == 0
-                    ? EmptyView()
-                    : GridView.builder(
-                        itemCount: _goods.length,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            childAspectRatio: 1.0,
-                            crossAxisSpacing:
-                                ScreenUtil.instance.setWidth(10.0),
-                            mainAxisSpacing:
-                                ScreenUtil.instance.setHeight(10.0),
-                            crossAxisCount: 2),
-                        itemBuilder: (BuildContext context, int index) {
-                          return getGoodsItemView(_goods[index]);
-                        }))
+            // Container(
+            //     height: double.infinity,
+            //     // margin:
+            //     //     EdgeInsets.only(top: ScreenUtil.instance.setHeight(210.0)),
+            //     child: _goods == null || _goods.length == 0
+            //         ? EmptyView()
+            //         : GridView.builder(
+            //             itemCount: _goods.length,
+            //             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            //                 childAspectRatio: 1.0,
+            //                 crossAxisSpacing:
+            //                     ScreenUtil.instance.setWidth(10.0),
+            //                 mainAxisSpacing:
+            //                     ScreenUtil.instance.setHeight(10.0),
+            //                 crossAxisCount: 2),
+            //             itemBuilder: (BuildContext context, int index) {
+            //               return getGoodsItemView(_goods[index]);
+            //             }))
           ],
         ),
       ),
@@ -400,6 +408,130 @@ class _SearchGoodsViewState extends State<SearchGoodsView> {
               color: Colors.black54, fontSize: ScreenUtil.instance.setSp(26.0)),
         ),
       ),
+    );
+  }
+}
+
+class SearchBarDelegate extends SearchDelegate<String> {
+  var nameList = ["绿皮南瓜", "番茄", "白菜", "胡萝卜", "土豆", "甜菜", "白甜"];
+  bool flag; //判断搜索框内输入的内容是否存在于数据列表里
+  // 搜索条右侧的按钮执行方法，我们在这里方法里放入一个clear图标。 当点击图片时，清空搜索的内容。
+  @override
+  List<Widget> buildActions(BuildContext context) {
+    return [
+      IconButton(
+        icon: Icon(Icons.clear),
+        onPressed: () {
+          query = "";
+          showSuggestions(context);
+        }, //搜索值为空
+      )
+    ];
+  }
+
+  // 搜索栏左侧的图标和功能，点击时关闭整个搜索页面
+  @override
+  Widget buildLeading(BuildContext context) {
+    return IconButton(
+        icon: AnimatedIcon(
+            icon: AnimatedIcons.menu_arrow, progress: transitionAnimation),
+        onPressed: () => close(context, null) //点击时关闭整个搜索页面
+        );
+  }
+
+  // 搜索到内容了
+  @override
+  Widget buildResults(BuildContext context) {
+    for (int i = 0; i < nameList.length; i++) {
+      if (query == nameList[i]) {
+        flag = true;
+        break;
+      } else {
+        flag = false;
+      }
+    }
+
+    return flag == true
+        ? Padding(
+            padding: EdgeInsets.all(16),
+            child: InkWell(
+              child: Text(query),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  new MaterialPageRoute(
+                    builder: (context) => new TextScreen(s: query),
+                    //TextScreen()用于展示我们想要通过搜索到达的页面，
+                    //这里用到了构造函数传值。
+                  ),
+                );
+                print('0000');
+              },
+            ))
+        : Center(
+            child: Text("没有找到这个蔬菜！！！"),
+          );
+  }
+
+  // 输入时的推荐及搜索结果
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    final suggestionsList =
+        // query.isEmpty
+        //     ? recentSuggest
+        //     :
+        searchList.where((input) => input.startsWith(query)).toList();
+//判断集合中的字符串是否以搜索框内输入的字符串开头，
+//是则返回true，并将筛选出来的结果以list的方式储存在searchList里
+    return ListView.builder(
+        itemCount: suggestionsList.length,
+        itemBuilder: (context, index) {
+          return InkWell(
+            child: ListTile(
+              title: RichText(
+                //富文本
+                text: TextSpan(
+                    text: suggestionsList[index].substring(0, query.length),
+                    style: TextStyle(
+                        color: Colors.black, fontWeight: FontWeight.bold),
+                    children: [
+                      TextSpan(
+                          text: suggestionsList[index].substring(query.length),
+                          style: TextStyle(color: Colors.grey))
+                    ]),
+              ),
+            ),
+            onTap: () {
+              Navigator.push(
+                context,
+                new MaterialPageRoute(
+                  builder: (context) =>
+                      new TextScreen(s: suggestionsList[index]),
+                ),
+              );
+              print('kjojojo');
+            },
+          );
+        });
+  }
+}
+
+class TextScreen extends StatelessWidget {
+  final String s;
+  TextScreen({Key key, @required this.s}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    // Use the Todo to create our UI
+    return new Scaffold(
+      appBar: AppBar(
+        title: Text("搜索结果内容"),
+      ),
+      body: Padding(
+          padding: EdgeInsets.all(16.0),
+          child: Center(
+            child: Text(s),
+          )),
     );
   }
 }

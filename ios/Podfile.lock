@@ -42,6 +42,7 @@ PODS:
   - sqflite (0.0.1):
     - Flutter
     - FMDB (~> 2.7.2)
+  - UICKeyChainStore (2.2.0)
   - webview_flutter (0.0.1):
     - Flutter
   - WechatOpenSDK (1.8.7.1)
@@ -66,6 +67,7 @@ DEPENDENCIES:
   - shared_preferences_macos (from `.symlinks/plugins/shared_preferences_macos/ios`)
   - shared_preferences_web (from `.symlinks/plugins/shared_preferences_web/ios`)
   - sqflite (from `.symlinks/plugins/sqflite/ios`)
+  - UICKeyChainStore
   - webview_flutter (from `.symlinks/plugins/webview_flutter/ios`)
   - WechatOpenSDK
 
@@ -73,6 +75,7 @@ SPEC REPOS:
   trunk:
     - FMDB
     - MTBBarcodeScanner
+    - UICKeyChainStore
     - WechatOpenSDK
 
 EXTERNAL SOURCES:
@@ -139,9 +142,10 @@ SPEC CHECKSUMS:
   shared_preferences_macos: f3f29b71ccbb56bf40c9dd6396c9acf15e214087
   shared_preferences_web: 141cce0c3ed1a1c5bf2a0e44f52d31eeb66e5ea9
   sqflite: 4001a31ff81d210346b500c55b17f4d6c7589dd0
+  UICKeyChainStore: 6a218644594e12f855ec2a10f4fc576c1a69daee
   webview_flutter: d2b4d6c66968ad042ad94cbb791f5b72b4678a96
   WechatOpenSDK: 6a4d1436c15b3b5fe2a0bd383f3046010186da44
 
-PODFILE CHECKSUM: 8700a15f842c32f816b1a76e8eac735a823407c6
+PODFILE CHECKSUM: edcbefe0ecbfef64582380fdc558396453de7bf3
 
 COCOAPODS: 1.9.3

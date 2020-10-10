@@ -1,8 +1,9 @@
 import 'dart:convert';
-
+import 'package:flutter/services.dart';
 import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mall/api/api.dart';
 import 'package:mall/page/home/webview.dart';
 import 'package:mall/utils/navigator_util.dart';
 import 'dart:io';
@@ -19,7 +20,13 @@ class _SplashViewState extends State<SplashView> {
   String systemVersion;
   String packageVersion;
   String packageBuild;
-  String deviceID;
+  String device_id;
+  String imei;
+  String idfa;
+  String model;
+  String clipboardData;
+  int device_type = Platform.isIOS ? 2 : 1;
+
   static const String CHINAL_NAME = "example.mall/call_native"; //同步路径
   static const platform = const MethodChannel(CHINAL_NAME);
   String _result = "";
@@ -46,24 +53,58 @@ class _SplashViewState extends State<SplashView> {
   }
 
   void getDeviceInfo() async {
-    String result = await platform.invokeMethod("DeviceID");
+    String result = await platform.invokeMethod("device_id");
     setState(() {
-      this.deviceID = result;
+      this.device_id = result;
+    });
+  }
+
+  void getAndroidDeviceInfo() async {
+    DeviceInfoPlugin deviceInfo = new DeviceInfoPlugin();
+    AndroidDeviceInfo androidDeviceInfo = await deviceInfo.androidInfo;
+    String imei = androidDeviceInfo.id;
+    print(imei);
+    setState(() {
+      this.imei = imei;
+    });
+  }
+
+  void getIdfa() async {
+    String result = await platform.invokeMethod("idfa");
+    setState(() {
+      this.idfa = result;
+    });
+  }
+
+  void getModel() async {
+    String result = await platform.invokeMethod("model");
+    setState(() {
+      this.model = result;
+    });
+  }
+
+  ///使用异步调用获取返回值
+  void getClipboardDatas() async {
+    ClipboardData data = await Clipboard.getData(Clipboard.kTextPlain);
+    setState(() {
+      this.clipboardData = data.text;
     });
   }
 
   void detectUpdates() {
     HttpClient _httpClient = HttpClient();
 //检测软件更新
-    var url = '';
+    var url = Api.Update;
     _httpClient.postUrl(Uri.parse(url)).then((HttpClientRequest request) {
       //这里添加POST请求Body的ContentType和内容
       //这个是application/x-www-form-urlencoded数据类型的传输方式
-      request.headers.contentType =
-          ContentType("application", "x-www-form-urlencoded");
+      request.headers.contentType = ContentType("application", "raw");
       // request.write("phone=$phoneNumber&code=$code");
-      request
-          .write("packageVersion=$packageVersion&packageBuild=$packageBuild");
+      String clipboardDataUtf8Encoder =
+          jsonEncode(Utf8Encoder().convert(this.clipboardData));
+      print("这是clipboardData编码$clipboardDataUtf8Encoder");
+      request.write(
+          "{\"imei\":\"$imei \",\"idfa\":\"$idfa\",\"deviceId\":\"$device_id\",\"userVersion\":\"$packageVersion\",\"deviceType\":\"$device_type\",\"model\":\"$systemVersion\",\"channel\":\"$clipboardDataUtf8Encoder\",\"build\":\"$packageBuild\"}");
       return request.close();
     }).then((HttpClientResponse response) {
       if (response.statusCode == 200) {
@@ -74,24 +115,15 @@ class _SplashViewState extends State<SplashView> {
           // print(map);
           if (map['errno'] == 0) {
             NavigatorUtils.goMallMainPage(context);
-            // String token = map['data']['token'];
-            // print('Token:$token');
-            // loginEventBus.fire(LoginEvent(
-            //   true,
-            //   url:
-            //       'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2117319092,2336640022&fm=26&gp=0.jpg',
-            //   nickName: '手机登录成功',
-            //   token: token,
-            // ));
-            // Navigator.pop(context);
           } else {
-            Toast.show("参数错误", context,
-                duration: Toast.LENGTH_SHORT, gravity: Toast.CENTER);
+            print(map);
+            Toast.show("请更新软件", context,
+                duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
           }
         });
       } else {
         Toast.show("服务器无响应", context,
-            duration: Toast.LENGTH_SHORT, gravity: Toast.CENTER);
+            duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
         print("error");
       }
     });
@@ -101,17 +133,28 @@ class _SplashViewState extends State<SplashView> {
   void initState() {
     super.initState();
 
-    getSystemVersion();
+    if (Platform.isIOS) {
+      getDeviceInfo();
+    } else if (Platform.isAndroid) {
+      getAndroidDeviceInfo();
+    }
+    getIdfa();
     getPackageVersion();
-    getDeviceInfo();
+    getSystemVersion();
+    getClipboardDatas();
     getPackageBuild();
-    Future.delayed(Duration(seconds: 1), () {
-      print(Platform.isIOS ? 'IOS' : 'Android');
-      print(systemVersion);
-      print(packageVersion);
-      print(deviceID);
-      print(packageBuild);
 
+    // getModel();
+
+    Future.delayed(Duration(seconds: 1), () {
+      print(imei);
+      print(idfa);
+      print(device_id);
+      print(packageVersion);
+      print(device_type);
+      print(systemVersion);
+      print(clipboardData);
+      print(packageBuild);
       // Platform.isIOS
       //     ? NavigatorUtils.goMallMainPage(context)
       //     : Navigator.push(
@@ -126,7 +169,8 @@ class _SplashViewState extends State<SplashView> {
               MaterialPageRoute(
                   //导航打开新视图
                   builder: (context) => webviewPage()))
-          : detectUpdates();
+          : NavigatorUtils.goMallMainPage(context);
+      // detectUpdates();
     });
   }
 

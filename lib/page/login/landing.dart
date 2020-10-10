@@ -236,6 +236,7 @@ class _landingPageState extends State<landingPage> {
                   if (result == '授权失败') {
                     Toast.show('授权失败', context,
                         duration: Toast.LENGTH_SHORT, gravity: Toast.CENTER);
+                    Navigator.pop(context);
                   } else {
                     print(result);
                     var url = Api.Apple_Verify;

@@ -1,7 +1,8 @@
 #include "AppDelegate.h"
 //#include "GeneratedPluginRegistrant.h"
 #import "AppleLandingViewController.h"
-
+#import <AdSupport/AdSupport.h>
+#import "UICKeyChainStore.h"
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application
@@ -25,21 +26,40 @@
                  NSString* phoneVersion = [[UIDevice currentDevice] systemVersion];
                  result(phoneVersion);
              }
-             //软件版本
-             if ([call.method isEqualToString:@"PackageVersion"]) {
-                NSString* packageVersion = [[[NSBundle mainBundle] infoDictionary]objectForKey:@"CFBundleShortVersionString"];
-                            result(packageVersion);
-                        }
+       
              //软件build
                          if ([call.method isEqualToString:@"PackageBuild"]) {
                             NSString* packageBuild = [[[NSBundle mainBundle] infoDictionary]objectForKey:@"CFBundleVersion"];
                                         result(packageBuild);
                                     }
+             //软件版本
+              if ([call.method isEqualToString:@"PackageVersion"]) {
+                 NSString* packageVersion = [[[NSBundle mainBundle] infoDictionary]objectForKey:@"CFBundleShortVersionString"];
+                             result(packageVersion);
+                         }
              //设备id
-                        if ([call.method isEqualToString:@"DeviceID"]) {
-                           NSString* deviceID = [UIDevice currentDevice].identifierForVendor.UUIDString;
-                                       result(deviceID);
+                        if ([call.method isEqualToString:@"device_id"]) {
+                           
+                            UICKeyChainStore *keychain = [UICKeyChainStore keyChainStoreWithService:@"com.JiaoYiBei"];
+                             
+                            NSString* device_id = [UIDevice currentDevice].identifierForVendor.UUIDString;
+                            [keychain setString:device_id forKey:@"device_id"];
+                            
+                                       result(device_id);
                                    }
+             
+             //设备idfa
+                                if ([call.method isEqualToString:@"idfa"]) {
+                                  NSString *idfa =   [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
+                                               result(idfa);
+                                           }
+             
+             //model
+             if ([call.method isEqualToString:@"model"]) {
+                 NSString *model = [[UIDevice currentDevice] name];
+                        result(model);
+               }
+             
         
              if ([call.method isEqualToString:@"WeChatlanding"]) {
                  result(@"微信登陆");

@@ -9,6 +9,7 @@ import 'package:mall/page/bill/my_assets.dart';
 import 'package:mall/page/help/customer_service.dart';
 import 'package:mall/page/help/set.dart';
 import 'package:mall/page/home/personaldata.dart';
+import 'package:mall/page/home/settings.dart';
 import 'package:mall/page/home/webview_flutter_plus.dart';
 import 'package:mall/service/mine_service.dart';
 import 'package:mall/utils/navigator_util.dart';
@@ -69,10 +70,10 @@ class _MineViewState extends State<MineView> {
       (LoginEvent loginEvent) {
         if (loginEvent.isLogin) {
           getMineOrders();
-          getMINE_FOOTPRINT();
-          getCART_LIST();
-          getMINE_COUPON_LIST();
-          getMINE_COLLECT();
+          // getMINE_FOOTPRINT();
+          // getCART_LIST();
+          // getMINE_COUPON_LIST();
+          // getMINE_COLLECT();
           setState(() {
             isLogin = true;
             imageHeadUrl = loginEvent.url;
@@ -96,7 +97,7 @@ class _MineViewState extends State<MineView> {
   void getMineOrders() {
     if (isLogin) {
       ///显示指定Map的限定类型
-      Map<String, String> parms = {};
+      Map<String, String> parms = {'showType': '0'};
       Map<String, String> headers = {"X-Litemall-Token": this.token};
       DioManger.getInstance().get(Api.MINE_ORDERS, parms, headers, (response) {
         Map<String, dynamic> map = json.decode(response);
@@ -224,13 +225,18 @@ class _MineViewState extends State<MineView> {
                     height: 70.0,
                     decoration: BoxDecoration(color: Color(0xffFE5155)),
                     child: IconButton(
-                      icon: Icon(
-                        Icons.settings,
-                        color: Colors.white,
-                        size: 22,
-                      ),
-                      onPressed: () => _toSettings(),
-                    ),
+                        icon: Icon(
+                          Icons.settings,
+                          color: Colors.white,
+                          size: 22,
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => SettingsPage(
+                                    isLogin: this.isLogin,
+                                    token: this.token,
+                                  )));
+                        }),
                   ),
                   Container(
                     width: double.infinity,
@@ -272,7 +278,7 @@ class _MineViewState extends State<MineView> {
                                   },
                                   child: isLogin
                                       ? Container(
-                                          width: 300,
+                                          width: double.infinity,
                                           child: ListTile(
                                             leading: Container(
                                               height: 54,
@@ -300,7 +306,7 @@ class _MineViewState extends State<MineView> {
                                           ),
                                         )
                                       : Container(
-                                          width: 200,
+                                          width: double.infinity,
                                           child: ListTile(
                                             leading: Icon(
                                               Icons.account_circle,
@@ -316,58 +322,59 @@ class _MineViewState extends State<MineView> {
                                           ),
                                         )),
                               SizedBox(height: 5),
-                              shoppingcartfootprint(),
+                              // shoppingcartfootprint(),
                             ],
                           ),
                         ),
-                        Positioned(
-                          left: 14,
-                          right: 14,
-                          top: 121,
-                          child: Container(
-                            width: double.infinity,
-                            height: 34,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              color: Colors.white12,
-                            ),
-                            child: FlatButton(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  Text(
-                                    '偷偷告诉你，实名认证后宝贝更易卖出哦~',
-                                    style: TextStyle(
-                                      color: Colors.white70,
-                                      fontSize: 12,
-                                    ),
-                                  ),
-                                  Icon(
-                                    Icons.navigate_next,
-                                    color: Colors.white,
-                                  ),
-                                ],
-                              ),
-                              // onPressed: () => _toPlacetheorder(),
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        //导航打开新视图
-                                        builder: (context) =>
-                                            PlacetheorderPage()));
-                              },
-                            ),
-                          ),
-                        ),
+                        // Positioned(
+                        //   left: 14,
+                        //   right: 14,
+                        //   top: 121,
+                        //   child: Container(
+                        //     width: double.infinity,
+                        //     height: 34,
+                        //     decoration: BoxDecoration(
+                        //       borderRadius: BorderRadius.circular(5),
+                        //       color: Colors.white12,
+                        //     ),
+                        //     child: FlatButton(
+                        //       shape: RoundedRectangleBorder(
+                        //         borderRadius: BorderRadius.circular(5),
+                        //       ),
+                        //       child: Row(
+                        //         mainAxisAlignment:
+                        //             MainAxisAlignment.spaceBetween,
+                        //         children: <Widget>[
+                        //           Text(
+                        //             '偷偷告诉你，实名认证后宝贝更易卖出哦~',
+                        //             style: TextStyle(
+                        //               color: Colors.white70,
+                        //               fontSize: 12,
+                        //             ),
+                        //           ),
+                        //           Icon(
+                        //             Icons.navigate_next,
+                        //             color: Colors.white,
+                        //           ),
+                        //         ],
+                        //       ),
+                        //       // onPressed: () => _toPlacetheorder(),
+                        //       onPressed: () {
+                        //         Navigator.push(
+                        //             context,
+                        //             MaterialPageRoute(
+                        //                 //导航打开新视图
+                        //                 builder: (context) =>
+                        //                     PlacetheorderPage()));
+                        //       },
+                        //     ),
+                        //   ),
+                        // ),
                         Positioned(
                           left: 12,
                           right: 13,
-                          top: 167,
+                          // top: 167,
+                          top: 121,
                           child: mytrading(),
                         ),
                       ],
@@ -383,7 +390,6 @@ class _MineViewState extends State<MineView> {
               opacity: appBarAlpha,
               child: Container(
                 alignment: Alignment.topCenter,
-                //按屏幕比例变化
                 height: statusBarHeight + 50,
                 child: AppBar(
                   // brightness: Brightness.dark,
@@ -392,13 +398,18 @@ class _MineViewState extends State<MineView> {
                   title: Text(this.nickName),
                   actions: <Widget>[
                     IconButton(
-                      icon: Icon(
-                        Icons.settings,
-                        color: Colors.white,
-                        size: 20,
-                      ),
-                      onPressed: () => _toSettings(),
-                    ),
+                        icon: Icon(
+                          Icons.settings,
+                          color: Colors.white,
+                          size: 20,
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => SettingsPage(
+                                    isLogin: this.isLogin,
+                                    token: this.token,
+                                  )));
+                        }),
                   ],
                 ),
               ),
@@ -409,7 +420,7 @@ class _MineViewState extends State<MineView> {
     );
   }
 
-  _toSettings() {
+  _toSettings({bool isLogin}) {
     NavigatorUtils.goSettings(context);
   }
 
@@ -990,23 +1001,23 @@ class _recommendedtoolsState extends State<recommendedtools> {
                 '推荐工具',
                 style: TextStyle(fontWeight: FontWeight.w600),
               ),
-              InkWell(
-                onTap: () {
-                  print('222');
-                },
-                child: Row(
-                  children: <Widget>[
-                    Text(
-                      '更多',
-                      style: TextStyle(fontSize: 12, color: Color(0xff999898)),
-                    ),
-                    Icon(
-                      Icons.navigate_next,
-                      color: Color(0xff999898),
-                    )
-                  ],
-                ),
-              )
+              // InkWell(
+              //   onTap: () {
+              //     print('222');
+              //   },
+              //   child: Row(
+              //     children: <Widget>[
+              //       Text(
+              //         '更多',
+              //         style: TextStyle(fontSize: 12, color: Color(0xff999898)),
+              //       ),
+              //       Icon(
+              //         Icons.navigate_next,
+              //         color: Color(0xff999898),
+              //       )
+              //     ],
+              //   ),
+              // )
             ],
           ),
           SizedBox(

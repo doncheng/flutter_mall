@@ -239,22 +239,22 @@ class _LandingbodyState extends State<Landingbody> {
                 style: TextStyle(fontSize: 20, color: Colors.white),
               ),
               onPressed: () {
-                verificationCode();
-                // if (check1 == 1) {
-                //   //判断手机号是否正确
-                //   RegExp exp = RegExp(
-                //       r'^((13[0-9])|(14[0-9])|(15[0-9])|(16[0-9])|(17[0-9])|(18[0-9])|(19[0-9]))\d{8}$');
-                //   bool matched = exp.hasMatch(_accountTextControl.text);
-                //   if (!matched) {
-                //     Toast.show("请输入正确的手机号", context,
-                //         duration: Toast.LENGTH_SHORT, gravity: Toast.CENTER);
-                //   } else if (code == "") {
-                //     Toast.show("请输入验证码", context,
-                //         duration: Toast.LENGTH_SHORT, gravity: Toast.CENTER);
-                //   } else {
-                //     verificationCode();
-                //   }
-                // }
+                // verificationCode();
+                if (check1 == 1) {
+                  //判断手机号是否正确
+                  RegExp exp = RegExp(
+                      r'^((13[0-9])|(14[0-9])|(15[0-9])|(16[0-9])|(17[0-9])|(18[0-9])|(19[0-9]))\d{8}$');
+                  bool matched = exp.hasMatch(_accountTextControl.text);
+                  if (!matched) {
+                    Toast.show("请输入正确的手机号", context,
+                        duration: Toast.LENGTH_SHORT, gravity: Toast.CENTER);
+                  } else if (code == "") {
+                    Toast.show("请输入验证码", context,
+                        duration: Toast.LENGTH_SHORT, gravity: Toast.CENTER);
+                  } else {
+                    verificationCode();
+                  }
+                }
               }),
         ),
         Row(
@@ -307,8 +307,8 @@ class _LandingbodyState extends State<Landingbody> {
       //这个是application/x-www-form-urlencoded数据类型的传输方式
       request.headers.contentType =
           ContentType("application", "x-www-form-urlencoded");
-      // request.write("phone=$phoneNumber&code=$code");
-      request.write("phone=13073078664&code=7097");
+      request.write("phone=$phoneNumber&code=$code");
+      // request.write("phone=13073078664&code=7097");
       return request.close();
     }).then((HttpClientResponse response) {
       if (response.statusCode == 200) {

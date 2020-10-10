@@ -61,4 +61,5 @@ class Api {
   static const String Apple_Verify = BASE_URL + "auth/appleVerify"; //苹果登录认证接口
   static const String NoteCodePost = BASE_URL + "/auth/noteCode"; //验证码获取接口
   static const String NoteVerity = BASE_URL + "/auth/noteVerity"; //手机登录验证
+  static const String Update = BASE_URL + "/start/verify"; //更新检测
 }
