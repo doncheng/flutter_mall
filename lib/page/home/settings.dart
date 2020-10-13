@@ -102,7 +102,6 @@ class _SettingsPageState extends State<SettingsPage> {
                 if (isLogin == true) {
                   loginOut();
                 } else {
-                  print(isLogin);
                   Toast.show("请先登录", context,
                       duration: Toast.LENGTH_SHORT, gravity: Toast.CENTER);
                 }
@@ -126,23 +125,25 @@ class _SettingsPageState extends State<SettingsPage> {
         (response) async {
       Map<String, dynamic> map = json.decode(response);
       print(map);
-      Toast.show("退出登录成功", context,
-          duration: Toast.LENGTH_SHORT, gravity: Toast.CENTER);
+      if (map['errno'] == 0) {
+        Toast.show("退出登录成功", context,
+            duration: Toast.LENGTH_SHORT, gravity: Toast.CENTER);
 
-      loginEventBus.fire(LoginEvent(false));
-      SharedPreferences sharedPreferences =
-          await SharedPreferences.getInstance();
-      setState(() {
-        SharedPreferencesUtils.token = null;
-      });
-      await sharedPreferences.clear();
+        loginEventBus.fire(LoginEvent(false));
+        SharedPreferences sharedPreferences =
+            await SharedPreferences.getInstance();
+        await sharedPreferences.clear();
 
-      Navigator.pop(context);
-      setState(() {
-        this.isLogin = false;
-      });
+        Navigator.pop(context);
+        setState(() {
+          this.isLogin = false;
+        });
+      } else {
+        Toast.show("系统繁忙 请稍后再试", context,
+            duration: Toast.LENGTH_SHORT, gravity: Toast.CENTER);
+      }
     }, (error) {
-      Toast.show("退出登录失败", context,
+      Toast.show("服务器无响应", context,
           duration: Toast.LENGTH_SHORT, gravity: Toast.CENTER);
       print(error.toString());
     });

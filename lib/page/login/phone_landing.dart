@@ -83,11 +83,11 @@ class _LandingbodyState extends State<Landingbody> {
     }
   }
 
-  int check1 = 0;
+  int check1 = 1;
   String phoneNumber = '';
   String code = '';
   String verificationcode; //验证码
-  var token;
+  String token;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -116,7 +116,9 @@ class _LandingbodyState extends State<Landingbody> {
               WhitelistingTextInputFormatter(RegExp("[0-9.]")), //只允许输入小数
             ],
             onChanged: (number) {
-              phoneNumber = number;
+              setState(() {
+                phoneNumber = number;
+              });
             },
             style: TextStyle(fontSize: 14, color: Colors.grey),
             decoration:
@@ -146,7 +148,9 @@ class _LandingbodyState extends State<Landingbody> {
                           RegExp("[0-9.]")), //只允许输入小数
                     ],
                     onChanged: (value) {
-                      this.code = value;
+                      setState(() {
+                        this.code = value;
+                      });
                     },
                     style: TextStyle(fontSize: 14, color: Color(0xffbfbfbf)),
                     decoration: InputDecoration(
@@ -232,7 +236,9 @@ class _LandingbodyState extends State<Landingbody> {
           width: double.infinity,
           margin: EdgeInsets.only(left: 20, right: 20, bottom: 10, top: 35),
           child: RaisedButton(
-              color: check1 == 0 ? Colors.grey : Color(0xffcf1322),
+              color: check1 == 0 || this.phoneNumber == '' || this.code == ''
+                  ? Colors.grey
+                  : Color(0xffcf1322),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30)),
               child: Text(
@@ -240,22 +246,22 @@ class _LandingbodyState extends State<Landingbody> {
                 style: TextStyle(fontSize: 20, color: Colors.white),
               ),
               onPressed: () {
-                verificationCode();
-                // if (check1 == 1) {
-                //   //判断手机号是否正确
-                //   RegExp exp = RegExp(
-                //       r'^((13[0-9])|(14[0-9])|(15[0-9])|(16[0-9])|(17[0-9])|(18[0-9])|(19[0-9]))\d{8}$');
-                //   bool matched = exp.hasMatch(_accountTextControl.text);
-                //   if (!matched) {
-                //     Toast.show("请输入正确的手机号", context,
-                //         duration: Toast.LENGTH_SHORT, gravity: Toast.CENTER);
-                //   } else if (code == "") {
-                //     Toast.show("请输入验证码", context,
-                //         duration: Toast.LENGTH_SHORT, gravity: Toast.CENTER);
-                //   } else {
-                //     verificationCode();
-                //   }
-                // }
+                // verificationCode();
+                if (check1 == 1) {
+                  //判断手机号是否正确
+                  RegExp exp = RegExp(
+                      r'^((13[0-9])|(14[0-9])|(15[0-9])|(16[0-9])|(17[0-9])|(18[0-9])|(19[0-9]))\d{8}$');
+                  bool matched = exp.hasMatch(_accountTextControl.text);
+                  if (!matched) {
+                    Toast.show("请输入正确的手机号", context,
+                        duration: Toast.LENGTH_SHORT, gravity: Toast.CENTER);
+                  } else if (code == "") {
+                    Toast.show("请输入验证码", context,
+                        duration: Toast.LENGTH_SHORT, gravity: Toast.CENTER);
+                  } else {
+                    verificationCode();
+                  }
+                }
               }),
         ),
         Row(
@@ -308,8 +314,8 @@ class _LandingbodyState extends State<Landingbody> {
       //这个是application/x-www-form-urlencoded数据类型的传输方式
       request.headers.contentType =
           ContentType("application", "x-www-form-urlencoded");
-      // request.write("phone=$phoneNumber&code=$code");
-      request.write("phone=13073078664&code=4329");
+      request.write("phone=$phoneNumber&code=$code");
+      // request.write("phone=13073078664&code=4329");
       return request.close();
     }).then((HttpClientResponse response) {
       if (response.statusCode == 200) {
@@ -348,10 +354,11 @@ class _LandingbodyState extends State<Landingbody> {
 
   _saveUserInfo() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    print(this.token);
     SharedPreferencesUtils.token = this.token;
     final setTokenResult =
         await sharedPreferences.setString(Strings.TOKEN, this.token);
+    // String token222 = sharedPreferences.getString(Strings.TOKEN);
+    // print('token222:$token222');
     if (setTokenResult) {
       debugPrint('保存登录token成功');
     } else {

@@ -54,22 +54,21 @@ class _MineViewState extends State<MineView> {
 
   _getUserInfo() {
     SharedPreferencesUtils.getToken().then((token) {
+      print('token:$token');
       if (token != null) {
         setState(() {
           isLogin = true;
         });
-        // SharedPreferencesUtils.getImageHead().then((imageHeadAddress) {
-        //   setState(() {
-        //     imageHeadUrl = imageHeadAddress;
-        //   });
-        // });
-        // SharedPreferencesUtils.getUserName().then((name) {
-        //   setState(() {
-        //     nickName = name;
-        //   });
-        // });
-      } else {
-        print('token == null');
+        SharedPreferencesUtils.getImageHead().then((imageHeadAddress) {
+          setState(() {
+            imageHeadUrl = imageHeadAddress;
+          });
+        });
+        SharedPreferencesUtils.getUserName().then((name) {
+          setState(() {
+            nickName = name;
+          });
+        });
       }
     });
   }
