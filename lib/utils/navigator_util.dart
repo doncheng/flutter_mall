@@ -158,6 +158,8 @@ class NavigatorUtils {
   }
 
   static submitOrderSuccessPop(BuildContext context) {
+    // Application.router.navigateTo(context, Routers.home,
+    //     clearStack: true, transition: TransitionType.native);
     Application.router.navigateTo(context, Routers.home,
         clearStack: true, transition: TransitionType.native);
   }

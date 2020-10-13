@@ -7,6 +7,7 @@ import 'package:mall/service/address_service.dart';
 import 'package:mall/utils/shared_preferences_util.dart';
 import 'package:dio/dio.dart';
 import 'package:mall/utils/toast_util.dart';
+import 'package:toast/toast.dart';
 
 class EditAddressView extends StatefulWidget {
   var addressId;
@@ -223,17 +224,33 @@ class _EditAddressViewState extends State<EditAddressView> {
                   color: Colors.grey[350],
                   height: ScreenUtil.instance.setHeight(1.0),
                 )),
+            // InkWell(
+            //   onTap: () => _submit(),
+            //   child: BottomAppBar(
+            //     child: Container(
+            //       alignment: Alignment.center,
+            //       width: double.infinity,
+            //       color: Colors.deepOrangeAccent,
+            //       height: ScreenUtil.instance.setHeight(100.0),
+            //       child: Text(
+            //         Strings.SUBMIT,
+            //         style: TextStyle(
+            //             color: Colors.white,
+            //             fontSize: ScreenUtil.instance.setSp(28.0)),
+            //       ),
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),
       bottomNavigationBar: BottomAppBar(
         child: Container(
-            alignment: Alignment.center,
             width: double.infinity,
             color: Colors.deepOrangeAccent,
             height: ScreenUtil.instance.setHeight(100.0),
-            child: InkWell(
-              onTap: () => _submit(),
+            child: FlatButton(
+              onPressed: () => _submit(),
               child: Text(
                 Strings.SUBMIT,
                 style: TextStyle(
@@ -256,6 +273,7 @@ class _EditAddressViewState extends State<EditAddressView> {
                 style: TextStyle(fontSize: ScreenUtil.instance.setSp(26.0))));
       },
       height: ScreenUtil.instance.setHeight(400),
+      barrierDismissible: true,
     );
 
     print(temp);
@@ -319,7 +337,7 @@ class _EditAddressViewState extends State<EditAddressView> {
 
   _deleteAddress() {
     var parameters = {"id": _addressData.id};
-    _addressService.deleteAddress( parameters, (onSuccess) {
+    _addressService.deleteAddress(parameters, (onSuccess) {
       ToastUtil.showToast(Strings.ADDRESS_DELETE_SUCCESS);
       Navigator.pop(context);
     }, (onFail) {
@@ -328,7 +346,9 @@ class _EditAddressViewState extends State<EditAddressView> {
   }
 
   _submit() {
+    print('uiuiuiu');
     if (_judgeAddressBody()) {
+      print('uiuiuiu');
       var parameters = {
         "addressDetail": _addressDetailController.text.toString(),
         "areaCode": _areaId,
@@ -340,7 +360,7 @@ class _EditAddressViewState extends State<EditAddressView> {
         "province": _provinceName,
         "tel": _phoneController.text.toString(),
       };
-      _addressService.addAddress( parameters, (success) {
+      _addressService.addAddress(parameters, (success) {
         ToastUtil.showToast(Strings.SUBMIT_SUCCESS);
         Navigator.of(context).pop(true);
       }, (error) {
@@ -351,15 +371,21 @@ class _EditAddressViewState extends State<EditAddressView> {
 
   bool _judgeAddressBody() {
     if (_addressDetailController.text.toString().isEmpty) {
-      ToastUtil.showToast(Strings.ADDRESS_PLEASE_INPUT_DETAIL);
+      // ToastUtil.showToast(Strings.ADDRESS_PLEASE_INPUT_DETAIL);
+      Toast.show(Strings.ADDRESS_PLEASE_INPUT_DETAIL, context,
+          duration: Toast.LENGTH_SHORT, gravity: Toast.CENTER);
       return false;
     }
     if (_nameController.text.toString().isEmpty) {
-      ToastUtil.showToast(Strings.ADDRESS_PLEASE_INPUT_NAME);
+      // ToastUtil.showToast(Strings.ADDRESS_PLEASE_INPUT_NAME);
+      Toast.show(Strings.ADDRESS_PLEASE_INPUT_NAME, context,
+          duration: Toast.LENGTH_SHORT, gravity: Toast.CENTER);
       return false;
     }
     if (_phoneController.text.toString().isEmpty) {
-      ToastUtil.showToast(Strings.ADDRESS_PLEASE_INPUT_PHONE);
+      // ToastUtil.showToast(Strings.ADDRESS_PLEASE_INPUT_PHONE);
+      Toast.show(Strings.ADDRESS_PLEASE_INPUT_PHONE, context,
+          duration: Toast.LENGTH_SHORT, gravity: Toast.CENTER);
       return false;
     }
     return true;

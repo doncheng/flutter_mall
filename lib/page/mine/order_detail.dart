@@ -36,8 +36,7 @@ class _OrderDetailState extends State<OrderDetail> {
   }
 
   _queryOrderDetail() {
-    _orderDetailFuture =
-        _mineService.queryOrderDetail(parameters,(success) {
+    _orderDetailFuture = _mineService.queryOrderDetail(parameters, (success) {
       _orderDetailEntity = success;
     }, (error) {});
   }
@@ -106,7 +105,8 @@ class _OrderDetailState extends State<OrderDetail> {
                       child: Container(
                           alignment: Alignment.centerRight,
                           child: Offstage(
-                            offstage: _orderDetailEntity.orderInfo.handleOption.cancel,
+                            offstage: _orderDetailEntity
+                                .orderInfo.handleOption.cancel,
                             child: Text(
                               Strings.MINE_ORDER_ALREADY_CANCEL,
                               style: TextStyle(
@@ -403,7 +403,7 @@ class _OrderDetailState extends State<OrderDetail> {
 
   _cancelOrder() {
     var parameters = {"orderId": widget.orderId};
-    _mineService.cancelOrder(parameters,  (success) {
+    _mineService.cancelOrder(parameters, (success) {
       ToastUtil.showToast(Strings.MINE_ORDER_CANCEL_SUCCESS);
       setState(() {
         _orderDetailEntity.orderInfo.handleOption.cancel = false;

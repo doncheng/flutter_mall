@@ -18,6 +18,7 @@ import 'package:barcode_scan/barcode_scan.dart';
 import 'package:mall/utils/shared_preferences_util.dart';
 import 'package:mall/widgets/flutter_webview_plugin.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:toast/toast.dart';
 import './placetheorder.dart';
 import 'dart:convert';
 import 'dart:io';
@@ -45,32 +46,47 @@ class _MineViewState extends State<MineView> {
   int footprint;
   int favorite;
   int couponCount;
-
+  dynamic _imagedynamic;
   @override
   void initState() {
     super.initState();
     _getUserInfo();
   }
 
-  _getUserInfo() {
-    SharedPreferencesUtils.getToken().then((token) {
-      print('token:$token');
-      if (token != null) {
-        setState(() {
-          isLogin = true;
-        });
-        SharedPreferencesUtils.getImageHead().then((imageHeadAddress) {
-          setState(() {
-            imageHeadUrl = imageHeadAddress;
-          });
-        });
-        SharedPreferencesUtils.getUserName().then((name) {
-          setState(() {
-            nickName = name;
-          });
-        });
-      }
-    });
+  _getUserInfo() async {
+    // SharedPreferencesUtils.getToken().then((token) {
+    //   print('token:$token');
+    //   if (token != null) {
+    //     setState(() {
+    //       isLogin = true;
+    //     });
+    //     SharedPreferencesUtils.getImageHead().then((imageHeadAddress) {
+    //       setState(() {
+    //         imageHeadUrl = imageHeadAddress;
+    //       });
+    //     });
+    //     SharedPreferencesUtils.getUserName().then((name) {
+    //       setState(() {
+    //         nickName = name;
+    //       });
+    //     });
+    //   }
+    // });
+    // SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    // token = sharedPreferences.getString(Strings.TOKEN);
+    // print('token:$token');
+    // Toast.show("响应", context,
+    //     duration: Toast.LENGTH_SHORT, gravity: Toast.CENTER);
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    if (prefs.getStringList('testInfo') != null) {
+      // setState(() {
+      //   this.testList = prefs.getStringList('testInfo');
+      // });
+      print(prefs.getStringList('testInfo'));
+    } else {
+      print('mnmnmn');
+    }
   }
 
   //创建HttpClient
@@ -98,17 +114,18 @@ class _MineViewState extends State<MineView> {
     loginEventBus.on<LoginEvent>().listen(
       (LoginEvent loginEvent) {
         if (loginEvent.isLogin) {
-          getMineOrders();
-          // getMINE_FOOTPRINT();
-          // getCART_LIST();
-          // getMINE_COUPON_LIST();
-          // getMINE_COLLECT();
           setState(() {
             isLogin = true;
             imageHeadUrl = loginEvent.url;
             nickName = loginEvent.nickName;
             token = loginEvent.token;
           });
+          getMineOrders();
+          // getMINE_FOOTPRINT();
+          // getCART_LIST();
+          // getMINE_COUPON_LIST();
+          // getMINE_COLLECT();
+
           // personalDataBus.fire(PersonalDataEvent(
           //   url: loginEvent.url,
           //   nickName: loginEvent.nickName,
@@ -126,15 +143,42 @@ class _MineViewState extends State<MineView> {
   void getMineOrders() {
     if (isLogin) {
       ///显示指定Map的限定类型
-      Map<String, String> parms = {'showType': '0'};
       Map<String, String> headers = {"X-Litemall-Token": this.token};
-      DioManger.getInstance().get(Api.MINE_ORDERS, parms, headers, (response) {
+      Map<String, String> parms1 = {'showType': '1'};
+      DioManger.getInstance().get(Api.MINE_ORDERS, parms1, headers, (response) {
         Map<String, dynamic> map = json.decode(response);
         setState(() {
           mytradingnum1 = map['data']['total'];
-          mytradingnum2 = map['data']["pages"];
-          mytradingnum3 = map['data']["limit"];
-          mytradingnum4 = map['data']["page"];
+        });
+      }, (error) {
+        print('请求我的订单数据错误');
+        print(error.toString());
+      });
+      Map<String, String> parms2 = {'showType': '2'};
+      DioManger.getInstance().get(Api.MINE_ORDERS, parms2, headers, (response) {
+        Map<String, dynamic> map = json.decode(response);
+        setState(() {
+          mytradingnum2 = map['data']['total'];
+        });
+      }, (error) {
+        print('请求我的订单数据错误');
+        print(error.toString());
+      });
+      Map<String, String> parms3 = {'showType': '3'};
+      DioManger.getInstance().get(Api.MINE_ORDERS, parms3, headers, (response) {
+        Map<String, dynamic> map = json.decode(response);
+        setState(() {
+          mytradingnum3 = map['data']['total'];
+        });
+      }, (error) {
+        print('请求我的订单数据错误');
+        print(error.toString());
+      });
+      Map<String, String> parms4 = {'showType': '4'};
+      DioManger.getInstance().get(Api.MINE_ORDERS, parms4, headers, (response) {
+        Map<String, dynamic> map = json.decode(response);
+        setState(() {
+          mytradingnum4 = map['data']['total'];
         });
       }, (error) {
         print('请求我的订单数据错误');
@@ -294,6 +338,8 @@ class _MineViewState extends State<MineView> {
                                                         this.imageHeadUrl,
                                                   )))
                                           .then((value) {
+                                        dynamic valuedynamic = value;
+                                        print(valuedynamic);
                                         setState(() {
                                           value == null
                                               ? this.nickName = this.nickName
@@ -575,6 +621,7 @@ class _MineViewState extends State<MineView> {
               InkWell(
                 onTap: () {
                   print('sss');
+                  NavigatorUtils.goOrder(context);
                 },
                 child: Column(
                   children: <Widget>[

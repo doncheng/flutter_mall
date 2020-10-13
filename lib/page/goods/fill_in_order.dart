@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mall/constant/string.dart';
 import 'package:mall/entity/fill_in_order_entity.dart';
+import 'package:mall/page/home/mall.dart';
+import 'package:mall/page/mine/order.dart';
 import 'package:mall/service/goods_service.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mall/widgets/item_text.dart';
@@ -13,6 +15,7 @@ import 'package:mall/utils/toast_util.dart';
 import 'package:mall/widgets/cached_image.dart';
 import 'package:event_bus/event_bus.dart';
 import 'package:mall/event/refresh_event.dart';
+import 'package:toast/toast.dart';
 
 class FillInOrderView extends StatefulWidget {
   var cartId;
@@ -462,9 +465,12 @@ class _FillInOrderViewState extends State<FillInOrderView> {
     };
     _goodsService.submitOrder(options, parameters, (success) {
       print(success);
+      Toast.show("付款成功", context,
+          duration: Toast.LENGTH_SHORT, gravity: Toast.CENTER);
       eventBus.fire(RefreshEvent());
       ToastUtil.showToast(Strings.SUBMIT_ORDER_SUCCESS);
-      NavigatorUtils.submitOrderSuccessPop(context);
+
+      // NavigatorUtils.submitOrderSuccessPop(context);
     }, (error) {
       ToastUtil.showToast(error);
     });

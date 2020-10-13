@@ -88,6 +88,7 @@ class _LandingbodyState extends State<Landingbody> {
   String code = '';
   String verificationcode; //验证码
   String token;
+  List<String> testList = [];
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -246,22 +247,22 @@ class _LandingbodyState extends State<Landingbody> {
                 style: TextStyle(fontSize: 20, color: Colors.white),
               ),
               onPressed: () {
-                // verificationCode();
-                if (check1 == 1) {
-                  //判断手机号是否正确
-                  RegExp exp = RegExp(
-                      r'^((13[0-9])|(14[0-9])|(15[0-9])|(16[0-9])|(17[0-9])|(18[0-9])|(19[0-9]))\d{8}$');
-                  bool matched = exp.hasMatch(_accountTextControl.text);
-                  if (!matched) {
-                    Toast.show("请输入正确的手机号", context,
-                        duration: Toast.LENGTH_SHORT, gravity: Toast.CENTER);
-                  } else if (code == "") {
-                    Toast.show("请输入验证码", context,
-                        duration: Toast.LENGTH_SHORT, gravity: Toast.CENTER);
-                  } else {
-                    verificationCode();
-                  }
-                }
+                verificationCode();
+                // if (check1 == 1) {
+                //   //判断手机号是否正确
+                //   RegExp exp = RegExp(
+                //       r'^((13[0-9])|(14[0-9])|(15[0-9])|(16[0-9])|(17[0-9])|(18[0-9])|(19[0-9]))\d{8}$');
+                //   bool matched = exp.hasMatch(_accountTextControl.text);
+                //   if (!matched) {
+                //     Toast.show("请输入正确的手机号", context,
+                //         duration: Toast.LENGTH_SHORT, gravity: Toast.CENTER);
+                //   } else if (code == "") {
+                //     Toast.show("请输入验证码", context,
+                //         duration: Toast.LENGTH_SHORT, gravity: Toast.CENTER);
+                //   } else {
+                //     verificationCode();
+                //   }
+                // }
               }),
         ),
         Row(
@@ -314,8 +315,8 @@ class _LandingbodyState extends State<Landingbody> {
       //这个是application/x-www-form-urlencoded数据类型的传输方式
       request.headers.contentType =
           ContentType("application", "x-www-form-urlencoded");
-      request.write("phone=$phoneNumber&code=$code");
-      // request.write("phone=13073078664&code=4329");
+      // request.write("phone=$phoneNumber&code=$code");
+      request.write("phone=13073078664&code=4329");
       return request.close();
     }).then((HttpClientResponse response) {
       if (response.statusCode == 200) {
@@ -354,20 +355,35 @@ class _LandingbodyState extends State<Landingbody> {
 
   _saveUserInfo() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    SharedPreferencesUtils.token = this.token;
-    final setTokenResult =
-        await sharedPreferences.setString(Strings.TOKEN, this.token);
-    // String token222 = sharedPreferences.getString(Strings.TOKEN);
-    // print('token222:$token222');
-    if (setTokenResult) {
-      debugPrint('保存登录token成功');
-    } else {
-      debugPrint('error, 保存登录token失败');
-    }
 
-    // await sharedPreferences.setString(
-    //     Strings.HEAD_URL, userEntity.userInfo.avatarUrl);
-    // await sharedPreferences.setString(
-    //     Strings.NICK_NAME, userEntity.userInfo.nickName);
+    SharedPreferencesUtils.token = token;
+    String temp = '我是最帅的';
+    this.testList.add(temp);
+    sharedPreferences.setStringList('testInfo', testList);
+    _show();
+    // await sharedPreferences
+    //     .setString(Strings.TOKEN, token)
+    //     .then((bool success) {
+    //   print('nnbhbhv');
+    //   return Strings.TOKEN;
+    // });
+    // print(sharedPreferences.getString(Strings.TOKEN));
+    //   await sharedPreferences.setString(
+    //       Strings.HEAD_URL, userEntity.userInfo.avatarUrl);
+    //   await sharedPreferences.setString(
+    //       Strings.NICK_NAME, userEntity.userInfo.nickName);
+    // }
+  }
+
+  // 查询
+  void _show() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    if (prefs.getStringList('testInfo') != null) {
+      // setState(() {
+      //   this.testList = prefs.getStringList('testInfo');
+      // });
+      print(prefs.getStringList('testInfo'));
+    }
   }
 }
