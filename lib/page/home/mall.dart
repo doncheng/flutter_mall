@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mall/constant/string.dart';
 import 'package:mall/page/bill/my_assets.dart';
 import 'package:mall/page/help/message.dart';
+import 'package:mall/page/home/cart.dart';
 
 import 'package:mall/page/home/mine.dart';
 import 'package:mall/page/home/search.dart';
@@ -31,9 +32,10 @@ class _MallMainViewState extends State<MallMainView> {
     _list
       ..add(HomePage())
       // ..add(CategoryView())
-      ..add(GoodsDetails())
-      // ..add(CartView())
+      // ..add(GoodsDetails())
+
       ..add(MassagePage())
+      ..add(CartView())
       ..add(MineView());
   }
 
@@ -58,12 +60,12 @@ class _MallMainViewState extends State<MallMainView> {
             title: Text(Strings.HOME),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
-            title: Text(Strings.CATEGORY),
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.message),
             title: Text(Strings.SHOP_CAR),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.local_grocery_store),
+            title: Text(Strings.CATEGORY),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),

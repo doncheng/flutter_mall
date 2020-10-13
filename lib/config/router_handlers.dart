@@ -6,6 +6,7 @@ import 'package:mall/page/bill/freeze_funds.dart';
 import 'package:mall/page/bill/my_assets.dart';
 import 'package:mall/page/bill/wallet_card.dart';
 import 'package:mall/page/bill/withdrawal.dart';
+import 'package:mall/page/goods/searchGoods.dart';
 import 'package:mall/page/home/addressselection.dart';
 import 'package:mall/page/home/mall.dart';
 import 'package:mall/page/home/nicknamechange.dart';

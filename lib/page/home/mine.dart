@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:mall/api/api.dart';
+import 'package:mall/constant/string.dart';
 import 'package:mall/event/login_event.dart';
 import 'package:mall/page/bill/my_assets.dart';
 import 'package:mall/page/help/customer_service.dart';
@@ -16,6 +17,7 @@ import 'package:mall/utils/navigator_util.dart';
 import 'package:barcode_scan/barcode_scan.dart';
 import 'package:mall/utils/shared_preferences_util.dart';
 import 'package:mall/widgets/flutter_webview_plugin.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import './placetheorder.dart';
 import 'dart:convert';
 import 'dart:io';
@@ -43,6 +45,34 @@ class _MineViewState extends State<MineView> {
   int footprint;
   int favorite;
   int couponCount;
+
+  @override
+  void initState() {
+    super.initState();
+    _getUserInfo();
+  }
+
+  _getUserInfo() {
+    SharedPreferencesUtils.getToken().then((token) {
+      if (token != null) {
+        setState(() {
+          isLogin = true;
+        });
+        // SharedPreferencesUtils.getImageHead().then((imageHeadAddress) {
+        //   setState(() {
+        //     imageHeadUrl = imageHeadAddress;
+        //   });
+        // });
+        // SharedPreferencesUtils.getUserName().then((name) {
+        //   setState(() {
+        //     nickName = name;
+        //   });
+        // });
+      } else {
+        print('token == null');
+      }
+    });
+  }
 
   //创建HttpClient
   HttpClient _httpClient = HttpClient();

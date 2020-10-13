@@ -5,6 +5,8 @@ import 'package:mall/api/api.dart';
 import 'package:mall/constant/string.dart';
 import 'package:mall/event/login_event.dart';
 import 'package:mall/utils/navigator_util.dart';
+import 'package:mall/utils/shared_preferences_util.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toast/toast.dart';
 
 import 'dioManger.dart';
@@ -120,13 +122,21 @@ class _SettingsPageState extends State<SettingsPage> {
     ///显示指定Map的限定类型
     Map<String, String> parms = {};
     Map<String, String> headers = {"X-Litemall-Token": token};
-    DioManger.getInstance().post(Api.LOGIN_OUT, parms, headers, (response) {
+    DioManger.getInstance().post(Api.LOGIN_OUT, parms, headers,
+        (response) async {
       Map<String, dynamic> map = json.decode(response);
       print(map);
       Toast.show("退出登录成功", context,
           duration: Toast.LENGTH_SHORT, gravity: Toast.CENTER);
 
       loginEventBus.fire(LoginEvent(false));
+      SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
+      setState(() {
+        SharedPreferencesUtils.token = null;
+      });
+      await sharedPreferences.clear();
+
       Navigator.pop(context);
       setState(() {
         this.isLogin = false;
