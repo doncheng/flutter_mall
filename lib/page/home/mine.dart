@@ -80,15 +80,15 @@ class _MineViewState extends State<MineView> {
     // print('token:$token');
     // Toast.show("响应", context,
     //     duration: Toast.LENGTH_SHORT, gravity: Toast.CENTER);
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
 
-    if (prefs.getStringList('testInfo') != null) {
+    if (sharedPreferences.getStringList('testInfo') != null) {
       // setState(() {
       //   this.testList = prefs.getStringList('testInfo');
       // });
-      print(prefs.getStringList('testInfo'));
+      print(sharedPreferences.get('testInfo'));
     } else {
-      print('mnmnmn');
+      print('testInfo==null');
     }
   }
 

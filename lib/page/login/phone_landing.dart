@@ -76,6 +76,12 @@ class _LandingbodyState extends State<Landingbody> {
     _timer = Timer.periodic(oneSec, callback);
   }
 
+  Future getString() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    String adasd = sharedPreferences.get('testInfo');
+    print('数据是：$adasd');
+  }
+
   @override
   void dispose() {
     super.dispose();
@@ -347,26 +353,35 @@ class _LandingbodyState extends State<Landingbody> {
     });
   }
 
-  _saveUserInfo() async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  // _saveUserInfo() async {
+  //   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
 
-    SharedPreferencesUtils.token = token;
-    String temp = '我是存储的信息';
-    this.testList.add(temp);
-    sharedPreferences.setStringList('testInfo', testList);
-    _show();
-    // await sharedPreferences
-    //     .setString(Strings.TOKEN, token)
-    //     .then((bool success) {
-    //   print('nnbhbhv');
-    //   return Strings.TOKEN;
-    // });
-    // print(sharedPreferences.getString(Strings.TOKEN));
-    //   await sharedPreferences.setString(
-    //       Strings.HEAD_URL, userEntity.userInfo.avatarUrl);
-    //   await sharedPreferences.setString(
-    //       Strings.NICK_NAME, userEntity.userInfo.nickName);
-    // }
+  //   SharedPreferencesUtils.token = token;
+  //   String temp = '我是存储的信息';
+  //   this.testList.add(temp);
+  //   sharedPreferences.setStringList('testInfo', testList);
+  //   _show();
+  //   // await sharedPreferences
+  //   //     .setString(Strings.TOKEN, token)
+  //   //     .then((bool success) {
+  //   //   print('nnbhbhv');
+  //   //   return Strings.TOKEN;
+  //   // });
+  //   // print(sharedPreferences.getString(Strings.TOKEN));
+  //   //   await sharedPreferences.setString(
+  //   //       Strings.HEAD_URL, userEntity.userInfo.avatarUrl);
+  //   //   await sharedPreferences.setString(
+  //   //       Strings.NICK_NAME, userEntity.userInfo.nickName);
+  //   // }
+  // }
+
+  /**
+   * 利用SharedPreferences存储数据
+   */
+  Future _saveUserInfo() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    sharedPreferences.setString('testInfo', 'asdasdasds');
+    // getString();
   }
 
   _getUserInfo() async {
@@ -403,14 +418,8 @@ class _LandingbodyState extends State<Landingbody> {
   }
 
   // 查询
-  void _show() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+  /**
+   * 获取存在SharedPreferences中的数据
+   */
 
-    if (prefs.getStringList('testInfo') != null) {
-      // setState(() {
-      //   this.testList = prefs.getStringList('testInfo');
-      // });
-      print(prefs.getStringList('testInfo'));
-    }
-  }
 }

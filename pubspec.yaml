@@ -33,7 +33,7 @@ dependencies:
   fluttertoast: ^3.1.0
   toast: ^0.1.5
   # shared_preferences: ^0.5.3+4
-  shared_preferences: ^0.5.10
+  shared_preferences: ^0.5.0
   fluro: "^1.6.3"
   provider: ^3.0.0+1
   city_pickers: ^0.1.30
