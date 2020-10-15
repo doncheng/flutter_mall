@@ -173,9 +173,26 @@
     [picker dismissViewControllerAnimated:YES completion:nil];
     //编辑后的照片
     UIImage *image = info[UIImagePickerControllerEditedImage];
+//    UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
+    
     NSData *imageData = UIImagePNGRepresentation(image);
+//    [imageData writeToFile:@"/Files/myShaoNv.png" atomically:YES];
     self.methodCannelResultBlock(imageData);
 }
+
+#pragma mark 系统的完成保存图片的方法
+- (void)image: (UIImage *) image didFinishSavingWithError: (NSError *) error contextInfo: (void *) contextInfo
+{
+    NSString *msg = nil ;
+    if (error != NULL) {
+        msg = @"保存图片失败" ;
+    } else {
+        msg = @"保存图片成功" ;
+    }
+//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"保存图片结果提示" message:msg delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+//    [alert show];
+}
+
 
 #pragma mark- 授权苹果ID
 - (void)authorizationAppleID {

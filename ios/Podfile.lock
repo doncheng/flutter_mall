@@ -7,8 +7,6 @@ PODS:
   - device_info (0.0.1):
     - Flutter
   - Flutter (1.0.0)
-  - flutter_plugin_android_lifecycle (0.0.1):
-    - Flutter
   - flutter_webview_plugin (0.0.1):
     - Flutter
   - fluttertoast (0.0.2):
@@ -52,7 +50,6 @@ DEPENDENCIES:
   - city_pickers (from `.symlinks/plugins/city_pickers/ios`)
   - device_info (from `.symlinks/plugins/device_info/ios`)
   - Flutter (from `Flutter`)
-  - flutter_plugin_android_lifecycle (from `.symlinks/plugins/flutter_plugin_android_lifecycle/ios`)
   - flutter_webview_plugin (from `.symlinks/plugins/flutter_webview_plugin/ios`)
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
   - image_crop (from `.symlinks/plugins/image_crop/ios`)
@@ -87,8 +84,6 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/device_info/ios"
   Flutter:
     :path: Flutter
-  flutter_plugin_android_lifecycle:
-    :path: ".symlinks/plugins/flutter_plugin_android_lifecycle/ios"
   flutter_webview_plugin:
     :path: ".symlinks/plugins/flutter_webview_plugin/ios"
   fluttertoast:
@@ -125,12 +120,11 @@ SPEC CHECKSUMS:
   city_pickers: b0370f4c35c201723b5b7fcce10ec29b59d5bc35
   device_info: d7d233b645a32c40dfdc212de5cf646ca482f175
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
-  flutter_plugin_android_lifecycle: dc0b544e129eebb77a6bfb1239d4d1c673a60a35
   flutter_webview_plugin: ed9e8a6a96baf0c867e90e1bce2673913eeac694
   fluttertoast: b644586ef3b16f67fae9a1f8754cef6b2d6b634b
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   image_crop: e0a67085d3ebf3cf46ca46d61c53a082507b0bc3
-  image_picker: 9c3312491f862b28d21ecd8fdf0ee14e601b3f09
+  image_picker: a211f28b95a560433c00f5cd3773f4710a20404d
   MTBBarcodeScanner: f453b33c4b7dfe545d8c6484ed744d55671788cb
   package_info: 873975fc26034f0b863a300ad47e7f1ac6c7ec62
   path_provider: abfe2b5c733d04e238b0d8691db0cfd63a27a93c

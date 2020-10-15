@@ -92,6 +92,8 @@ class _SplashViewState extends State<SplashView> {
   }
 
   void detectUpdates() {
+    Toast.show("调用方法成功", context,
+        duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
     HttpClient _httpClient = HttpClient();
 //检测软件更新
     var url = Api.Update;
@@ -99,14 +101,18 @@ class _SplashViewState extends State<SplashView> {
       //这里添加POST请求Body的ContentType和内容
       //这个是application/x-www-form-urlencoded数据类型的传输方式
       request.headers.contentType = ContentType("application", "raw");
-      // request.write("phone=$phoneNumber&code=$code");
-      String clipboardDataUtf8Encoder =
-          jsonEncode(Utf8Encoder().convert(this.clipboardData));
-      print("这是clipboardData编码$clipboardDataUtf8Encoder");
+      //粘贴板的转换
+      // String clipboardDataUtf8Encoder =
+      //     jsonEncode(Utf8Encoder().convert(this.clipboardData));
+      // print("这是clipboardData编码$clipboardDataUtf8Encoder");
       request.write(
-          "{\"imei\":\"$imei \",\"idfa\":\"$idfa\",\"deviceId\":\"$device_id\",\"userVersion\":\"$packageVersion\",\"deviceType\":\"$device_type\",\"model\":\"$systemVersion\",\"channel\":\"$clipboardDataUtf8Encoder\",\"build\":\"$packageBuild\"}");
+          "{\"imei\":\"$imei \",\"idfa\":\"$idfa\",\"deviceId\":\"$device_id\",\"userVersion\":\"$packageVersion\",\"deviceType\":\"$device_type\",\"model\":\"$systemVersion\",\"channel\":\"douyin\",\"build\":\"$packageBuild\"}");
+      Toast.show("发送检测消息成功", context,
+          duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
       return request.close();
     }).then((HttpClientResponse response) {
+      Toast.show("回调成功", context,
+          duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
       if (response.statusCode == 200) {
         // ignore: unnecessary_statements
         response.transform(utf8.decoder).join().then((String string) async {
@@ -115,6 +121,9 @@ class _SplashViewState extends State<SplashView> {
           // print(map);
           if (map['errno'] == 0) {
             NavigatorUtils.goMallMainPage(context);
+            print("可用版本");
+            // Toast.show("最新版本", context,
+            //     duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
           } else {
             print(map);
             Toast.show("请更新软件", context,
@@ -122,7 +131,7 @@ class _SplashViewState extends State<SplashView> {
           }
         });
       } else {
-        Toast.show("服务器无响应", context,
+        Toast.show("服务器响应超时", context,
             duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
         print("error");
       }
@@ -169,8 +178,9 @@ class _SplashViewState extends State<SplashView> {
               MaterialPageRoute(
                   //导航打开新视图
                   builder: (context) => webviewPage()))
-          : NavigatorUtils.goMallMainPage(context);
-      // detectUpdates();
+          :
+          // NavigatorUtils.goMallMainPage(context);
+          detectUpdates();
     });
   }
 

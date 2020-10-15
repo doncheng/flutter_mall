@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
@@ -5,32 +6,50 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image_crop/image_crop.dart';
+import 'package:mall/api/api.dart';
 import 'package:mall/event/login_event.dart';
+import 'package:mall/page/home/dioManger.dart';
 import 'package:mall/page/home/nicknamechange.dart';
 import 'package:mall/utils/navigator_util.dart';
+import 'package:toast/toast.dart';
 
 enum Option { getImageGallery, getImageCamera }
 
 class personaldataPage extends StatefulWidget {
   final String nickName;
   final String imageHeadUrl;
-  personaldataPage({Key key, this.nickName, this.imageHeadUrl})
+  final String phoneNumber;
+  final int gender;
+  personaldataPage(
+      {Key key,
+      this.nickName,
+      this.imageHeadUrl,
+      this.phoneNumber,
+      this.gender})
       : super(key: key);
 
   @override
   _personaldataPageState createState() => _personaldataPageState(
-      nickName: this.nickName, imageHeadUrl: this.imageHeadUrl);
+      nickName: this.nickName,
+      imageHeadUrl: this.imageHeadUrl,
+      phoneNumber: this.phoneNumber,
+      gender: this.gender);
 }
 
 class _personaldataPageState extends State<personaldataPage> {
   String sex = '男';
+  int gender;
   File _headimagefile;
   dynamic _imagedynamic;
   bool isLogin = false;
   String imageHeadUrl;
   String nickName;
+  String phoneNumber;
+  String token;
+  HttpClient _httpClient = HttpClient();
 
-  _personaldataPageState({this.nickName, this.imageHeadUrl});
+  _personaldataPageState(
+      {this.nickName, this.imageHeadUrl, this.phoneNumber, this.gender});
 
   //原生交互
   static const String CHINAL_NAME = "example.mall/call_native"; //同步路径
@@ -40,14 +59,16 @@ class _personaldataPageState extends State<personaldataPage> {
   //相册 图片访问
   final picker = ImagePicker();
   Future getImageGallery() async {
-    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+    final pickedFile = await ImagePicker.pickImage(source: ImageSource.gallery);
     setState(() {
       _headimagefile = File(pickedFile.path);
     });
   }
 
   Future getImageCamera() async {
-    final pickedFile = await picker.getImage(source: ImageSource.camera);
+    // final pickedFile = await picker.getImage(source: ImageSource.camera);
+    final pickedFile = await ImagePicker.pickImage(source: ImageSource.camera);
+
     setState(() {
       _headimagefile = File(pickedFile.path);
     });
@@ -89,6 +110,78 @@ class _personaldataPageState extends State<personaldataPage> {
     }
   }
 
+  uploadUserInformation() {
+    print('性别$sex');
+    if (this.sex == '男') {
+      this.gender = 1;
+    } else {
+      this.gender = 0;
+    }
+    var url = Api.UploadUserInformation;
+    _httpClient.postUrl(Uri.parse(url)).then((HttpClientRequest request) {
+      //这里添加POST请求Body的ContentType和内容
+      //这个是application/x-www-form-urlencoded数据类型的传输方式
+      request.headers.contentType =
+          ContentType("application", "raw;charset=utf-8");
+
+      request.write(
+          "{\"mobile\":\"$phoneNumber\",\"gender\":\"$gender\",\"nickname\":\"$nickName\"}");
+      // request.write("mobile=13073078664&gender=0&nickname=我的文档");
+      return request.close();
+    }).then((HttpClientResponse response) {
+      // Process the response.
+      // print(response.transform(utf8.decoder).join());
+      if (response.statusCode == 200) {
+        // ignore: unnecessary_statements
+        response.transform(utf8.decoder).join().then((String string) async {
+          Map<String, dynamic> map = json.decode(string);
+          print(map);
+          //登录成功回调
+          if (map['errno'] == 0) {
+            _getUserInfo();
+            Navigator.of(context).pop();
+          } else {
+            Toast.show("系统繁忙 请稍后再试", context,
+                duration: Toast.LENGTH_SHORT, gravity: Toast.CENTER);
+          }
+        });
+      } else {
+        print("服务器超时");
+      }
+    });
+  }
+
+  _getUserInfo() async {
+    ///显示指定Map的限定类型
+    print(this.phoneNumber);
+    Map<String, String> parms = {"mobile": this.phoneNumber};
+    Map<String, String> headers = {};
+    DioManger.getInstance().get(Api.GetUserInformation, parms, headers,
+        (response) async {
+      Map<String, dynamic> map = json.decode(response);
+      print(map);
+
+      if (map['errno'] == 0) {
+        loginEventBus.fire(LoginEvent(
+          true,
+          url:
+              'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2117319092,2336640022&fm=26&gp=0.jpg',
+          nickName: map['data']['nickname'],
+          token: token,
+          phoneNumber: this.phoneNumber,
+          gender: map['data']['gender'],
+        ));
+      } else {
+        Toast.show("系统繁忙 请稍后再试", context,
+            duration: Toast.LENGTH_SHORT, gravity: Toast.CENTER);
+      }
+    }, (error) {
+      Toast.show("服务器无响应", context,
+          duration: Toast.LENGTH_SHORT, gravity: Toast.CENTER);
+      print(error.toString());
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final screenwith = MediaQuery.of(context).size.width;
@@ -112,7 +205,7 @@ class _personaldataPageState extends State<personaldataPage> {
           FlatButton(
               padding: EdgeInsets.only(left: 25),
               onPressed: () {
-                Navigator.of(context).pop(this.nickName);
+                uploadUserInformation();
               },
               child: Text(
                 '保存',
@@ -143,10 +236,18 @@ class _personaldataPageState extends State<personaldataPage> {
                             .then((value) {
                           setState(() {
                             _imagedynamic = value;
+                            Image _imagedynamicImage = Image.memory(
+                              _imagedynamic,
+                            );
                           });
                         });
                       }
                     : _simpleDialog,
+                // onTap: () async {
+                //   print('nbhnhbhb');
+                //   final pickedFile =
+                //       await ImagePicker.pickImage(source: ImageSource.gallery);
+                // },
                 child: Column(
                   children: <Widget>[
                     _imagedynamic == null && _headimagefile == null
@@ -165,7 +266,12 @@ class _personaldataPageState extends State<personaldataPage> {
                                 ? Container(
                                     height: 100,
                                     width: 100,
-                                    child: Image.memory(
+                                    child:
+                                        // Image.file(
+                                        //   File(
+                                        //       '/Users/userName/Desktop/myShaoNv.png'),
+                                        // ),
+                                        Image.memory(
                                       _imagedynamic,
                                       fit: BoxFit.cover,
                                     ),
@@ -225,11 +331,14 @@ class _personaldataPageState extends State<personaldataPage> {
               child: InkWell(
                 onTap: () {
                   var names = ['', '男', '女'];
+                  var namesint = ['', '1', '0'];
                   final picker = CupertinoPicker(
                       itemExtent: 40,
                       onSelectedItemChanged: (position) {
                         setState(() {
                           this.sex = names[position];
+                          this.gender = int.parse(namesint[position]);
+                          print(gender);
                         });
                         // print('The position is ${names[position]}');
                       },
@@ -257,7 +366,7 @@ class _personaldataPageState extends State<personaldataPage> {
                       child: Row(
                         children: <Widget>[
                           Text(
-                            this.sex,
+                            this.gender == 0 ? '女' : '男',
                             style: TextStyle(fontSize: 14, color: Colors.grey),
                           ),
                           Icon(
@@ -271,35 +380,35 @@ class _personaldataPageState extends State<personaldataPage> {
                 ),
               )),
           Divider(),
-          Padding(
-              padding: EdgeInsets.only(left: 20, right: 20, top: 6, bottom: 6),
-              child: InkWell(
-                onTap: () => _toUserPhonePage(),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Text(
-                      '手机号',
-                      style: TextStyle(fontSize: 14),
-                    ),
-                    Container(
-                      child: Row(
-                        children: <Widget>[
-                          Text(
-                            '更换手机号',
-                            style: TextStyle(fontSize: 14, color: Colors.grey),
-                          ),
-                          Icon(
-                            Icons.navigate_next,
-                            color: Colors.grey,
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              )),
-          Divider(),
+          // Padding(
+          //     padding: EdgeInsets.only(left: 20, right: 20, top: 6, bottom: 6),
+          //     child: InkWell(
+          //       onTap: () => _toUserPhonePage(),
+          //       child: Row(
+          //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //         children: <Widget>[
+          //           Text(
+          //             '手机号',
+          //             style: TextStyle(fontSize: 14),
+          //           ),
+          //           Container(
+          //             child: Row(
+          //               children: <Widget>[
+          //                 Text(
+          //                   '更换手机号',
+          //                   style: TextStyle(fontSize: 14, color: Colors.grey),
+          //                 ),
+          //                 Icon(
+          //                   Icons.navigate_next,
+          //                   color: Colors.grey,
+          //                 ),
+          //               ],
+          //             ),
+          //           )
+          //         ],
+          //       ),
+          //     )),
+          // Divider(),
           // Padding(
           //     padding: EdgeInsets.only(left: 20, right: 20, top: 6, bottom: 6),
           //     child: InkWell(

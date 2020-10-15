@@ -62,4 +62,7 @@ class Api {
   static const String NoteCodePost = BASE_URL + "/auth/noteCode"; //验证码获取接口
   static const String NoteVerity = BASE_URL + "/auth/noteVerity"; //手机登录验证
   static const String Update = BASE_URL + "/start/verify"; //更新检测
+  static const String UploadUserInformation = BASE_URL + "/user/save"; //用户信息上传
+  static const String GetUserInformation = BASE_URL + "/user/get"; //用户网络获取
+
 }

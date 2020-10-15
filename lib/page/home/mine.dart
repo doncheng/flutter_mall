@@ -47,6 +47,9 @@ class _MineViewState extends State<MineView> {
   int favorite;
   int couponCount;
   dynamic _imagedynamic;
+  String phoneNumber;
+  int gender;
+
   @override
   void initState() {
     super.initState();
@@ -119,6 +122,8 @@ class _MineViewState extends State<MineView> {
             imageHeadUrl = loginEvent.url;
             nickName = loginEvent.nickName;
             token = loginEvent.token;
+            phoneNumber = loginEvent.phoneNumber;
+            gender = loginEvent.gender;
           });
           getMineOrders();
           // getMINE_FOOTPRINT();
@@ -328,6 +333,7 @@ class _MineViewState extends State<MineView> {
                                   //     : _toLandingPage(),
                                   onTap: () {
                                     if (isLogin) {
+                                      print(gender);
                                       // Navigator.of(context).pop();
                                       Navigator.of(context)
                                           .push(new MaterialPageRoute(
@@ -336,6 +342,9 @@ class _MineViewState extends State<MineView> {
                                                     nickName: this.nickName,
                                                     imageHeadUrl:
                                                         this.imageHeadUrl,
+                                                    phoneNumber:
+                                                        this.phoneNumber,
+                                                    gender: this.gender,
                                                   )))
                                           .then((value) {
                                         dynamic valuedynamic = value;
@@ -372,12 +381,12 @@ class _MineViewState extends State<MineView> {
                                                 color: Colors.white,
                                               ),
                                             ),
-                                            subtitle: Text(
-                                              '关注 0 丨 粉丝 0',
-                                              style: TextStyle(
-                                                  fontSize: 14,
-                                                  color: Colors.white),
-                                            ),
+                                            // subtitle: Text(
+                                            //   '关注 0 丨 粉丝 0',
+                                            //   style: TextStyle(
+                                            //       fontSize: 14,
+                                            //       color: Colors.white),
+                                            // ),
                                           ),
                                         )
                                       : Container(
@@ -620,20 +629,19 @@ class _MineViewState extends State<MineView> {
             children: <Widget>[
               InkWell(
                 onTap: () {
-                  print('sss');
-                  NavigatorUtils.goOrder(context);
+                  isLogin ? NavigatorUtils.goOrder(context) : _toLandingPage();
                 },
                 child: Column(
                   children: <Widget>[
                     Container(
-                      width: 60,
-                      height: 35,
-                      child: Text(
-                        isLogin ? '$mytradingnum1' : '0',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.black, fontSize: 30),
-                      ),
-                    ),
+                        width: 60,
+                        height: 35,
+                        child: Center(
+                          child: Text(
+                            isLogin ? '$mytradingnum1' : '0',
+                            style: TextStyle(color: Colors.black, fontSize: 30),
+                          ),
+                        )),
                     Container(
                       width: 53,
                       height: 19,
@@ -653,14 +661,14 @@ class _MineViewState extends State<MineView> {
                 child: Column(
                   children: <Widget>[
                     Container(
-                      width: 60,
-                      height: 35,
-                      child: Text(
-                        isLogin ? '$mytradingnum2' : '0',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.black, fontSize: 30),
-                      ),
-                    ),
+                        width: 60,
+                        height: 35,
+                        child: Center(
+                          child: Text(
+                            isLogin ? '$mytradingnum2' : '0',
+                            style: TextStyle(color: Colors.black, fontSize: 30),
+                          ),
+                        )),
                     Container(
                       width: 53,
                       height: 19,
@@ -680,14 +688,14 @@ class _MineViewState extends State<MineView> {
                 child: Column(
                   children: <Widget>[
                     Container(
-                      width: 60,
-                      height: 35,
-                      child: Text(
-                        isLogin ? '$mytradingnum3' : '0',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.black, fontSize: 30),
-                      ),
-                    ),
+                        width: 60,
+                        height: 35,
+                        child: Center(
+                          child: Text(
+                            isLogin ? '$mytradingnum3' : '0',
+                            style: TextStyle(color: Colors.black, fontSize: 30),
+                          ),
+                        )),
                     Container(
                       width: 53,
                       height: 19,
@@ -707,14 +715,14 @@ class _MineViewState extends State<MineView> {
                 child: Column(
                   children: <Widget>[
                     Container(
-                      width: 60,
-                      height: 35,
-                      child: Text(
-                        isLogin ? '$mytradingnum4' : '0',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.black, fontSize: 30),
-                      ),
-                    ),
+                        width: 60,
+                        height: 35,
+                        child: Center(
+                          child: Text(
+                            isLogin ? '$mytradingnum4' : '0',
+                            style: TextStyle(color: Colors.black, fontSize: 30),
+                          ),
+                        )),
                     Container(
                       width: 53,
                       height: 19,

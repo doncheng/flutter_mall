@@ -190,29 +190,29 @@ class _SearchGoodsViewState extends State<SearchGoodsView> {
                                     BorderSide(color: Colors.transparent),
                               ),
                             ),
-                            onChanged: (value) {
-                              setState(() {
-                                this.hintText = value;
-                              });
+                            // onChanged: (value) {
+                            //   setState(() {
+                            //     this.hintText = value;
+                            //   });
 
-                              ///显示指定Map的限定类型
-                              Map<String, String> parms = {
-                                'keyword': value,
-                              };
-                              Map<String, String> headers = {};
-                              DioManger.getInstance().get(
-                                  Api.SEARCH_GOODS, parms, headers, (response) {
-                                Map<String, dynamic> map1 =
-                                    json.decode(response);
-                                print(map1['data']);
-                                setState(() {
-                                  this.searchMap = map1;
-                                });
-                              }, (error) {
-                                print('请求搜索结果错误');
-                                print(error.toString());
-                              });
-                            },
+                            //   ///显示指定Map的限定类型
+                            //   Map<String, String> parms = {
+                            //     'keyword': value,
+                            //   };
+                            //   Map<String, String> headers = {};
+                            //   DioManger.getInstance().get(
+                            //       Api.SEARCH_GOODS, parms, headers, (response) {
+                            //     Map<String, dynamic> map1 =
+                            //         json.decode(response);
+                            //     print(map1['data']);
+                            //     setState(() {
+                            //       this.searchMap = map1;
+                            //     });
+                            //   }, (error) {
+                            //     print('请求搜索结果错误');
+                            //     print(error.toString());
+                            //   });
+                            // },
                           ),
                         )),
                   ]),
@@ -237,33 +237,35 @@ class _SearchGoodsViewState extends State<SearchGoodsView> {
             ),
             // _sortView(),
             Container(
-                height: double.infinity,
-                margin:
-                    EdgeInsets.only(top: ScreenUtil.instance.setHeight(120.0)),
-                child: this.hintText == Strings.GOODS_SEARCH_HINT
-                    ? recommendedSearch()
-                    : Container(
-                        color: Colors.red,
-                        height: 100,
-                        width: 100,
-                        child: Text(searchMap['data']),
-                      )
-                // _goods == null || _goods.length == 0
-                //     ? EmptyView()
-                //     : GridView.builder(
-                //         itemCount: _goods.length,
-                //         gridDelegate:
-                //             SliverGridDelegateWithFixedCrossAxisCount(
-                //                 childAspectRatio: 1.0,
-                //                 crossAxisSpacing:
-                //                     ScreenUtil.instance.setWidth(10.0),
-                //                 mainAxisSpacing:
-                //                     ScreenUtil.instance.setHeight(10.0),
-                //                 crossAxisCount: 2),
-                //         itemBuilder: (BuildContext context, int index) {
-                //           return getGoodsItemView(_goods[index]);
-                //         }),
-                )
+              height: double.infinity,
+              margin:
+                  EdgeInsets.only(top: ScreenUtil.instance.setHeight(120.0)),
+              child:
+                  // this.hintText == Strings.GOODS_SEARCH_HINT
+                  //     ? recommendedSearch()
+                  //     :
+                  // : Container(
+                  //     color: Colors.red,
+                  //     height: 100,
+                  //     width: 100,
+                  //     child: Text(searchMap['data']),
+                  //   )
+                  _goods == null || _goods.length == 0
+                      ? EmptyView()
+                      : GridView.builder(
+                          itemCount: _goods.length,
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                                  childAspectRatio: 1.0,
+                                  crossAxisSpacing:
+                                      ScreenUtil.instance.setWidth(10.0),
+                                  mainAxisSpacing:
+                                      ScreenUtil.instance.setHeight(10.0),
+                                  crossAxisCount: 2),
+                          itemBuilder: (BuildContext context, int index) {
+                            return getGoodsItemView(_goods[index]);
+                          }),
+            )
           ],
         ),
       ),

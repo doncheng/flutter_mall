@@ -10,6 +10,7 @@ import 'package:mall/constant/string.dart';
 import 'package:mall/entity/user_entity.dart';
 import 'package:mall/event/login_event.dart';
 import 'package:mall/model/user_info.dart';
+import 'package:mall/page/home/dioManger.dart';
 import 'package:mall/service/user_service.dart';
 import 'package:mall/utils/shared_preferences_util.dart';
 import 'package:mall/widgets/flutter_webview_plugin.dart';
@@ -316,7 +317,7 @@ class _LandingbodyState extends State<Landingbody> {
       request.headers.contentType =
           ContentType("application", "x-www-form-urlencoded");
       // request.write("phone=$phoneNumber&code=$code");
-      request.write("phone=13073078664&code=4329");
+      request.write("phone=13073078664&code=3457");
       return request.close();
     }).then((HttpClientResponse response) {
       if (response.statusCode == 200) {
@@ -332,14 +333,7 @@ class _LandingbodyState extends State<Landingbody> {
             });
             print('Token:$token');
             _saveUserInfo();
-            loginEventBus.fire(LoginEvent(
-              true,
-              url:
-                  'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2117319092,2336640022&fm=26&gp=0.jpg',
-              nickName: '手机登录成功',
-              token: token,
-            ));
-            Navigator.pop(context);
+            _getUserInfo();
           } else {
             Toast.show("验证码或手机号不正确", context,
                 duration: Toast.LENGTH_SHORT, gravity: Toast.CENTER);
@@ -357,7 +351,7 @@ class _LandingbodyState extends State<Landingbody> {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
 
     SharedPreferencesUtils.token = token;
-    String temp = '我是最帅的';
+    String temp = '我是存储的信息';
     this.testList.add(temp);
     sharedPreferences.setStringList('testInfo', testList);
     _show();
@@ -373,6 +367,39 @@ class _LandingbodyState extends State<Landingbody> {
     //   await sharedPreferences.setString(
     //       Strings.NICK_NAME, userEntity.userInfo.nickName);
     // }
+  }
+
+  _getUserInfo() async {
+    ///显示指定Map的限定类型
+    print('手机号码:$phoneNumber');
+    // Map<String, String> parms = {"mobile": this.phoneNumber};
+    Map<String, String> parms = {"mobile": "13073078664"};
+    Map<String, String> headers = {};
+    DioManger.getInstance().get(Api.GetUserInformation, parms, headers,
+        (response) async {
+      Map<String, dynamic> map = json.decode(response);
+      print(map);
+
+      if (map['errno'] == 0) {
+        loginEventBus.fire(LoginEvent(
+          true,
+          url:
+              'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2117319092,2336640022&fm=26&gp=0.jpg',
+          nickName: map['data']['nickname'],
+          token: token,
+          phoneNumber: this.phoneNumber,
+          gender: map['data']['gender'],
+        ));
+        Navigator.pop(context);
+      } else {
+        Toast.show("系统繁忙 请稍后再试", context,
+            duration: Toast.LENGTH_SHORT, gravity: Toast.CENTER);
+      }
+    }, (error) {
+      Toast.show("服务器无响应", context,
+          duration: Toast.LENGTH_SHORT, gravity: Toast.CENTER);
+      print(error.toString());
+    });
   }
 
   // 查询

@@ -8,12 +8,16 @@ class LoginEvent {
   String nickName;
   String url;
   String token;
+  String phoneNumber;
+  int gender;
 
   LoginEvent(
     this.isLogin, {
     this.nickName,
     this.url,
     this.token,
+    this.phoneNumber,
+    this.gender,
   });
 }
 
